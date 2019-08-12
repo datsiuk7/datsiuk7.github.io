@@ -1,0 +1,254 @@
+extends includes/layout/layout.pug
+
+block content
+  
+  main.main
+    header.size-header
+      .x-header
+        ._logo
+          img(src="img/logo.png", alt="logo")
+        ._search 
+          input(placeholder="Знайти фахівця")
+          .fa.fa-search
+        ._leng
+          | Українська 
+          .fa.fa-chevron-down
+          ul.list
+            li Русский 
+            li English
+            li Polish
+        ._entry 
+          button 
+            .fa.fa-lock
+            |Увійти
+        ._menu 
+          span Меню
+          .fa.fa-th      
+    section.size-content
+      .x-block2
+        ._title 
+          h2 Медичний, оздоровчий центр "Благомед"
+          p Медичний центр
+        .x-block2__box 
+          ._button#butShowContact
+            button
+              .fa.fa-chevron-up
+          ._content#boxSliseContact
+            b Адреса:
+            p.space пр. Відродження, 13, Луцьк, Волинська область, Україна, 43000
+            b Контакти:
+            p
+              b +38 (099) 999-99-99,
+            p.space
+              b +38 (0332) 77-08-09,
+            b Графік роботи: 
+            span ПН-СБ 09:00-20:00
+          #boxSliseContactMessage
+            b Адреса ...        
+    section.size-content
+      .x-block3
+        ._logo
+          img(src="img/logo_main.jpg" alt="main_logo")
+        ._search 
+          input(placeholder="Введіть текст для пошуку")
+          .fa.fa-search
+        .x-block3__buttons
+          button._button.-button1 В обране
+          button._button.-button2 Про клініку
+          button._button.-button3 Фото
+          button._button.-button4 
+            .fa.fa-map-marker      
+    section.size-content
+      .x-block4
+        .block_title._title Спеціальності
+        .x-block4__arrows
+          ._arrowleft
+            .fa.fa-chevron-left
+          ._arrowright
+            .fa.fa-chevron-right
+        .x-block4__carusel.owl-carousel.owl-theme
+          mixin mix4(src, name)
+            .x-block4__carusel__boxs
+              .x-block4__carusel__boxs__box
+                ._image
+                  img(src=src alt="doctorworkfoto")
+                ._text
+                  h3= name
+                  p 14 Лікарів
+                  p 48 Послуг
+          +mix4('img/terapevt.png',     'Гінеколог')
+          +mix4('img/hinecolog.png',    'Терапевт')
+          +mix4('img/kardiohirurg.png', 'Кардіохірург')
+          +mix4('img/oftalmolog.png',   'Офтальмолог')
+          +mix4('img/travmatolog.png',  'Травматолог')
+          +mix4('img/pshyholog.png',    'Психолог')  
+    section.size-content
+      .x-block5
+        .x-block__title
+          ._left Лікар
+          ._right Всі лікарі
+        .block5__carusel.owl-carousel.owl-theme
+          mixin mix5(bron, img, online, onlinetext, name, work)
+            .x-block5__box
+              .x-block5__box__left
+                ._rating
+                  ._icon
+                    .fa.fa-star
+                  ._box-text
+                    ._num 4,9
+                    ._text Рейтинг
+                ._respond
+                  ._icon 
+                    .fa.fa-list-alt
+                  ._box-text
+                    ._num 123
+                    ._text Відгуків
+                ._reserv
+                  ._icon
+                    .fa.fa-calendar-o
+                  ._box-text
+                    ._num= bron
+                    ._text Бронювань
+              .x-block5__box__right
+                ._img
+                  img(src=img alt="doctor")
+                ._onlinedot(class=online)
+                ._onlinetext(class=onlinetext)
+              .x-block5__box__down
+                ._name= name
+                ._work= work
+              .x-block5__box__adress
+                ._icon
+                  .fa.fa-map-marker
+                ._text
+                  | м. Луцьк, пр. Соборності 89
+          each val in [1, 2, 3, 4, 5]
+            +mix5('24', 'img/doctor1.png', 'online',    'onlinetext'   , 'Лозовий Юрій Володимирович'      , 'Інфекціонист, Лікар-нарколог дільничий'                               )
+            +mix5('1' , 'img/doctor2.png', 'online',    'onlinetext'   , 'Москаленко Дмитро  Миколайович'  , 'Інфекціонист, Лікар-нарколог дільничий'                               )
+            +mix5('99', 'img/doctor3.png', 'notonline', 'notonlinetext', 'Філатова Ірина Миколаївна'       , 'Інфекціонист, Лікар-нарколог дільничий, дитячий невропатолог, Хірург' )
+            +mix5('11', 'img/doctor4.png', 'notonline', 'notonlinetext', 'Омельяненко Анатолий Анатольевич', 'Інфекціонист, Лікар-нарколог дільничий'                               )
+          
+        .x-block5__arrows
+          .x-block5__arrows__arrow.-left
+            ._left
+              .fa.fa-arrow-left
+          .x-block5__arrows__arrow.-right
+            ._right
+              .fa.fa-arrow-right
+    section.size-content
+      .x-block6
+        .x-block__title
+          ._left Послуги та ціни
+          ._right Всі послуги
+        .x-block6__arrows
+          .x-block6__arrows__arrow
+            ._left#block6arrowleft
+              .fa.fa-chevron-left
+          .x-block6__arrows__arrow
+            ._right#block6arrowright
+              .fa.fa-chevron-right
+        .block6__carusel.owl-carousel.owl-theme
+          mixin mix6(img, text)
+            .x-block6__carusel__boxs
+              .x-block6__carusel__boxs__box
+                ._img
+                  img(src=img alt='foto')
+                .x-block6__carusel__boxs__box__text
+                  ._top= text
+                  .x-block6__carusel__boxs__box__text__block
+                    ._left Ціна: 
+                      p 320 грн
+                    ._right Тривалість: 
+                      p 1год 45хв
+                  ._btn-down.main-button 
+                    button Записатися
+          +mix6('img/b61.jpg', 'Повне офтальмологічне обстеження з консультацією лікаря для дітей')
+          +mix6('img/b62.jpg', 'Консультація з частковим обстеженням ( з призначенням лікування)')
+          +mix6('img/b63.jpg', 'Повне офтальмологічне обстеження з консультацією лікаря для пенсіонерів')
+          +mix6('img/b64.jpg', 'Діагностика серця та сосудів')
+          +mix6('img/b65.jpg', 'Беопсія Ексцизійна глибока (видалення всієї освіти (невриноми, лімфовузли) глибоких утворень')
+          +mix6('img/b61.jpg', 'Повне офтальмологічне обстеження з консультацією лікаря для дітей')
+          +mix6('img/b62.jpg', 'Консультація з частковим обстеженням ( з призначенням лікування)')
+          +mix6('img/b63.jpg', 'Повне офтальмологічне обстеження з консультацією лікаря для пенсіонерів')
+          +mix6('img/b64.jpg', 'Діагностика серця та сосудів')
+          +mix6('img/b65.jpg', 'Беопсія Ексцизійна глибока (видалення всієї освіти (невриноми, лімфовузли) глибоких утворень')            
+    section.size-content
+      .x-block7
+        .x-block__title
+          ._left Акції та новини
+          ._right Більше новин
+        .x-block7__boxs
+          mixin mix7(img, title, text)
+            .x-block7__boxs__box
+              .x-block7__boxs__box__left
+                ._foto
+                  img(src=img, alt='foto')
+              .x-block7__boxs__box__right
+                ._date 30 січня 2019, 14:23 
+                  span Суспільство
+                ._title= title
+                ._text= text
+                  
+          +mix7('img/b71.png', 'Кольки у дітей: причини і як запобігти виникненню?', 'Іноді здорові малюки починають раптово плакати без особливої на те причини, супроводжується плач витягуванням або згинанням ніг, стисненням ручок в кулачки, появою "гримаси болю" і почервонінням особи.')
+          +mix7('img/b72.png', 'Швидкість загоєння після хірургічних втручань збільшилася на 50%!', 'Клініка "Парнас Дент" і "Парнас Центр" раді представити інноваційні методики, які спрямовані на збільшення швидкості загоєння після хірургічних втручань на 50%!')
+          +mix7('img/b73.png', 'Запрошуємо батьків, лікарів та журналістьів на тренінг "Агентів змін з вакцинації"', ' 22-23 квітня в Києві відбудеться тренінг "Агенція змін" для лікарів, батьків та представників ЗМІ на тему вакцинації. Головна мета заходу - підготовка активістів, які будуть проводити інформаційно')
+          +mix7('img/b74.png', 'Інтерв\'ю Андрія Харкова - одного з кращих пластичних хірургів м. Києва', 'Що важливо для жінки і як пластичний хірург може допомогти досягти цього стану щастя? Про це в інтерв\'ю розповів засновник клініки Medical Club, доктор медичних наук, хірург вищої категорії,')
+    section.size-content
+      .x-block8
+        .x-block8__box
+          ._foto
+            img(src='img/bl8.jpg')
+          .x-block8__box__content
+            ._text Ваш онлайн-органайзер здоров'я для всієї сім'ї завжди на зв'язку.
+            ._button.main-button 
+              button Почати безкоштовно
+    section.size-content
+      .x-block9
+        .x-block9__compani 
+          ._title Компанія
+          ul
+            li 
+              a(href='#') Про нас
+            li 
+              a(href='#') Новини
+            li 
+              a(href='#') Довідковий центр
+        .x-block9__contact 
+          ._title Контакт
+          ._email moehealthmapsapi@gmail.com
+          .x-block9__contact__icons
+            ._icon
+              .fa.fa-facebook
+            ._icon
+              .fa.fa-instagram
+            ._icon
+              .fa.fa-paper-plane-o
+        .x-block9__email 
+          ._title Підписатися на розсилку
+          ._enter-email
+            input(placeholder='Введіть вашу пошту')
+            span.fa.fa-arrow-right
+        .x-block9__languages 
+          ._list 
+            select 
+              option(value="ukr") Українська
+              option(value="rus") Русский 
+              option(value="eng") English
+              option(value="pol") Polish
+          ._img-store
+            img(src='img/appstore.png' alt='icon')
+            img(src='img/googleplay.png' alt='icon')
+    footer.size-content
+      .x-footer
+        .x-footer__box
+          .x-footer__box__left 
+            ._text
+              .fa.fa-heart
+              |2019
+              b
+                |MOE Health.
+              | Medical Online Information System
+          ._right 
+            a(href='#') Захист даних
+            a(href='#') Політика приватності
+            a(href='#') Правила користування 

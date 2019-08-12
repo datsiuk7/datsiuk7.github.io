@@ -1,0 +1,223 @@
+@media (min-width: 400px) and (max-width: 1000px)
+  .header
+    flex-wrap: wrap
+    &__logo,
+    &__search,
+    &__leng,
+    &__entry,
+    &__menu,
+      justify-content: center
+      margin: 0 auto !important
+    &__logo
+      width: 100%
+    &__search
+      width: 100%
+      .fa
+        margin-left: 170px !important
+    &__leng
+      width: calc(100% / 3)
+    &__entry
+      width: calc(100% / 3)
+    &__menu
+      width: calc(100% / 3)
+  .block2
+    &__title
+      margin: auto auto !important
+      text-align: center
+    &__box
+      margin: auto auto 0 calc(50vw - 115px)  !important
+  .block3
+    display: flex !important
+    flex-direction: column
+    margin: 0
+    &__logo
+      display: none
+    &__search
+      margin-bottom: 10px
+      margin-left: 10px
+      input
+        width: 380px !important
+      .fa
+        margin-left: 355px !important
+    &__buttons
+      margin-left: 10px
+  .block5
+    &__arrows__arrow--right
+      margin-right: 20% !important
+    &__arrows__arrow--left
+      margin-left: 20% !important
+  .block9
+    &__languages
+      &__list
+        select
+          width: 100% !important
+
+@media (max-width: 1000px)
+  .block4
+    &__arrows
+      width: calc(100vw - 40px) !important
+      margin-left: 15px  !important
+  .block5
+    &__carusel
+      .owl-dots
+        height: 20px
+        button
+          display: none !important
+  .block6
+    &__arrows
+      width: calc(100vw - 40px) !important
+      margin-left: 15px  !important
+
+@media (max-width: 800px)
+  .block7
+    &__boxs
+      &__box
+        width: 100% !important
+  .block8
+    &__box
+      width: 100% !important
+      &__foto
+        display: flex
+        justify-content: center
+        width: calc(100% - 30px) !important
+        img
+          width: 100% !important
+      &__content
+        width: 100% !important
+        &__text
+          width: 100% !important
+          text-align: center
+          font-size: 15px !important
+        &__button
+          margin-top: 5px
+          width: 100% !important
+          text-align: center  !important
+  .footer
+    &__box
+      flex-wrap: wrap
+      &__left,
+      &__right
+        margin-bottom: 10px
+        display: flex
+        justify-content: center
+        width: 100%
+
+@media (max-width: 600px)
+  .block9
+    &__compani,
+    &__contact,
+    &__email,
+    &__languages
+      width: 50% !important
+      &__list
+        select
+          width: 100% !important
+
+@media (max-width: 390px)
+  .header
+    &__search
+      .fa
+        margin-left: calc(100vw - 30px) !important
+@media (max-width: 400px)
+  .header
+    display: flex
+    flex-direction: column
+    &__logo,
+    &__search,
+    &__leng,
+    &__entry,
+    &__menu,
+      margin: 0 auto !important
+      padding: 0
+
+    &__search
+      input
+        width: 100vw !important
+  .block2
+    &__title
+      margin: 300px auto !important
+      text-align: center
+      h2
+        margin-bottom: 5px
+        font-size: 16px !important
+      p
+        font-size: 12px !important
+    &__box
+      margin: auto 0px  !important
+      left: 20px
+      width: calc(100% - 40px) !important
+      &__button
+        margin-left: 50px !important
+  .block3
+    display: flex !important
+    flex-direction: column
+    margin: 0
+    &__logo
+      display: none
+    &__search
+      margin-bottom: 10px
+      input
+        width: calc(100vw - 40px) !important
+        margin: 0 20px !important
+      .fa
+        margin-left: calc(100vw - 40px) !important
+    &__buttons
+      display: flex
+      flex-wrap: wrap
+      justify-content: center !important
+      &__button
+        margin-bottom: 10px
+  .block5
+    &__arrows__arrow--right
+      margin-right: 5% !important
+    &__arrows__arrow--left
+      margin-left: 5% !important
+  .block7
+    &__boxs
+      &__box
+        height: 100% !important
+        &__left
+          width: 30%  !important
+          padding-right: 10px
+          img
+            width: 100% !important
+        &__right
+          width: 70%  !important
+          // width: 100% !important
+          // height: 200px !important
+  .block8
+    &__box
+      &__foto
+        width: calc(100% - 4px) !important
+      &__content
+        width: 100% !important
+        padding: 0 !important
+        &__text
+          width: 100% !important
+          text-align: center
+          font-size: 15px !important
+        &__button
+          margin-top: 5px
+          width: 100% !important
+          text-align: center  !important
+  .block9
+    &__compani,
+    &__contact,
+    &__email,
+    &__languages
+      width: 100% !important
+      text-align: center !important
+      &__icons
+        justify-content: center
+  .footer
+    &__box
+      &__right
+        // box-sizing: border-box
+        display: flex
+        flex-wrap: wrap
+        text-align: center
+        a
+          padding-left: 0px  !important
+
+          margin-bottom: 5px
+          width: 100%
