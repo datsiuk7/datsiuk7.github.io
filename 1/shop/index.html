@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>index</title>
 
-  <link href="css/include.css" rel="stylesheet">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
@@ -14,6 +13,9 @@
 
   <link rel="stylesheet" href="css/owl.carousel.min.css">
   <link rel="stylesheet" href="css/owl.theme.default.min.css">
+  <!-- <link rel="stylesheet" href="css/vue-slider-component.css"> -->
+
+  <link href="css/include.css" rel="stylesheet">
   <!-- <link rel="stylesheet" href="css/jquery.circliful.css"> -->
   <!-- <link rel="stylesheet" href="css/animate.min.css"> -->
   <!-- <link rel="stylesheet" type="text/css" href="css/fullpage.css" /> -->
@@ -24,7 +26,7 @@
   <script src="https://unpkg.com/vue"></script>
 
 
-  <div class="main" id="app">
+  <main class="main" id="app">
     <header class="header">
       <div class="bg-black">
         <div class="box-width-site">
@@ -71,7 +73,7 @@
       </div>
     </header>
     <!-- menu -->
-    <section class=" d-none">
+    <section class="blockmenu">
       <div class="bg-white">
         <div class="box-width-site">
           <div class="logo row">
@@ -163,7 +165,7 @@
               </div>
               <div class="logo__cart__money d-flex justify-content-between align-items-center">
                 <i class="fas fa-shopping-bag"></i>
-                <span>0 items | $ 0</span>
+                <span>{{cart.length - 1}} items | $ {{cartprice}}</span>
               </div>
             </div>
           </div>
@@ -174,7 +176,7 @@
     <!-- end menu -->
 
     <!-- path -->
-    <section class=" d-none">
+    <section class="blockpath">
       <div class="box-width-site ">
         <div class="road">
           <div class="road__line">
@@ -186,7 +188,7 @@
     </section>
     <!-- end path -->
     <!-- carousel -->
-    <section class=" d-none">
+    <section class="blockcarousel">
       <div class="box-width-site">
         <!-- <div class="carusell  d-flex justify-content-between">
           <div class="carusell__arrow">1</div>
@@ -202,7 +204,7 @@
               </div>
               <div class="carusell__own__box__text">
                 <div class="carusell__box__text">
-                  This is Photoshop's version of Lorem Ipsum.
+                  111This is Photoshop's version of Lorem Ipsum.
                   Proin gravida nibh vel velit auctor aliquet.
                   Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit.
                   Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit.
@@ -366,16 +368,16 @@
       </div>
     </section>
     <!-- end carousel -->
-    <section>
+    <!-- content -->
+    <section class="blockcontent">
       <div class="box-width-site contentmain row">
         <div class="content col-9 text-center  p-0">
-          <div class="content__button row mb-2">
-            <div class="content__button__sort col-6 text-left">
+          <div class="content__button row">
+            <div class="content__button__sort col-3 text-left">
               Sort by
               <div class="btn-group">
                 <button type="button" class="content__button__sort__btn" data-toggle="dropdown">{{sortMainName}}</button>
                 <button type="button" class="content__button__sort__btn dropdown-toggle" id="dropdownMenuReference" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-reference="parent">
-                  <!-- <span class="sr-only">Toggle Dropdown</span> -->
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuReference">
                   <button v-on:click="sortPriceMin" class="dropdown-item" type="button">min price</button>
@@ -384,67 +386,38 @@
                   <button v-on:click="sortId" class="dropdown-item" type="button">default</button>
                   <button v-on:click="sortSale" class="dropdown-item" type="button">action</button>
                 </div>
-                <!-- <button v-on:click="sortpovz" class="dropdown-item" type="button">sortpovz</button> -->
               </div>
             </div>
-            <div class="content__button__page col-6 text-right">
-              <button v-on:click="changelistPage1" class=""> {{page1}} </button>
-              <button v-on:click="changelistPage2" class=""> {{page2}}</button>
-              <button v-on:click="changelistPage3" class=""> {{page3}}</button>
-              <button v-on:click="changelistPage4" class=""> {{page4}} </button>
+            <div class="content__button__page col-9 text-right">
+              <div class="content__button__page__text">Showing {{!ringeprice.length ? 0 : max - page + 1}} - {{max < ringeprice.length ? max : ringeprice.length}} of {{ringeprice.length}} results</div>
+              <paginate :page-count="Math.ceil(ringeprice.length/page)" :hide-prev-next=true :prev-text="'<'" :next-text="'>'" :click-handler="paginate" :page-class="'paginate-page-class'" :container-class="'paginate-class'">
+              </paginate>
             </div>
+            <div class="content__button__hr col-12"><div></div></div>
           </div>
           <div class="content__cells row p-0">
-            <div class="content__cells__cell col-4 p-0" v-for="(item, index) in ringeprice.slice(min, max) ">
+            <div class="text-center w-100" v-if="!ringeprice.length">
+              <h1 class="">Not found! Please сhange value price or select a different category!</h1>
+            </div>
+            <div class="content__cells__cell col-4 p-0 w-100" v-for="(item, index) in ringeprice.slice(max - page, max) ">
               <div class="content__cells__cell__cel">
-                <img :src="item.url" alt="item.url">
-                <div class="name">name - {{item.name}}</div>
-                <div class="price">price - {{item.price}}</div>
-                <button type="button" name="button">add to cart</button>
-                <div>index - {{index}}</div>
+                <div class="content__cells__cell__cel__sale" v-if="item.sale"></div>
+                <div class="content__cells__cell__cel__sale-text" v-if="item.sale">sale</div>
+                <img class="content__cells__cell__cel__img" :src="item.url" alt="item.url">
+                <div class="content__cells__cell__cel__name">{{item.name}}</div>
+                <div class="content__cells__cell__cel__price">${{item.price}}</div>
+                <div class="content__cells__cell__cel__button">
+                  <div class="button-main content__cells__cell__cel__button__main">
+                    <button v-on:click="addCart(item.id)" type="button" name="button">add to cart <i class="fa fa-plus"></i></button>
+                  </div>
+                </div>
+                <!-- <div>index - {{index}}</div>
                 <div>id - {{item.id}}</div>
                 <div>date - {{item.date}}</div>
                 <div>sale - {{item.sale}}</div>
                 <div>ringeprice.length - {{ringeprice.length}}</div>
-                <div>items.length - {{items.length}}</div>
+                <div>items.length - {{items.length}}</div> -->
               </div>
-
-
-
-
-              <!-- <div class="foto">foto</div>
-            <div class="name">name</div>
-            <div class="price">price</div>
-            <div class="button">button</div> -->
-
-
-
-
-
-              <!-- <div id="app">
-              <h1>Hello {{name}}</h1>
-              <h3>{{userInfo}}</h3>
-              <h3><a :href="url">My page</a></h3>
-              <button v-on:click="changeName">Change to Julia</button>
-              <br>
-              <br>
-              Add Book: <input type="text" v-model="currentBook"><button @click=addBook>Add Book</button>
-              <br>
-              <br>
-              <div v-if="books.length > 0">
-                Books
-                <ul>
-                  <li v-for="book in books">{{book}}</li>
-                </ul>
-              </div>
-            </div> -->
-
-
-
-
-
-
-
             </div>
           </div>
         </div>
@@ -453,17 +426,156 @@
         <!-- __foto -->
         <!-- __name -->
         <!-- __button -->
-        <div class="sidebar col-3">
-          <div class="sidebar__slider">
-            <input class="sidebar__slider__min" type="range" min="1" max="100" oninput="sizePic()" v-model="slidermin">
-            <input class="sidebar__slider__max" type="range" min="1" max="100" oninput="sizePic()" v-model="slidermax">
+        <div class="sidebar col-3 align-top">
+          <div class="sidebar__categories">
+            <div class="sidebar__title">
+              categories
+            </div>
+            <div class="sidebar__categories__menu">
+              <ul class="ul1" id="ul1">
+                <li class="li1">
+                  <input id="newlist" class="hide" type="checkbox" />
+                  <label for="newlist">
+                    <span>new</span>
+                  </label>
+                  <ul>
+                    <li v-on:click="womenClothes">Clothes</li>
+                    <li v-on:click="womenShoes">Shoes</li>
+                  </ul>
+                </li>
+                <li class="li1">
+                  <input id="designerlist" class="hide" type="checkbox" />
+                  <label for="designerlist">
+                    <span>designer</span>
+                  </label>
+                  <ul>
+                    <li v-on:click="womenClothes">Clothes</li>
+                    <li v-on:click="womenShoes">Shoes</li>
+                  </ul>
+                </li>
+                <li class="li1">
+                  <input id="womenlist" class="hide" type="checkbox" />
+                  <label for="womenlist">
+                    <span>women</span>
+                  </label>
+                  <ul>
+                    <li v-on:click="womenClothes">Clothes</li>
+                    <li v-on:click="womenShoes">Shoes</li>
+                  </ul>
+                </li>
+                <li class="li1">
+                  <input id="menlist" class="hide" type="checkbox" />
+                  <label for="menlist">
+                    <span class="icontext">men</span>
+                    <!-- <span class="iconsquare"><i class="fa fa-plus" aria-hidden="true"></i></span> -->
+                  </label>
+                  <ul>
+                    <li v-on:click="womenClothes">Clothes</li>
+                    <li v-on:click="womenShoes">Shoes</li>
+                  </ul>
+                </li>
+                <li class="li1">
+                  <input id="clearencelist" class="hide" type="checkbox" />
+                  <label for="clearencelist">
+                    <span class="icontext">clearence</span>
+                    <!-- <span class="iconsquare"><i class="fa fa-plus" aria-hidden="true"></i></span> -->
+                  </label>
+
+                  <ul>
+                    <li v-on:click="womenClothes">Clothes</li>
+                    <li v-on:click="womenShoes">Shoes</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+            <div class="sidebar__categories__filter">
+              <vue-slider class="sidebar__categories__filter__slider" v-model="value_slider" :min="minprice" :max="maxprice" :enable-cross="false"></vue-slider>
+              <div class="sidebar__categories__filter__text">PRICE ${{value_slider[0]}} - ${{value_slider[1]}}</div>
+              <div class="sidebar__categories__filter__button button-main">
+                <button v-on:click="filter">
+                  Filter
+                </button>
+              </div>
+            </div>
+            <div class="sidebar__select-size">
+              <div class="sidebar__select-size__text">
+                select your size
+              </div>
+              <div class="sidebar__select-size__button">
+                <button type="button" name="button">xs</button>
+                <button type="button" name="button">s</button>
+                <button type="button" name="button">m</button>
+                <button type="button" name="button">l</button>
+                <button type="button" name="button">xl</button>
+              </div>
+            </div>
           </div>
-          {{slidermin}}
-          {{slidermax}}
-          тут повинен бути sidebar _
-          тут повинен бути sidebar _
-          тут повинен бути sidebar _
-          тут повинен бути sidebar _
+          <div class="sidebar__onsale">
+            <div class="sidebar__title">
+              on sale
+            </div>
+            <div class="sidebar__content">
+              <div class="sidebar__content__foto">
+                <img src="images/sidebar/1.png" alt="sidebarimg">
+              </div>
+              <div class="sidebar__content__text">
+                <div class="sidebar__content__text__text">pintuck tank</div>
+                <div class="sidebar__content__text__price">$45.55</div>
+              </div>
+            </div>
+            <div class="sidebar__content">
+              <div class="sidebar__content__foto">
+                <img src="images/sidebar/2.png" alt="sidebarimg">
+              </div>
+              <div class="sidebar__content__text">
+                <div class="sidebar__content__text__text">folocia silk shirt</div>
+                <div class="sidebar__content__text__price">$69.49</div>
+              </div>
+            </div>
+            <div class="sidebar__content">
+              <div class="sidebar__content__foto">
+                <img src="images/sidebar/3.png" alt="sidebarimg">
+              </div>
+              <div class="sidebar__content__text">
+                <div class="sidebar__content__text__text">laylala shirt</div>
+                <div class="sidebar__content__text__price">$78.25</div>
+              </div>
+            </div>
+          </div>
+          <div class="sidebar__featured">
+            <div class="sidebar__title">
+              featured products
+            </div>
+            <div class="sidebar__content">
+              <div class="sidebar__content__foto">
+                <img src="images/sidebar/4.png" alt="sidebarimg">
+              </div>
+              <div class="sidebar__content__text">
+                <div class="sidebar__content__text__text">basic sunglasses</div>
+                <div class="sidebar__content__text__price">$14.95</div>
+              </div>
+            </div>
+            <div class="sidebar__content">
+              <div class="sidebar__content__foto">
+                <img src="images/sidebar/5.png" alt="sidebarimg">
+              </div>
+              <div class="sidebar__content__text">
+                <div class="sidebar__content__text__text">billie j</div>
+                <div class="sidebar__content__text__price">$69.49</div>
+              </div>
+            </div>
+            <div class="sidebar__content">
+              <div class="sidebar__content__foto">
+                <img src="images/sidebar/6.png" alt="sidebarimg">
+              </div>
+              <div class="sidebar__content__text">
+                <div class="sidebar__content__text__text">sandie shoppebag</div>
+                <div class="sidebar__content__text__price">$69.95</div>
+              </div>
+            </div>
+          </div>
+          <!-- {{minprice}}
+          {{maxprice}} -->
         </div>
       </div>
       <!-- <div id="app">
@@ -471,17 +583,127 @@
         <p>{{ title }}</p>
       </div> -->
     </section>
-    <footer>
+    <!-- end content -->
+    <!-- credit -->
+    <section class="blockcredit">
+      <div class="box-width-site">
+        <div class="credit">
 
+          <span>We accept</span>
+          <img src="images/icon/2.png" alt="cartimg">
+          <img src="images/icon/3.png" alt="cartimg">
+          <img src="images/icon/4.png" alt="cartimg">
+          <img src="images/icon/5.png" alt="cartimg">
+          <img src="images/icon/6.png" alt="cartimg">
+          <img src="images/icon/7.png" alt="cartimg">
+          <img src="images/icon/8.png" alt="cartimg">
+          <img src="images/icon/9.png" alt="cartimg">
+          <img src="images/icon/10.png" alt="cartimg">
+          <img src="images/icon/11.png" alt="cartimg">
+          <img src="images/icon/1.png" alt="cartimg">
+        </div>
+      </div>
+    </section>
+    <!-- end credit -->
+    <!-- contact -->
+    <section class="blockcontact">
+      <div class="box-width-site">
+        <div class="contact">
+          <div class="contact__title">
+            <div class="contact__title__text">Customer Service</div>
+            <ul>
+              <li>Contact</li>
+              <li>FAQ</li>
+              <li>Terms of payment</li>
+              <li>Terms of sale</li>
+              <li>Delivery terms and conditions</li>
+              <li>Returns and Refunds</li>
+            </ul>
+          </div>
+          <div class="contact__title">
+            <div class="contact__title__text">Information</div>
+            <ul>
+              <li>Affiliate</li>
+              <li>Cookies</li>
+              <li>How to Shop</li>
+              <li>About Nelly</li>
+              <li>Investor relations</li>
+            </ul>
+          </div>
+          <div class="contact__title">
+            <div class="contact__title__text">Campaigns</div>
+            <ul>
+              <li>Evening dresses</li>
+              <li>Makeup</li>
+              <li>Fashion forward</li>
+              <li>training cloths</li>
+              <li>Special Occasion Dresses</li>
+              <li></li>
+            </ul>
+          </div>
+          <div class="contact__title">
+            <div class="contact__title__text">Stores</div>
+            <ul>
+              <li>Paris</li>
+              <li>New Your</li>
+              <li>London</li>
+              <li>Madrid</li>
+              <li>Tokio</li>
+            </ul>
+          </div>
+          <div class="contact__title ">
+            <div class="contact__title__text">Social</div>
+            <div class="contact__title__icons">
+              <div class="contact__title__icons__icon"> <i class="fa fa-twitter" aria-hidden="true"></i></div>
+              <div class="contact__title__icons__icon"> <i class="fa fa-pinterest" aria-hidden="true"></i></div>
+              <div class="contact__title__icons__icon"> <i class="fa fa-facebook" aria-hidden="true"></i></div>
+              <div class="contact__title__icons__icon"> <i class="fa fa-google-plus-official" aria-hidden="true"></i></div>
+              <div class="contact__title__icons__icon"> <i class="fa fa-tumblr" aria-hidden="true"></i></div>
+              <div class="contact__title__icons__icon"> <i class="fa fa-vimeo" aria-hidden="true"></i></div>
+            </div>
+          </div>
+          <div class="contact__title">
+            <div class="contact__title__ellipse">
+              <img src="images/icon/Ellipsedown.png" alt="elipseimg">
+              <span>
+                <div class="procent">100%</div>
+                <div class="text">secured</div>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- end contact -->
+    <footer>
+      <div class="box-width-site">
+        <div class="buttom">
+          <div class="buttom__list">
+            <ul>
+              <li>Privacy & Cookies</li>
+              <li>Terms & Conditions</li>
+              <li>Acccessibility</li>
+              <li>Store Directory</li>
+              <li>About Us</li>
+            </ul>
+          </div>
+          <div class="buttom__copyright">
+            <div>&copy; LookShop.com</div>
+            <div>All Rights Reserved</div>
+          </div>
+        </div>
+      </div>
     </footer>
 
-  </div>
+  </main>
 
-
+  <script src="https://use.fontawesome.com/64eb14efc2.js"></script>
   <script src="js/owl.carousel.min.js"></script>
   <!-- <script src="js/jquery.circliful.min.js"></script> -->
   <!-- <script src="js/jquery.viewportchecker.min.js"></script> -->
   <!-- <script src="js/scrolling-nav.js"></script> -->
+  <script src="js/vue-slider-component.umd.min.js"></script>
+  <script src="js/vuejs-paginate.js"></script>
   <script src="js/script.js"></script>
 
 </body>
