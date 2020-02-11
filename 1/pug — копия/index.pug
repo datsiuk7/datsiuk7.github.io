@@ -1,0 +1,144 @@
+extends layout.pug
+
+block content
+  .countPlayer
+    .countBgc
+    .countPlayersForm
+      .countPlayersFormCenter
+        .countHeader
+          | MONOPOLY
+        | Виберіть кількість гравців
+        form#countPlayersForm
+          input(type='radio', name='countPlayer', value='2')
+          |  2
+          input(type='radio', name='countPlayer', value='3')
+          |  3
+          input(type='radio', name='countPlayer', value='4', checked='')
+          |  4<br>
+        input(class="inputNext" value="Далі" onclick="countPlayer()" type="button")
+  .playerSetting
+    .countBgc
+    .player-inputs
+      .player-input1
+        | Player 1: 
+        input#player1name(type='text', title='Player name', maxlength='16', value='Player 1')
+        //select#player1random(title='random', onclick="")
+          option(value='0', selected='') Людина
+          option(value='1') Рандом
+      .player-input2.player-input
+        | Player 2: 
+        input#player2name(type='text', title='Player name', maxlength='16', value='Player 2')
+        //select#player2random(title='random', onclick="")
+          option(value='0', selected='') Людина
+          option(value='1') Рандом
+      .player-input3.player-input
+        | Player 3: 
+        input#player3name(type='text', title='Player name', maxlength='16', value='Player 3')
+        //select#player3random(title='random', onclick="")
+          option(value='0', selected='') Людина
+          option(value='1') Рандом
+      .player-input4.player-input
+        | Player 4: 
+        input#player4name(type='text', title='Player name', maxlength='16', value='Player 4')
+        //select#player4random(title='random', onclick="")
+          option(value='0', selected='') Людина
+          option(value='1') Рандом
+
+      input(class="inputNext" value="Почати гру  " onclick="startGame()" type="button")
+  .win 
+  
+  .main#main
+    .field
+      #id18.pl <!--18-->
+      #id19.pl <!--19-->
+      #id20.pl <!--20-->
+      #id21.pl <!--21-->
+      #id22.pl <!--22-->
+      #id23.pl <!--23-->
+      #id0.pl0 
+        .countBgcs
+        .divCube 
+          .Cube
+            img(id="imgCube1" src="./img/0.jpg" alt="foto")
+            img(id="imgCube2" src="./img/0.jpg" alt="foto")
+        //#clickRand.click кинути кубик
+        .buttonMain
+          input(class="mainButton" value="Кинути кубик" onclick="tossCube()" type="button")
+          input(class="mainButton" value="Купити" onclick="buy()" type="button")
+          input(class="mainButton" value="Завершити хід" onclick="endMove()" type="button")
+          //input(value="Угода" onclick="agreement()" type="button")
+      #id24.pl <!--24-->
+      #id25.pl <!--25-->
+      #id26.pl <!--26-->
+      #id27.pl <!--27-->
+      #id28.pl <!--28-->
+      #id17.pl <!--17-->
+      #id29.pl <!--29-->
+      #id16.pl <!--16-->
+      #id30.pl <!--30-->
+      #id15.pl <!--15-->
+      #id31.pl <!--31-->
+      #id14.pl <!--14-->
+      #id32.pl <!--32-->
+      #id13.pl <!--13-->
+      #id33.pl <!--33-->
+      #id12.pl <!--12-->
+      #id34.pl <!--34-->
+      #id11.pl <!--11-->
+      #id10.pl <!--10-->
+      #id9.pl <!--9-->
+      #id8.pl <!--8-->
+      #id7.pl <!--7-->
+      #id6.pl <!--6-->
+      #id5.pl <!--5-->
+      #id4.pl <!--4-->
+      #id3.pl <!--3-->
+      #id2.pl <!--2-->
+      #id1.pl <!--1-->
+      #player1.player.animateActivePlayer
+      #player2.player
+      #player3.player
+      #player4.player
+    .bar
+      .score
+        .control 
+        //&pcy;&acy;&ncy;&iecy;&lcy;&softcy; &kcy;&iecy;&rcy;&ucy;&vcy;&acy;&ncy;&ncy;&yacy;
+        .players 
+          .player1Money
+            #player1Money
+            #player1MoneyScore.playerMoneyScore
+          .player2Money
+            #player2Money
+            #player2MoneyScore.playerMoneyScore
+          .player3Money
+            #player3Money
+            #player3MoneyScore.playerMoneyScore
+          .player4Money
+            #player4Money
+            #player4MoneyScore.playerMoneyScore
+            
+      .history Історія
+        #windowHistory 
+          div Гру розпочато
+      //&Iukcy;&scy;&tcy;&ocy;&rcy;&iukcy;&yacy;
+      
+      //cubes ok
+      //buttons
+      //win player
+      //count first players
+      //name players
+      //train button
+      
+            
+      //Історія ок
+      //Монополія ok
+      //Банкрот ok
+      
+      //Поїзди
+      //Передача нерухомості або грошей
+      //Продаж нерухомості
+      
+      //Кредит
+      //Пропуск ходу
+      //Вязниця
+      

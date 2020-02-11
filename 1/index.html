@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+    <meta name="author" content=""/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="css/main.css"/>
+    <title>Test</title>
+  </head>
+  <body>
+    <div class="countPlayer">
+      <div class="countBgc"></div>
+      <div class="countPlayersForm">
+        <div class="countPlayersFormCenter">
+          <div class="countHeader">MONOPOLY</div>Виберіть кількість гравців
+          <form id="countPlayersForm">
+            <input type="radio" name="countPlayer" value="2"/> 2
+            <input type="radio" name="countPlayer" value="3"/> 3
+            <input type="radio" name="countPlayer" value="4" checked=""/> 4<br>
+          </form>
+          <input class="inputNext" value="Далі" onclick="countPlayer()" type="button"/>
+        </div>
+      </div>
+    </div>
+    <div class="playerSetting">
+      <div class="countBgc"></div>
+      <div class="player-inputs">
+        <div class="player-input1">Player 1: 
+          <input id="player1name" type="text" title="Player name" maxlength="16" value="Player 1"/>
+          <!--select#player1random(title='random', onclick="")
+          option(value='0', selected='') Людина
+          option(value='1') Рандом
+          -->
+        </div>
+        <div class="player-input2 player-input">Player 2: 
+          <input id="player2name" type="text" title="Player name" maxlength="16" value="Player 2"/>
+          <!--select#player2random(title='random', onclick="")
+          option(value='0', selected='') Людина
+          option(value='1') Рандом
+          -->
+        </div>
+        <div class="player-input3 player-input">Player 3: 
+          <input id="player3name" type="text" title="Player name" maxlength="16" value="Player 3"/>
+          <!--select#player3random(title='random', onclick="")
+          option(value='0', selected='') Людина
+          option(value='1') Рандом
+          -->
+        </div>
+        <div class="player-input4 player-input">Player 4: 
+          <input id="player4name" type="text" title="Player name" maxlength="16" value="Player 4"/>
+          <!--select#player4random(title='random', onclick="")
+          option(value='0', selected='') Людина
+          option(value='1') Рандом
+          
+          -->
+        </div>
+        <input class="inputNext" value="Почати гру  " onclick="startGame()" type="button"/>
+      </div>
+    </div>
+    <div class="win"> </div>
+    <div class="main" id="main">
+      <div class="field">
+        <div class="pl" id="id18"><!--18--></div>
+        <div class="pl" id="id19"><!--19--></div>
+        <div class="pl" id="id20"><!--20--></div>
+        <div class="pl" id="id21"><!--21--></div>
+        <div class="pl" id="id22"><!--22--></div>
+        <div class="pl" id="id23"><!--23--></div>
+        <div class="pl0" id="id0"> 
+          <div class="countBgcs"></div>
+          <div class="divCube"> 
+            <div class="Cube"><img id="imgCube1" src="./img/0.jpg" alt="foto"/><img id="imgCube2" src="./img/0.jpg" alt="foto"/></div>
+          </div>
+          <!--#clickRand.click кинути кубик-->
+          <div class="buttonMain">
+            <input class="mainButton" value="Кинути кубик" onclick="tossCube()" type="button"/>
+            <input class="mainButton" value="Купити" onclick="buy()" type="button"/>
+            <input class="mainButton" value="Завершити хід" onclick="endMove()" type="button"/>
+            <!--input(value="Угода" onclick="agreement()" type="button")-->
+          </div>
+        </div>
+        <div class="pl" id="id24"><!--24--></div>
+        <div class="pl" id="id25"><!--25--></div>
+        <div class="pl" id="id26"><!--26--></div>
+        <div class="pl" id="id27"><!--27--></div>
+        <div class="pl" id="id28"><!--28--></div>
+        <div class="pl" id="id17"><!--17--></div>
+        <div class="pl" id="id29"><!--29--></div>
+        <div class="pl" id="id16"><!--16--></div>
+        <div class="pl" id="id30"><!--30--></div>
+        <div class="pl" id="id15"><!--15--></div>
+        <div class="pl" id="id31"><!--31--></div>
+        <div class="pl" id="id14"><!--14--></div>
+        <div class="pl" id="id32"><!--32--></div>
+        <div class="pl" id="id13"><!--13--></div>
+        <div class="pl" id="id33"><!--33--></div>
+        <div class="pl" id="id12"><!--12--></div>
+        <div class="pl" id="id34"><!--34--></div>
+        <div class="pl" id="id11"><!--11--></div>
+        <div class="pl" id="id10"><!--10--></div>
+        <div class="pl" id="id9"><!--9--></div>
+        <div class="pl" id="id8"><!--8--></div>
+        <div class="pl" id="id7"><!--7--></div>
+        <div class="pl" id="id6"><!--6--></div>
+        <div class="pl" id="id5"><!--5--></div>
+        <div class="pl" id="id4"><!--4--></div>
+        <div class="pl" id="id3"><!--3--></div>
+        <div class="pl" id="id2"><!--2--></div>
+        <div class="pl" id="id1"><!--1--></div>
+        <div class="player animateActivePlayer" id="player1"></div>
+        <div class="player" id="player2"></div>
+        <div class="player" id="player3"></div>
+        <div class="player" id="player4"></div>
+      </div>
+      <div class="bar">
+        <div class="score">
+          <div class="control"> </div>
+          <!--&pcy;&acy;&ncy;&iecy;&lcy;&softcy; &kcy;&iecy;&rcy;&ucy;&vcy;&acy;&ncy;&ncy;&yacy;-->
+          <div class="players"> 
+            <div class="player1Money">
+              <div id="player1Money"></div>
+              <div class="playerMoneyScore" id="player1MoneyScore"></div>
+            </div>
+            <div class="player2Money">
+              <div id="player2Money"></div>
+              <div class="playerMoneyScore" id="player2MoneyScore"></div>
+            </div>
+            <div class="player3Money">
+              <div id="player3Money"></div>
+              <div class="playerMoneyScore" id="player3MoneyScore"></div>
+            </div>
+            <div class="player4Money">
+              <div id="player4Money"></div>
+              <div class="playerMoneyScore" id="player4MoneyScore"></div>
+            </div>
+          </div>
+        </div>
+        <div class="history">Історія
+          <div id="windowHistory"> 
+            <div>Гру розпочато</div>
+          </div>
+        </div>
+        <!--&Iukcy;&scy;&tcy;&ocy;&rcy;&iukcy;&yacy;-->
+        <!--cubes ok-->
+        <!--buttons-->
+        <!--win player-->
+        <!--count first players-->
+        <!--name players-->
+        <!--train button-->
+        <!--Історія ок-->
+        <!--Монополія ok-->
+        <!--Банкрот ok-->
+        <!--Поїзди-->
+        <!--Передача нерухомості або грошей-->
+        <!--Продаж нерухомості-->
+        <!--Кредит-->
+        <!--Пропуск ходу-->
+        <!--Вязниця-->
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>

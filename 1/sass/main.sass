@@ -1,0 +1,258 @@
+@import '../libs/font-awesome.min'
+@import '../libs/normalize'
+//@import 'helpers/*'
+//@import 'base/base'
+//@import 'base/adjustment'
+//@import 'components/*'
+//@import 'layout/*'
+
+//@import 'pages/*'
+*
+  //border: 0px solid black
+  outline: 0 !important
+  margin: 0
+  padding: 0
+  box-sizing: border-box
+  -moz-box-sizing: border-box
+  -webkit-box-sizing: border-box
+
+html, body
+  height: 100%
+  .countBgc
+    background: no-repeat center url("../img/background.jpg")
+    background-size: cover
+    background-color: rgba(0, 0, 0, 0.2)
+    width: 100vw
+    height: 100vh
+    z-index: -10
+    position: absolute
+    opacity: 0.2
+.countPlayer
+  width: 100vw
+  height: 100vh
+  position: relative
+  .countPlayersForm
+    display: flex
+    justify-content: center
+    align-items: center
+    height: 100%
+    .countPlayersFormCenter
+      background-color: rgba(255,0,0,0.3)
+      height: 80vh
+      width: 80vw
+      display: flex
+      justify-content: center
+      align-items: center
+      flex-direction: column
+      border-radius: 200px
+      .inputNext
+        display: flex
+        justify-content: center
+        width: 100%
+        text-decoration: none
+        outline: none
+        width: 150px
+        border: 0
+        border-radius: 10px
+        box-shadow: 0 0 40px 40px #0f0 inset, 0 0 0 0 #0f0
+        font-family: 'Montserrat', sans-serif
+        font-weight: bold
+        letter-spacing: 2px
+        color: white
+        transition: .15s ease-in-out
+      .inputNext:hover
+        box-shadow: 0 0 10px 0 #0f0 inset, 0 0 10px 4px #0f0
+        color: #595
+      input
+        cursor: pointer
+      input:hover
+        box-shadow: 0 0 5px 0 #0f0 inset, 0 0 5px 1px #0f0
+.playerSetting
+  display: flex
+  justify-content: center
+  align-items: center
+  height: 100%
+  .player-input
+    margin: 5px
+  .player-inputs
+    height: 80vh
+    width: 80vw
+    padding-top: 15%
+    border-radius: 200px
+    background-color: rgba(255,0,0,0.3)
+    text-align: center
+    .inputNext
+      justify-content: center
+      width: 100%
+      text-decoration: none
+      outline: none
+      width: 150px
+      border: 0
+      border-radius: 10px
+      box-shadow: 0 0 40px 40px #0f0 inset, 0 0 0 0 #0f0
+      font-family: 'Montserrat', sans-serif
+      font-weight: bold
+      letter-spacing: 2px
+      color: white
+      transition: .15s ease-in-out
+    .inputNext:hover
+      box-shadow: 0 0 10px 0 #0f0 inset, 0 0 10px 4px #0f0
+      color: #595
+    input
+      cursor: pointer
+    input:hover
+      box-shadow: 0 0 1px 0 #f00 inset, 0 0 1px 1px #0f0
+
+.main
+  width: 100%
+  height: 100%
+  padding: 1%
+  display: flex
+  justify-content: space-between
+  margin: auto
+  border: 1px solid red
+  // display: none
+  .pl0
+    background: no-repeat center url("../img/background.jpg")
+    background-size: cover
+    background-color: rgba(0, 0, 0, 0.2)
+    width: 100%
+    height: 100%
+    // position: absolute
+  .field
+    display: grid
+    justify-content: center
+    grid: repeat(9, calc(100%/8)) / repeat(11, calc(100%/11))
+    width: 80%
+    .buttonMain
+      display: flex
+      justify-content: center
+      align-items: center
+      height: 50%
+      input
+        margin: 5px
+        border-radius: 45px
+        border: 0
+        box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1)
+        height: 40px
+        width: 150px
+        transition: all 0.3s ease 0s
+        &:active
+          background-color: red
+        &:hover
+          background-color: #2EE59D
+          box-shadow: 0px 15px 20px rgba(246, 29, 157, 0.4)
+          color: #fff
+          transform: translateY(-2px)
+
+  .bar
+    width: 35%
+    margin-left: 5px
+    .playerMoneyScore
+      display: flex
+      justify-content: center
+      align-items: center
+      height: 30px
+      border-radius: 15px
+      z-index: 90
+
+  .pl
+    border-radius: 5px
+    background-color: rgba(90,60,90,0.5)
+    border: 1px solid rgba(0,0,0,0.1)
+    padding-top: 20px
+    color: #240036
+    text-align: center
+    &:hover
+      z-index: 95
+      color: white
+
+  .pl0
+    /* от какой строки
+    grid-row-start: 2
+
+    /* до какой строки
+    grid-row-end: 8
+
+    /* от какого столбца
+    grid-column-start: 2
+
+    /* до какого столбца
+    grid-column-end: 11
+    .divCube
+      height: 50%
+      display: flex
+      justify-content: center
+      align-items: center
+      img
+        margin: 5px
+
+  .player
+    width: 20px
+    height: 20px
+    // background-color: green
+    border-radius: 50%
+    display: flex
+    align-items: center
+    justify-content: center
+    position: absolute
+  .animateActivePlayer
+    animation-duration: 1s
+    animation-iteration-count: infinite
+    animation-name: player-move
+    animation-timing-function: ease-out
+
+  @keyframes player-move
+    0%
+      transform: translateY(0)
+    10%
+      transform: translateY(-1px)
+    45%
+      transform: translateY(-10px)
+    55%
+      transform: translateY(-10px)
+    90%
+      transform: translateY(-1px)
+    100%
+      transform: translateY(0)
+  .textInTablesUp,
+    height: 70%
+    display: flex
+    justify-content: center
+  .textInTablesDown
+    border-radius: 30px
+    height: 30%
+    display: flex
+    justify-content: center
+    align-items: flex-end
+
+  .score
+    height: 28vh
+  .history
+    height: 60vh
+  #windowHistory
+    overflow: scroll
+    overflow-x: hidden
+    max-height: 65vh
+    div
+      border-radius: 5px
+      padding: 0 10px
+
+
+.win
+  position: absolute
+  height: 100%
+  width: 100%
+  background-color: rgba(255,0,0,0.7)
+  z-index: 100
+  display: flex
+  justify-content: center
+  align-items: center
+  font-size: 46px
+  color: white
+  // color: blue
+  // color: blue
+  // color: blue
+  // color: blue
+  // color: blue
+  // color: blue
