@@ -84,10 +84,14 @@ if (localStorage.lightMode == "light") {
   app.setAttribute("data-light-mode", "light");
   try {
     app3.setAttribute("class", "light");
+  } catch {
+
   }
 } else {
   app.setAttribute("data-light-mode", "dark");
   try {
     app3.setAttribute("class", "dark");
+  } catch {
+
   }
 }
