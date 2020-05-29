@@ -1,3 +1,9 @@
+var app = document.getElementsByTagName("BODY")[0];
+if (localStorage.lightMode == "dark") {
+  app.setAttribute("data-light-mode", "dark");
+} else {
+  app.setAttribute("data-light-mode", "light");
+}
 let changecrupts = 1;
 
 function changecrupt() {
@@ -161,10 +167,4 @@ function toggle_light_mode() {
     localStorage.lightMode = "dark";
     app.setAttribute("data-light-mode", "dark");
   }
-}
-var app = document.getElementsByTagName("BODY")[0];
-if (localStorage.lightMode == "dark") {
-  app.setAttribute("data-light-mode", "dark");
-} else {
-  app.setAttribute("data-light-mode", "light");
 }

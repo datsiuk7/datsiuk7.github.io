@@ -64,8 +64,8 @@ header menu a img {
     outline: none;
     border: none;
     border-radius: 3px;
-    background: #0c9c0d linear-gradient(#82d18d, #0c9c0d);
-    box-shadow: inset #72de26 0 -1px 1px, inset 0 1px 1px #98ff98, #3caa3c 0 0 0 1px, rgba(0,0,0,.3) 0 2px 5px;
+    background: #F1B4A8 linear-gradient(#F1CAC2, #CA0028);
+    box-shadow: inset #CA7384 -1px 1px, inset 0 1px 1px #F17B64, #CA0028 0 0 0 1px, rgba(0,0,0,.5) 0 2px 5px;
 }
 
 .main button {
@@ -82,8 +82,9 @@ header menu a img {
     outline: none;
     border: none;
     border-radius: 3px;
-    background: #0c9c0d linear-gradient(#82d18d, #0c9c0d);
-    box-shadow: inset #72de26 0 -1px 1px, inset 0 1px 1px #98ff98, #3caa3c 0 0 0 1px, rgba(0,0,0,.3) 0 2px 5px;
+    background: #F1B4A8 linear-gradient(#F1CAC2, #CA0028);
+    /* background: #0c9c0d linear-gradient(#82d18d, #0c9c0d); */
+    box-shadow: inset #CA7384 0 -1px 1px, inset 0 1px 1px #F1B4A8, #CA0028 0 0 0 1px, rgba(0,0,0,.3) 0 2px 5px;
     -webkit-animation: pulsate 1.2s linear infinite;
     animation: pulsate 1.2s linear infinite;
 }
