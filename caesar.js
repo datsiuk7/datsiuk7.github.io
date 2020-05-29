@@ -1,4 +1,5 @@
 document.getElementById('count').innerHTML = localStorage.getItem("ceasar");
+
 function start() {
   cleartext();
   globaltext = document.getElementById("textencrupt").value;
@@ -65,12 +66,15 @@ class Caesar {
 }
 
 function toggle_light_mode() {
-    var app = document.getElementsByTagName("BODY")[0];
-    if (localStorage.lightMode == "dark") {
-	localStorage.lightMode = "light";
-	app.setAttribute("data-light-mode", "light");
-    } else {
-	localStorage.lightMode = "dark";
-	app.setAttribute("data-light-mode", "dark");
-    }
+  var app = document.getElementsByTagName("BODY")[0];
+  var app = document.getElementsById("fbsetting");
+  if (localStorage.lightMode == "dark") {
+    localStorage.lightMode = "light";
+    app.setAttribute("data-light-mode", "light");
+    app.setAttribute("data-colorscheme", "light");
+  } else {
+    localStorage.lightMode = "dark";
+    app.setAttribute("data-light-mode", "dark");
+    app.setAttribute("data-colorscheme", "dark");
+  }
 }
