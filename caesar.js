@@ -67,14 +67,14 @@ class Caesar {
 
 function toggle_light_mode() {
   var app = document.getElementsByTagName("BODY")[0];
-  var app = document.getElementsById("fbsetting");
+  var app2 = document.getElementsById("fbsetting");
   if (localStorage.lightMode == "dark") {
     localStorage.lightMode = "light";
     app.setAttribute("data-light-mode", "light");
-    app.setAttribute("data-colorscheme", "light");
+    app2.setAttribute("data-colorscheme", "light");
   } else {
     localStorage.lightMode = "dark";
     app.setAttribute("data-light-mode", "dark");
-    app.setAttribute("data-colorscheme", "dark");
+    app2.setAttribute("data-colorscheme", "dark");
   }
 }
