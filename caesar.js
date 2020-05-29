@@ -67,7 +67,7 @@ class Caesar {
 
 function toggle_light_mode() {
   var app = document.getElementsByTagName("BODY")[0];
-  var app2 = document.getElementsById("fbsetting");
+  var app2 = document.getElementById("fbsetting");
   if (localStorage.lightMode == "dark") {
     localStorage.lightMode = "light";
     app.setAttribute("data-light-mode", "light");
