@@ -78,6 +78,8 @@ function toggle_light_mode() {
     app3.setAttribute("class", "dark");
   }
 }
+var app = document.getElementsByTagName("BODY")[0];
+var app3 = document.getElementById("fbsetting");
 if (localStorage.lightMode == "dark") {
   app.setAttribute("data-light-mode", "light");
   app3.setAttribute("class", "light");
