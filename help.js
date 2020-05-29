@@ -138,7 +138,7 @@ function deletemark(text) {
   }
   return text;
 }
-
+//count crupt
 function localstorage(text) {
   if (!parseInt(localStorage.getItem(text))) {
     localStorage.setItem(text, 1);
@@ -147,6 +147,24 @@ function localstorage(text) {
     console.log(localStorage.getItem(text));
   }
 }
+//text history
 function cookie(name, text) {
   localStorage.setItem(localStorage.length, name + ":" + text);
+}
+//dark mode
+function toggle_light_mode() {
+  var app = document.getElementsByTagName("BODY")[0];
+  if (localStorage.lightMode == "dark") {
+    localStorage.lightMode = "light";
+    app.setAttribute("data-light-mode", "light");
+  } else {
+    localStorage.lightMode = "dark";
+    app.setAttribute("data-light-mode", "dark");
+  }
+}
+var app = document.getElementsByTagName("BODY")[0];
+if (localStorage.lightMode == "dark") {
+  app.setAttribute("data-light-mode", "dark");
+} else {
+  app.setAttribute("data-light-mode", "light");
 }

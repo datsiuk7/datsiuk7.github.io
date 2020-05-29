@@ -3,51 +3,68 @@
 
 <head>
   <meta charset="utf-8">
-  <title></title>
+  <title>Шифр Цезаря</title>
   <meta property="fb:admins" content="100004843085791" />
   <meta property="fb:app_id" content="251597329238141" />
+  <!-- <meta http-equiv="refresh" content="2"> -->
+  <link rel="stylesheet" href="./style.css">
   <script async defer crossorigin="anonymous" src="https://connect.facebook.net/uk_UA/sdk.js#xfbml=1&version=v7.0&appId=251597329238141&autoLogAppEvents=1"></script>
-  <style media="screen">
-    body {
-      transition: background-color 3s;
-    }
-
-    body[data-light-mode=dark] {
-      background-color: #181A1B;
-      color: #D3D0C9;
-    }
-    #fbsetting{
-      background-color: #999999 !important;
-    }
-  </style>
 </head>
 
 <body>
-  <button onclick="toggle_light_mode()">
-    День/Ніч
-  </button>
-  шифровок/дешифровок17
-  <div id="count">
-  </div>
-  <input id="textencrupt" type="text" name="" value="" placeholder="текст*">
-  <input id="mainButton" value="Шифрувати/дешифрувати" onclick="start()" type="button">
-  <input id="mainButtonClear" value="Очистити" onclick="cleartext()" type="button">
-  <br>
-  <h6 style="margin: 0">*одинарні лапки збоків текста видаляються</h6>
-  Виберіть мову тексту:
-  <select id="textlanguage">
-    <option value="en">Англійська</option>
-    <option value="pl">Польська</option>
-    <option value="ru">Російська</option>
-    <option value="ua">Українська</option>
-  </select>
-  <div id="text">
+  <header>
+    <menu>
+      <a href="./index.html"><img src="logo.png" alt="logo"></a><br>
+      <a href="./vigenere.html">Шифр Віженера</a><br>
+      <a href="./caesar.html">Шифр Цезаря</a><br>
+      <a href="./localhistory.html">Локальна історія</a><br>
+    </menu>
+  </header>
+  <div class="main">
 
+    <main>
+
+      <input id="textencrupt" type="text" name="" value="" placeholder="текст*">
+      <button id="mainButton" value="Шифрувати/дешифрувати" onclick="start()" type="button">Шифрувати/дешифрувати</button>
+      <button id="mainButtonClear" value="Очистити" onclick="cleartext()" type="button">Очистити</button>
+      <br>
+      <h6 style="margin: 0">*одинарні лапки збоків текста видаляються</h6>
+      Виберіть мову тексту:
+      <select id="textlanguage">
+        <option value="en">Англійська</option>
+        <option value="pl">Польська</option>
+        <option value="ru">Російська</option>
+        <option value="ua">Українська</option>
+      </select>
+      <div id="text">
+
+      </div>
+      <div class="opus">
+        Шифр Цезаря один з найбільш найдавніших відомих шифрів. Схема шифрування дуже проста - використовується зрушення букви алфавіту на фіксоване число позицій. Що використовується перетворення зазвичай позначають як ROTN, де N - зрушення, ROT - скорочення від слова ROTATE, в даному випадку «циклічний зсув».
+
+        Алфавіт дійсно зациклюється, тобто букви в кінці алфавіту перетворюються в літери початку алфавіту. Наприклад, позначення ROT2 позначає зсув на 2 позиції, тобто, «а» перетворюється в «в», «б» в «г», і так далі, і в кінці «ю» перетворюється в «а» а «я» - в «б». Число різних перетворень звичайно і залежить від довжини алфавіту. Для російської мови можливо 32 різних перетворення (перетворення ROT0 і ROT33 зберігають вихідний текст, а далі починаються вже повторення). У зв'язку з цим шифр є вкрай слабким і вихідний текст можна відновити просто перевіривши всі можливі перетворення.
+
+        Калькулятор видає таблицю всіх можливих в шифрі Цезаря перетворень введеного тексту.
+      </div>
+      <div id="fb-root"></div>
+      <div id="fbsetting" class="fb-comments" data-href="https://datsiuk7.github.io/caesar.html" data-numposts="5" data-width=""></div>
+    </main>
+    <nav>
+      усіх ваших шифровок/дешифровок
+      <div id="count">
+      </div><br>
+      <button onclick="toggle_light_mode()">
+        Темний/світлий режим
+      </button>
+    </nav>
   </div>
+  <footer>
+    Сайт створено студентами 3 курсу <br>
+    Автори: Дацюк Богдан та Кукол Антон <br>
+    Copyright © University Lutsk EENU
+  </footer>
   <script src="caesar.js" charset="utf-8"></script>
   <script src="help.js" charset="utf-8"></script>
-  <div id="fb-root"></div>
-  <div id="fbsetting"class="fb-comments" data-href="https://datsiuk7.github.io/caesar.html" data-numposts="5" data-width=""></div>
 </body>
 
 </html>

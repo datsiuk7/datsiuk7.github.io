@@ -3,30 +3,76 @@
 
 <head>
   <meta charset="utf-8">
-  <title></title>
+  <title>Шифр Віженера</title>
+  <meta property="fb:admins" content="100004843085791" />
+  <meta property="fb:app_id" content="251597329238141" />
+  <link rel="stylesheet" href="./style.css">
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/uk_UA/sdk.js#xfbml=1&version=v7.0&appId=251597329238141&autoLogAppEvents=1"></script>
 </head>
 
 <body>
-  шифровок/дешифровок
-  <div id="count">
-  </div>
-  <input id="textencrupt" type="text" name="" value="" placeholder="текст*">
-  <input id="key" type="text" name="" value="" placeholder="ключ">
-  <input id="mainButton" value="Шифрувати" onclick="start()" type="button">
-  <input id="mainButtonClear" value="Очистити" onclick="cleartext()" type="button">
-  <br>
-  <h6 style="margin: 0">*одинарні лапки збоків текста видаляються</h6>
-  Виберіть мову тексту:
-  <select id="textlanguage">
-    <option value="en">Англійська</option>
-    <option value="pl">Польська</option>
-    <option value="ru">Російська</option>
-    <option value="ua">Українська</option>
-  </select>
-  <input value="Переключити" onclick="changecrupt()" type="button">
-  <div id="text">
+  <header>
+    <menu>
+      <a href="./index.html"><img src="logo.png" alt="logo"></a><br>
+      <a href="./vigenere.html">Шифр Віженера</a><br>
+      <a href="./caesar.html">Шифр Цезаря</a><br>
+      <a href="./localhistory.html">Локальна історія</a><br>
+    </menu>
+  </header>
+  <div class="main">
 
+    <main>
+      <input id="textencrupt" type="text" name="" value="" placeholder="текст*">
+      <input id="key" type="text" name="" value="" placeholder="ключ">
+      <input id="mainButton" value="Шифрувати" onclick="start()" type="button">
+      <input id="mainButtonClear" value="Очистити" onclick="cleartext()" type="button">
+      <br>
+      <h6 style="margin: 0">*одинарні лапки збоків текста видаляються</h6>
+      Виберіть мову тексту:
+      <select id="textlanguage">
+        <option value="en">Англійська</option>
+        <option value="pl">Польська</option>
+        <option value="ru">Російська</option>
+        <option value="ua">Українська</option>
+      </select>
+      <input value="Переключити" onclick="changecrupt()" type="button">
+      <div id="text">
+
+      </div>
+      <div class="opus">
+        Так як Шифр ​​Цезаря у нас вже є, було б логічно доповнити його калькулятором, який шифрує / розшифровує текст використовуючи шифр Віженера.
+        <br>
+        <br>
+        Суть алгоритму шифрування проста. Шифр Віженера - це послідовність шифрів Цезаря з різними значеннями зсуву (ROTX - см. Шифр ​​Цезаря). Тобто до першої букві тексту застосовується перетворення, наприклад, ROT5, до другої, наприклад, ROT17, і
+        так далі. Послідовність застосовуваних перетворень визначається ключовою фразою, в якій кожна буква слова позначає необхідний зрушення, наприклад, фраза ДЕ ВІН задає таку послідовність шифрів Цезаря: ROT3-ROT4-ROT5-ROT15-ROT14, яка
+        повторюється, поки не буде зашифрований весь текст повідомлення.
+        <br>
+        <br>
+        Як оповідає Вікіпедія, шифр Віженера є шифром підстановки, тобто шифром, в якому кожна літера вихідного тексту замінюється буквою шифр-тексту. Для розкриття подібних шифрів використовується частотний криптоаналіз.
+        <br>
+        <br>
+        Ще там можна прочитати про варіант шифру з біжучим ключем (running key), який був колись був невзламиваемим. Цей варіант полягає у використанні в якості ключа блоку тексту, рівного по довжині вихідного тексту. Втім, і цей варіант, як
+        виявилося, успішно піддається злому. Проблема з біжучим ключем шифру Віженера полягає в тому, що криптоаналитик має статистичну інформацію про ключі (враховуючи, що блок тексту написаний на відомій мові) і ця інформація буде відображатися в
+        зашифрованому тексті. Якщо ключ дійсно випадковий, його довжина дорівнює довжині повідомлення і він використовувався одного разу, то шифр Віженера теоретично буде невзламиваемим, але такі системи вже відносяться до класу систем одноразового
+        коду, або одноразового шифр-блокнота (one-time pad). Вони дійсно не піддаються злому, проте їх практичне застосування досить важко.
+      </div>
+      <div id="fb-root"></div>
+      <div id="fbsetting" class="fb-comments" data-href="https://datsiuk7.github.io/vigenere.html" data-numposts="5" data-width=""></div>
+    </main>
+    <nav>
+      усіх ваших шифровок/дешифровок
+      <div id="count">
+      </div><br>
+      <button onclick="toggle_light_mode()">
+        Темний/світлий режим
+      </button>
+    </nav>
   </div>
+  <footer>
+    Сайт створено студентами 3 курсу <br>
+    Автори: Дацюк Богдан та Кукол Антон <br>
+    Copyright © University Lutsk EENU
+  </footer>
   <script src="vigenere.js" charset="utf-8"></script>
   <script src="help.js" charset="utf-8"></script>
 </body>

@@ -1,14 +1,45 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
-    <h2>Це історія всіх шифрувань і дешифровань яка збережена у цьому браузері</h2>
-    <input value="Кнопка для видалення усіх ваших даних" onclick="clearhistory()" type="button">
-    <hr>
-    <b>!!!ваш текст:метод кодування!!!</b><br>
-    <script src="localhistory.js" charset="utf-8"></script>
-  </body>
+
+<head>
+  <meta charset="utf-8">
+  <title>Локальна історія</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+  <header>
+    <menu>
+      <a href="./index.html"><img src="logo.png" alt="logo"></a><br>
+      <a href="./vigenere.html">Шифр Віженера</a><br>
+      <a href="./caesar.html">Шифр Цезаря</a><br>
+      <a href="./localhistory.html">Локальна історія</a><br>
+    </menu>
+  </header>
+  <div class="main">
+
+    <main>
+      <h2>Це історія всіх шифрувань і дешифровань яка збережена у цьому браузері</h2>
+      <input value="Кнопка для видалення усіх ваших даних" onclick="clearhistory()" type="button">
+      <hr>
+      <b>!!!ваш текст:метод кодування!!!</b><br>
+      <div id="maintext" class="opus">
+      </div>
+    </main>
+
+    <nav>
+      <button onclick="toggle_light_mode()">
+        Темний/світлий режим
+      </button>
+    </nav>
+  </div>
+  <footer>
+    Сайт створено студентами 3 курсу <br>
+    Автори: Дацюк Богдан та Кукол Антон <br>
+    Copyright © University Lutsk EENU
+  </footer>
+  <script src="localhistory.js" charset="utf-8"></script>
+  <script src="help.js" charset="utf-8"></script>
+</body>
+
 </html>
