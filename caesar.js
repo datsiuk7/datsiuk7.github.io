@@ -71,10 +71,10 @@ function toggle_light_mode() {
   if (localStorage.lightMode == "dark") {
     localStorage.lightMode = "light";
     app.setAttribute("data-light-mode", "light");
-    app3.setAttribute("data-colorscheme", "light");
+    app3.setAttribute("data-color-scheme", "light");
   } else {
     localStorage.lightMode = "dark";
     app.setAttribute("data-light-mode", "dark");
-    app3.setAttribute("data-colorscheme", "dark");
+    app3.setAttribute("data-color-scheme", "dark");
   }
 }
