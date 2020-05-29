@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+
+<body>
+  шифровок/дешифровок
+  <div id="count">
+  </div>
+  <input id="textencrupt" type="text" name="" value="" placeholder="текст*">
+  <input id="key" type="text" name="" value="" placeholder="ключ">
+  <input id="mainButton" value="Шифрувати" onclick="start()" type="button">
+  <input id="mainButtonClear" value="Очистити" onclick="cleartext()" type="button">
+  <br>
+  <h6 style="margin: 0">*одинарні лапки збоків текста видаляються</h6>
+  Виберіть мову тексту:
+  <select id="textlanguage">
+    <option value="en">Англійська</option>
+    <option value="pl">Польська</option>
+    <option value="ru">Російська</option>
+    <option value="ua">Українська</option>
+  </select>
+  <input value="Переключити" onclick="changecrupt()" type="button">
+  <div id="text">
+
+  </div>
+  <script src="vigenere.js" charset="utf-8"></script>
+  <script src="help.js" charset="utf-8"></script>
+</body>
+
+</html>
