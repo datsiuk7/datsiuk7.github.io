@@ -78,3 +78,10 @@ function toggle_light_mode() {
     app3.setAttribute("class", "dark");
   }
 }
+if (localStorage.lightMode == "dark") {
+  app.setAttribute("data-light-mode", "light");
+  app3.setAttribute("class", "light");
+} else {
+  app.setAttribute("data-light-mode", "dark");
+  app3.setAttribute("class", "dark");
+}
