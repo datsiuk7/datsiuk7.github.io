@@ -7,9 +7,22 @@
   <meta property="fb:admins" content="100004843085791" />
   <meta property="fb:app_id" content="251597329238141" />
   <script async defer crossorigin="anonymous" src="https://connect.facebook.net/uk_UA/sdk.js#xfbml=1&version=v7.0&appId=251597329238141&autoLogAppEvents=1"></script>
+  <style media="screen">
+    body {
+      transition: background-color 3s;
+    }
+
+    body[data-light-mode=dark] {
+      background-color: #181A1B;
+      color: #D3D0C9;
+    }
+  </style>
 </head>
 
 <body>
+  <button onclick="toggle_light_mode()">
+    День/Ніч
+  </button>
   шифровок/дешифровок
   <div id="count">
   </div>
