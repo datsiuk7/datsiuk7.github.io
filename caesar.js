@@ -82,8 +82,12 @@ var app = document.getElementsByTagName("BODY")[0];
 var app3 = document.getElementById("fbsetting");
 if (localStorage.lightMode == "light") {
   app.setAttribute("data-light-mode", "light");
-  app3.setAttribute("class", "light");
+  try {
+    app3.setAttribute("class", "light");
+  }
 } else {
   app.setAttribute("data-light-mode", "dark");
-  app3.setAttribute("class", "dark");
+  try {
+    app3.setAttribute("class", "dark");
+  }
 }
