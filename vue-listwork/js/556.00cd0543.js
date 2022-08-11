@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunknotebook"]=self["webpackChunknotebook"]||[]).push([[556],{4556:function(n,t,e){e.r(t),e.d(t,{default:function(){return k}});var o=e(3396);const u={class:"about"},r=(0,o._)("h1",null,"Setting",-1),c=[r];function s(n,t){return(0,o.wg)(),(0,o.iD)("div",u,c)}var a=e(89);const i={},f=(0,a.Z)(i,[["render",s]]);var k=f}}]);
+//# sourceMappingURL=556.00cd0543.js.map
