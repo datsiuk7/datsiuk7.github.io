@@ -47,9 +47,9 @@ main{
     border-radius: 20px;
 }
 
-#imageContainer img:hover {
-    box-shadow: 0 0 20px rgba(0,0,0,0.4); /* Зміна тіні при наведенні */
-  }
+/* #imageContainer img:hover {
+    box-shadow: 0 0 20px rgba(0,0,0,0.4);
+  } */
   
 .hidden {
 opacity: 0;
@@ -88,4 +88,23 @@ button:hover {
 
 #imageIndicator{
     color:rgba(238, 181, 250);
+}
+
+@media (max-width: 768px) {
+    main{
+        width: 100vw;
+        height: 90vh;
+        margin: 0px;
+        padding: 0px;
+        padding-top: 3vh;
+    }
+    #imageContainer img {
+        height: auto; 
+        width: 100vw;
+        max-height: 55vh;
+    }
+    #imageText{
+        margin-top: 30px;
+        font-size: 1.2em;
+    }
 }
