@@ -39,6 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
         { src: 'img/beautifullyou.gif', text: 'ти у мене ще та прекрасна кішечка' },
 
         { src: 'img/lovemykitty.gif', text: 'я просто обожнюю бути з тобою' },
+        { src: 'img/end.gif', text: 'киць вітаю тебе з святим Валентином❤️' },
         
 
     ];
