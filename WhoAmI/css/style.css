@@ -88,6 +88,7 @@ button {
     margin: 5px;
 }
 
+
 button:hover {
     background-color: rgb(20 255 125 / 70%); /* Рожевий колір при наведенні */
     transform: scale(1.05); /* Трохи збільшуємо кнопку при наведенні для плавного ефекту */
