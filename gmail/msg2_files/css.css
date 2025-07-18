@@ -1,27 +1,1082 @@
-<!DOCTYPE html>
-<!-- saved from url=(0089)file:///D:/olx/%D0%91%D0%B8%D0%BD%D0%B0%D0%BD%D1%81%20%D0%A1%D0%90%D0%99%D0%A2/index.html -->
-<html class=" RWz2Df"><!--
---><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
-    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, width=device-width">
-    <link href="https://ssl.gstatic.com/ui/v1/icons/mail/images/favicon5.ico" rel="shortcut icon">
-    <link rel="stylesheet" href="./index_files/css.css">
-    <script nonce="">
-        START_TIME_MS = +new Date;
-        // Видалили логіку перенаправлення для локального тестування
-        USER_EMAIL = "datcukbogdan@gmail.com";
-        // Блокуємо автоматичне перенаправлення
-        console.log("Gmail clone loaded for user:", USER_EMAIL);
-    </script><style type="text/css" id="operaUserStyle"></style>
-    <style type="text/css">
-    </style>
-    <script nonce="">
-        END_ONE_GOOGLE_TIME_MS = +new Date;
-    </script>
-    <title>
-        Gmail
-    </title>
-    <style type="text/css" id="css_core">
+
+
+/*
+ * See: https://fonts.google.com/license/googlerestricted
+ */
+/* armenian */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPiIUvaYr.woff2) format('woff2');
+  unicode-range: U+0308, U+0530-058F, U+2010, U+2024, U+25CC, U+FB13-FB17;
+}
+/* bengali */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPiAUvaYr.woff2) format('woff2');
+  unicode-range: U+0951-0952, U+0964-0965, U+0980-09FE, U+1CD0, U+1CD2, U+1CD5-1CD6, U+1CD8, U+1CE1, U+1CEA, U+1CED, U+1CF2, U+1CF5-1CF7, U+200C-200D, U+20B9, U+25CC, U+A8F1;
+}
+/* canadian-aboriginal */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPh0UvaYr.woff2) format('woff2');
+  unicode-range: U+02C7, U+02D8-02D9, U+02DB, U+0307, U+1400-167F, U+18B0-18F5, U+25CC, U+11AB0-11ABF;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPj8UvaYr.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPjYUvaYr.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* devanagari */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPjMUvaYr.woff2) format('woff2');
+  unicode-range: U+0900-097F, U+1CD0-1CF9, U+200C-200D, U+20A8, U+20B9, U+20F0, U+25CC, U+A830-A839, U+A8E0-A8FF, U+11B00-11B09;
+}
+/* ethiopic */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPiMUvaYr.woff2) format('woff2');
+  unicode-range: U+030E, U+1200-1399, U+2D80-2DDE, U+AB01-AB2E, U+1E7E0-1E7E6, U+1E7E8-1E7EB, U+1E7ED-1E7EE, U+1E7F0-1E7FE;
+}
+/* georgian */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPi0UvaYr.woff2) format('woff2');
+  unicode-range: U+0589, U+10A0-10FF, U+1C90-1CBA, U+1CBD-1CBF, U+205A, U+2D00-2D2F, U+2E31;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPj4UvaYr.woff2) format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPjEUvaYr.woff2) format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* gujarati */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPikUvaYr.woff2) format('woff2');
+  unicode-range: U+0951-0952, U+0964-0965, U+0A80-0AFF, U+200C-200D, U+20B9, U+25CC, U+A830-A839;
+}
+/* gurmukhi */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPhEUvaYr.woff2) format('woff2');
+  unicode-range: U+0951-0952, U+0964-0965, U+0A01-0A76, U+200C-200D, U+20B9, U+25CC, U+262C, U+A830-A839;
+}
+/* hebrew */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPjAUvaYr.woff2) format('woff2');
+  unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F;
+}
+/* khmer */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPjkUvaYr.woff2) format('woff2');
+  unicode-range: U+1780-17FF, U+19E0-19FF, U+200C-200D, U+25CC;
+}
+/* lao */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPjsUvaYr.woff2) format('woff2');
+  unicode-range: U+0E81-0EDF, U+200C-200D, U+25CC;
+}
+/* malayalam */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPioUvaYr.woff2) format('woff2');
+  unicode-range: U+0307, U+0323, U+0951-0952, U+0964-0965, U+0D00-0D7F, U+1CDA, U+1CF2, U+200C-200D, U+20B9, U+25CC, U+A830-A832;
+}
+/* oriya */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPisUvaYr.woff2) format('woff2');
+  unicode-range: U+0951-0952, U+0964-0965, U+0B01-0B77, U+1CDA, U+1CF2, U+200C-200D, U+20B9, U+25CC;
+}
+/* sinhala */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPi8UvaYr.woff2) format('woff2');
+  unicode-range: U+0964-0965, U+0D81-0DF4, U+1CF2, U+200C-200D, U+25CC, U+111E1-111F4;
+}
+/* symbols */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPlwUvaYr.woff2) format('woff2');
+  unicode-range: U+0001-000C, U+000E-001F, U+007F-009F, U+20DD-20E0, U+20E2-20E4, U+2150-218F, U+2190, U+2192, U+2194-2199, U+21AF, U+21E6-21F0, U+21F3, U+2218-2219, U+2299, U+22C4-22C6, U+2300-243F, U+2440-244A, U+2460-24FF, U+25A0-27BF, U+2800-28FF, U+2921-2922, U+2981, U+29BF, U+29EB, U+2B00-2BFF, U+4DC0-4DFF, U+FFF9-FFFB, U+10140-1018E, U+10190-1019C, U+101A0, U+101D0-101FD, U+102E0-102FB, U+10E60-10E7E, U+1D2C0-1D2D3, U+1D2E0-1D37F, U+1F000-1F0FF, U+1F100-1F1AD, U+1F1E6-1F1FF, U+1F30D-1F30F, U+1F315, U+1F31C, U+1F31E, U+1F320-1F32C, U+1F336, U+1F378, U+1F37D, U+1F382, U+1F393-1F39F, U+1F3A7-1F3A8, U+1F3AC-1F3AF, U+1F3C2, U+1F3C4-1F3C6, U+1F3CA-1F3CE, U+1F3D4-1F3E0, U+1F3ED, U+1F3F1-1F3F3, U+1F3F5-1F3F7, U+1F408, U+1F415, U+1F41F, U+1F426, U+1F43F, U+1F441-1F442, U+1F444, U+1F446-1F449, U+1F44C-1F44E, U+1F453, U+1F46A, U+1F47D, U+1F4A3, U+1F4B0, U+1F4B3, U+1F4B9, U+1F4BB, U+1F4BF, U+1F4C8-1F4CB, U+1F4D6, U+1F4DA, U+1F4DF, U+1F4E3-1F4E6, U+1F4EA-1F4ED, U+1F4F7, U+1F4F9-1F4FB, U+1F4FD-1F4FE, U+1F503, U+1F507-1F50B, U+1F50D, U+1F512-1F513, U+1F53E-1F54A, U+1F54F-1F5FA, U+1F610, U+1F650-1F67F, U+1F687, U+1F68D, U+1F691, U+1F694, U+1F698, U+1F6AD, U+1F6B2, U+1F6B9-1F6BA, U+1F6BC, U+1F6C6-1F6CF, U+1F6D3-1F6D7, U+1F6E0-1F6EA, U+1F6F0-1F6F3, U+1F6F7-1F6FC, U+1F700-1F7FF, U+1F800-1F80B, U+1F810-1F847, U+1F850-1F859, U+1F860-1F887, U+1F890-1F8AD, U+1F8B0-1F8BB, U+1F8C0-1F8C1, U+1F900-1F90B, U+1F93B, U+1F946, U+1F984, U+1F996, U+1F9E9, U+1FA00-1FA6F, U+1FA70-1FA7C, U+1FA80-1FA89, U+1FA8F-1FAC6, U+1FACE-1FADC, U+1FADF-1FAE9, U+1FAF0-1FAF8, U+1FB00-1FBFF;
+}
+/* tamil */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPiQUvaYr.woff2) format('woff2');
+  unicode-range: U+0964-0965, U+0B82-0BFA, U+200C-200D, U+20B9, U+25CC;
+}
+/* telugu */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPi4UvaYr.woff2) format('woff2');
+  unicode-range: U+0951-0952, U+0964-0965, U+0C00-0C7F, U+1CDA, U+1CF2, U+200C-200D, U+25CC;
+}
+/* thai */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPiYUvaYr.woff2) format('woff2');
+  unicode-range: U+02D7, U+0303, U+0331, U+0E01-0E5B, U+200C-200D, U+25CC;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPj0UvaYr.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPjwUvaYr.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPjIUvQ.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* armenian */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 500;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPiIUvaYr.woff2) format('woff2');
+  unicode-range: U+0308, U+0530-058F, U+2010, U+2024, U+25CC, U+FB13-FB17;
+}
+/* bengali */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 500;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPiAUvaYr.woff2) format('woff2');
+  unicode-range: U+0951-0952, U+0964-0965, U+0980-09FE, U+1CD0, U+1CD2, U+1CD5-1CD6, U+1CD8, U+1CE1, U+1CEA, U+1CED, U+1CF2, U+1CF5-1CF7, U+200C-200D, U+20B9, U+25CC, U+A8F1;
+}
+/* canadian-aboriginal */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 500;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPh0UvaYr.woff2) format('woff2');
+  unicode-range: U+02C7, U+02D8-02D9, U+02DB, U+0307, U+1400-167F, U+18B0-18F5, U+25CC, U+11AB0-11ABF;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 500;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPj8UvaYr.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 500;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPjYUvaYr.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* devanagari */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 500;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPjMUvaYr.woff2) format('woff2');
+  unicode-range: U+0900-097F, U+1CD0-1CF9, U+200C-200D, U+20A8, U+20B9, U+20F0, U+25CC, U+A830-A839, U+A8E0-A8FF, U+11B00-11B09;
+}
+/* ethiopic */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 500;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPiMUvaYr.woff2) format('woff2');
+  unicode-range: U+030E, U+1200-1399, U+2D80-2DDE, U+AB01-AB2E, U+1E7E0-1E7E6, U+1E7E8-1E7EB, U+1E7ED-1E7EE, U+1E7F0-1E7FE;
+}
+/* georgian */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 500;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPi0UvaYr.woff2) format('woff2');
+  unicode-range: U+0589, U+10A0-10FF, U+1C90-1CBA, U+1CBD-1CBF, U+205A, U+2D00-2D2F, U+2E31;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 500;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPj4UvaYr.woff2) format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 500;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPjEUvaYr.woff2) format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* gujarati */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 500;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPikUvaYr.woff2) format('woff2');
+  unicode-range: U+0951-0952, U+0964-0965, U+0A80-0AFF, U+200C-200D, U+20B9, U+25CC, U+A830-A839;
+}
+/* gurmukhi */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 500;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPhEUvaYr.woff2) format('woff2');
+  unicode-range: U+0951-0952, U+0964-0965, U+0A01-0A76, U+200C-200D, U+20B9, U+25CC, U+262C, U+A830-A839;
+}
+/* hebrew */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 500;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPjAUvaYr.woff2) format('woff2');
+  unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F;
+}
+/* khmer */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 500;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPjkUvaYr.woff2) format('woff2');
+  unicode-range: U+1780-17FF, U+19E0-19FF, U+200C-200D, U+25CC;
+}
+/* lao */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 500;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPjsUvaYr.woff2) format('woff2');
+  unicode-range: U+0E81-0EDF, U+200C-200D, U+25CC;
+}
+/* malayalam */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 500;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPioUvaYr.woff2) format('woff2');
+  unicode-range: U+0307, U+0323, U+0951-0952, U+0964-0965, U+0D00-0D7F, U+1CDA, U+1CF2, U+200C-200D, U+20B9, U+25CC, U+A830-A832;
+}
+/* oriya */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 500;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPisUvaYr.woff2) format('woff2');
+  unicode-range: U+0951-0952, U+0964-0965, U+0B01-0B77, U+1CDA, U+1CF2, U+200C-200D, U+20B9, U+25CC;
+}
+/* sinhala */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 500;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPi8UvaYr.woff2) format('woff2');
+  unicode-range: U+0964-0965, U+0D81-0DF4, U+1CF2, U+200C-200D, U+25CC, U+111E1-111F4;
+}
+/* symbols */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 500;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPlwUvaYr.woff2) format('woff2');
+  unicode-range: U+0001-000C, U+000E-001F, U+007F-009F, U+20DD-20E0, U+20E2-20E4, U+2150-218F, U+2190, U+2192, U+2194-2199, U+21AF, U+21E6-21F0, U+21F3, U+2218-2219, U+2299, U+22C4-22C6, U+2300-243F, U+2440-244A, U+2460-24FF, U+25A0-27BF, U+2800-28FF, U+2921-2922, U+2981, U+29BF, U+29EB, U+2B00-2BFF, U+4DC0-4DFF, U+FFF9-FFFB, U+10140-1018E, U+10190-1019C, U+101A0, U+101D0-101FD, U+102E0-102FB, U+10E60-10E7E, U+1D2C0-1D2D3, U+1D2E0-1D37F, U+1F000-1F0FF, U+1F100-1F1AD, U+1F1E6-1F1FF, U+1F30D-1F30F, U+1F315, U+1F31C, U+1F31E, U+1F320-1F32C, U+1F336, U+1F378, U+1F37D, U+1F382, U+1F393-1F39F, U+1F3A7-1F3A8, U+1F3AC-1F3AF, U+1F3C2, U+1F3C4-1F3C6, U+1F3CA-1F3CE, U+1F3D4-1F3E0, U+1F3ED, U+1F3F1-1F3F3, U+1F3F5-1F3F7, U+1F408, U+1F415, U+1F41F, U+1F426, U+1F43F, U+1F441-1F442, U+1F444, U+1F446-1F449, U+1F44C-1F44E, U+1F453, U+1F46A, U+1F47D, U+1F4A3, U+1F4B0, U+1F4B3, U+1F4B9, U+1F4BB, U+1F4BF, U+1F4C8-1F4CB, U+1F4D6, U+1F4DA, U+1F4DF, U+1F4E3-1F4E6, U+1F4EA-1F4ED, U+1F4F7, U+1F4F9-1F4FB, U+1F4FD-1F4FE, U+1F503, U+1F507-1F50B, U+1F50D, U+1F512-1F513, U+1F53E-1F54A, U+1F54F-1F5FA, U+1F610, U+1F650-1F67F, U+1F687, U+1F68D, U+1F691, U+1F694, U+1F698, U+1F6AD, U+1F6B2, U+1F6B9-1F6BA, U+1F6BC, U+1F6C6-1F6CF, U+1F6D3-1F6D7, U+1F6E0-1F6EA, U+1F6F0-1F6F3, U+1F6F7-1F6FC, U+1F700-1F7FF, U+1F800-1F80B, U+1F810-1F847, U+1F850-1F859, U+1F860-1F887, U+1F890-1F8AD, U+1F8B0-1F8BB, U+1F8C0-1F8C1, U+1F900-1F90B, U+1F93B, U+1F946, U+1F984, U+1F996, U+1F9E9, U+1FA00-1FA6F, U+1FA70-1FA7C, U+1FA80-1FA89, U+1FA8F-1FAC6, U+1FACE-1FADC, U+1FADF-1FAE9, U+1FAF0-1FAF8, U+1FB00-1FBFF;
+}
+/* tamil */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 500;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPiQUvaYr.woff2) format('woff2');
+  unicode-range: U+0964-0965, U+0B82-0BFA, U+200C-200D, U+20B9, U+25CC;
+}
+/* telugu */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 500;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPi4UvaYr.woff2) format('woff2');
+  unicode-range: U+0951-0952, U+0964-0965, U+0C00-0C7F, U+1CDA, U+1CF2, U+200C-200D, U+25CC;
+}
+/* thai */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 500;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPiYUvaYr.woff2) format('woff2');
+  unicode-range: U+02D7, U+0303, U+0331, U+0E01-0E5B, U+200C-200D, U+25CC;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 500;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPj0UvaYr.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 500;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPjwUvaYr.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 500;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPjIUvQ.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* armenian */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPiIUvaYr.woff2) format('woff2');
+  unicode-range: U+0308, U+0530-058F, U+2010, U+2024, U+25CC, U+FB13-FB17;
+}
+/* bengali */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPiAUvaYr.woff2) format('woff2');
+  unicode-range: U+0951-0952, U+0964-0965, U+0980-09FE, U+1CD0, U+1CD2, U+1CD5-1CD6, U+1CD8, U+1CE1, U+1CEA, U+1CED, U+1CF2, U+1CF5-1CF7, U+200C-200D, U+20B9, U+25CC, U+A8F1;
+}
+/* canadian-aboriginal */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPh0UvaYr.woff2) format('woff2');
+  unicode-range: U+02C7, U+02D8-02D9, U+02DB, U+0307, U+1400-167F, U+18B0-18F5, U+25CC, U+11AB0-11ABF;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPj8UvaYr.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPjYUvaYr.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* devanagari */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPjMUvaYr.woff2) format('woff2');
+  unicode-range: U+0900-097F, U+1CD0-1CF9, U+200C-200D, U+20A8, U+20B9, U+20F0, U+25CC, U+A830-A839, U+A8E0-A8FF, U+11B00-11B09;
+}
+/* ethiopic */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPiMUvaYr.woff2) format('woff2');
+  unicode-range: U+030E, U+1200-1399, U+2D80-2DDE, U+AB01-AB2E, U+1E7E0-1E7E6, U+1E7E8-1E7EB, U+1E7ED-1E7EE, U+1E7F0-1E7FE;
+}
+/* georgian */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPi0UvaYr.woff2) format('woff2');
+  unicode-range: U+0589, U+10A0-10FF, U+1C90-1CBA, U+1CBD-1CBF, U+205A, U+2D00-2D2F, U+2E31;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPj4UvaYr.woff2) format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPjEUvaYr.woff2) format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* gujarati */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPikUvaYr.woff2) format('woff2');
+  unicode-range: U+0951-0952, U+0964-0965, U+0A80-0AFF, U+200C-200D, U+20B9, U+25CC, U+A830-A839;
+}
+/* gurmukhi */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPhEUvaYr.woff2) format('woff2');
+  unicode-range: U+0951-0952, U+0964-0965, U+0A01-0A76, U+200C-200D, U+20B9, U+25CC, U+262C, U+A830-A839;
+}
+/* hebrew */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPjAUvaYr.woff2) format('woff2');
+  unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F;
+}
+/* khmer */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPjkUvaYr.woff2) format('woff2');
+  unicode-range: U+1780-17FF, U+19E0-19FF, U+200C-200D, U+25CC;
+}
+/* lao */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPjsUvaYr.woff2) format('woff2');
+  unicode-range: U+0E81-0EDF, U+200C-200D, U+25CC;
+}
+/* malayalam */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPioUvaYr.woff2) format('woff2');
+  unicode-range: U+0307, U+0323, U+0951-0952, U+0964-0965, U+0D00-0D7F, U+1CDA, U+1CF2, U+200C-200D, U+20B9, U+25CC, U+A830-A832;
+}
+/* oriya */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPisUvaYr.woff2) format('woff2');
+  unicode-range: U+0951-0952, U+0964-0965, U+0B01-0B77, U+1CDA, U+1CF2, U+200C-200D, U+20B9, U+25CC;
+}
+/* sinhala */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPi8UvaYr.woff2) format('woff2');
+  unicode-range: U+0964-0965, U+0D81-0DF4, U+1CF2, U+200C-200D, U+25CC, U+111E1-111F4;
+}
+/* symbols */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPlwUvaYr.woff2) format('woff2');
+  unicode-range: U+0001-000C, U+000E-001F, U+007F-009F, U+20DD-20E0, U+20E2-20E4, U+2150-218F, U+2190, U+2192, U+2194-2199, U+21AF, U+21E6-21F0, U+21F3, U+2218-2219, U+2299, U+22C4-22C6, U+2300-243F, U+2440-244A, U+2460-24FF, U+25A0-27BF, U+2800-28FF, U+2921-2922, U+2981, U+29BF, U+29EB, U+2B00-2BFF, U+4DC0-4DFF, U+FFF9-FFFB, U+10140-1018E, U+10190-1019C, U+101A0, U+101D0-101FD, U+102E0-102FB, U+10E60-10E7E, U+1D2C0-1D2D3, U+1D2E0-1D37F, U+1F000-1F0FF, U+1F100-1F1AD, U+1F1E6-1F1FF, U+1F30D-1F30F, U+1F315, U+1F31C, U+1F31E, U+1F320-1F32C, U+1F336, U+1F378, U+1F37D, U+1F382, U+1F393-1F39F, U+1F3A7-1F3A8, U+1F3AC-1F3AF, U+1F3C2, U+1F3C4-1F3C6, U+1F3CA-1F3CE, U+1F3D4-1F3E0, U+1F3ED, U+1F3F1-1F3F3, U+1F3F5-1F3F7, U+1F408, U+1F415, U+1F41F, U+1F426, U+1F43F, U+1F441-1F442, U+1F444, U+1F446-1F449, U+1F44C-1F44E, U+1F453, U+1F46A, U+1F47D, U+1F4A3, U+1F4B0, U+1F4B3, U+1F4B9, U+1F4BB, U+1F4BF, U+1F4C8-1F4CB, U+1F4D6, U+1F4DA, U+1F4DF, U+1F4E3-1F4E6, U+1F4EA-1F4ED, U+1F4F7, U+1F4F9-1F4FB, U+1F4FD-1F4FE, U+1F503, U+1F507-1F50B, U+1F50D, U+1F512-1F513, U+1F53E-1F54A, U+1F54F-1F5FA, U+1F610, U+1F650-1F67F, U+1F687, U+1F68D, U+1F691, U+1F694, U+1F698, U+1F6AD, U+1F6B2, U+1F6B9-1F6BA, U+1F6BC, U+1F6C6-1F6CF, U+1F6D3-1F6D7, U+1F6E0-1F6EA, U+1F6F0-1F6F3, U+1F6F7-1F6FC, U+1F700-1F7FF, U+1F800-1F80B, U+1F810-1F847, U+1F850-1F859, U+1F860-1F887, U+1F890-1F8AD, U+1F8B0-1F8BB, U+1F8C0-1F8C1, U+1F900-1F90B, U+1F93B, U+1F946, U+1F984, U+1F996, U+1F9E9, U+1FA00-1FA6F, U+1FA70-1FA7C, U+1FA80-1FA89, U+1FA8F-1FAC6, U+1FACE-1FADC, U+1FADF-1FAE9, U+1FAF0-1FAF8, U+1FB00-1FBFF;
+}
+/* tamil */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPiQUvaYr.woff2) format('woff2');
+  unicode-range: U+0964-0965, U+0B82-0BFA, U+200C-200D, U+20B9, U+25CC;
+}
+/* telugu */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPi4UvaYr.woff2) format('woff2');
+  unicode-range: U+0951-0952, U+0964-0965, U+0C00-0C7F, U+1CDA, U+1CF2, U+200C-200D, U+25CC;
+}
+/* thai */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPiYUvaYr.woff2) format('woff2');
+  unicode-range: U+02D7, U+0303, U+0331, U+0E01-0E5B, U+200C-200D, U+25CC;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPj0UvaYr.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPjwUvaYr.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Google Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: url(https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPjIUvQ.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+ .asor_a {
+            margin: 5px 0
+        }
+
+        .asor_b {
+            font: 14px arial, sans-serif
+        }
+
+        .asor_c {
+            font: 12px arial, sans-serif;
+            margin: 0 0 0 6px;
+            vertical-align: top
+        }
+
+        .asor_d {
+            font: 12px arial, sans-serif
+        }
+
+        .asor_e {
+            color: #5f6368;
+            font: 12px arial, sans-serif
+        }
+
+        .asor_f {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            -o-text-overflow: ellipsis;
+            -ms-text-overflow: ellipsis
+        }
+
+        .asor_g {
+            width: 500px
+        }
+
+        .asor_h {
+            font: 12px arial, sans-serif;
+            margin-left: 5px;
+            width: 150px
+        }
+
+        .asor_h1 {
+            color: #dd4b39
+        }
+
+        .asor_i {
+            font: 12px arial, sans-serif;
+            margin-left: 6px;
+            width: 55px
+        }
+
+        .asor_j {
+            margin-left: 2px
+        }
+
+        .asor_k {
+            margin-top: 2px
+        }
+
+        .asor_l {
+            width: 460px
+        }
+
+        .asor_n {
+            width: 148px
+        }
+
+        .asor_o {
+            background: url(//ssl.gstatic.com/ui/v1/icons/mail/sprite_black2.png);
+            width: 21px;
+            height: 16px;
+            margin-top: -5px
+        }
+
+        .asor_p {
+            overflow: hidden;
+            white-space: nowrap
+        }
+
+        .asor_q {
+            margin-right: 3px;
+            border: 1px solid #fff
+        }
+
+        .asor_q:hover {
+            border: 1px solid #4d90fe
+        }
+
+        .asor_r {
+            margin-top: 5px
+        }
+
+        .asor_s {
+            color: #777;
+            margin-bottom: 3px
+        }
+
+        .asor_t {
+            margin-top: 9px;
+            margin-bottom: 7px
+        }
+
+        .asor_u {
+            font: 14px arial, sans-serif;
+            height: 18px
+        }
+
+        .asor_v {
+            margin-left: 9px
+        }
+
+        .asor_w {
+            height: 0
+        }
+
+        .asor_x {
+            color: #777
+        }
+
+        .asor_y {
+            background: url(//ssl.gstatic.com/mail/sprites/general-28e9627ce25f296789298024751a0d39.png) 0 -290px no-repeat;
+            width: 16px;
+            height: 16px
+        }
+
+        .asor_z {
+            margin-top: 10px;
+            margin-right: 8px;
+            border: 1px solid #fff;
+            width: 48px;
+            height: 48px;
+            background-color: #e6e6e6
+        }
+
+        .asor_z:hover {
+            border: 1px solid #4d90fe
+        }
+
+        .asor_s0 {
+            font-weight: bold;
+            padding: 0 2px
+        }
+
+        .asor_s1 {
+            font: 12px arial, sans-serif
+        }
+
+        td.asor_t0 {
+            vertical-align: top
+        }
+
+        div.asor_0 {
+            margin-top: 12px
+        }
+
+        svg.asor_1 {
+            display: block;
+            margin: 0 9px 0 12px
+        }
+
+        .asor_i0 {
+            height: 32px
+        }
+
+        .asor_i1 {
+            background-position: 0 0;
+            margin: 5px -5px 2px 5px
+        }
+
+        .asor_i2 {
+            background-position: 5px -32px;
+            opacity: .55
+        }
+
+        .asor_i3 {
+            background-position: 5px -64px;
+            opacity: .55
+        }
+
+        .asor_i4 {
+            background-position: 5px -96px;
+            opacity: .55
+        }
+
+        .asor_i5 {
+            background-position: 5px -128px;
+            opacity: .55
+        }
+
+        .asor_i6 {
+            background-position: 5px -160px;
+            opacity: .55
+        }
+
+        .asor {
+            background-image: url(https://ssl.gstatic.com/cloudsearch/static/o/d/0016-a3cdcdc31a16b3497ed6ffcdaee4f325/qicons.png);
+            background-color: transparent;
+            background-repeat: no-repeat;
+            -webkit-background-size: 32px 32px;
+            background-size: 32px;
+            height: 32px
+        }
+
+        @media (-webkit-min-device-pixel-ratio:1.5),
+        (min-resolution:144dpi) {
+            .asor {
+                background-image: url(https://ssl.gstatic.com/cloudsearch/static/o/d/0016-a3cdcdc31a16b3497ed6ffcdaee4f325/qicons-hdpi.png)
+            }
+        }
+
+        .goog-inline-block {
+            position: relative;
+            display: -moz-inline-box;
+            display: inline-block
+        }
+
+        * html .goog-inline-block {
+            display: inline
+        }
+
+        *:first-child+html .goog-inline-block {
+            display: inline
+        }
+
+        .jfk-bubble {
+            -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, .2);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, .2);
+            background-color: #fff;
+            border: 1px solid;
+            border-color: #bbb #bbb #a8a8a8;
+            padding: 16px;
+            position: absolute
+        }
+
+        .jfk-bubble.jfk-bubble.jfk-bubble {
+            z-index: 1201
+        }
+
+        .jfk-bubble-closebtn {
+            background: url(//ssl.gstatic.com/ui/v1/icons/common/x_8px.png) no-repeat;
+            border: 1px solid transparent;
+            height: 21px;
+            opacity: .4;
+            outline: 0;
+            position: absolute;
+            right: 2px;
+            top: 2px;
+            width: 21px
+        }
+
+        .jfk-bubble-closebtn:focus {
+            border: 1px solid #4d90fe;
+            opacity: .8
+        }
+
+        .jfk-bubble-arrow {
+            position: absolute
+        }
+
+        .jfk-bubble-arrow .jfk-bubble-arrowimplbefore,
+        .jfk-bubble-arrow .jfk-bubble-arrowimplafter {
+            display: block;
+            height: 0;
+            position: absolute;
+            width: 0
+        }
+
+        .jfk-bubble-arrow .jfk-bubble-arrowimplbefore {
+            border: 9px solid
+        }
+
+        .jfk-bubble-arrow .jfk-bubble-arrowimplafter {
+            border: 8px solid
+        }
+
+        .jfk-bubble-arrowdown {
+            bottom: 0
+        }
+
+        .jfk-bubble-arrowup {
+            top: -9px
+        }
+
+        .jfk-bubble-arrowleft {
+            left: -9px
+        }
+
+        .jfk-bubble-arrowright {
+            right: 0
+        }
+
+        .jfk-bubble-arrowdown .jfk-bubble-arrowimplbefore,
+        .jfk-bubble-arrowup .jfk-bubble-arrowimplbefore {
+            border-color: #bbb transparent;
+            left: -9px
+        }
+
+        .jfk-bubble-arrowdown .jfk-bubble-arrowimplbefore {
+            border-color: #a8a8a8 transparent;
+            border-bottom-width: 0
+        }
+
+        .jfk-bubble-arrowdown .jfk-bubble-arrowimplafter,
+        .jfk-bubble-arrowup .jfk-bubble-arrowimplafter {
+            border-color: #fff transparent;
+            left: -8px
+        }
+
+        .jfk-bubble-arrowdown .jfk-bubble-arrowimplafter {
+            border-bottom-width: 0
+        }
+
+        .jfk-bubble-arrowup .jfk-bubble-arrowimplbefore {
+            border-top-width: 0
+        }
+
+        .jfk-bubble-arrowup .jfk-bubble-arrowimplafter {
+            border-top-width: 0;
+            top: 1px
+        }
+
+        .jfk-bubble-arrowleft .jfk-bubble-arrowimplbefore,
+        .jfk-bubble-arrowright .jfk-bubble-arrowimplbefore {
+            border-color: transparent #bbb;
+            top: -9px
+        }
+
+        .jfk-bubble-arrowleft .jfk-bubble-arrowimplafter,
+        .jfk-bubble-arrowright .jfk-bubble-arrowimplafter {
+            border-color: transparent #fff;
+            top: -8px
+        }
+
+        .jfk-bubble-arrowleft .jfk-bubble-arrowimplbefore {
+            border-left-width: 0
+        }
+
+        .jfk-bubble-arrowleft .jfk-bubble-arrowimplafter {
+            border-left-width: 0;
+            left: 1px
+        }
+
+        .jfk-bubble-arrowright .jfk-bubble-arrowimplbefore,
+        .jfk-bubble-arrowright .jfk-bubble-arrowimplafter {
+            border-right-width: 0
+        }
+
+        .jfk-tooltip {
+            border-radius: 0;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+            -webkit-transition: visibility 0, opacity .13s ease-in;
+            transition: visibility 0, opacity .13s ease-in;
+            background-color: #2a2a2a;
+            border: 1px solid #fff;
+            color: #fff;
+            cursor: default;
+            display: block;
+            font-size: 11px;
+            font-weight: bold;
+            margin-left: -1px;
+            opacity: 1;
+            padding: 7px 9px;
+            position: absolute;
+            visibility: visible;
+            white-space: pre-wrap;
+            word-break: break-all;
+            word-break: break-word
+        }
+
+        .jfk-tooltip-hide {
+            -webkit-transition: visibility .13s, opacity .13s ease-out, left 0 linear .13s, top 0 linear .13s;
+            transition: visibility .13s, opacity .13s ease-out, left 0 linear .13s, top 0 linear .13s;
+            opacity: 0;
+            left: 20px !important;
+            top: 20px !important;
+            visibility: hidden
+        }
+
+        .jfk-tooltip-data {
+            display: none
+        }
+
+        .jfk-tooltip-arrow {
+            pointer-events: none;
+            position: absolute
+        }
+
+        .jfk-tooltip-arrow .jfk-tooltip-arrowimplbefore,
+        .jfk-tooltip-arrow .jfk-tooltip-arrowimplafter {
+            content: "";
+            display: block;
+            height: 0;
+            position: absolute;
+            width: 0
+        }
+
+        .jfk-tooltip-arrow .jfk-tooltip-arrowimplbefore {
+            border: 6px solid
+        }
+
+        .jfk-tooltip-arrow .jfk-tooltip-arrowimplafter {
+            border: 5px solid
+        }
+
+        .jfk-tooltip-arrowdown {
+            bottom: 0
+        }
+
+        .jfk-tooltip-arrowup {
+            top: -6px
+        }
+
+        .jfk-tooltip-arrowleft {
+            left: -6px
+        }
+
+        .jfk-tooltip-arrowright {
+            right: 0
+        }
+
+        .jfk-tooltip-arrowdown .jfk-tooltip-arrowimplbefore,
+        .jfk-tooltip-arrowup .jfk-tooltip-arrowimplbefore {
+            border-color: #fff transparent;
+            left: -6px
+        }
+
+        .jfk-tooltip-arrowdown .jfk-tooltip-arrowimplafter,
+        .jfk-tooltip-arrowup .jfk-tooltip-arrowimplafter {
+            border-color: #2a2a2a transparent;
+            left: -5px
+        }
+
+        .jfk-tooltip-arrowdown .jfk-tooltip-arrowimplbefore,
+        .jfk-tooltip-arrowdown .jfk-tooltip-arrowimplafter {
+            border-bottom-width: 0
+        }
+
+        .jfk-tooltip-arrowup .jfk-tooltip-arrowimplbefore {
+            border-top-width: 0
+        }
+
+        .jfk-tooltip-arrowup .jfk-tooltip-arrowimplafter {
+            border-top-width: 0;
+            top: 1px
+        }
+
+        .jfk-tooltip-arrowleft .jfk-tooltip-arrowimplbefore,
+        .jfk-tooltip-arrowright .jfk-tooltip-arrowimplbefore {
+            border-color: transparent #fff;
+            top: -6px
+        }
+
+        .jfk-tooltip-arrowleft .jfk-tooltip-arrowimplafter,
+        .jfk-tooltip-arrowright .jfk-tooltip-arrowimplafter {
+            border-color: transparent #2a2a2a;
+            top: -5px
+        }
+
+        .jfk-tooltip-arrowleft .jfk-tooltip-arrowimplbefore {
+            border-left-width: 0
+        }
+
+        .jfk-tooltip-arrowleft .jfk-tooltip-arrowimplafter {
+            border-left-width: 0;
+            left: 1px
+        }
+
+        .jfk-tooltip-arrowright .jfk-tooltip-arrowimplbefore,
+        .jfk-tooltip-arrowright .jfk-tooltip-arrowimplafter {
+            border-right-width: 0
+        }
+
+        sentinel {}
+
         .pbXL6b {
             background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAQAAAD9CzEMAAAA1klEQVR4Ae3XxVkAMRBA4eA0gtMLVsGrAoepAekAveCUhctxB3cCsxE037vvvxZzZO6fAgVoZ5ETtGanzNNmA9bRwFYtwAyKMoarVSPLKMrkZ8AI1ds7MdXMLkrF4EdAPxdoZGf0+IF9NEHbfuAyCXDuBzRN3wUUoADuZV8CFEBwxiQMsBIS/ooshIS/IgshKT6y2C9vByyEoMGAgRA0GDAQggYDBkLQYMBASM7pWpCy4GQFztEEnfmBnSTAph/o5hiN7JBOD3BPbHMW/nLYpLMcYwuQuisUl4eAHKHK9wAAAABJRU5ErkJggg==)
         }
@@ -7418,1145 +8473,356 @@
             position: absolute;
             top: -1px
         }
-    </style>
-    <script nonce="">
-        END_STYLES_TIME_MS = +new Date;
-        unusedApplicationCacheReference = window.applicationCache;
-        USER_LOCALE = "uk";
-        I18N_RTL = "";
-        ID_KEY = "c56cd213b9";
-        PROFILE_ID = "112404285954106754316";
-        CLIENT_ID = "sp-ca-h5";
-        ENVIRONMENT_ID = 'PROD';
-        LOGOUT_URL_HTML = "https:\x2F\x2Fmail.google.com\x2Fmail\x2Fmu\x2Fmp\x2F206\x2Flogout";
-        HELP_URL_HTML = "http:\x2F\x2Fwww.google.com\x2Fsupport\x2Fmobile\x2F?hl=uk\x26p=mail_ci\x26src=web";
-        DESKTOP_URL_HTML = "https:\x2F\x2Fmail.google.com\x2Fmail\x2F?ui=html";
-        PINTO_URL_HTML = "https:\x2F\x2Fmail.google.com\x2Fmail\x2F?ui=2";
-        IFRAME_CONTINUE_URL_ENCODED = "https%3A%2F%2Fmail.google.com%2Fmail%2Fmu%2Fmp%2F206%2Fcontinue%3Fic%3D1";
-        PRODUCT_NAME_HTML = "Gmail";
-        DATA_URL_TEMPLATE = "https:\x2F\x2Fmail.google.com\x2Fmail\x2Fu\x2F{SESSION_INDEX}\x2Fs\x2F";
-        PINTO_URL_PREFIX = "https:\x2F\x2Fmail.google.com\x2Fmail\x2F";
-        CARIBOU_COOKIE_PATH_TEMPLATE = "\x2Fmail\x2Fu\x2F{SESSION_INDEX}\x2Fs\x2F";
-        HOSTED_DOMAIN_HDF_PATH = "";
-        ADD_SESSION_URL = "https:\x2F\x2Faccounts.google.com\x2FAddSession?hl=uk\x26service=mail\x26continue=https:\x2F\x2Fmail.google.com\x2Fmail\x2Fmu\x2Fmp\x2F206\x2F?login%3D1";
-        COOKIE_PATH = "\x2Fmail\x2Fmu\x2Fmp\x2F206";
-        BUILD_LABEL = "no_build_label";
-        BUILD_LABEL_VERBOSE = "";
-        CLIENT_BUILD_LABEL = "apps-mobile-ui_907.1";
-        SUB_UI_NAME = "iphone";
-        WAS_JOBSET_TYPE = "p";
-        ENABLE_KEYBOARD = '' == '1';
-        ENABLE_SUGGEST_CLEARING_COOKIES = '' == '1';
-        ENABLE_AUTO_FEEDBACK = '' == '1';
-        ENABLE_LABELAS_FILTER = '' == '1';
-        ENABLE_SHOW_RESTART_MSG_ON_CACHE_ERROR = '' == '1';
-        ENABLE_REFRESH_ON_WAKE = '1' == '1';
-        ENABLE_IPHONE_TEXTAREA_SCROLL_HACK = '1' == '1';
-        DISABLE_DATABASE = '' == '1';
-        ENABLE_LARGE_DB = '' == '1';
-        DISABLE_CLOUD_PRINT = '1' == '1';
-        DISABLE_WEBSQL_SAVE = '1' == '1';
-        DISABLE_WEBSQL_INIT = '1' == '1';
-        SYNC_LEARN_MORE_URL = '';
-        SYNC_CHANGE_SETTING_INFO_URL = '';
-        SYNC_CLEAR_DATA_URL = '';
-        _CFLAGS = ["superpuducf", 5000, 120000, 180000, 3600000, 10, 5, 5000, "deprecated", "7z,avi,bmp,bz2,cab,csv,dif,dmg,doc,docx,exe,gif,gz,iso,jpeg,jpg,mkv,mp3,mp4,odt,ods,odp,odb,odg,odf,ogg,pdf,png,pps,ppsx,ppt,pptx,psd,rar,rtf,tab,tar,tgz,tiff,tsv,txt,vcf,webp,wmv,xcf,xls,xlsx,zip", null, null, 80, 20, 20, 100, "5.0.0", "86400", "3.1415926", "https://chrome.google.com/webstore/detail/dncjnngcblhgeeocnhmmihpanahkjbmi", "https://support.google.com/mail/?p\u003doffline_extension\u0026hl\u003d{locale}", "https://mail.google.com/mail/?ui\u003d2", "https://mail.google.com/mail/?ui\u003dhtml", "https://mail.google.com/mail/?ui\u003dmobile\u0026fpu\u003d1\u0026authuser\u003d0", 1000, 1, "https://accounts.google.com/SignOutOptions?continue\u003dhttps://mail.google.com/mail/mu/mp/206/?login%3D1\u0026manage\u003dtrue", "https://accounts.google.com/SignOutOptions?continue\u003dhttps://mail.google.com/mail/mu/mp/206/?login%3D1", 150, "itms-apps://itunes.apple.com/app/inbox-by-gmail-inbox-that/id905060486?pt\u003d9008\u0026ct\u003dmobileweb2\u0026mt\u003d8", "isp-ios", "Already using Gmail?", "Try out our new email app", "https://gmail.app.goo.gl/?link\u003dhttps://mail.google.com\u0026pt\u003d9008\u0026mt\u003d8\u0026isi\u003d422689480\u0026ibi\u003dcom.google.Gmail", null, null, "IPHONE", null, null, null, null, null, null, 0, 0, "MOBILE_REQUEST"];
-        SEND_BROWSER_REPORT = '1' == '1';
-        GMAIL_FDL = '' == '1';
-        SWITCH_TO_NATIVE_ENABLE_FDL_FOR_ANDROID = '' == '1';
-        SWITCH_TO_NATIVE_ENABLE_FDL_FOR_IOS = '' == '1';
-        SUPERPUDU_LOAD_SCREEN = '1' == '1';
-        SUPERPUDU_NATIVE_PROMO_SPLASH_SCREEN_IOS_V2 = '' == '1';
-        SUPERPUDU_NATIVE_PROMO_SPLASH_SCREEN_ANDROID_V2 = '' == '1';
-        HIDE_EXTERNAL_LINKS = '1' == '1';
-        REPORT_ILLEGAL_CONTENT = '' == '1';
-    </script>
-</head>
-
-<body style="height: 844px; min-height: 844px;" dir="ltr" class="  kUJyX">
-    <div id="nav" style="">
-        <div>
-        </div>
-        <div id="speedbump">
-            <div class="ObxnS">
-                <div class="MefFWe">
-                    <div class="UZYyjf">
-                        <div class="we3O5d"></div>
-                    </div>
-                    <div class="hbTneb">
-                        <div class="KkSzKc">Оновіть Gmail до зручнішої версії</div>
-                        <div class="ycEO6">Безпечна, швидка й упорядкована електронна пошта</div>
-                    </div>
-                    <div class="p9if3e"><a href="https://mail.google.com/mail/mu/mp/206/#" data-onclick="nb-a-cta+231">Відкрити</a></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <noscript>
-        <style>
-            body {
-                display: block !important
-            }
-        </style>
-        Щоб використовувати Gmail, потрібно ввімкнути JavaScript. Однак схоже, що мова JavaScript вимкнена або не
-        підтримується вашим веб-переглядачем. Щоб дізнатися більше, відвідайте наш <a
-            href="http://www.google.com/support/mobile/?p=js_mail&amp;hl=uk">Довідковий центр</a>.
-    </noscript>
-    <div id="sdppromo"></div>
-    <div id="apploadingdiv" style="position: absolute; top: 0px; z-index: 0; width: 100%; height: 0px; background-color: white; pointer-events: none; visibility: inherit; transition: opacity 1000ms; opacity: 0; display: none;">
-        <div id="loadscreen">
-            <div class="IuU1Qc">
-                <div class="s72y1b">
-                    <div class="MTukde"></div>
-                </div>
-                <div class=" urB1ec">
-                    <div class=" rajz8e">If you're having trouble loading, visit the <a href="https://mail.google.com/mail/mu/mp/206/#" data-onclick="ls-hl+232">Gmail help
-                            center</a>.</div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div position="relative">
-        <div id="viewsloadingdiv" style="position: absolute; top: 0px; z-index: 0; width: 100%; height: 0px; background-color: white; pointer-events: none; visibility: inherit; transition: opacity 1000ms; opacity: 0; display: none;">
-        </div>
-    </div>
-    <div id="views" style="top: 136px;">
-        <div class="  ctjNef">
-            <div class="QFYg4  " style="transition: -webkit-transform ease-in-out; transform: translate3d(0px, 0px, 0px); display: none;">
-                <div class="th09cb gVhZsf rKeFwd PRCEm p1CFje sFMZ7b" id="tltbt" style="width: 100%; transition: -webkit-transform ease-in-out; transform: translate3d(0px, 0px, 0px);">
-                    <div class="AH2Azc"></div>
-                    <div class="iYLoc" style="transition: -webkit-transform ease-in-out; transform: translate3d(0px, 0px, 0px);">
-                        <div class="kYbzg pNR6wf laQMJf AXeQ0c YaxK2 TKSQzb" role="button" tabindex="0" data-control-type="tlasprev+83" style="display: none;">
-                            <div class="acXkhd pNR6wf Q4Ph1e UMhkib SGqfCc">...</div>
-                        </div>
-                        <div class="kYbzg pNR6wf laQMJf AXeQ0c YaxK2 leetlb vsB5b  " role="button" aria-label="Меню" tabindex="0" data-control-type="tlamenu+77" style="">
-                            <div class="acXkhd pNR6wf iBAHzf  "></div>
-                        </div>
-                    </div>
-                    <div class="aLzX3d" style="left: 42px; right: 42px; transition: -webkit-transform ease-in-out; transform: translate3d(0px, 0px, 0px);">
-                        <div class=" WqEu7b ">
-                            <div class="SGqfCc" data-onclick="refr+10">Основні</div>
-                        </div>
-                    </div>
-                    <div class="LuRb0e" style="transition: -webkit-transform ease-in-out; transform: translate3d(0px, 0px, 0px);">
-                        <div class="kYbzg pNR6wf laQMJf AXeQ0c YaxK2 leetlb  LTRkrd" role="button" aria-label="Написати" tabindex="0" data-control-type="tlacmp+76">
-                            <div class="acXkhd pNR6wf Q0W8je"></div>
-                        </div>
-                    </div>
-                    <div class="AH2Azc"></div>
-                    <div class="YvrVlb UU8uMc"> </div>
-                </div>
-            </div>
-            <div class="QFYg4  " style="transition: -webkit-transform ease-in-out; transform: translate3d(0px, 0px, 0px);">
-                <div class="th09cb gVhZsf rKeFwd PRCEm p1CFje sFMZ7b" id="mutbt" style="width: 100%; transition: -webkit-transform ease-in-out; transform: translate3d(0px, 0px, 0px);">
-                    <div class="AH2Azc"></div>
-                    <div class="iYLoc" style="transition: -webkit-transform ease-in-out; transform: translate3d(0px, 0px, 0px);"></div>
-                    <div class="aLzX3d" style="left: 0px; right: 42px; transition: -webkit-transform ease-in-out; transform: translate3d(0px, 0px, 0px);">
-                        <div class="QbJwEc" style="width: 42px; transition: -webkit-transform ease-in-out; transform: translate3d(0px, 0px, 0px);">
-                        </div>
-                        <div class="K2uY8d xZPiZ"></div>
-                        <div class="kYbzg pNR6wf laQMJf AXeQ0c YaxK2 HMt0S EUWiO uAGVBb" role="button" tabindex="0" data-control-type="toggleaccountscallout+21">
-                            <div class="acXkhd Q4Ph1e Fgl8gd SGqfCc">nazarnikolaets1@gmail.com</div>
-                            <div class="acXkhd dAzsef"></div>
-                        </div>
-                    </div>
-                    <div class="LuRb0e" style="transition: -webkit-transform ease-in-out; transform: translate3d(0px, 0px, 0px);">
-                        <div class="kYbzg pNR6wf laQMJf AXeQ0c YaxK2 leetlb  vsB5b" role="button" aria-label="Налаштування" tabindex="0" data-control-type="prview+183">
-                            <div class="acXkhd pNR6wf c0Uytc"></div>
-                        </div>
-                    </div>
-                    <div class="AH2Azc"></div>
-                    <div class="YvrVlb UU8uMc"> </div>
-                </div>
-            </div>
-            <div class="QFYg4  " style="transition: -webkit-transform ease-in-out; transform: translate3d(0px, 0px, 0px); display: none;">
-                <div class="th09cb gVhZsf rKeFwd PRCEm p1CFje sFMZ7b" id="cv__cntbt" style="width: 100%; transition: -webkit-transform ease-in-out; transform: translate3d(0px, 0px, 0px);">
-                    <div class="AH2Azc"></div>
-                    <div class="iYLoc" style="transition: -webkit-transform ease-in-out; transform: translate3d(0px, 0px, 0px);">
-                        <div class="kYbzg pNR6wf laQMJf AXeQ0c YaxK2 E5gUaf TKSQzb  " role="button" tabindex="0" data-control-type="bti+2">
-                            <div class="acXkhd pNR6wf Q4Ph1e UMhkib SGqfCc  ">Основні</div>
-                        </div>
-                    </div>
-                    <div class="aLzX3d" style="left: 78px; right: 162px; transition: -webkit-transform ease-in-out; transform: translate3d(0px, 0px, 0px);">
-                    </div>
-                    <div class="LuRb0e" style="transition: -webkit-transform ease-in-out; transform: translate3d(0px, 0px, 0px);">
-                        <div class="kYbzg pNR6wf laQMJf AXeQ0c YaxK2 leetlb r68GOd vsB5b" data-onclick-arg="1" role="button" aria-label="Архівувати" tabindex="0" data-control-type="ca+5">
-                            <div class="acXkhd pNR6wf pbXL6b"></div>
-                        </div>
-                        <div class="kYbzg pNR6wf laQMJf AXeQ0c YaxK2 leetlb r68GOd vsB5b" data-onclick-arg="9" role="button" aria-label="Видалити" tabindex="0" data-control-type="ca+5">
-                            <div class="acXkhd pNR6wf oT1gRb"></div>
-                        </div>
-                        <div class="kYbzg pNR6wf laQMJf AXeQ0c YaxK2 VLhLE" data-onclick-arg="10" role="button" tabindex="0" data-control-type="ca+5" style="display: none;">
-                            <div class="acXkhd pNR6wf Q4Ph1e UMhkib SGqfCc">Видалити назавжди</div>
-                        </div>
-                        <div class="kYbzg pNR6wf laQMJf AXeQ0c YaxK2 VLhLE" data-onclick-arg="8" role="button" tabindex="0" data-control-type="ca+5" style="display: none;">
-                            <div class="acXkhd pNR6wf Q4Ph1e UMhkib SGqfCc">Не спам</div>
-                        </div>
-                        <div class="kYbzg pNR6wf laQMJf AXeQ0c YaxK2 VLhLE" data-onclick-arg="2" role="button" tabindex="0" data-control-type="ca+5" style="display: none;">
-                            <div class="acXkhd pNR6wf Q4Ph1e UMhkib SGqfCc">У вхідні</div>
-                        </div>
-                        <div class="kYbzg pNR6wf laQMJf AXeQ0c YaxK2 leetlb r68GOd vsB5b" role="button" aria-label="Перемістити..." tabindex="0" data-control-type="mla+6" style="display: none;">
-                            <div class="acXkhd pNR6wf HyFzU"></div>
-                        </div>
-                        <div class="kYbzg pNR6wf laQMJf AXeQ0c YaxK2 leetlb r68GOd vsB5b" role="button" aria-label="Позначити..." tabindex="0" data-control-type="laa+7" style="display: none;">
-                            <div class="acXkhd pNR6wf buFThf"></div>
-                        </div>
-                        <div class="kYbzg pNR6wf laQMJf AXeQ0c YaxK2 leetlb FTc1zc r68GOd vsB5b" role="button" aria-label="Інші варіанти" tabindex="0">
-                            <div class="acXkhd pNR6wf bso1Wc"></div>
-                        </div>
-                    </div>
-                    <div class="AH2Azc"></div>
-                    <div class="YvrVlb UU8uMc"></div>
-                </div>
-            </div>
-        </div>
-        <div id="tl_" class=" q0CeU  " style="transition: -webkit-transform ease-in-out; transform: translate3d(0px, 0px, 0px); display: none;">
-            <div class="BMRW0e" style="bottom: 0px;">
-                <div class="uQdvnb VDvclb" style="min-height: 916px; left: 0px; top: 0px; transform: translate3d(0px, -54.6667px, 0px); margin-bottom: -50px; transition: -webkit-transform ease-in-out;">
-                    <div style="transform: translate3d(0px, 0px, 0px);" class="TbVFjd VMfMxd">
-                        <div class="ydyVhc">
-                            <div class="CkPR7e">
-                                <div class="sAslAb nRADXb T4YWue"></div>
-                                <div class="BoB4Pc iLxkFb" style="display: none;"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div style="display: none" class="HqpmNc"></div>
-                    <div class="u62BUb" data-onclick="tlacc+89"></div>
-                    <form class="qaOz5" data-onsubmit="dosearch+12" role="search">
-                        <div class="j69s7 JDXkdf  YOnhOb"></div>
-                        <div class="SC3Y9e"><input type="search" autocomplete="off" autocorrect="off" class="KK7o3c" data-onfocus="focussearch+13" data-onblur="blursearch+14" data-oninput="tlsesbch+92" placeholder="Пошук"></div>
-                        <div class="N747J">
-                            <div class="kYbzg pNR6wf laQMJf AXeQ0c YaxK2 OisyHc uxfubf VLhLE cA0Jx" style="display:none" role="button" aria-label="Скасувати" tabindex="0" data-control-type="cancel+239">
-                                <div class="acXkhd pNR6wf Q4Ph1e hfnrbd">Скасувати</div>
-                            </div>
-                        </div>
-                    </form>
-                    <div class="Ci8ENc"></div>
-                    <div class="  EhWaIe" style="display: none;"></div>
-                    <div class="UU1duf" style="display: none;"></div>
-                    <div class="I2nW4d" role="list">
-                        <div id="th_sitch" class="ksQvef XFflXd" role="listitem">
-                            <div class="Akvd4" tabindex="0" role="button" aria-labelledby="ti_f_sitch tl_as ti_s_sitch" aria-describedby="ti_d_sitch tl_as ti_b_sitch"></div>
-                            <div class="BVxbRe" aria-hidden="true"></div>
-                            <div class="immPke">
-                                <div class="C9xYIc"><span id="ti_d_sitch" aria-hidden="true">18:43</span></div>
-                                <div class="SGqfCc FjjIEb" aria-hidden="true"><span id="ti_f_sitch"><b>Нові категорії
-                                            листів</b></span></div>
-                            </div>
-                            <div class="MpFCYc">
-                                <div class="kYbzg pNR6wf yaP12c" data-onclick="tlsita+87" aria-hidden="true" role="button" tabindex="0">
-                                    <div class="acXkhd pNR6wf Zqwiic QnW1le"></div>
-                                </div>
-                                <div class="OA0Zxb fTx1Ge"></div>
-                                <div class="JIX8rd SGqfCc HhG5wd" id="ti_s_sitch" aria-hidden="true"><span> 4 Реклама, 8
-                                        Оновлення</span></div>
-                            </div>
-                            <div class="fGaFVc" aria-hidden="true">
-                                <div class="Se5Bse"></div>
-                                <div class="SGqfCc bEeVec" id="ti_b_sitch">із Банк Власний Рахунок, GitHub, ★
-                                    Freelancehunt, Аgapit Mironov (Google Документи) та
-                                    noreply-apps-scripts-notifications@google.com</div>
-                            </div>
-                        </div>
-                        <div id="th_197405a2dc63d7aa" class="ksQvef rIdQ2b" role="listitem">
-                            <div class="Akvd4" tabindex="0" role="button" aria-labelledby="ti_f_197405a2dc63d7aa tl_as ti_s_197405a2dc63d7aa" aria-describedby="ti_d_197405a2dc63d7aa tl_as ti_b_197405a2dc63d7aa"></div>
-                            <div class="BVxbRe" aria-hidden="true"></div>
-                            <div class="immPke">
-                                <div class="C9xYIc">
-                                    <div class="WNA6fd IWDhfb"></div><span id="ti_d_197405a2dc63d7aa" aria-hidden="true">6 черв.</span>
-                                </div>
-                                <div class="SGqfCc FjjIEb" aria-hidden="true"><span id="ti_f_197405a2dc63d7aa">я, Fm
-                                    </span><span class="D5Emhe">16</span></div>
-                            </div>
-                            <div class="MpFCYc">
-                                <div class="kYbzg pNR6wf yaP12c" role="checkbox" aria-label="Вибрати" aria-checked="false" tabindex="0" data-control-type="tlatogglecheck+84">
-                                    <div class="acXkhd pNR6wf q4uqaf roR7Jb"></div>
-                                </div>
-                                <div class="kYbzg pNR6wf fTx1Ge" role="checkbox" aria-label="Зірочка" aria-checked="false" tabindex="0" data-control-type="tlastar+80">
-                                    <div class="acXkhd pNR6wf vsNLJe QkTueb"></div>
-                                </div>
-                                <div class=" SGqfCc HhG5wd" id="ti_s_197405a2dc63d7aa" aria-hidden="true">
-                                    <span>BeStronger Support</span></div>
-                            </div>
-                            <div class="fGaFVc" aria-hidden="true">
-                                <div class="Se5Bse"></div>
-                                <div class="SGqfCc bEeVec" id="ti_b_197405a2dc63d7aa">Супер!) Вдалих тренувань! пт, 6
-                                    июн. 2025 г. в 18:31, Богдан Дацюк &lt;datcukbogdan@gmail.com&gt;: вчора не
-                                    активувалося, сьогодні вже є) дякую) чт, 5 черв. 2025 р. о 17:59 Fm Shvager
-                                    &lt;shvagerfm@</div>
-                            </div>
-                        </div>
-                        <div id="th_195d3997e5072a5e" class="ksQvef rIdQ2b" role="listitem">
-                            <div class="Akvd4" tabindex="0" role="button" aria-labelledby="ti_f_195d3997e5072a5e tl_as ti_s_195d3997e5072a5e" aria-describedby="ti_d_195d3997e5072a5e tl_as ti_b_195d3997e5072a5e" style="outline: none;"></div>
-                            <div class="BVxbRe" aria-hidden="true"></div>
-                            <div class="immPke">
-                                <div class="C9xYIc"><span id="ti_d_195d3997e5072a5e" aria-hidden="true">27 бер.</span>
-                                </div>
-                                <div class="SGqfCc FjjIEb" aria-hidden="true"><span id="ti_f_195d3997e5072a5e">GitHub
-                                    </span><span class="D5Emhe">2</span></div>
-                            </div>
-                            <div class="MpFCYc">
-                                <div class="kYbzg pNR6wf yaP12c" role="checkbox" aria-label="Вибрати" aria-checked="false" tabindex="0" data-control-type="tlatogglecheck+84">
-                                    <div class="acXkhd pNR6wf q4uqaf roR7Jb"></div>
-                                </div>
-                                <div class="kYbzg pNR6wf fTx1Ge" role="checkbox" aria-label="Зірочка" aria-checked="false" tabindex="0" data-control-type="tlastar+80">
-                                    <div class="acXkhd pNR6wf vsNLJe QkTueb"></div>
-                                </div>
-                                <div class=" SGqfCc HhG5wd" id="ti_s_195d3997e5072a5e" aria-hidden="true"><span>[GitHub
-                                        Support] - verify my student status</span></div>
-                            </div>
-                            <div class="fGaFVc" aria-hidden="true">
-                                <div class="Se5Bse"></div>
-                                <div class="SGqfCc bEeVec" id="ti_b_195d3997e5072a5e">## Please do not write below this
-                                    line ## Your request (Ticket 3311947) has been updated. To review the status of your
-                                    request and add additional comments, please visit: Ticket 3311947. GitHub (GitHub
-                                </div>
-                            </div>
-                        </div>
-                        <div id="th_195a8731b3ff0d04" class="ksQvef rIdQ2b" role="listitem">
-                            <div class="Akvd4" tabindex="0" role="button" aria-labelledby="ti_f_195a8731b3ff0d04 tl_as ti_s_195a8731b3ff0d04" aria-describedby="ti_d_195a8731b3ff0d04 tl_as ti_b_195a8731b3ff0d04"></div>
-                            <div class="BVxbRe" aria-hidden="true"></div>
-                            <div class="immPke">
-                                <div class="C9xYIc"><span id="ti_d_195a8731b3ff0d04" aria-hidden="true">18 бер.</span>
-                                </div>
-                                <div class="SGqfCc FjjIEb" aria-hidden="true"><span id="ti_f_195a8731b3ff0d04">Укрпошта
-                                        Контакт - центр</span></div>
-                            </div>
-                            <div class="MpFCYc">
-                                <div class="kYbzg pNR6wf yaP12c" role="checkbox" aria-label="Вибрати" aria-checked="false" tabindex="0" data-control-type="tlatogglecheck+84">
-                                    <div class="acXkhd pNR6wf q4uqaf roR7Jb"></div>
-                                </div>
-                                <div class="kYbzg pNR6wf fTx1Ge" role="checkbox" aria-label="Зірочка" aria-checked="false" tabindex="0" data-control-type="tlastar+80">
-                                    <div class="acXkhd pNR6wf vsNLJe QkTueb"></div>
-                                </div>
-                                <div class=" SGqfCc HhG5wd" id="ti_s_195a8731b3ff0d04" aria-hidden="true">
-                                    <span>Укрпошта</span></div>
-                            </div>
-                            <div class="fGaFVc" aria-hidden="true">
-                                <div class="Se5Bse"></div>
-                                <div class="SGqfCc bEeVec" id="ti_b_195a8731b3ff0d04">Шановний клієнте! Перепрошуємо за
-                                    очікування на відповідь підтримки. Ваше відправлення по Україні оброблюється в
-                                    сортувальному центрі, про що є свіжий статус в трекінгу. Клієнтська підтримка не
-                                    може</div>
-                            </div>
-                        </div>
-                        <div id="th_195a84f0dd9e4bcd" class="ksQvef rIdQ2b" role="listitem">
-                            <div class="Akvd4" tabindex="0" role="button" aria-labelledby="ti_f_195a84f0dd9e4bcd tl_as ti_s_195a84f0dd9e4bcd" aria-describedby="ti_d_195a84f0dd9e4bcd tl_as ti_b_195a84f0dd9e4bcd"></div>
-                            <div class="BVxbRe" aria-hidden="true"></div>
-                            <div class="immPke">
-                                <div class="C9xYIc"><span id="ti_d_195a84f0dd9e4bcd" aria-hidden="true">18 бер.</span>
-                                </div>
-                                <div class="SGqfCc FjjIEb" aria-hidden="true"><span id="ti_f_195a84f0dd9e4bcd">Укрпошта
-                                        Контакт - центр</span></div>
-                            </div>
-                            <div class="MpFCYc">
-                                <div class="kYbzg pNR6wf yaP12c" role="checkbox" aria-label="Вибрати" aria-checked="false" tabindex="0" data-control-type="tlatogglecheck+84">
-                                    <div class="acXkhd pNR6wf q4uqaf roR7Jb"></div>
-                                </div>
-                                <div class="kYbzg pNR6wf fTx1Ge" role="checkbox" aria-label="Зірочка" aria-checked="false" tabindex="0" data-control-type="tlastar+80">
-                                    <div class="acXkhd pNR6wf vsNLJe QkTueb"></div>
-                                </div>
-                                <div class=" SGqfCc HhG5wd" id="ti_s_195a84f0dd9e4bcd" aria-hidden="true">
-                                    <span>Автоматична відповідь: Re: Рекомендований лист</span></div>
-                            </div>
-                            <div class="fGaFVc" aria-hidden="true">
-                                <div class="Se5Bse"></div>
-                                <div class="SGqfCc bEeVec" id="ti_b_195a84f0dd9e4bcd">Вітаємо! Відповідаємо одразу за
-                                    наявності вільного оператора. Через значну кількість звернень, можемо надавати
-                                    відповідь не миттєво. Середній час очікування – приблизно 1-2 дні. Приносимо
-                                    вибачення, ми</div>
-                            </div>
-                        </div>
-                        <div id="th_1958acdfb2018d34" class="ksQvef rIdQ2b" role="listitem">
-                            <div class="Akvd4" tabindex="0" role="button" aria-labelledby="ti_f_1958acdfb2018d34 tl_as ti_s_1958acdfb2018d34" aria-describedby="ti_d_1958acdfb2018d34 tl_as ti_b_1958acdfb2018d34"></div>
-                            <div class="BVxbRe" aria-hidden="true"></div>
-                            <div class="immPke">
-                                <div class="C9xYIc"><span id="ti_d_1958acdfb2018d34" aria-hidden="true">18 бер.</span>
-                                </div>
-                                <div class="SGqfCc FjjIEb" aria-hidden="true"><span id="ti_f_1958acdfb2018d34">я,
-                                        ukrposhta </span><span class="D5Emhe">5</span></div>
-                            </div>
-                            <div class="MpFCYc">
-                                <div class="kYbzg pNR6wf yaP12c" role="checkbox" aria-label="Вибрати" aria-checked="false" tabindex="0" data-control-type="tlatogglecheck+84">
-                                    <div class="acXkhd pNR6wf q4uqaf roR7Jb"></div>
-                                </div>
-                                <div class="kYbzg pNR6wf fTx1Ge" role="checkbox" aria-label="Зірочка" aria-checked="false" tabindex="0" data-control-type="tlastar+80">
-                                    <div class="acXkhd pNR6wf vsNLJe QkTueb"></div>
-                                </div>
-                                <div class=" SGqfCc HhG5wd" id="ti_s_1958acdfb2018d34" aria-hidden="true">
-                                    <span>Рекомендований лист</span></div>
-                            </div>
-                            <div class="fGaFVc" aria-hidden="true">
-                                <div class="Se5Bse"></div>
-                                <div class="SGqfCc bEeVec" id="ti_b_1958acdfb2018d34">Дацюк Богдан Андрійович вт, 18
-                                    бер. 2025, 09:58 користувач &lt;ukrposhta@ukrposhta.ua&gt; пише: Вітаємо, шановний
-                                    клієнте! У відповідь на Ваше звернення повідомляємо, що з метою детальної перевірки
-                                </div>
-                            </div>
-                        </div>
-                        <div id="th_19567ed817dab295" class="ksQvef rIdQ2b" role="listitem">
-                            <div class="Akvd4" tabindex="0" role="button" aria-labelledby="ti_f_19567ed817dab295 tl_as ti_s_19567ed817dab295" aria-describedby="ti_d_19567ed817dab295 tl_as ti_b_19567ed817dab295"></div>
-                            <div class="BVxbRe" aria-hidden="true"></div>
-                            <div class="immPke">
-                                <div class="C9xYIc"><span id="ti_d_19567ed817dab295" aria-hidden="true">5 бер.</span>
-                                </div>
-                                <div class="SGqfCc FjjIEb" aria-hidden="true"><span id="ti_f_19567ed817dab295">NetX
-                                    </span><span class="D5Emhe">2</span></div>
-                            </div>
-                            <div class="MpFCYc">
-                                <div class="kYbzg pNR6wf yaP12c" role="checkbox" aria-label="Вибрати" aria-checked="false" tabindex="0" data-control-type="tlatogglecheck+84">
-                                    <div class="acXkhd pNR6wf q4uqaf roR7Jb"></div>
-                                </div>
-                                <div class="kYbzg pNR6wf fTx1Ge" role="checkbox" aria-label="Зірочка" aria-checked="false" tabindex="0" data-control-type="tlastar+80">
-                                    <div class="acXkhd pNR6wf vsNLJe QkTueb"></div>
-                                </div>
-                                <div class=" SGqfCc HhG5wd" id="ti_s_19567ed817dab295" aria-hidden="true"><span>Reset
-                                        your password</span></div>
-                            </div>
-                            <div class="fGaFVc" aria-hidden="true">
-                                <div class="Se5Bse"></div>
-                                <div class="SGqfCc bEeVec" id="ti_b_19567ed817dab295">NetX To reset your password,
-                                    please click on the link below. Reset your password If you're having trouble, try
-                                    copying and pasting the following URL into your browser:
-                                    https://netx.com.ua/password/</div>
-                            </div>
-                        </div>
-                        <div id="th_19496a69bc7fa1b0" class="ksQvef rIdQ2b" role="listitem">
-                            <div class="Akvd4" tabindex="0" role="button" aria-labelledby="ti_f_19496a69bc7fa1b0 tl_as ti_s_19496a69bc7fa1b0" aria-describedby="ti_d_19496a69bc7fa1b0 tl_as ti_b_19496a69bc7fa1b0"></div>
-                            <div class="BVxbRe" aria-hidden="true"></div>
-                            <div class="immPke">
-                                <div class="C9xYIc"><span id="ti_d_19496a69bc7fa1b0" aria-hidden="true">24 січ.</span>
-                                </div>
-                                <div class="SGqfCc FjjIEb" aria-hidden="true"><span id="ti_f_19496a69bc7fa1b0">Chetan
-                                        Kumar</span></div>
-                            </div>
-                            <div class="MpFCYc">
-                                <div class="kYbzg pNR6wf yaP12c" role="checkbox" aria-label="Вибрати" aria-checked="false" tabindex="0" data-control-type="tlatogglecheck+84">
-                                    <div class="acXkhd pNR6wf q4uqaf roR7Jb"></div>
-                                </div>
-                                <div class="kYbzg pNR6wf fTx1Ge" role="checkbox" aria-label="Зірочка" aria-checked="false" tabindex="0" data-control-type="tlastar+80">
-                                    <div class="acXkhd pNR6wf vsNLJe QkTueb"></div>
-                                </div>
-                                <div class=" SGqfCc HhG5wd" id="ti_s_19496a69bc7fa1b0" aria-hidden="true"><span>IT
-                                        Solution</span></div>
-                            </div>
-                            <div class="fGaFVc" aria-hidden="true">
-                                <div class="Se5Bse"></div>
-                                <div class="SGqfCc bEeVec" id="ti_b_19496a69bc7fa1b0">Hi, Bohdan Datsiuk Greetings of
-                                    the day! If you're looking for expert support with any of the following online
-                                    services: Website Development SEO (Search Engine Optimization) Digital Marketing
-                                    Logo</div>
-                            </div>
-                        </div>
-                        <div id="th_19487a67721b3836" class="ksQvef rIdQ2b" role="listitem">
-                            <div class="Akvd4" tabindex="0" role="button" aria-labelledby="ti_f_19487a67721b3836 tl_as ti_s_19487a67721b3836" aria-describedby="ti_d_19487a67721b3836 tl_as ti_b_19487a67721b3836"></div>
-                            <div class="BVxbRe" aria-hidden="true"></div>
-                            <div class="immPke">
-                                <div class="C9xYIc"><span id="ti_d_19487a67721b3836" aria-hidden="true">21 січ.</span>
-                                </div>
-                                <div class="SGqfCc FjjIEb" aria-hidden="true"><span id="ti_f_19487a67721b3836">Mr
-                                        blacksolo</span></div>
-                            </div>
-                            <div class="MpFCYc">
-                                <div class="kYbzg pNR6wf yaP12c" role="checkbox" aria-label="Вибрати" aria-checked="false" tabindex="0" data-control-type="tlatogglecheck+84">
-                                    <div class="acXkhd pNR6wf q4uqaf roR7Jb"></div>
-                                </div>
-                                <div class="kYbzg pNR6wf fTx1Ge" role="checkbox" aria-label="Зірочка" aria-checked="false" tabindex="0" data-control-type="tlastar+80">
-                                    <div class="acXkhd pNR6wf vsNLJe QkTueb"></div>
-                                </div>
-                                <div class=" SGqfCc HhG5wd" id="ti_s_19487a67721b3836" aria-hidden="true">
-                                    <span>Vulnerability Report</span></div>
-                            </div>
-                            <div class="fGaFVc" aria-hidden="true">
-                                <div class="Se5Bse"></div>
-                                <div class="SGqfCc bEeVec" id="ti_b_19487a67721b3836">Dear Security team, Vulnerability
-                                    : - Information Disclosure Vulnerable Url : - https://ali.datsiuk.com/ I found a git
-                                    repository on https://ali.datsiuk.com/.git. This endpoint allows an attacker to
-                                </div>
-                            </div>
-                        </div>
-                        <div id="th_193aa8807afbed1a" class="ksQvef rIdQ2b" role="listitem">
-                            <div class="Akvd4" tabindex="0" role="button" aria-labelledby="ti_f_193aa8807afbed1a tl_as ti_s_193aa8807afbed1a" aria-describedby="ti_d_193aa8807afbed1a tl_as ti_b_193aa8807afbed1a"></div>
-                            <div class="BVxbRe" aria-hidden="true"></div>
-                            <div class="immPke">
-                                <div class="C9xYIc"><span id="ti_d_193aa8807afbed1a" aria-hidden="true">9 груд.
-                                        2024 р.</span></div>
-                                <div class="SGqfCc FjjIEb" aria-hidden="true"><span id="ti_f_193aa8807afbed1a">Eolymp
-                                    </span><span class="D5Emhe">2</span></div>
-                            </div>
-                            <div class="MpFCYc">
-                                <div class="kYbzg pNR6wf yaP12c" role="checkbox" aria-label="Вибрати" aria-checked="false" tabindex="0" data-control-type="tlatogglecheck+84">
-                                    <div class="acXkhd pNR6wf q4uqaf roR7Jb"></div>
-                                </div>
-                                <div class="kYbzg pNR6wf fTx1Ge" role="checkbox" aria-label="Зірочка" aria-checked="false" tabindex="0" data-control-type="tlastar+80">
-                                    <div class="acXkhd pNR6wf vsNLJe QkTueb"></div>
-                                </div>
-                                <div class=" SGqfCc HhG5wd" id="ti_s_193aa8807afbed1a" aria-hidden="true"><span>Кубок
-                                        Eolymp, Раунд 3</span></div>
-                            </div>
-                            <div class="fGaFVc" aria-hidden="true">
-                                <div class="Se5Bse"></div>
-                                <div class="SGqfCc bEeVec" id="ti_b_193aa8807afbed1a">Привет, dreamy_yalow_443, Мы рады
-                                    объявить о третем раунде Кубка Eolymp в следующие выходные. Мы приглашаем вас
-                                    присоединиться и побороться за наши крутые призы, медали и, конечно, кубок Eolymp.
-                                </div>
-                            </div>
-                        </div>
-                        <div id="th_190a1bd45972ad39" class="ksQvef rIdQ2b" role="listitem">
-                            <div class="Akvd4" tabindex="0" role="button" aria-labelledby="ti_f_190a1bd45972ad39 tl_as ti_s_190a1bd45972ad39" aria-describedby="ti_d_190a1bd45972ad39 tl_as ti_b_190a1bd45972ad39"></div>
-                            <div class="BVxbRe" aria-hidden="true"></div>
-                            <div class="immPke">
-                                <div class="C9xYIc"><span id="ti_d_190a1bd45972ad39" aria-hidden="true">11 лип.
-                                        2024 р.</span></div>
-                                <div class="SGqfCc FjjIEb" aria-hidden="true"><span id="ti_f_190a1bd45972ad39">NetX
-                                        Общий </span><span class="D5Emhe">4</span></div>
-                            </div>
-                            <div class="MpFCYc">
-                                <div class="kYbzg pNR6wf yaP12c" role="checkbox" aria-label="Вибрати" aria-checked="false" tabindex="0" data-control-type="tlatogglecheck+84">
-                                    <div class="acXkhd pNR6wf q4uqaf roR7Jb"></div>
-                                </div>
-                                <div class="kYbzg pNR6wf fTx1Ge" role="checkbox" aria-label="Зірочка" aria-checked="false" tabindex="0" data-control-type="tlastar+80">
-                                    <div class="acXkhd pNR6wf vsNLJe QkTueb"></div>
-                                </div>
-                                <div class=" SGqfCc HhG5wd" id="ti_s_190a1bd45972ad39" aria-hidden="true"><span>[Ticket
-                                        ID: 304004] Проблема з сервером</span></div>
-                            </div>
-                            <div class="fGaFVc" aria-hidden="true">
-                                <div class="Se5Bse"></div>
-                                <div class="SGqfCc bEeVec" id="ti_b_190a1bd45972ad39">NetX Готово. Ticket ID: #304004
-                                    Subject: Проблема з сервером Status: Answered Ticket URL:
-                                    https://netx.com.ua/viewticket.php?tid=304004&amp;c=KYzYNgK2 ---</div>
-                            </div>
-                        </div>
-                        <div id="th_1905e0826223d4fe" class="ksQvef rIdQ2b" role="listitem">
-                            <div class="Akvd4" tabindex="0" role="button" aria-labelledby="ti_f_1905e0826223d4fe tl_as ti_s_1905e0826223d4fe" aria-describedby="ti_d_1905e0826223d4fe tl_as ti_b_1905e0826223d4fe" style="outline: none;"></div>
-                            <div class="BVxbRe" aria-hidden="true"></div>
-                            <div class="immPke">
-                                <div class="C9xYIc"><span id="ti_d_1905e0826223d4fe" aria-hidden="true">28 черв.
-                                        2024 р.</span></div>
-                                <div class="SGqfCc FjjIEb" aria-hidden="true"><span id="ti_f_1905e0826223d4fe">Chetan
-                                        Kumar</span></div>
-                            </div>
-                            <div class="MpFCYc">
-                                <div class="kYbzg pNR6wf yaP12c" role="checkbox" aria-label="Вибрати" aria-checked="false" tabindex="0" data-control-type="tlatogglecheck+84">
-                                    <div class="acXkhd pNR6wf q4uqaf roR7Jb"></div>
-                                </div>
-                                <div class="kYbzg pNR6wf fTx1Ge" role="checkbox" aria-label="Зірочка" aria-checked="false" tabindex="0" data-control-type="tlastar+80">
-                                    <div class="acXkhd pNR6wf vsNLJe QkTueb"></div>
-                                </div>
-                                <div class=" SGqfCc HhG5wd" id="ti_s_1905e0826223d4fe" aria-hidden="true">
-                                    <span>Presentation</span></div>
-                            </div>
-                            <div class="fGaFVc" aria-hidden="true">
-                                <div class="Se5Bse"></div>
-                                <div class="SGqfCc bEeVec" id="ti_b_1905e0826223d4fe">Hi, Bohdan Datsiuk Greetings! We
-                                    provide range of services to help you build a strong online presence: Website Design
-                                    Logo Design SEO (Search Engine Optimization) Social Media Marketing Android &amp;
-                                </div>
-                            </div>
-                        </div>
-                        <div id="th_1903b4a0fade4185" class="ksQvef rIdQ2b" role="listitem">
-                            <div class="Akvd4" tabindex="0" role="button" aria-labelledby="ti_f_1903b4a0fade4185 tl_as ti_s_1903b4a0fade4185" aria-describedby="ti_d_1903b4a0fade4185 tl_as ti_b_1903b4a0fade4185"></div>
-                            <div class="BVxbRe" aria-hidden="true"></div>
-                            <div class="immPke">
-                                <div class="C9xYIc"><span id="ti_d_1903b4a0fade4185" aria-hidden="true">21 черв.
-                                        2024 р.</span></div>
-                                <div class="SGqfCc FjjIEb" aria-hidden="true"><span id="ti_f_1903b4a0fade4185">я, Lazy
-                                    </span><span class="D5Emhe">6</span>
-                                    <font color="#DD4B39">Чернетка</font>
-                                </div>
-                            </div>
-                            <div class="MpFCYc">
-                                <div class="kYbzg pNR6wf yaP12c" role="checkbox" aria-label="Вибрати" aria-checked="false" tabindex="0" data-control-type="tlatogglecheck+84">
-                                    <div class="acXkhd pNR6wf q4uqaf roR7Jb"></div>
-                                </div>
-                                <div class="kYbzg pNR6wf fTx1Ge" role="checkbox" aria-label="Зірочка" aria-checked="false" tabindex="0" data-control-type="tlastar+80">
-                                    <div class="acXkhd pNR6wf vsNLJe QkTueb"></div>
-                                </div>
-                                <div class=" SGqfCc HhG5wd" id="ti_s_1903b4a0fade4185" aria-hidden="true"><span>Сервер
-                                        міні</span></div>
-                            </div>
-                            <div class="fGaFVc" aria-hidden="true">
-                                <div class="Se5Bse"></div>
-                                <div class="SGqfCc bEeVec" id="ti_b_1903b4a0fade4185">це дані для ssh зєднання? пт, 21
-                                    черв. 2024 р. о 18:28 Lazy IT &lt;askanton71@gmail.com&gt; пише: Installation has
-                                    been started. Please allow up to 10 minutes for it to complete IP: 107.172.153.200
-                                </div>
-                            </div>
-                        </div>
-                        <div id="th_18fd5e6bebba9bfd" class="ksQvef rIdQ2b" role="listitem">
-                            <div class="Akvd4" tabindex="0" role="button" aria-labelledby="ti_f_18fd5e6bebba9bfd tl_as ti_s_18fd5e6bebba9bfd" aria-describedby="ti_d_18fd5e6bebba9bfd tl_as ti_b_18fd5e6bebba9bfd"></div>
-                            <div class="BVxbRe" aria-hidden="true"></div>
-                            <div class="immPke">
-                                <div class="C9xYIc"><span id="ti_d_18fd5e6bebba9bfd" aria-hidden="true">2 черв.
-                                        2024 р.</span></div>
-                                <div class="SGqfCc FjjIEb" aria-hidden="true"><span id="ti_f_18fd5e6bebba9bfd">PixelSquid </span><span class="D5Emhe">2</span></div>
-                            </div>
-                            <div class="MpFCYc">
-                                <div class="kYbzg pNR6wf yaP12c" role="checkbox" aria-label="Вибрати" aria-checked="false" tabindex="0" data-control-type="tlatogglecheck+84">
-                                    <div class="acXkhd pNR6wf q4uqaf roR7Jb"></div>
-                                </div>
-                                <div class="kYbzg pNR6wf fTx1Ge" role="checkbox" aria-label="Зірочка" aria-checked="false" tabindex="0" data-control-type="tlastar+80">
-                                    <div class="acXkhd pNR6wf vsNLJe QkTueb"></div>
-                                </div>
-                                <div class=" SGqfCc HhG5wd" id="ti_s_18fd5e6bebba9bfd" aria-hidden="true">
-                                    <span>PixelSquid - Email Confirmation Required</span></div>
-                            </div>
-                            <div class="fGaFVc" aria-hidden="true">
-                                <div class="Se5Bse"></div>
-                                <div class="SGqfCc bEeVec" id="ti_b_18fd5e6bebba9bfd">Thanks for joining! Your account
-                                    is almost ready, we just need to confirm your email address. Click the link below to
-                                    proceed: Confirm Email PixelSquid 643 Magazine St 2nd Floor New Orleans, LA 70130,
-                                </div>
-                            </div>
-                        </div>
-                        <div id="th_18fd1c0f2e448ede" class="ksQvef rIdQ2b" role="listitem">
-                            <div class="Akvd4" tabindex="0" role="button" aria-labelledby="ti_f_18fd1c0f2e448ede tl_as ti_s_18fd1c0f2e448ede" aria-describedby="ti_d_18fd1c0f2e448ede tl_as ti_b_18fd1c0f2e448ede"></div>
-                            <div class="BVxbRe" aria-hidden="true"></div>
-                            <div class="immPke">
-                                <div class="C9xYIc">
-                                    <div class="WNA6fd IWDhfb"></div><span id="ti_d_18fd1c0f2e448ede" aria-hidden="true">1 черв. 2024 р.</span>
-                                </div>
-                                <div class="SGqfCc FjjIEb" aria-hidden="true"><span id="ti_f_18fd1c0f2e448ede">NetX
-                                    </span><span class="D5Emhe">2</span></div>
-                            </div>
-                            <div class="MpFCYc">
-                                <div class="kYbzg pNR6wf yaP12c" role="checkbox" aria-label="Вибрати" aria-checked="false" tabindex="0" data-control-type="tlatogglecheck+84">
-                                    <div class="acXkhd pNR6wf q4uqaf roR7Jb"></div>
-                                </div>
-                                <div class="kYbzg pNR6wf fTx1Ge" role="checkbox" aria-label="Зірочка" aria-checked="false" tabindex="0" data-control-type="tlastar+80">
-                                    <div class="acXkhd pNR6wf vsNLJe QkTueb"></div>
-                                </div>
-                                <div class=" SGqfCc HhG5wd" id="ti_s_18fd1c0f2e448ede" aria-hidden="true"><span>Перше
-                                        повідомлення про неоплачений рахунок</span></div>
-                            </div>
-                            <div class="fGaFVc" aria-hidden="true">
-                                <div class="Se5Bse"></div>
-                                <div class="SGqfCc bEeVec" id="ti_b_18fd1c0f2e448ede">NetX Шановний (-а) Bohdan Datsiuk.
-                                    Даним листом повідомляємо вас про прострочений рахунок № 124543, виписаному Friday,
-                                    May 31st, 2024. Поточний спосіб оплати: MMPay (Visa\Mastercard, криптовалюты,</div>
-                            </div>
-                        </div>
-                        <div id="th_18f27f525e80736c" class="ksQvef rIdQ2b" role="listitem">
-                            <div class="Akvd4" tabindex="0" role="button" aria-labelledby="ti_f_18f27f525e80736c tl_as ti_s_18f27f525e80736c" aria-describedby="ti_d_18f27f525e80736c tl_as ti_b_18f27f525e80736c"></div>
-                            <div class="BVxbRe" aria-hidden="true"></div>
-                            <div class="immPke">
-                                <div class="C9xYIc"><span id="ti_d_18f27f525e80736c" aria-hidden="true">29 квіт.
-                                        2024 р.</span></div>
-                                <div class="SGqfCc FjjIEb" aria-hidden="true"><span id="ti_f_18f27f525e80736c">NetX
-                                        Общий </span><span class="D5Emhe">4</span></div>
-                            </div>
-                            <div class="MpFCYc">
-                                <div class="kYbzg pNR6wf yaP12c" role="checkbox" aria-label="Вибрати" aria-checked="false" tabindex="0" data-control-type="tlatogglecheck+84">
-                                    <div class="acXkhd pNR6wf q4uqaf roR7Jb"></div>
-                                </div>
-                                <div class="kYbzg pNR6wf fTx1Ge" role="checkbox" aria-label="Зірочка" aria-checked="false" tabindex="0" data-control-type="tlastar+80">
-                                    <div class="acXkhd pNR6wf vsNLJe QkTueb"></div>
-                                </div>
-                                <div class=" SGqfCc HhG5wd" id="ti_s_18f27f525e80736c" aria-hidden="true"><span>[Ticket
-                                        ID: 555133] Видалили хостинг</span></div>
-                            </div>
-                            <div class="fGaFVc" aria-hidden="true">
-                                <div class="Se5Bse"></div>
-                                <div class="SGqfCc bEeVec" id="ti_b_18f27f525e80736c">NetX Активували Лог з абузи Apr 28
-                                    06:18:44 mail sshd[3819218]: Invalid user test11 from 31.42.190.158 port 39422 Apr
-                                    28 06:18:44 mail sshd[3819218]: pam_unix(sshd:auth): authentication failure;</div>
-                            </div>
-                        </div>
-                        <div id="th_18e21529b314021f" class="ksQvef rIdQ2b" role="listitem">
-                            <div class="Akvd4" tabindex="0" role="button" aria-labelledby="ti_f_18e21529b314021f tl_as ti_s_18e21529b314021f" aria-describedby="ti_d_18e21529b314021f tl_as ti_b_18e21529b314021f"></div>
-                            <div class="BVxbRe" aria-hidden="true"></div>
-                            <div class="immPke">
-                                <div class="C9xYIc"><span id="ti_d_18e21529b314021f" aria-hidden="true">9 бер.
-                                        2024 р.</span></div>
-                                <div class="SGqfCc FjjIEb" aria-hidden="true"><span id="ti_f_18e21529b314021f">avawatwsgg@gmail.com</span></div>
-                            </div>
-                            <div class="MpFCYc">
-                                <div class="kYbzg pNR6wf yaP12c" role="checkbox" aria-label="Вибрати" aria-checked="false" tabindex="0" data-control-type="tlatogglecheck+84">
-                                    <div class="acXkhd pNR6wf q4uqaf roR7Jb"></div>
-                                </div>
-                                <div class="kYbzg pNR6wf fTx1Ge" role="checkbox" aria-label="Зірочка" aria-checked="false" tabindex="0" data-control-type="tlastar+80">
-                                    <div class="acXkhd pNR6wf vsNLJe QkTueb"></div>
-                                </div>
-                                <div class=" SGqfCc HhG5wd" id="ti_s_18e21529b314021f" aria-hidden="true">
-                                    <span>Professional Web Designing for - Bohdan Datsiuk</span></div>
-                            </div>
-                            <div class="fGaFVc" aria-hidden="true">
-                                <div class="Se5Bse"></div>
-                                <div class="SGqfCc bEeVec" id="ti_b_18e21529b314021f">Dear Bohdan Datsiuk, Let me know,
-                                    if you are interested in our services (Logo designing starts at $50 USD, WordPress
-                                    Website Designing starts at $100 USD, e-commerce website starts at $350 USD and SEO
-                                </div>
-                            </div>
-                        </div>
-                        <div id="th_18e18e493ab925f5" class="ksQvef rIdQ2b" role="listitem">
-                            <div class="Akvd4" tabindex="0" role="button" aria-labelledby="ti_f_18e18e493ab925f5 tl_as ti_s_18e18e493ab925f5" aria-describedby="ti_d_18e18e493ab925f5 tl_as ti_b_18e18e493ab925f5"></div>
-                            <div class="BVxbRe" aria-hidden="true"></div>
-                            <div class="immPke">
-                                <div class="C9xYIc"><span id="ti_d_18e18e493ab925f5" aria-hidden="true">7 бер.
-                                        2024 р.</span></div>
-                                <div class="SGqfCc FjjIEb" aria-hidden="true"><span id="ti_f_18e18e493ab925f5">NetX
-                                        Общий </span><span class="D5Emhe">3</span></div>
-                            </div>
-                            <div class="MpFCYc">
-                                <div class="kYbzg pNR6wf yaP12c" role="checkbox" aria-label="Вибрати" aria-checked="false" tabindex="0" data-control-type="tlatogglecheck+84">
-                                    <div class="acXkhd pNR6wf q4uqaf roR7Jb"></div>
-                                </div>
-                                <div class="kYbzg pNR6wf fTx1Ge" role="checkbox" aria-label="Зірочка" aria-checked="false" tabindex="0" data-control-type="tlastar+80">
-                                    <div class="acXkhd pNR6wf vsNLJe QkTueb"></div>
-                                </div>
-                                <div class=" SGqfCc HhG5wd" id="ti_s_18e18e493ab925f5" aria-hidden="true"><span>[Ticket
-                                        ID: 525987] домен</span></div>
-                            </div>
-                            <div class="fGaFVc" aria-hidden="true">
-                                <div class="Se5Bse"></div>
-                                <div class="SGqfCc bEeVec" id="ti_b_18e18e493ab925f5">NetX Домен зареєстровано Ticket
-                                    ID: #525987 Subject: домен Status: Answered Ticket URL:
-                                    https://netx.com.ua/viewticket.php?tid=525987&amp;c=M8yU9CH0 </div>
-                            </div>
-                        </div>
-                        <div id="th_18e06139dd869288" class="ksQvef rIdQ2b" role="listitem">
-                            <div class="Akvd4" tabindex="0" role="button" aria-labelledby="ti_f_18e06139dd869288 tl_as ti_s_18e06139dd869288" aria-describedby="ti_d_18e06139dd869288 tl_as ti_b_18e06139dd869288"></div>
-                            <div class="BVxbRe" aria-hidden="true"></div>
-                            <div class="immPke">
-                                <div class="C9xYIc"><span id="ti_d_18e06139dd869288" aria-hidden="true">3 бер.
-                                        2024 р.</span></div>
-                                <div class="SGqfCc FjjIEb" aria-hidden="true"><span id="ti_f_18e06139dd869288">NetX
-                                    </span><span class="D5Emhe">2</span></div>
-                            </div>
-                            <div class="MpFCYc">
-                                <div class="kYbzg pNR6wf yaP12c" role="checkbox" aria-label="Вибрати" aria-checked="false" tabindex="0" data-control-type="tlatogglecheck+84">
-                                    <div class="acXkhd pNR6wf q4uqaf roR7Jb"></div>
-                                </div>
-                                <div class="kYbzg pNR6wf fTx1Ge" role="checkbox" aria-label="Зірочка" aria-checked="false" tabindex="0" data-control-type="tlastar+80">
-                                    <div class="acXkhd pNR6wf vsNLJe QkTueb"></div>
-                                </div>
-                                <div class=" SGqfCc HhG5wd" id="ti_s_18e06139dd869288" aria-hidden="true"><span>Reset
-                                        your password</span></div>
-                            </div>
-                            <div class="fGaFVc" aria-hidden="true">
-                                <div class="Se5Bse"></div>
-                                <div class="SGqfCc bEeVec" id="ti_b_18e06139dd869288">NetX To reset your password,
-                                    please click on the link below. Reset your password If you're having trouble, try
-                                    copying and pasting the following URL into your browser:
-                                    https://netx.com.ua/password/</div>
-                            </div>
-                        </div>
-                        <div id="th_18d6bfbe08df0228" class="ksQvef rIdQ2b" role="listitem">
-                            <div class="Akvd4" tabindex="0" role="button" aria-labelledby="ti_f_18d6bfbe08df0228 tl_as ti_s_18d6bfbe08df0228" aria-describedby="ti_d_18d6bfbe08df0228 tl_as ti_b_18d6bfbe08df0228"></div>
-                            <div class="BVxbRe" aria-hidden="true"></div>
-                            <div class="immPke">
-                                <div class="C9xYIc"><span id="ti_d_18d6bfbe08df0228" aria-hidden="true">5 лют.
-                                        2024 р.</span></div>
-                                <div class="SGqfCc FjjIEb" aria-hidden="true"><span id="ti_f_18d6bfbe08df0228">я, KivyMD
-                                    </span><span class="D5Emhe">3</span></div>
-                            </div>
-                            <div class="MpFCYc">
-                                <div class="kYbzg pNR6wf yaP12c" role="checkbox" aria-label="Вибрати" aria-checked="false" tabindex="0" data-control-type="tlatogglecheck+84">
-                                    <div class="acXkhd pNR6wf q4uqaf roR7Jb"></div>
-                                </div>
-                                <div class="kYbzg pNR6wf fTx1Ge" role="checkbox" aria-label="Зірочка" aria-checked="false" tabindex="0" data-control-type="tlastar+80">
-                                    <div class="acXkhd pNR6wf vsNLJe QkTueb"></div>
-                                </div>
-                                <div class=" SGqfCc HhG5wd" id="ti_s_18d6bfbe08df0228" aria-hidden="true"><span>where is
-                                        kivymd2.0.0? and 1.2.0</span></div>
-                            </div>
-                            <div class="fGaFVc" aria-hidden="true">
-                                <div class="Se5Bse"></div>
-                                <div class="SGqfCc bEeVec" id="ti_b_18d6bfbe08df0228">so I already understood, I had
-                                    some problems with the bulldozer, the wrong versions were installed, but I decided)
-                                    and one more question why the scroll does not work with a quick swipe bug? from
-                                    kivymd</div>
-                            </div>
-                        </div>
-                        <div id="th_18d1f4b25e9161a4" class="ksQvef rIdQ2b" role="listitem">
-                            <div class="Akvd4" tabindex="0" role="button" aria-labelledby="ti_f_18d1f4b25e9161a4 tl_as ti_s_18d1f4b25e9161a4" aria-describedby="ti_d_18d1f4b25e9161a4 tl_as ti_b_18d1f4b25e9161a4"></div>
-                            <div class="BVxbRe" aria-hidden="true"></div>
-                            <div class="immPke">
-                                <div class="C9xYIc"><span id="ti_d_18d1f4b25e9161a4" aria-hidden="true">19 січ.
-                                        2024 р.</span></div>
-                                <div class="SGqfCc FjjIEb" aria-hidden="true"><span id="ti_f_18d1f4b25e9161a4">Blockchain.com </span><span class="D5Emhe">2</span>
-                                </div>
-                            </div>
-                            <div class="MpFCYc">
-                                <div class="kYbzg pNR6wf yaP12c" role="checkbox" aria-label="Вибрати" aria-checked="false" tabindex="0" data-control-type="tlatogglecheck+84">
-                                    <div class="acXkhd pNR6wf q4uqaf roR7Jb"></div>
-                                </div>
-                                <div class="kYbzg pNR6wf fTx1Ge" role="checkbox" aria-label="Зірочка" aria-checked="false" tabindex="0" data-control-type="tlastar+80">
-                                    <div class="acXkhd pNR6wf vsNLJe QkTueb"></div>
-                                </div>
-                                <div class=" SGqfCc HhG5wd" id="ti_s_18d1f4b25e9161a4" aria-hidden="true"><span>Recover
-                                        your account</span></div>
-                            </div>
-                            <div class="fGaFVc" aria-hidden="true">
-                                <div class="Se5Bse"></div>
-                                <div class="SGqfCc bEeVec" id="ti_b_18d1f4b25e9161a4">Blockchain​.com Recover your
-                                    account Please click on the button below to start your account recovery. To keep
-                                    your verification status, you'll need to perform Two-Factor Authentication (2FA)
-                                    during</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="AL59yc" style="">
-                        <div class="BsSBZb"></div>
-                    </div>
-                    <div class="LvROwd"></div>
-                </div>
-            </div>
-            <div class="YVEu5"></div>
-            <div style="display: none;" id="tl_as">
-            </div>
-            <div style="display: none;" id="tl_ul">Непрочитані</div>
-        </div>
-        <div class="zY6rPd" style="position: absolute; transition: -webkit-transform 200ms ease-out;">
-            <div class="dbW7of">
-                <div class="coFjif">
-                    <div class="uX9oRe  ">
-                        <div class="i0xO9 fA8JZc">
-                            <div class="kNIC5d" style="display: none;">
-                                <div class="T1sd8e">
-                                    <div class="fvys2c"></div>
-                                    <div class="Man2bb">Оновлено.</div>
-                                    <div class="Dl6Dte"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="hNlMfb">
-                        <div class="DipW1c" style="display: none;">
-                            <div class="u2Isuc i7dCsc"></div>
-                            <div class="Uo24kd"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="yQgLUb">
-                    <div class="K7yJvd w9Qxyb" style="display: none;"></div>
-                </div>
-            </div>
-        </div>
-        <div id="mn_" class=" q0CeU  " style="transition: -webkit-transform ease-in-out; transform: translate3d(0px, 0px, 0px);">
-            <div style="display:none" class="HqpmNc  "></div>
-            <div class="BMRW0e" style="bottom: 0px;">
-                <div class="uQdvnb" style="left: 0px; top: 0px; transform: translate3d(0px, -50px, 0px); margin-bottom: -50px; transition: -webkit-transform 500ms ease-in-out;">
-                    <div style="transform: translate3d(0px, 0px, 0px);" class="R7cnbe VMfMxd">
-                        <div class="ydyVhc">
-                            <div class="CkPR7e">
-                                <div class="sAslAb nRADXb T4YWue"></div>
-                                <div class="BoB4Pc iLxkFb" style="display: none;"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="xxC1xc" role="menu">
-                        <div class="YO7dFd" role="heading">Вхідні</div>
-                        <div class="CqrfPb DxbtB SGqfCc" tabindex="0" role="menuitem" data-onclick="mnpi+158" data-onclick-arg="^smartlabel_personal">
-                            <div class="jTGGuc"></div>
-                            <div class="Gpssoc">
-                                <div class="inL4nf"></div>
-                            </div><a href="file:///D:/olx/%D0%91%D0%B8%D0%BD%D0%B0%D0%BD%D1%81%20%D0%A1%D0%90%D0%99%D0%A2/main_page.html" style="color: black">Основні</a>
-                        </div>
-                        <div class="CqrfPb DxbtB SGqfCc" tabindex="0" role="menuitem" data-onclick="mnpi+158" data-onclick-arg="^smartlabel_social">
-                            <div class="jTGGuc"></div>
-                            <div class="Gpssoc">
-                                <div class="fLpawd"></div>
-                            </div>Соціальні
-                        </div>
-                        <div class="CqrfPb DxbtB SGqfCc" tabindex="0" role="menuitem" data-onclick="mnpi+158" data-onclick-arg="^smartlabel_promo">
-                            <div class="EAH59d undefined" style="background:#16A765;color:">4&nbsp;нов.</div>
-                            <div class="jTGGuc"></div>
-                            <div class="Gpssoc">
-                                <div class="wwP9ke"></div>
-                            </div>Реклама
-                        </div>
-                        <div class="CqrfPb DxbtB SGqfCc" tabindex="0" role="menuitem" data-onclick="mnpi+158" data-onclick-arg="^smartlabel_notification">
-                            <div class="EAH59d undefined" style="background:#E9B330;color:">8&nbsp;нов.</div>
-                            <div class="jTGGuc"></div>
-                            <div class="Gpssoc">
-                                <div class="lVXPlf"></div>
-                            </div>Оновлення
-                        </div>
-                        <div class="YO7dFd" role="heading">Мітки</div>
-                        <div class="CqrfPb UgTiZc DxbtB" tabindex="0" role="menuitem" data-onclick="mnalbl+156" data-onclick-arg="^t">
-                            <div class="jTGGuc"></div>
-                            <div class="SNTXG">Із зірочкою</div>
-                        </div>
-                        <div class="CqrfPb UgTiZc DxbtB" tabindex="0" role="menuitem" data-onclick="mnalbl+156" data-onclick-arg="^f">
-                            <div class="jTGGuc"></div><span>Надіслані</span>
-                        </div>
-                        <div class="CqrfPb DxbtB" tabindex="0" role="menuitem" data-onclick="mnalbl+156" data-onclick-arg="^r">
-                            <div class="EAH59d undefined">12</div>
-                            <div class="jTGGuc"></div><span>Чернетки</span>
-                        </div>
-                        <div class="YO7dFd" role="heading">Додатково</div>
-                        <div class="CqrfPb UgTiZc DxbtB" tabindex="0" role="menuitem" data-onclick="mnalbl+156" data-onclick-arg="^io_im">
-                            <div class="jTGGuc"></div>Важливі
-                        </div>
-                        <div class="CqrfPb UgTiZc DxbtB" tabindex="0" role="menuitem" data-onclick="mnalbl+156" data-onclick-arg="^all">
-                            <div class="jTGGuc"></div><span>Уся пошта</span>
-                        </div>
-                        <div class="CqrfPb UgTiZc DxbtB" tabindex="0" role="menuitem" data-onclick="mnalbl+156" data-onclick-arg="^k">
-                            <div class="jTGGuc"></div><span>Кошик</span>
-                        </div>
-                        <div class="CqrfPb UgTiZc DxbtB" tabindex="0" role="menuitem" data-onclick="mnalbl+156" data-onclick-arg="^s">
-                            <div class="jTGGuc"></div><span>Спам</span>
-                        </div>
-                    </div>
-                    <div class="LvROwd">
-                        <div>
-                            <div class="th09cb gVhZsf HPsZFc PRCEm p1CFje sFMZ7b" id="mutbb" style="width: 100%;">
-                                <div class="iYLoc"></div>
-                                <div class="aLzX3d" style="left: 0px; right: 0px;">
-                                    <div class=" WqEu7b ">
-                                        <div class="SGqfCc">nazarnikolaets1@gmail.com</div>
-                                    </div>
-                                </div>
-                                <div class="LuRb0e"></div>
-                                <div class="AH2Azc"></div>
-                                <div class="YvrVlb UU8uMc rN4ZCe"> </div>
-                            </div>
-                        </div>
-                        <div class="BzpU1e">
-                            <div class="CEAzkc">
-                                <div class="CEAzkc sy7Xnf"><span dir="ltr">©Google, 2025 </span></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="jvjkdf" style="transform: translate3d(0px, 0px, 0px); visibility: hidden;">Вхідні</div>
-            </div>
-            <div class="YVEu5"></div>
-        </div>
-        <div id="cv_" class=" q0CeU  " style="transition: -webkit-transform ease-in-out; transform: translate3d(0px, 0px, 0px); display: none;">
-            <div style="display:none" class="HqpmNc"></div>
-            <div class="XokXDf" style="width: 300%; transform: translate3d(-33.3333%, 0px, 0px);">
-                <div id="cvss_190a1bd45972ad39" class="rKFfVc" style="width: 33.3333%;" aria-hidden="true">
-                    <div class="WSTcAc"></div>
-                    <div class="q09fgd">
-                        <div class="H8m9v Z5IDtf">
-                            <div class="Sn15Z">
-                                <div class="hzi8He vsNLJe"></div>
-                            </div>
-                            <div class="xWfkye"><span class="jzNoVc ZdWP9b" role="heading"><span>[Ticket ID: 304004]
-                                        Проблема з сервером</span></span><span class="eVKxec">
-                                    <div class="r7S6o"></div>
-                                </span></div>
-                        </div>
-                        <div class="gmSzme">
-                            <div class="aYUCtd ArwC7c">
-                                <div class="lNFyP">
-                                    <div class="th5Fjd gtMPIf Rqt9Te " style="background-color: #846600;" role="presentation" aria-hidden="true">N</div><img class="pSeF4d C0WCf gtMPIf" id=":8" alt="" data-onload="avatar-load+240" data-onload-arg="1752691625495" data-onerror="avatar-load+240" data-onerror-arg="1752691625495">
-                                </div>
-                                <div class="C9xYIc"><span id="ti_d_190a1bd45972ad39" aria-hidden="true">11 лип.
-                                        2024 р.</span></div>
-                                <div class="HXJujf vy12Td SGqfCc">NetX Общий (4)</div>
-                                <div class="oex1Df Ut8PDe">NetX Готово. Ticket ID: #304004 Subject: Проблема з сервером
-                                    Status: Answered Ticket URL:
-                                    https://netx.com.ua/viewticket.php?tid=304004&amp;c=KYzYNgK2 ---</div>
-                            </div>
-                        </div>
-                        <div class="ls1Jtf" style="visibility: hidden;">
-                            <div class="BsSBZb"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="RF4LNc" style="width: 33.3333%;">
-                    <div class="BMRW0e" style="bottom: 0px;">
-                        <div class="uQdvnb" style="left: 0px; top: 0px; transform: translate3d(0px, -50px, 0px); margin-bottom: -50px; transition: -webkit-transform ease-in-out;">
-                            <div style="transform: translate3d(0px, 0px, 0px);" class="ku7CNc VMfMxd">
-                                <div class="ydyVhc">
-                                    <div class="CkPR7e">
-                                        <div class="sAslAb nRADXb T4YWue"></div>
-                                        <div class="BoB4Pc iLxkFb" style="display: none;"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="OM62re">
-                                <div class="Atp2Qd">
-                                    <div class="H8m9v">
-                                        <div class="Sn15Z">
-                                            <div id="cvcstar" class="kYbzg pNR6wf AXeQ0c" style="display:none" role="button" aria-label="Зняти зірочку" tabindex="0" data-control-type="cvcvstar+54">
-                                                <div class="acXkhd pNR6wf gp5Moe hzi8He AXeQ0c"></div>
-                                            </div>
-                                            <div id="cvcstaroff" class="kYbzg pNR6wf AXeQ0c" role="button" aria-label="Зірочка" tabindex="0" data-control-type="cvcvstar+54">
-                                                <div class="acXkhd pNR6wf vsNLJe hzi8He AXeQ0c"></div>
-                                            </div>
-                                        </div>
-                                        <div class="xWfkye"><span class="jzNoVc" role="heading"><span>Presentation</span></span><span class="eVKxec">
-                                                <div class="r7S6o"></div>
-                                            </span></div>
-                                    </div>
-                                    <div class="gmSzme" data-onclick="cvmsgcontainercl+23">
-                                        <div id="cvcmsg_1905e0826223d4fe" class="ArwC7c" style="margin-bottom: 11px;">
-                                            <div class="LnPMz" id="cvcfullmsg_1905e0826223d4fe">
-                                                <div class="kYbzg pNR6wf NDVjH rFNqfb" data-onclick-arg="1905e0826223d4fe" role=" " tabindex="0" data-control-type="cvasnip+51">
-                                                    <div id="cvcreply_1905e0826223d4fe" class="kYbzg pNR6wf laQMJf AXeQ0c YaxK2 iunP9b LILoEb" data-onclick-arg="1905e0826223d4fe" role="button" aria-label="Відповісти" tabindex="0" data-control-type="cvram+63">
-                                                        <div class="acXkhd pNR6wf grS3lc"></div>
-                                                    </div>
-                                                    <div class="P54DCe"></div>
-                                                    <div class="z3Gszc">
-                                                        <div class="lNFyP">
-                                                            <div class="th5Fjd gtMPIf Rqt9Te " style="background-color: #00681c;" role="presentation" aria-hidden="true">C</div><img class="pSeF4d C0WCf gtMPIf" id=":7" alt="" data-onload="avatar-load+240" data-onload-arg="1752691625443" data-onerror="avatar-load+240" data-onerror-arg="1752691625443">
-                                                        </div>
-                                                        <div class="HXJujf SGqfCc"><span>Chetan Kumar</span></div>
-                                                        <div class="kXQfsf">
-                                                            <div id="cvcstsnip_1905e0826223d4fe" class="ijOHGe I7Ix3e kGDVj">
-                                                                <div class="oex1Df">Hi, Bohdan Datsiuk Greetings! We
-                                                                    provide range of services to help you build a strong
-                                                                    online presence: Website Design Logo Design SEO
-                                                                    (Search Engin...</div>
-                                                                <div class="EwJ31c"></div>
-                                                            </div>
-                                                            <div id="cvcstrecipexp_1905e0826223d4fe" class="I7Ix3e kGDVj">
-                                                                <div class="SGqfCc">
-                                                                    <span>kabirkhadija2003@gmail.com</span></div>
-                                                                <div>
-                                                                    <div id="cvcshowdet_1905e0826223d4fe" class="kYbzg pNR6wf MrVNyc Cgy2K" data-onclick-arg="1905e0826223d4fe" role="button" tabindex="0" data-control-type="cvatoggledet+24">
-                                                                        <div class="acXkhd pNR6wf bEopKc">Сховати деталі
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div id="cvcstrecip_1905e0826223d4fe" class="HbPORe SGqfCc I7Ix3e">Кому: <span>я</span><br>28
-                                                                черв. 2024 р.<div id="cvcshowdet_1905e0826223d4fe" class="kYbzg pNR6wf wwDAHc Cgy2K" data-onclick-arg="1905e0826223d4fe" role="button" tabindex="0" data-control-type="cvatoggledet+24">
-                                                                    <div class="acXkhd pNR6wf bEopKc">Відомості</div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="b2iQyd" style="display: none; height: 0; opacity: 0;" id="cvcmsgdet_1905e0826223d4fe">
-                                                    <div id="cvcmsgdett_1905e0826223d4fe" class="BZ869b"></div>
-                                                </div>
-                                                <div class="kYbzg pNR6wf WOsSWe RZ8gl" style="display:none" data-onclick-arg="1905e0826223d4fe" role="button" tabindex="0" data-control-type="cvsom+46">
-                                                    <div class="acXkhd pNR6wf CIxhBc">Це повідомлення адаптовано до
-                                                        розміру вашого екрана. Торкніться тут, щоб переглянути оригінал.
-                                                    </div>
-                                                </div>
-                                                <div class="kYbzg pNR6wf vjLg6e RZ8gl" style="display:none" data-onclick-arg="1905e0826223d4fe" role="button" tabindex="0" data-control-type="cvsmm+47">
-                                                    <div class="acXkhd pNR6wf CIxhBc">Це оригінал повідомлення.
-                                                        Торкніться тут, щоб переглянути версію для мобільних пристроїв.
-                                                    </div>
-                                                </div>
-                                                <div id="cvcmsgbod_1905e0826223d4fe" class="qgRHze">
-                                                    <div class="lR4FQe">
-                                                        <div class="Vd2cB">
-                                                            <div class="VhLpLd">
-                                                                <div class="dHn2d">
-                                                                    <div class="IoGNdb Zc0jMc  dlaWib" dir="ltr">Hi,
-                                                                        Bohdan Datsiuk<br>
-                                                                        Greetings!<br>
-                                                                        <br>
-                                                                        We provide range of services to help you build a
-                                                                        strong online presence:<br>
-                                                                        <br>
-                                                                        Website Design<br>
-                                                                        Logo Design<br>
-                                                                        SEO (Search Engine Optimization)<br>
-                                                                        Social Media Marketing<br>
-                                                                        Android &amp; iOS App Development<br>
-                                                                        <br>
-                                                                        Reach out to us to learn how we can help you
-                                                                        achieve your online goals.<br>
-                                                                        <br>
-                                                                        Best regards, <br>
-                                                                        Chetan Kumar<br>
-                                                                        <br>
-                                                                        <br>
-                                                                        <div style="clear: both"></div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div style="clear:both"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="cFYWu"></div>
-                                    <div id="cvcfb" class="MViv1c">
-                                        <div class="gtnVW">
-                                            <div class="cfX2h">
-                                                <div class="kYbzg pNR6wf laQMJf AXeQ0c YaxK2 bT910e rFNqfb LILoEb" role="button" tabindex="0" data-control-type="cvarplf+29">
-                                                    <div class="acXkhd pNR6wf R1LJ5e PXwBMb"></div>
-                                                    <div class="acXkhd pNR6wf Q4Ph1e xBuRAc">Відповісти</div>
-                                                </div>
-                                            </div>
-                                            <div class="OjpGZc"></div>
-                                            <div id="cvcfra" class="cfX2h" style="display:none">
-                                                <div class="kYbzg pNR6wf laQMJf AXeQ0c YaxK2 bT910e rFNqfb LILoEb" role="button" tabindex="0" data-control-type="cvarplallf+30">
-                                                    <div class="acXkhd pNR6wf zJOeo PXwBMb"></div>
-                                                    <div class="acXkhd pNR6wf Q4Ph1e xBuRAc">Відповісти всім</div>
-                                                </div>
-                                            </div>
-                                            <div id="cvcfrab" class="OjpGZc" style="display:none"></div>
-                                            <div class="cfX2h">
-                                                <div class="kYbzg pNR6wf laQMJf AXeQ0c YaxK2 bT910e rFNqfb LILoEb" role="button" tabindex="0" data-control-type="cvafwdf+31">
-                                                    <div class="acXkhd pNR6wf j0yM5e PXwBMb"></div>
-                                                    <div class="acXkhd pNR6wf Q4Ph1e xBuRAc">Переслати</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="grS3lc zPlACb" style="display: none;"></div>
-                                <div class="R1LJ5e zPlACb" style="display: none;"></div>
-                                <div class="zJOeo zPlACb" style="display: none;"></div>
-                                <div class="j0yM5e zPlACb" style="display: none;"></div>
-                            </div>
-                            <div class="LvROwd">
-                                <div class="BzpU1e">
-                                    <div class="CEAzkc">
-                                        <div class="CEAzkc sy7Xnf"><span dir="ltr">©Google, 2025 </span></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div id="cvss_1903b4a0fade4185" class="rKFfVc" style="width: 33.3333%;" aria-hidden="true">
-                    <div class="WSTcAc"></div>
-                    <div class="q09fgd">
-                        <div class="H8m9v">
-                            <div class="Sn15Z">
-                                <div class="hzi8He vsNLJe"></div>
-                            </div>
-                            <div class="xWfkye"><span class="jzNoVc" role="heading"><span>Сервер міні</span></span><span class="eVKxec">
-                                    <div class="r7S6o"></div>
-                                </span></div>
-                        </div>
-                        <div class="gmSzme">
-                            <div class="aYUCtd ArwC7c">
-                                <div class="lNFyP">
-                                    <div class="th5Fjd C0WCf gtMPIf" style="background-color: #846600;" role="presentation" aria-hidden="true">L</div><img class="pSeF4d gtMPIf " id=":9" src="./index_files/unnamed.jpg" alt="" data-onload="avatar-load+240" data-onload-arg="1752691625495" data-onerror="avatar-load+240" data-onerror-arg="1752691625495">
-                                </div>
-                                <div class="C9xYIc"><span id="ti_d_1903b4a0fade4185" aria-hidden="true">21 черв.
-                                        2024 р.</span></div>
-                                <div class="HXJujf vy12Td SGqfCc">я, Lazy (6), <font color="#DD4B39">Чернетка</font>
-                                </div>
-                                <div class="oex1Df Ut8PDe">це дані для ssh зєднання? пт, 21 черв. 2024 р. о 18:28 Lazy
-                                    IT &lt;askanton71@gmail.com&gt; пише: Installation has been started. Please allow up
-                                    to 10 minutes for it to complete IP: 107.172.153.200</div>
-                            </div>
-                        </div>
-                        <div class="ls1Jtf" style="visibility: hidden;">
-                            <div class="BsSBZb"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="YVEu5"></div>
-        </div>
-    </div>
-    <div id="overlayviews"></div>
-    <script nonce="">
-        // workaround for flash bug
-        'name="at" value=0&name=at value=0&at=0&amp;at=0&';
-    </script>
 
 
 
 
+          .gssb_c {
+            border: 0;
+            position: absolute;
+            z-index: 989
+        }
 
+        .gssb_e {
+            border: 1px solid #ccc;
+            border-top-color: #d9d9d9;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            cursor: default
+        }
 
-</body></html>
+        .gssb_f {
+            visibility: hidden;
+            white-space: nowrap
+        }
+
+        .gssb_k {
+            border: 0;
+            display: block;
+            position: absolute;
+            top: 0;
+            z-index: 988
+        }
+
+        .gsdd_a {
+            border: none !important
+        }
+
+        .gsdd_b {
+            border-radius: 0 0 24px 24px;
+            overflow: hidden;
+        }
+
+        .gsib_a {
+            width: 100%;
+            vertical-align: top;
+            padding: 4px 5px 0
+        }
+
+        .gssb_a {
+            padding: 0 7px
+        }
+
+        .gssb_a,
+        .gssb_a td {
+            white-space: nowrap;
+            overflow: hidden;
+            line-height: 22px
+        }
+
+        #gssb_b {
+            font-size: 11px;
+            color: #36c;
+            text-decoration: none
+        }
+
+        #gssb_b:hover {
+            font-size: 11px;
+            color: #36c;
+            text-decoration: underline
+        }
+
+        .gssb_g {
+            text-align: center;
+            padding: 8px 0 7px;
+            position: relative
+        }
+
+        .gssb_h {
+            font-size: 15px;
+            height: 28px;
+            margin: 0.2em;
+            -webkit-appearance: button
+        }
+
+        .gssb_i {
+            background: #d5e2ff
+        }
+
+        .gss_ifl {
+            visibility: hidden;
+            padding-left: 5px
+        }
+
+        .gssb_i .gss_ifl {
+            visibility: visible
+        }
+
+        a.gssb_j {
+            font-size: 13px;
+            color: #36c;
+            text-decoration: none;
+            line-height: 100%
+        }
+
+        a.gssb_j:hover {
+            text-decoration: underline
+        }
+
+        .gssb_l {
+            height: 1px;
+            background-color: #e5e5e5
+        }
+
+        .gssb_m {
+            color: #000;
+            background: #fff
+        }
+
+        #answer-thumbs-up-id.thumb_unchecked,
+        #answer-thumbs-down-id.thumb_unchecked {
+            fill: #222222;
+            opacity: 0.1
+        }
+
+        #answer-thumbs-up-id.thumb_unchecked:hover,
+        #answer-thumbs-down-id.thumb_unchecked:hover {
+            fill: #222222;
+            opacity: 0.4
+        }
+
+        #answer-thumbs-up-id.thumb_checked,
+        #answer-thumbs-down-id.thumb_checked {
+            fill: #222222;
+            opacity: 1.0
+        }
+
+        #answer-thumbs-up-id.thumb_checked:hover,
+        #answer-thumbs-down-id.thumb_checked:hover {
+            fill: #222222;
+            opacity: 0.7
+        }
+
+        .gsfe_a {
+            border: 1px solid #b9b9b9;
+            border-top-color: #a0a0a0;
+            box-shadow: inset 0px 1px 2px rgba(0, 0, 0, 0.1);
+            -moz-box-shadow: inset 0px 1px 2px rgba(0, 0, 0, 0.1);
+            -webkit-box-shadow: inset 0px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .gsfe_b {
+            border: 1px solid #4d90fe;
+            outline: none;
+            box-shadow: inset 0px 1px 2px rgba(0, 0, 0, 0.3);
+            -moz-box-shadow: inset 0px 1px 2px rgba(0, 0, 0, 0.3);
+            -webkit-box-shadow: inset 0px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .gsaq_b {
+            display: none;
+            cursor: pointer;
+            width: 38px;
+            height: 14px;
+            opacity: .4;
+            background-image: url(//ssl.gstatic.com/ui/v1/icons/common/x_8px.png);
+            background-position: center;
+            background-repeat: no-repeat
+        }
+
+        .gssb_i .gsaq_b {
+            display: block
+        }
+
+        #gbqfqwb {
+            padding: 0
+        }
+
+        .gsib_a {
+            padding: 4px 8px 0
+        }
+
+        #gbqfaa,
+        #gbqfab {
+            z-index: 7
+        }
+
+        .gstt {
+            width: 100%
+        }
+
+        .gssb_a {
+            padding: 0
+        }
+
+        .gssb_c {
+            table-layout: fixed
+        }
+
+        .gssb_e {
+            border-width: 0;
+            box-shadow: 0 0 0;
+            -webkit-box-shadow: 0 0 0;
+        }
+
+        .gssb_i {
+            background: #eee
+        }
+
+        .gssb_l {
+            margin: 7px 0
+        }
+
+        .gssb_m {
+            table-layout: fixed
+        }
+
+        .gscs_a {
+            border: 0;
+            left: 0;
+            position: absolute;
+            top: 0;
+            width: 100%
+        }
+
+        .gsbv_a {
+            position: fixed;
+            z-index: 997
+        }
+
+        .gsbv_b {
+            border-right: 1px solid #ccc;
+            overflow: hidden
+        }
+
+        .gsbv_c {
+            height: 26px;
+            position: relative;
+            width: 13px
+        }
+
+        .gsbv_d {
+            border: 13px solid transparent;
+            border-right-color: #ccc;
+            width: 0;
+            position: absolute;
+            margin-top: 8px;
+            height: 0
+        }
+
+        .gsbv_e {
+            border: 13px outset transparent;
+            border-right: 13px solid #fff;
+            height: 0;
+            width: 0;
+            position: absolute;
+            margin-top: 8px;
+            left: 1px
+        }
+
+        .gsbv_g {
+            text-decoration: none !important;
+            font-size: 11px;
+            font-weight: bold;
+            text-align: center;
+            white-space: nowrap;
+            margin-right: 16px;
+            height: 27px;
+            line-height: 27px;
+            min-width: 54px;
+            outline: 0px;
+            padding: 8px;
+            -webkit-border-radius: 2px;
+            -moz-border-radius: 2px;
+            border-radius: 2px
+        }
+
+        .gsbv_h {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            -moz-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            position: absolute;
+            left: 25px
+        }
+
+        .gsbv_i {
+            margin: 16px
+        }
+
+        .gsbv_j {
+            color: #666;
+            line-height: 18px;
+            margin: 16px;
+            white-space: normal;
+            width: 260px;
+            font-size: 13px;
+            line-height: 18px
+        }
+
+        a.gsbv_k,
+        a.gsbv_k:visited {
+            color: #fff;
+            background-color: #4d90fe;
+            border: 1px solid #3079ed
+        }
+
+        .gsbv_k {
+            background: linear-gradient(top, #4d90fe, #4787ed);
+            background: -webkit-linear-gradient(top, #4d90fe, #4787ed);
+        }
+
+        .gsbv_k:hover {
+            background-color: #357ae8;
+            border: 1px solid #2f5bb7
+        }
+
+        .gsbv_k:hover {
+            background: linear-gradient(top, #4d90fe, #357ae8);
+            background: -webkit-linear-gradient(top, #4d90fe, #357ae8);
+        }
+
+        a.gsbv_l,
+        a.gsbv_l:visited {
+            color: #444;
+            background-color: #f5f5f5;
+            border: 1px solid #dcdcdc
+        }
+
+        .gsbv_l {
+            background: linear-gradient(top, #f5f5f5, #f1f1f1);
+            background: -webkit-linear-gradient(top, #f5f5f5, #f1f1f1);
+        }
+
+        .gsbv_l:hover {
+            color: #333;
+            background-color: #f8f8f8;
+            border: 1px solid #c6c6c6
+        }
+
+        .gsbv_l:hover {
+            background: linear-gradient(top, #f8f8f8, #f1f1f1);
+            background: -webkit-linear-gradient(top, #f8f8f8, #f1f1f1);
+        }
+
+        .gsom_a {
+            background-color: #f9edbe;
+            font-size: 13px;
+            line-height: 32px;
+            text-align: center;
+            font-weight: bold;
+            border-bottom: 1px solid #e5e5e5;
+            margin: 0 -7px
+        }
+        
