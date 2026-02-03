@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Geo Switching</title>
+    <title>Геоперемикання</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style.css">
 </head>
@@ -12,35 +12,35 @@
         <div class="panel">
             <div class="topbar">
                 <div class="status">
-                    <div class="badge">Time: <span id="time">90</span>s</div>
-                    <div class="badge">Score: <span id="score">0</span></div>
+                    <div class="badge">Час: <span id="time">90</span>с</div>
+                    <div class="badge">Рахунок: <span id="score">0</span></div>
                     <div class="badge lives" id="lives">❤️❤️❤️❤️❤️</div>
                 </div>
             </div>
-            <h1>Answer the question</h1>
+            <h1>Дайте відповідь на запитання</h1>
             <div class="questions">
                 <div class="question">
-                    <p>Is the color blue?</p>
+                    <p>Чи синій колір?</p>
                     <div class="card" id="card-color"></div>
                 </div>
                 <div class="divider"></div>
                 <div class="question">
-                    <p>Is the figure square?</p>
+                    <p>Чи квадратна фігура?</p>
                     <div class="card" id="card-shape"></div>
                 </div>
             </div>
             <div class="actions">
-                <button class="btn-no" id="btn-no">No</button>
-                <button class="btn-yes" id="btn-yes">Yes</button>
+                <button class="btn-no" id="btn-no">Ні</button>
+                <button class="btn-yes" id="btn-yes">Так</button>
             </div>
             <div class="overlay" id="countdown">3</div>
             <div class="result" id="result">
                 <div class="result-card">
-                    <h2>Game over</h2>
-                    <div>Correct: <span id="correct">0</span> from <span id="total">0</span></div>
-                    <h3>Your best scores:</h3>
+                    <h2>Гру завершено</h2>
+                    <div>Правильних відповідей: <span id="correct">0</span> з <span id="total">0</span></div>
+                    <h3>Ваші найкращі результати:</h3>
                     <ul id="best-list"></ul>
-                    <button id="play-again">Play again</button>
+                    <button id="play-again">Грати знову</button>
                 </div>
             </div>
         </div>
@@ -48,4 +48,3 @@
     <script src="./js/geoswitching.js"></script>
 </body>
 </html>
-                   
