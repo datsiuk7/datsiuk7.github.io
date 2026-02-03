@@ -4,11 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ігри</title>
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
+            width: 90%;
+        }
+        h1 {
+            color: #333;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            margin: 15px 0;
+        }
+        a {
+            text-decoration: none;
+            color: #007BFF;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: color 0.3s, transform 0.3s;
+        }
+        a:hover {
+            color: #0056b3;
+            transform: scale(1.1);
+        }
+    </style>
 </head>
 <body>
-    <h1>Ігри</h1>
-    <ul>
-        <li><a href="./GeoSwitching/index.html">Geo Switching</a></li>
-    </ul>
+    <div class="container">
+        <h1>Ласкаво просимо до ігор</h1>
+        <ul>
+            <li><a href="./GeoSwitching/index.html">Geo Switching</a></li>
+        </ul>
+    </div>
 </body>
 </html>
