@@ -12,6 +12,9 @@ document.addEventListener("DOMContentLoaded", function () {
     var totalEl = document.getElementById("total");
     var bestListEl = document.getElementById("best-list");
     var playAgainBtn = document.getElementById("play-again");
+    var startScreenEl = document.getElementById("start-screen");
+    var startBtn = document.getElementById("start-btn");
+    var stopResumeBtn = document.getElementById("btn-stop-resume");
 
     var colors = [
         { name: "blue", value: "#3b82f6" },
@@ -98,11 +101,61 @@ document.addEventListener("DOMContentLoaded", function () {
         state.timerId = setInterval(tick, 1000);
     }
 
+    var audioContext = null;
+
+    function initAudio() {
+        if (!audioContext) {
+            audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (audioContext.state === "suspended") {
+            audioContext.resume();
+        }
+    }
+
+    function playBeep() {
+        if (!audioContext) {
+            return;
+        }
+        var oscillator = audioContext.createOscillator();
+        var gainNode = audioContext.createGain();
+        oscillator.type = "sine";
+        oscillator.frequency.value = 880;
+        gainNode.gain.value = 0.15;
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        oscillator.start();
+        oscillator.stop(audioContext.currentTime + 0.12);
+    }
+
+    var isPaused = false;
+
+    stopResumeBtn.addEventListener("click", function () {
+        if (isPaused) {
+            stopResumeBtn.textContent = "Зупинити";
+            state.running = true;
+            startTimer();
+            buildRound();
+        } else {
+            stopResumeBtn.textContent = "Продовжити";
+            state.running = false;
+            clearInterval(state.timerId);
+        }
+        isPaused = !isPaused;
+    });
+
+    startBtn.addEventListener("click", function () {
+        initAudio();
+        startScreenEl.style.display = "none";
+        stopResumeBtn.style.display = "inline-flex";
+        showCountdown();
+    });
+
     function showCountdown() {
         var count = 3;
         countdownEl.textContent = count;
         countdownEl.classList.remove("hidden");
         var countdownId = setInterval(function () {
+            playBeep();
             count -= 1;
             if (count > 0) {
                 countdownEl.textContent = count;
@@ -113,7 +166,7 @@ document.addEventListener("DOMContentLoaded", function () {
             state.running = true;
             startTimer();
             buildRound();
-        }, 900);
+        }, 1000);
     }
 
     function handleAnswer(value) {
@@ -194,5 +247,4 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     updateHeader();
-    showCountdown();
 });
