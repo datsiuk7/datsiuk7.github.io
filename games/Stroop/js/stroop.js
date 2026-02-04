@@ -19,26 +19,27 @@ document.addEventListener("DOMContentLoaded", function () {
     var playAgainBtn = document.getElementById("play-again");
 
     var colors = [
-        { name: "Синій", value: "#3b82f6" },
         { name: "Червоний", value: "#ef4444" },
+        { name: "Чорний", value: "#111827" },
         { name: "Зелений", value: "#22c55e" },
+        { name: "Синій", value: "#3b82f6" },
         { name: "Жовтий", value: "#eab308" },
-        { name: "Помаранчевий", value: "#f59e0b" },
         { name: "Фіолетовий", value: "#8b5cf6" },
         { name: "Рожевий", value: "#ec4899" },
-        { name: "Бірюзовий", value: "#14b8a6" },
-        { name: "Голубий", value: "#06b6d4" },
-        { name: "Лаймовий", value: "#84cc16" },
-        { name: "Індиго", value: "#6366f1" },
-        { name: "Коричневий", value: "#a16207" },
-        { name: "Сірий", value: "#6b7280" },
-        { name: "Чорний", value: "#111827" },
-        { name: "Білий", value: "#ffffff" },
-        { name: "Бордовий", value: "#991b1b" },
-        { name: "Оливковий", value: "#4d7c0f" },
-        { name: "Пісочний", value: "#d6b56c" },
-        { name: "М'ятний", value: "#34d399" },
-        { name: "Малиновий", value: "#e11d48" }
+
+        // { name: "Помаранчевий", value: "#f59e0b" },
+        // { name: "Бірюзовий", value: "#14b8a6" },
+        // { name: "Голубий", value: "#06b6d4" },
+        // { name: "Лаймовий", value: "#84cc16" },
+        // { name: "Індиго", value: "#6366f1" },
+        // { name: "Коричневий", value: "#a16207" },
+        // { name: "Сірий", value: "#6b7280" },
+        // { name: "Білий", value: "#ffffff" },
+        // { name: "Бордовий", value: "#991b1b" },
+        // { name: "Оливковий", value: "#4d7c0f" },
+        // { name: "Пісочний", value: "#d6b56c" },
+        // { name: "М'ятний", value: "#34d399" },
+        // { name: "Малиновий", value: "#e11d48" }
     ];
 
     var state = {

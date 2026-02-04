@@ -304,6 +304,7 @@ button:active {
 @media (max-width: 780px) {
     .plane {
         width: 220px;
-        height: 220px;
+        height: 100%;
+
     }
 }
