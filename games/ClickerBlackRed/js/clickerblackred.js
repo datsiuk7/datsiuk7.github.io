@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-    var timeEl = document.getElementById("time");
     var levelEl = document.getElementById("level");
     var sublevelEl = document.getElementById("sublevel");
     var progressEl = document.getElementById("progress");
@@ -19,7 +18,6 @@ document.addEventListener("DOMContentLoaded", function () {
     var resultEl = document.getElementById("result");
     var correctEl = document.getElementById("correct");
     var totalEl = document.getElementById("total");
-    var finalTimeEl = document.getElementById("final-time");
     var resultSubEl = document.getElementById("result-sub");
     var bestLevelEl = document.getElementById("best-level");
     var bestListEl = document.getElementById("best-list");
@@ -27,8 +25,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     var state = {
         level: 1,
-        time: 90,
-        timerId: null,
         running: false,
         sequenceIndex: 0,
         maxNumber: 4,
@@ -40,7 +36,8 @@ document.addEventListener("DOMContentLoaded", function () {
         lives: 3,
         maxLives: 3,
         remaining: [],
-        currentTask: null
+        currentTask: null,
+        nextTaskColor: "red"
     };
 
     var audioContext = null;
@@ -69,10 +66,6 @@ document.addEventListener("DOMContentLoaded", function () {
         oscillator.stop(audioContext.currentTime + 0.12);
     }
 
-    function levelToTime() {
-        return 90;
-    }
-
     function getSublevels(level) {
         var base = [
             { rows: 2, cols: 2 },
@@ -91,7 +84,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function updateHeader() {
-        timeEl.textContent = state.time;
         levelEl.textContent = state.level;
         sublevelEl.textContent = state.sublevelIndex + 1;
         progressEl.textContent = state.sequenceIndex;
@@ -99,8 +91,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function updateLevelHint() {
-        var timeLimit = levelToTime(state.level);
-        levelHintEl.textContent = "Час: " + timeLimit + "с";
+        levelHintEl.textContent = "Без таймера";
     }
 
     function buildGrid(rows, cols) {
@@ -175,20 +166,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function pickTask() {
         var options = [];
-        var black = getExtremes("black");
-        var red = getExtremes("red");
+        var preferredColor = state.nextTaskColor;
+        var otherColor = preferredColor === "black" ? "red" : "black";
+        var preferredExtremes = getExtremes(preferredColor);
+        var otherExtremes = getExtremes(otherColor);
 
-        if (black) {
-            options.push({ color: "black", type: "min", value: black.min });
-            options.push({ color: "black", type: "max", value: black.max });
-        }
-        if (red) {
-            options.push({ color: "red", type: "min", value: red.min });
-            options.push({ color: "red", type: "max", value: red.max });
+        if (preferredExtremes) {
+            options.push({ color: preferredColor, type: "min", value: preferredExtremes.min });
+            options.push({ color: preferredColor, type: "max", value: preferredExtremes.max });
+        } else if (otherExtremes) {
+            options.push({ color: otherColor, type: "min", value: otherExtremes.min });
+            options.push({ color: otherColor, type: "max", value: otherExtremes.max });
         }
 
         var task = options[Math.floor(Math.random() * options.length)];
         state.currentTask = task;
+        if (task) {
+            state.nextTaskColor = task.color === "black" ? "red" : "black";
+        }
         taskEl.classList.remove("task-black", "task-red");
         taskEl.classList.add(task.color === "black" ? "task-black" : "task-red");
         taskEl.textContent =
@@ -242,22 +237,6 @@ document.addEventListener("DOMContentLoaded", function () {
         pickTask();
     }
 
-    function tick() {
-        if (!state.running) {
-            return;
-        }
-        state.time -= 1;
-        updateHeader();
-        if (state.time <= 0) {
-            endGame(false, "Раунд незавершено: час вичерпано");
-        }
-    }
-
-    function startTimer() {
-        clearInterval(state.timerId);
-        state.timerId = setInterval(tick, 1000);
-    }
-
     function startSublevel() {
         var size = state.sublevels[state.sublevelIndex];
         state.sequenceIndex = 0;
@@ -292,7 +271,6 @@ document.addEventListener("DOMContentLoaded", function () {
             clearInterval(countdownId);
             countdownEl.classList.add("hidden");
             state.running = true;
-            startTimer();
         }, 1000);
     }
 
@@ -300,8 +278,8 @@ document.addEventListener("DOMContentLoaded", function () {
         state.sublevels = getSublevels(state.level);
         state.sublevelIndex = 0;
         state.sequenceIndex = 0;
-        state.time = levelToTime(state.level);
         state.lives = state.maxLives;
+        state.nextTaskColor = "red";
         state.completedStepsLevel = 0;
         state.totalStepsLevel = state.sublevels.reduce(function (sum, size) {
             return sum + size.rows * size.cols;
@@ -317,14 +295,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function endGame(isWin, message) {
         state.running = false;
-        clearInterval(state.timerId);
         stopResumeBtn.textContent = "Продовжити";
-        var timeSpent = Math.max(0, levelToTime(state.level) - state.time);
         correctEl.textContent = state.sequenceIndex;
-        finalTimeEl.textContent = timeSpent;
         bestLevelEl.textContent = state.level;
         resultSubEl.textContent = message || (isWin ? "Раунд завершено" : "Раунд незавершено");
-        saveResult(isWin, timeSpent);
+        saveResult(isWin, 0);
         renderBest();
         resultEl.classList.add("visible");
     }
@@ -335,13 +310,12 @@ document.addEventListener("DOMContentLoaded", function () {
         if (!stored[state.level]) {
             stored[state.level] = [];
         }
-        stored[state.level].push({
-            steps: state.completedStepsLevel,
-            total: state.totalStepsLevel,
-            time: timeSpent,
-            win: isWin,
-            date: new Date().toISOString().slice(0, 10)
-        });
+            stored[state.level].push({
+                steps: state.completedStepsLevel,
+                total: state.totalStepsLevel,
+                win: isWin,
+                date: new Date().toISOString().slice(0, 10)
+            });
         localStorage.setItem(key, JSON.stringify(stored));
     }
 
@@ -355,7 +329,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (b.steps !== a.steps) {
                     return b.steps - a.steps;
                 }
-                return a.time - b.time;
+                    return 0; // Removed time comparison
             })
             .slice(0, 5);
 
@@ -377,23 +351,21 @@ document.addEventListener("DOMContentLoaded", function () {
                 item.total +
                 " " +
                 status +
-                "</span><span>" +
-                item.time +
-                "с</span>";
+                    "</span><span>" +
+                    item.date +
+                    "</span>";
             bestListEl.appendChild(li);
         });
     }
 
     function togglePause() {
-        if (!state.running && state.time > 0 && !resultEl.classList.contains("visible")) {
+        if (!state.running && !resultEl.classList.contains("visible")) {
             state.running = true;
-            startTimer();
             stopResumeBtn.textContent = "Зупинити";
             return;
         }
         if (state.running) {
             state.running = false;
-            clearInterval(state.timerId);
             stopResumeBtn.textContent = "Продовжити";
         }
     }
@@ -415,7 +387,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     exitBtn.addEventListener("click", function () {
         state.running = false;
-        clearInterval(state.timerId);
         resultEl.classList.remove("visible");
         startScreenEl.classList.remove("hidden");
         stopResumeBtn.textContent = "Зупинити";
