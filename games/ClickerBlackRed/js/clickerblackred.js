@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
         maxLives: 3,
         remaining: [],
         currentTask: null,
-        nextTaskColor: "red"
+        nextTaskColor: "black"
     };
 
     var audioContext = null;
@@ -165,25 +165,26 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function pickTask() {
-        var options = [];
-        var preferredColor = state.nextTaskColor;
-        var otherColor = preferredColor === "black" ? "red" : "black";
-        var preferredExtremes = getExtremes(preferredColor);
-        var otherExtremes = getExtremes(otherColor);
-
-        if (preferredExtremes) {
-            options.push({ color: preferredColor, type: "min", value: preferredExtremes.min });
-            options.push({ color: preferredColor, type: "max", value: preferredExtremes.max });
-        } else if (otherExtremes) {
-            options.push({ color: otherColor, type: "min", value: otherExtremes.min });
-            options.push({ color: otherColor, type: "max", value: otherExtremes.max });
+        var isBlackTurn = state.nextTaskColor === "black";
+        var color = isBlackTurn ? "black" : "red";
+        var extremes = getExtremes(color);
+        if (!extremes) {
+            var fallbackColor = color === "black" ? "red" : "black";
+            extremes = getExtremes(fallbackColor);
+            if (!extremes) {
+                return;
+            }
+            color = fallbackColor;
+            isBlackTurn = color === "black";
         }
 
-        var task = options[Math.floor(Math.random() * options.length)];
+        var task = {
+            color: color,
+            type: isBlackTurn ? "min" : "max",
+            value: isBlackTurn ? extremes.min : extremes.max
+        };
         state.currentTask = task;
-        if (task) {
-            state.nextTaskColor = task.color === "black" ? "red" : "black";
-        }
+        state.nextTaskColor = task.color === "black" ? "red" : "black";
         taskEl.classList.remove("task-black", "task-red");
         taskEl.classList.add(task.color === "black" ? "task-black" : "task-red");
         taskEl.textContent =
@@ -203,6 +204,9 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         var task = state.currentTask;
+        if (!task) {
+            return;
+        }
         var isCorrect =
             cellData.color === task.color &&
             Number(cellData.value) === Number(task.value);
@@ -279,7 +283,7 @@ document.addEventListener("DOMContentLoaded", function () {
         state.sublevelIndex = 0;
         state.sequenceIndex = 0;
         state.lives = state.maxLives;
-        state.nextTaskColor = "red";
+        state.nextTaskColor = "black";
         state.completedStepsLevel = 0;
         state.totalStepsLevel = state.sublevels.reduce(function (sum, size) {
             return sum + size.rows * size.cols;
