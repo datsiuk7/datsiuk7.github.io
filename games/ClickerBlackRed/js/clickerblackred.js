@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function updateLevelHint() {
-        levelHintEl.textContent = "Без таймера";
+        levelHintEl.textContent = "";
     }
 
     function buildGrid(rows, cols) {
