@@ -16,8 +16,11 @@ body {
     font-weight: 700;
     background-color: #f8fafc;
     border-bottom: 2px solid #e5e7eb;
+    z-index: 8; /* Ensures the game title is visible above other elements */
+    position: relative; /* Ensure it stays in the normal document flow */
+    /* margin-bottom: 12px; Add spacing below the header */
 }
-
+/* ------------------- */
 .game-header h1 {
     margin: 0;
     font-size: 30px;
@@ -37,8 +40,7 @@ body {
     border-radius: 24px;
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
     padding: 26px 30px 32px;
-    position: relative;
-    backdrop-filter: blur(6px);
+    /* backdrop-filter: blur(6px); */
 }
 
 .topbar {
@@ -247,33 +249,35 @@ button:active {
 }
 
 .overlay {
-    position: absolute;
+    position: fixed;
     inset: 0;
     background: rgba(15, 23, 42, 0.55);
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 24px;
+    border-radius: 0;
     color: #fff;
     font-size: 64px;
     font-weight: 800;
-    z-index: 5;
+    z-index: 10;
 }
 
 .overlay.hidden {
     display: none;
 }
-
+/* -------------------------- */
 .start-screen {
-    position: absolute;
+    position: fixed;
     inset: 0;
     background: #f8fafc;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 24px;
+    border-radius: 0;
     z-index: 7;
+    padding: 24px 16px;
 }
+/* -------------------------- */
 
 .start-content {
     display: flex;
@@ -282,6 +286,11 @@ button:active {
     gap: 16px;
     color: #111827;
     text-align: center;
+    width: min(520px, 92vw);
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 24px 20px 28px;
+    box-shadow: 0 20px 40px rgba(15, 23, 42, 0.25);
 }
 
 .start-screen.hidden {
@@ -290,20 +299,37 @@ button:active {
 
 .level-grid {
     display: grid;
-    grid-template-columns: repeat(5, minmax(52px, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 12px;
-    width: min(360px, 90%);
+    width: min(520px, 92%);
 }
 
 .level-btn {
     background: #ffffff;
     color: #111827;
     border-radius: 14px;
-    padding: 10px 0;
+    padding: 10px 6px;
     font-weight: 800;
     font-size: 18px;
     border: 2px solid transparent;
     box-shadow: 0 10px 20px rgba(15, 23, 42, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+}
+
+.level-btn span {
+    font-size: 18px;
+}
+
+.level-btn small {
+    font-size: 11px;
+    font-weight: 700;
+    color: #475569;
+    text-transform: none;
+    line-height: 1.1;
 }
 
 .level-btn:hover {
@@ -317,17 +343,16 @@ button:active {
 
 .start-content h3 {
     margin: 0;
-    font-size: 28px;
 }
 
 .result {
-    position: absolute;
+    position: fixed;
     inset: 0;
     display: none;
     align-items: center;
     justify-content: center;
     background: rgba(15, 23, 42, 0.55);
-    border-radius: 24px;
+    border-radius: 0;
     z-index: 6;
 }
 
@@ -402,7 +427,7 @@ button:active {
     }
 
     .level-grid {
-        grid-template-columns: repeat(5, minmax(44px, 1fr));
-        gap: 8px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
     }
 }
