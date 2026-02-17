@@ -102,17 +102,29 @@ document.addEventListener("DOMContentLoaded", function () {
         wordEl.style.color = inkColor.value;
 
         // Two buttons: one is the text (word) name, the other is ink color name.
+        // When they match, we need a third different color for the other button
+        var otherButtonColor;
+        if (shouldMatch) {
+            // Pick a color that's different from both word and ink (which are the same)
+            do {
+                otherButtonColor = pickRandom(colors);
+            } while (otherButtonColor.name === inkColor.name);
+        } else {
+            // When they don't match, use the word color for the non-ink button
+            otherButtonColor = wordColor;
+        }
+
         // Shuffle sides.
         var leftIsInk = Math.random() < 0.5;
         if (leftIsInk) {
             btnLeft.textContent = inkColor.name;
-            btnRight.textContent = wordColor.name;
+            btnRight.textContent = otherButtonColor.name;
             btnLeft.dataset.kind = "ink";
-            btnRight.dataset.kind = "word";
+            btnRight.dataset.kind = shouldMatch ? "other" : "word";
         } else {
-            btnLeft.textContent = wordColor.name;
+            btnLeft.textContent = otherButtonColor.name;
             btnRight.textContent = inkColor.name;
-            btnLeft.dataset.kind = "word";
+            btnLeft.dataset.kind = shouldMatch ? "other" : "word";
             btnRight.dataset.kind = "ink";
         }
 

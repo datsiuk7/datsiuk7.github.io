@@ -211,15 +211,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
     /* ——— Sequence generation ——— */
     function generateSequence(totalCells, length) {
-        var seq = [];
-        for (var i = 0; i < length; i++) {
-            // Allow repeats but avoid 2 identical consecutive
-            var next;
-            do {
-                next = Math.floor(Math.random() * totalCells);
-            } while (seq.length > 0 && seq[seq.length - 1] === next);
-            seq.push(next);
+        // Create array of all available cell indices
+        var availableCells = [];
+        for (var i = 0; i < totalCells; i++) {
+            availableCells.push(i);
         }
+        
+        // Shuffle the available cells
+        for (var i = availableCells.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var temp = availableCells[i];
+            availableCells[i] = availableCells[j];
+            availableCells[j] = temp;
+        }
+        
+        // Take the first 'length' cells (each cell appears only once)
+        var seq = availableCells.slice(0, Math.min(length, totalCells));
+        
         return seq;
     }
 
