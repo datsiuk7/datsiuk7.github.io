@@ -105,7 +105,7 @@ document.addEventListener("DOMContentLoaded", function () {
         curtain.classList.add("closed");
         setTimeout(function () {
             if (callback) callback();
-        }, 700);
+        }, 1700);
     }
 
     function openCurtain(callback) {
