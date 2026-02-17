@@ -26,20 +26,6 @@ document.addEventListener("DOMContentLoaded", function () {
         { name: "Жовтий", value: "#eab308" },
         { name: "Фіолетовий", value: "#8b5cf6" },
         { name: "Рожевий", value: "#ec4899" },
-
-        // { name: "Помаранчевий", value: "#f59e0b" },
-        // { name: "Бірюзовий", value: "#14b8a6" },
-        // { name: "Голубий", value: "#06b6d4" },
-        // { name: "Лаймовий", value: "#84cc16" },
-        // { name: "Індиго", value: "#6366f1" },
-        // { name: "Коричневий", value: "#a16207" },
-        // { name: "Сірий", value: "#6b7280" },
-        // { name: "Білий", value: "#ffffff" },
-        // { name: "Бордовий", value: "#991b1b" },
-        // { name: "Оливковий", value: "#4d7c0f" },
-        // { name: "Пісочний", value: "#d6b56c" },
-        // { name: "М'ятний", value: "#34d399" },
-        // { name: "Малиновий", value: "#e11d48" }
     ];
 
     var state = {
@@ -93,9 +79,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function buildRound() {
         var wordColor = pickRandom(colors);
-        var inkColor = pickRandom(colors);
-        while (inkColor.name === wordColor.name) {
+        var inkColor;
+        
+        // 40-50% chance that text and ink color MATCH (harder!)
+        var shouldMatch = Math.random() < 0.45; // 45% match rate
+        
+        if (shouldMatch) {
+            // Text and ink are the SAME color
+            inkColor = wordColor;
+        } else {
+            // Text and ink are DIFFERENT colors (original behavior)
             inkColor = pickRandom(colors);
+            while (inkColor.name === wordColor.name) {
+                inkColor = pickRandom(colors);
+            }
         }
 
         state.wordName = wordColor.name;
