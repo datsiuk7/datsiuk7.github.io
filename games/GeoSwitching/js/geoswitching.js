@@ -105,10 +105,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function initAudio() {
         if (!audioContext) {
-            audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            // iOS requires AudioContext to be created in user interaction
+            try {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            } catch (e) {
+                console.warn("Audio not supported:", e);
+                return;
+            }
         }
-        if (audioContext.state === "suspended") {
-            audioContext.resume();
+        if (audioContext && audioContext.state === "suspended") {
+            audioContext.resume().catch(function(err) {
+                console.warn("Audio resume failed:", err);
+            });
         }
     }
 
@@ -129,7 +137,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     var isPaused = false;
 
-    stopResumeBtn.addEventListener("click", function () {
+    addButtonHandler(stopResumeBtn, function () {
         if (isPaused) {
             stopResumeBtn.textContent = "Зупинити";
             state.running = true;
@@ -143,7 +151,7 @@ document.addEventListener("DOMContentLoaded", function () {
         isPaused = !isPaused;
     });
 
-    startBtn.addEventListener("click", function () {
+    addButtonHandler(startBtn, function () {
         initAudio();
         startScreenEl.style.display = "none";
         stopResumeBtn.style.display = "inline-flex";
@@ -236,13 +244,44 @@ document.addEventListener("DOMContentLoaded", function () {
         showCountdown();
     }
 
-    btnNo.addEventListener("click", function () {
+    // iOS-friendly event handling with both touch and click
+    function addButtonHandler(btn, handler) {
+        var handled = false;
+        
+        btn.addEventListener("touchstart", function (e) {
+            e.preventDefault();
+            handled = true;
+            btn.style.transform = "translateY(1px)";
+            btn.style.opacity = "0.9";
+        }, { passive: false });
+        
+        btn.addEventListener("touchend", function (e) {
+            e.preventDefault();
+            btn.style.transform = "";
+            btn.style.opacity = "";
+            if (handled) {
+                handler();
+                handled = false;
+            }
+        }, { passive: false });
+        
+        btn.addEventListener("click", function (e) {
+            if (!handled) {
+                handler();
+            }
+            handled = false;
+        });
+    }
+
+    addButtonHandler(btnNo, function () {
         handleAnswer(false);
     });
-    btnYes.addEventListener("click", function () {
+    
+    addButtonHandler(btnYes, function () {
         handleAnswer(true);
     });
-    playAgainBtn.addEventListener("click", function () {
+    
+    addButtonHandler(playAgainBtn, function () {
         resetGame();
     });
 
