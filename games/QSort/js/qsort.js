@@ -191,6 +191,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     /* ——— Countdown ——— */
     function showCountdown() {
+        GameAnalytics.send("game_start", { time: state.time, lives: state.lives });
         var count = 3;
         countdownEl.textContent = count;
         countdownEl.classList.remove("hidden");
@@ -216,6 +217,7 @@ document.addEventListener("DOMContentLoaded", function () {
         var entry = {
             correct: state.correct,
             total: state.total,
+            player: GameAnalytics.getPlayerName(),
             date: new Date().toISOString().slice(0, 10)
         };
         var stored = JSON.parse(localStorage.getItem("qSortResults") || "[]");
@@ -239,7 +241,7 @@ document.addEventListener("DOMContentLoaded", function () {
         sorted.forEach(function (item, index) {
             var li = document.createElement("li");
             li.innerHTML =
-                "<span>" + (index + 1) + ". " + item.correct + " / " + item.total + "</span>" +
+                "<span>" + (index + 1) + ". " + (item.player || "—") + " — " + item.correct + " / " + item.total + "</span>" +
                 "<span>" + item.date + "</span>";
             bestListEl.appendChild(li);
         });
@@ -253,6 +255,7 @@ document.addEventListener("DOMContentLoaded", function () {
         var results = saveResult();
         renderBest(results);
         resultEl.classList.add("visible");
+        GameAnalytics.send("game_end", { correct: state.correct, total: state.total });
     }
 
     function resetGame(toStartScreen) {
@@ -303,6 +306,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     /* ——— Event listeners ——— */
     startBtn.addEventListener("click", function () {
+        GameAnalytics.ensurePlayerName();
         initAudio();
         startScreenEl.style.display = "none";
         stopResumeBtn.style.display = "inline-flex";

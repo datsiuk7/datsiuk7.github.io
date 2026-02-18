@@ -261,6 +261,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function showCountdown() {
+        GameAnalytics.send("game_start", { level: state.level });
         var count = 3;
         countdownEl.textContent = count;
         countdownEl.classList.remove("hidden");
@@ -306,6 +307,7 @@ document.addEventListener("DOMContentLoaded", function () {
         saveResult(isWin, 0);
         renderBest();
         resultEl.classList.add("visible");
+        GameAnalytics.send("game_end", { level: state.level, steps: state.completedStepsLevel, total: state.totalStepsLevel, win: isWin });
     }
 
     function saveResult(isWin, timeSpent) {
@@ -318,6 +320,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 steps: state.completedStepsLevel,
                 total: state.totalStepsLevel,
                 win: isWin,
+                player: GameAnalytics.getPlayerName(),
                 date: new Date().toISOString().slice(0, 10)
             });
         localStorage.setItem(key, JSON.stringify(stored));
@@ -350,6 +353,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 "<span>" +
                 (index + 1) +
                 ". " +
+                (item.player || "—") +
+                " — " +
                 item.steps +
                 "/" +
                 item.total +
@@ -376,6 +381,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     levelButtons.forEach(function (button) {
         button.addEventListener("click", function () {
+            GameAnalytics.ensurePlayerName();
             state.level = Number(button.dataset.level);
             updateLevelHint();
             updateHeader();

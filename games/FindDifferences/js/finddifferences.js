@@ -484,10 +484,12 @@ document.addEventListener("DOMContentLoaded", function () {
         finalScoreEl.textContent = state.score;
         finalSublevelsEl.textContent = state.completedSublevels + " / " + SUB_LEVELS_COUNT;
         resultEl.classList.add("visible");
+        GameAnalytics.send("game_end", { level: state.level, score: state.score, completedSublevels: state.completedSublevels });
     }
 
     /* ——— Countdown ——— */
     function showCountdown(callback) {
+        GameAnalytics.send("game_start", { level: state.level });
         var count = 3;
         countdownEl.textContent = count;
         countdownEl.classList.remove("hidden");
@@ -521,6 +523,7 @@ document.addEventListener("DOMContentLoaded", function () {
     levelButtons.forEach(function (button) {
         button.addEventListener("click", function () {
             var level = Number(button.dataset.level);
+            GameAnalytics.ensurePlayerName();
             initAudio();
             startLevel(level);
         });

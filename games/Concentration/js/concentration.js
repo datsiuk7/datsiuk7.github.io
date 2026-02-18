@@ -242,6 +242,7 @@ document.addEventListener("DOMContentLoaded", function () {
         finalMovesEl.textContent = state.moves;
         finalPairsEl.textContent = state.matchedPairs + " / " + state.totalPairs;
         resultEl.classList.add("visible");
+        GameAnalytics.send("game_end", { level: state.level, moves: state.moves, matchedPairs: state.matchedPairs, totalPairs: state.totalPairs });
         if (message) {
             resultEl.querySelector("h2").textContent = message;
         } else {
@@ -250,6 +251,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function showCountdown() {
+        GameAnalytics.send("game_start", { level: state.level });
         var count = 3;
         countdownEl.textContent = count;
         countdownEl.classList.remove("hidden");
@@ -277,6 +279,7 @@ document.addEventListener("DOMContentLoaded", function () {
     levelButtons.forEach(function (button) {
         button.addEventListener("click", function () {
             var level = Number(button.dataset.level);
+            GameAnalytics.ensurePlayerName();
             initAudio();
             startLevel(level);
         });
