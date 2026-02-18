@@ -1,0 +1,324 @@
+document.addEventListener("DOMContentLoaded", function () {
+    var timeEl = document.getElementById("time");
+    var scoreEl = document.getElementById("score");
+    var livesEl = document.getElementById("lives");
+    var stopResumeBtn = document.getElementById("btn-stop-resume");
+
+    var flockEl = document.getElementById("flock");
+    var birdEls = [
+        document.getElementById("bird-0"),
+        document.getElementById("bird-1"),
+        document.getElementById("bird-2"),
+        document.getElementById("bird-3"),
+        document.getElementById("bird-4")
+    ];
+
+    var btnLeft = document.getElementById("btn-left");
+    var btnUp = document.getElementById("btn-up");
+    var btnDown = document.getElementById("btn-down");
+    var btnRight = document.getElementById("btn-right");
+
+    var startScreenEl = document.getElementById("start-screen");
+    var startBtn = document.getElementById("start-btn");
+    var countdownEl = document.getElementById("countdown");
+
+    var resultEl = document.getElementById("result");
+    var correctEl = document.getElementById("correct");
+    var totalEl = document.getElementById("total");
+    var bestListEl = document.getElementById("best-list");
+    var playAgainBtn = document.getElementById("play-again");
+
+    /* ——— Directions ——— */
+    var directions = ["up", "down", "left", "right"];
+
+    var dirToRotation = {
+        up: 0,
+        right: 90,
+        down: 180,
+        left: 270
+    };
+
+    /* ——— Layout patterns ——— */
+    var layouts = ["layout-row", "layout-column", "layout-cross", "layout-arrow"];
+
+    /* ——— State ——— */
+    var state = {
+        time: 90,
+        lives: 5,
+        total: 0,
+        correct: 0,
+        answer: "", // correct direction of center bird
+        timerId: null,
+        running: false
+    };
+
+    var answerLocked = false;
+
+    /* ——— Audio ——— */
+    var audioContext = null;
+
+    function initAudio() {
+        if (!audioContext) {
+            try {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            } catch (e) {
+                return;
+            }
+        }
+        if (audioContext && audioContext.state === "suspended") {
+            audioContext.resume().catch(function () {});
+        }
+    }
+
+    function playTone(freq, duration, type) {
+        if (!audioContext) return;
+        var osc = audioContext.createOscillator();
+        var gain = audioContext.createGain();
+        osc.type = type || "sine";
+        osc.frequency.value = freq;
+        gain.gain.setValueAtTime(0.15, audioContext.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioContext.destination);
+        osc.start();
+        osc.stop(audioContext.currentTime + duration);
+    }
+
+    function playBeep() { playTone(880, 0.12, "sine"); }
+    function playCorrect() {
+        playTone(660, 0.12, "sine");
+        setTimeout(function () { playTone(880, 0.15, "sine"); }, 80);
+    }
+    function playWrong() { playTone(200, 0.3, "sawtooth"); }
+
+    /* ——— Helpers ——— */
+    function pickRandom(list) {
+        return list[Math.floor(Math.random() * list.length)];
+    }
+
+    function updateHeader() {
+        timeEl.textContent = state.time;
+        scoreEl.textContent = state.correct;
+        livesEl.textContent = "❤️".repeat(Math.max(0, state.lives));
+    }
+
+    /* ——— Build round ——— */
+    function buildRound() {
+        // Pick direction for the flanker birds (all 4 outer birds face same way)
+        var flankerDir = pickRandom(directions);
+
+        // Pick direction for the center bird
+        var centerDir = pickRandom(directions);
+
+        state.answer = centerDir;
+
+        // Pick random layout
+        var layout = pickRandom(layouts);
+        flockEl.className = "flock " + layout;
+
+        // Render birds
+        for (var i = 0; i < 5; i++) {
+            var dir = (i === 2) ? centerDir : flankerDir;
+            var rotation = dirToRotation[dir];
+            birdEls[i].innerHTML = "<img src=\"./images/bird.png\" alt=\"Пташка\" style=\"transform: rotate(" + rotation + "deg);\">";
+        }
+    }
+
+    /* ——— Timer ——— */
+    function tick() {
+        if (!state.running) return;
+        state.time -= 1;
+        updateHeader();
+        if (state.time <= 0) {
+            endGame();
+        }
+    }
+
+    function startTimer() {
+        clearInterval(state.timerId);
+        state.timerId = setInterval(tick, 1000);
+    }
+
+    /* ——— Countdown ——— */
+    function showCountdown() {
+        var count = 3;
+        countdownEl.textContent = count;
+        countdownEl.classList.remove("hidden");
+        playBeep();
+
+        var countdownId = setInterval(function () {
+            count -= 1;
+            if (count > 0) {
+                countdownEl.textContent = count;
+                playBeep();
+                return;
+            }
+            clearInterval(countdownId);
+            countdownEl.classList.add("hidden");
+            state.running = true;
+            startTimer();
+            buildRound();
+        }, 1000);
+    }
+
+    /* ——— Answer handling ——— */
+    function handleAnswer(dir) {
+        if (!state.running || answerLocked) return;
+
+        state.total += 1;
+        var isCorrect = (dir === state.answer);
+
+        // Find which button was pressed
+        var btnMap = { left: btnLeft, up: btnUp, down: btnDown, right: btnRight };
+        var activeBtn = btnMap[dir];
+
+        answerLocked = true;
+
+        if (isCorrect) {
+            state.correct += 1;
+            playCorrect();
+            if (activeBtn) activeBtn.classList.add("flash-correct");
+            flockEl.classList.add("flash-correct");
+        } else {
+            state.lives -= 1;
+            playWrong();
+            if (activeBtn) activeBtn.classList.add("flash-wrong");
+            flockEl.classList.add("flash-wrong");
+        }
+
+        updateHeader();
+
+        setTimeout(function () {
+            // Remove feedback
+            if (activeBtn) activeBtn.classList.remove("flash-correct", "flash-wrong");
+            flockEl.classList.remove("flash-correct", "flash-wrong");
+            answerLocked = false;
+
+            if (state.lives <= 0) {
+                endGame();
+                return;
+            }
+
+            buildRound();
+        }, 300);
+    }
+
+    /* ——— Persistence ——— */
+    function saveResult() {
+        var entry = {
+            correct: state.correct,
+            total: state.total,
+            date: new Date().toISOString().slice(0, 10)
+        };
+        var stored = JSON.parse(localStorage.getItem("flankerTaskResults") || "[]");
+        stored.push(entry);
+        localStorage.setItem("flankerTaskResults", JSON.stringify(stored));
+        return stored;
+    }
+
+    function renderBest(list) {
+        var sorted = list
+            .slice()
+            .sort(function (a, b) { return b.correct - a.correct; })
+            .slice(0, 5);
+
+        bestListEl.innerHTML = "";
+        if (sorted.length === 0) {
+            bestListEl.innerHTML = "<li>Результатів ще немає</li>";
+            return;
+        }
+
+        sorted.forEach(function (item, index) {
+            var li = document.createElement("li");
+            li.innerHTML =
+                "<span>" + (index + 1) + ". " + item.correct + " / " + item.total + "</span>" +
+                "<span>" + item.date + "</span>";
+            bestListEl.appendChild(li);
+        });
+    }
+
+    function endGame() {
+        state.running = false;
+        clearInterval(state.timerId);
+        correctEl.textContent = state.correct;
+        totalEl.textContent = state.total;
+        var results = saveResult();
+        renderBest(results);
+        resultEl.classList.add("visible");
+    }
+
+    function resetGame(toStartScreen) {
+        clearInterval(state.timerId);
+        state.time = 90;
+        state.lives = 5;
+        state.total = 0;
+        state.correct = 0;
+        state.answer = "";
+        state.running = false;
+        answerLocked = false;
+        updateHeader();
+        resultEl.classList.remove("visible");
+
+        stopResumeBtn.textContent = "Зупинити";
+        isPaused = false;
+
+        // Clear birds
+        for (var i = 0; i < 5; i++) {
+            birdEls[i].innerHTML = "";
+        }
+
+        if (toStartScreen) {
+            startScreenEl.style.display = "flex";
+            stopResumeBtn.style.display = "none";
+            countdownEl.classList.add("hidden");
+        } else {
+            showCountdown();
+        }
+    }
+
+    /* ——— Pause / Resume ——— */
+    var isPaused = false;
+
+    stopResumeBtn.addEventListener("click", function () {
+        if (!state.running && !isPaused) return;
+
+        if (isPaused) {
+            stopResumeBtn.textContent = "Зупинити";
+            state.running = true;
+            startTimer();
+        } else {
+            stopResumeBtn.textContent = "Продовжити";
+            state.running = false;
+            clearInterval(state.timerId);
+        }
+
+        isPaused = !isPaused;
+    });
+
+    /* ——— Event listeners ——— */
+    startBtn.addEventListener("click", function () {
+        initAudio();
+        startScreenEl.style.display = "none";
+        stopResumeBtn.style.display = "inline-flex";
+        showCountdown();
+    });
+
+    btnLeft.addEventListener("click", function () { handleAnswer("left"); });
+    btnUp.addEventListener("click", function () { handleAnswer("up"); });
+    btnDown.addEventListener("click", function () { handleAnswer("down"); });
+    btnRight.addEventListener("click", function () { handleAnswer("right"); });
+
+    // Keyboard: arrow keys
+    document.addEventListener("keydown", function (e) {
+        if (e.key === "ArrowLeft") { e.preventDefault(); handleAnswer("left"); }
+        else if (e.key === "ArrowUp") { e.preventDefault(); handleAnswer("up"); }
+        else if (e.key === "ArrowDown") { e.preventDefault(); handleAnswer("down"); }
+        else if (e.key === "ArrowRight") { e.preventDefault(); handleAnswer("right"); }
+    });
+
+    playAgainBtn.addEventListener("click", function () {
+        resetGame(true);
+    });
+
+    updateHeader();
+});
