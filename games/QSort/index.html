@@ -26,7 +26,7 @@
                 </div>
             </div>
 
-            <h2 class="subtitle">якщо картка збігається вибери, інакше вибери яка не збігається з жодною</h2>
+            <div class="task-label" id="task-label"></div>
 
             <div class="stage" aria-live="polite">
                 <div class="game-card" id="game-card">
@@ -53,10 +53,10 @@
             <div class="start-screen" id="start-screen">
                 <div class="start-content">
                     <h2>QSort</h2>
-                    <p class="start-rule">Вам показується картка з фігурою та кольором.<br>
-                    Якщо <strong>колір і фігура</strong> збігаються з одним із варіантів — оберіть його.<br>
-                    Якщо <strong>не збігаються</strong> — оберіть протилежний варіант<br>
-                    (де ні фігура, ні колір не відповідають картці).</p>
+                    <p class="start-rule">
+                    Вам показується картка — фігура певного кольору.<br><br>
+                    Коли на екрані написано <strong>ЗБІГАЄТЬСЯ</strong> — знайдіть кнопку, де і фігура, і колір повністю збігаються з карткою.<br><br>
+                    Коли написано <strong>НЕ ЗБІГАЄТЬСЯ</strong> — знайдіть кнопку, яка зовсім не схожа на картку: ні фігура, ні колір не збігаються.</p>
                     <button class="btn-start" id="start-btn">Старт</button>
                 </div>
             </div>

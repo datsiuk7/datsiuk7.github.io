@@ -190,10 +190,20 @@ body {
 /* ——— Arrow buttons ——— */
 .actions {
     display: flex;
-    justify-content: center;
-    gap: 14px;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
     margin-top: 24px;
-    flex-wrap: wrap;
+}
+
+.arrow-row {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+}
+
+.top-row {
+    padding-left: 0px; /* offset to align ↑ above ↓ */
 }
 
 button {

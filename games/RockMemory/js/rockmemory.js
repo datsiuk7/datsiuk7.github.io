@@ -103,9 +103,11 @@ document.addEventListener("DOMContentLoaded", function () {
         state.canClick = false;
         curtain.classList.remove("open");
         curtain.classList.add("closed");
+        // Завіса закривається за 0.7s (CSS transition), чекаємо 750ms
+        // Потім рендеримо іконки, потім ще 500ms пауза закритою перед відкриттям
         setTimeout(function () {
             if (callback) callback();
-        }, 1700);
+        }, 750);
     }
 
     function openCurtain(callback) {
@@ -241,11 +243,10 @@ document.addEventListener("DOMContentLoaded", function () {
     function nextRound() {
         if (!state.running) return;
 
+        // Закрити завісу, потім підготувати іконки поки вона закрита, потім відкрити
         closeCurtain(function () {
-            // Додати нову іконку з пулу
+            // Тут завіса вже повністю закрита — додаємо нову іконку
             if (state.availablePool.length === 0) {
-                // Якщо всі іконки використані — перезаповнити
-                // (виключити ті що вже на полі)
                 var usedSet = {};
                 state.currentIcons.forEach(function (id) {
                     usedSet[id] = true;
@@ -255,7 +256,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 });
                 state.availablePool = shuffle(state.availablePool);
 
-                // Якщо все ще пусто — просто перемішати все
                 if (state.availablePool.length === 0) {
                     state.availablePool = shuffle(allSvgs.slice());
                 }
@@ -265,8 +265,13 @@ document.addEventListener("DOMContentLoaded", function () {
             state.newIconId = newId;
             state.currentIcons.push(newId);
 
+            // Рендеримо поки завіса закрита — іконки зʼявляються без анімації
             renderIcons();
-            openCurtain();
+
+            // Невелика затримка щоб браузер встиг намалювати DOM перед відкриттям
+            setTimeout(function () {
+                openCurtain();
+            }, 80);
         });
     }
 

@@ -1,1 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="85" height="85" viewBox="0 0 85 85"><defs></defs><path fill="#fff" d="M63.575 54.706c.044 11.246-9.04 20.398-20.285 20.442-11.247.043-20.4-9.04-20.443-20.287-.047-12.415 20.19-45.275 20.19-45.275s20.49 32.702 20.538 45.12z"></path></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="200" height="200">
+  <polygon
+    points="50,8 62,35 92,38 70,58 76,88 50,73 24,88 30,58 8,38 38,35"
+    fill="none"
+    stroke="#000"
+    stroke-width="6"
+    stroke-linejoin="miter"
+    stroke-linecap="butt"
+  />
+</svg>

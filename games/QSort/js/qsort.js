@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     var gameCardEl = document.getElementById("game-card");
     var cardFigureEl = document.getElementById("card-figure");
+    var taskLabelEl = document.getElementById("task-label");
 
     var btnSun = document.getElementById("btn-sun");
     var btnCloud = document.getElementById("btn-cloud");
@@ -43,6 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
         total: 0,
         correct: 0,
         correctAnswer: "", // "sun", "cloud" or "drop"
+        isMatch: false,
         timerId: null,
         running: false
     };
@@ -122,6 +124,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (figureIndex === colorIndex) {
             // Both match the same category → answer is that category
             state.correctAnswer = categories[figureIndex].name;
+            state.isMatch = true;
         } else {
             // Figure belongs to one category, color to another
             // The answer is the THIRD one (where neither figure nor color match)
@@ -131,6 +134,13 @@ document.addEventListener("DOMContentLoaded", function () {
                     break;
                 }
             }
+            state.isMatch = false;
+        }
+
+        // Update task label
+        if (taskLabelEl) {
+            taskLabelEl.textContent = state.isMatch ? "Збігається" : "Не збігається";
+            taskLabelEl.style.color = state.isMatch ? "#16a34a" : "#dc2626";
         }
     }
 
@@ -249,6 +259,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function endGame() {
         state.running = false;
+        if (taskLabelEl) taskLabelEl.textContent = "";
         clearInterval(state.timerId);
         correctEl.textContent = state.correct;
         totalEl.textContent = state.total;

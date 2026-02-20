@@ -43,8 +43,9 @@ body {
     padding: 28px 32px 32px;
     position: relative;
     background-image: url("./img/bg.png");
-    background-size: cover;
 
+    background-size: cover;
+    background-position: center;
 }
 
 .topbar {
