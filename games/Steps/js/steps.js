@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var playAgainBtn = document.getElementById("play-again");
 
     var state = {
-        level: 1,
+        level: 4,
         running: false,
         phase: "idle", // idle | memorize | click
         nextExpected: 1,
@@ -92,81 +92,29 @@ document.addEventListener("DOMContentLoaded", function () {
 
     /* ─── Level config ─── */
 
-    // Returns array of 5 sub-levels, each { rows, cols, numbered, memorizeTime }
+    // Returns array of 6 identical sub-levels for a given level.
+    // level = number of cells to memorize (4..14)
+    // Grid size grows with level, memorize time shrinks
     function getSublevels(level) {
-        var configs = {
-            1:  [
-                { rows: 2, cols: 2, numbered: 2, memorizeTime: 3000 },
-                { rows: 2, cols: 2, numbered: 3, memorizeTime: 3000 },
-                { rows: 2, cols: 3, numbered: 3, memorizeTime: 3000 },
-                { rows: 2, cols: 3, numbered: 4, memorizeTime: 2800 },
-                { rows: 3, cols: 3, numbered: 4, memorizeTime: 2800 }
-            ],
-            2:  [
-                { rows: 3, cols: 3, numbered: 4, memorizeTime: 2800 },
-                { rows: 3, cols: 3, numbered: 5, memorizeTime: 2800 },
-                { rows: 3, cols: 4, numbered: 5, memorizeTime: 2600 },
-                { rows: 3, cols: 4, numbered: 6, memorizeTime: 2600 },
-                { rows: 3, cols: 4, numbered: 6, memorizeTime: 2400 }
-            ],
-            3:  [
-                { rows: 3, cols: 4, numbered: 5, memorizeTime: 2600 },
-                { rows: 3, cols: 4, numbered: 6, memorizeTime: 2400 },
-                { rows: 4, cols: 4, numbered: 6, memorizeTime: 2400 },
-                { rows: 4, cols: 4, numbered: 7, memorizeTime: 2200 },
-                { rows: 4, cols: 4, numbered: 8, memorizeTime: 2200 }
-            ],
-            4:  [
-                { rows: 4, cols: 4, numbered: 6, memorizeTime: 2400 },
-                { rows: 4, cols: 4, numbered: 7, memorizeTime: 2200 },
-                { rows: 4, cols: 5, numbered: 7, memorizeTime: 2200 },
-                { rows: 4, cols: 5, numbered: 8, memorizeTime: 2000 },
-                { rows: 4, cols: 5, numbered: 9, memorizeTime: 2000 }
-            ],
-            5:  [
-                { rows: 4, cols: 5, numbered: 7, memorizeTime: 2200 },
-                { rows: 4, cols: 5, numbered: 8, memorizeTime: 2000 },
-                { rows: 5, cols: 5, numbered: 9, memorizeTime: 2000 },
-                { rows: 5, cols: 5, numbered: 9, memorizeTime: 1800 },
-                { rows: 5, cols: 5, numbered: 10, memorizeTime: 1800 }
-            ],
-            6:  [
-                { rows: 5, cols: 5, numbered: 8, memorizeTime: 2000 },
-                { rows: 5, cols: 5, numbered: 9, memorizeTime: 1800 },
-                { rows: 5, cols: 6, numbered: 10, memorizeTime: 1800 },
-                { rows: 5, cols: 6, numbered: 11, memorizeTime: 1600 },
-                { rows: 5, cols: 6, numbered: 12, memorizeTime: 1600 }
-            ],
-            7:  [
-                { rows: 5, cols: 6, numbered: 9, memorizeTime: 1800 },
-                { rows: 5, cols: 6, numbered: 10, memorizeTime: 1600 },
-                { rows: 6, cols: 6, numbered: 11, memorizeTime: 1600 },
-                { rows: 6, cols: 6, numbered: 12, memorizeTime: 1400 },
-                { rows: 6, cols: 6, numbered: 13, memorizeTime: 1400 }
-            ],
-            8:  [
-                { rows: 6, cols: 6, numbered: 10, memorizeTime: 1600 },
-                { rows: 6, cols: 6, numbered: 11, memorizeTime: 1400 },
-                { rows: 6, cols: 6, numbered: 12, memorizeTime: 1400 },
-                { rows: 6, cols: 7, numbered: 13, memorizeTime: 1200 },
-                { rows: 6, cols: 7, numbered: 14, memorizeTime: 1200 }
-            ],
-            9:  [
-                { rows: 6, cols: 6, numbered: 11, memorizeTime: 1400 },
-                { rows: 6, cols: 7, numbered: 12, memorizeTime: 1200 },
-                { rows: 6, cols: 7, numbered: 13, memorizeTime: 1200 },
-                { rows: 6, cols: 7, numbered: 14, memorizeTime: 1000 },
-                { rows: 7, cols: 7, numbered: 15, memorizeTime: 1000 }
-            ],
-            10: [
-                { rows: 6, cols: 7, numbered: 12, memorizeTime: 1200 },
-                { rows: 6, cols: 7, numbered: 14, memorizeTime: 1000 },
-                { rows: 7, cols: 7, numbered: 15, memorizeTime: 1000 },
-                { rows: 7, cols: 7, numbered: 16, memorizeTime: 900 },
-                { rows: 7, cols: 7, numbered: 18, memorizeTime: 800 }
-            ]
-        };
-        return configs[level] || configs[1];
+        var n = level; // numbered = level number
+
+        // Pick a grid big enough to hold n numbers + some empty cells
+        // Minimum total cells = n + 2 (always some blanks)
+        var totalMin = n + 3;
+        var cols, rows;
+        if (totalMin <= 6)        { cols = 3; rows = 2; }   // 6 cells
+        else if (totalMin <= 8)   { cols = 4; rows = 2; }   // 8 cells
+        else if (totalMin <= 9)   { cols = 3; rows = 3; }   // 9 cells
+        else if (totalMin <= 12)  { cols = 4; rows = 3; }   // 12 cells
+        else if (totalMin <= 16)  { cols = 4; rows = 4; }   // 16 cells
+        else if (totalMin <= 20)  { cols = 5; rows = 4; }   // 20 cells
+        else                      { cols = 5; rows = 5; }   // 25 cells
+
+        // Memorize time: starts at 3000ms for n=4, reduces by 150ms per extra number
+        var memorizeTime = Math.max(800, 3200 - (n - 4) * 200);
+
+        var sub = { rows: rows, cols: cols, numbered: n, memorizeTime: memorizeTime };
+        return [sub, sub, sub, sub, sub, sub]; // 6 identical rounds
     }
 
     /* ─── UI helpers ─── */

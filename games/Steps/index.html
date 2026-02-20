@@ -16,8 +16,8 @@
         <div class="panel">
             <div class="topbar">
                 <div class="status">
-                    <div class="badge">Рівень: <span id="level">1</span></div>
-                    <div class="badge">Субрівень: <span id="sublevel">1</span> / 5</div>
+                    <div class="badge">Чисел: <span id="level">4</span></div>
+                    <div class="badge">Раунд: <span id="sublevel">1</span> / 6</div>
                     <div class="badge">Крок: <span id="progress">0</span> / <span id="total">0</span></div>
                     <div class="badge lives" id="lives">❤️❤️❤️</div>
                 </div>
@@ -35,20 +35,21 @@
 
             <div class="start-screen" id="start-screen">
                 <div class="start-content">
-                    <h3>Оберіть рівень</h3>
+                    <h3>Оберіть кількість чисел</h3>
                     <div class="level-grid" id="level-grid">
-                        <button class="level-btn" data-level="1"><span>1</span><small>Перший крок</small></button>
-                        <button class="level-btn" data-level="2"><span>2</span><small>Допитливий</small></button>
-                        <button class="level-btn" data-level="3"><span>3</span><small>Уважний</small></button>
-                        <button class="level-btn" data-level="4"><span>4</span><small>Тактик</small></button>
-                        <button class="level-btn" data-level="5"><span>5</span><small>Стратег</small></button>
-                        <button class="level-btn" data-level="6"><span>6</span><small>Навігатор</small></button>
-                        <button class="level-btn" data-level="7"><span>7</span><small>Архітектор</small></button>
-                        <button class="level-btn" data-level="8"><span>8</span><small>Провидець</small></button>
-                        <button class="level-btn" data-level="9"><span>9</span><small>Геній пам'яті</small></button>
-                        <button class="level-btn" data-level="10"><span>10</span><small>Абсолютна пам'ять</small></button>
+                        <button class="level-btn" data-level="4"><span>4</span></button>
+                        <button class="level-btn" data-level="5"><span>5</span></button>
+                        <button class="level-btn" data-level="6"><span>6</span></button>
+                        <button class="level-btn" data-level="7"><span>7</span></button>
+                        <button class="level-btn" data-level="8"><span>8</span></button>
+                        <button class="level-btn" data-level="9"><span>9</span></button>
+                        <button class="level-btn" data-level="10"><span>10</span></button>
+                        <button class="level-btn" data-level="11"><span>11</span></button>
+                        <button class="level-btn" data-level="12"><span>12</span></button>
+                        <button class="level-btn" data-level="13"><span>13</span></button>
+                        <button class="level-btn" data-level="14"><span>14</span></button>
                     </div>
-                    <div class="level-hint" id="level-hint"></div>
+                    <div class="level-hint" id="level-hint">запам’ятайте і натискайте за зростанням</div>
                 </div>
             </div>
 
@@ -59,7 +60,7 @@
                     <h2>Гру завершено</h2>
                     <div>Виконано кроків: <span id="correct">0</span> з <span id="total-result">0</span></div>
                     <div class="result-sub" id="result-sub">Раунд завершено</div>
-                    <h3>Найкращі результати (рівень <span id="best-level">1</span>)</h3>
+                    <h3>Найкращі результати (<span id="best-level">4</span> чисел)</h3>
                     <ul id="best-list"></ul>
                     <button id="play-again">Грати знову</button>
                 </div>
