@@ -48,10 +48,17 @@ var GameAnalytics = (function () {
     function ensurePlayerName() {
         var name = getPlayerName();
         if (!name) {
-            name = prompt("Введіть ваше ім'я:") || "";
-            name = name.trim();
-            if (name) {
-                setPlayerName(name);
+            var msg = "Введіть через пробіл: ім'я, прізвище, університет та курс\n\nПриклад: Іван Петренко КПІ 3";
+            while (true) {
+                name = prompt(msg) || "";
+                name = name.trim();
+                if (!name) break; // user cancelled
+                var parts = name.split(/\s+/);
+                if (parts.length >= 4) {
+                    setPlayerName(name);
+                    break;
+                }
+                msg = "⚠️ Потрібно ввести 4 слова: ім'я, прізвище, університет та курс\n\nПриклад: Іван Петренко КПІ 3\n\nВи ввели: \"" + name + "\" — це лише " + parts.length + " " + (parts.length === 1 ? "слово" : "слова") + ". Спробуйте ще раз:";
             }
         }
         return name;
