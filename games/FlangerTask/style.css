@@ -95,11 +95,9 @@ body {
 /* ——— Stage / Flock ——— */
 .stage {
     border-radius: 20px;
-    padding: 48px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     height: 320px;
+    position: relative;
+    overflow: hidden;
 }
 
 .flock {
@@ -107,7 +105,8 @@ body {
     align-items: center;
     justify-content: center;
     gap: 8px;
-    position: relative;
+    position: absolute;
+    transition: top 0.18s ease, left 0.18s ease;
 }
 
 .flock.layout-row {

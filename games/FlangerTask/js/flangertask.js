@@ -120,8 +120,24 @@ document.addEventListener("DOMContentLoaded", function () {
         for (var i = 0; i < 5; i++) {
             var dir = (i === 2) ? centerDir : flankerDir;
             var rotation = dirToRotation[dir];
-            birdEls[i].innerHTML = "<img src=\"./images/bird.png\" alt=\"Пташка\" style=\"transform: rotate(" + rotation + "deg);\">";
+            birdEls[i].innerHTML = "<img src=\"./images/bird.png\" alt=\"\u041f\u0442\u0430\u0448\u043a\u0430\" style=\"transform: rotate(" + rotation + "deg);\">";
         }
+
+        // Position the whole flock randomly within the stage
+        // We measure after a short frame so the layout is known
+        requestAnimationFrame(function () {
+            var stageW = flockEl.parentElement.clientWidth;
+            var stageH = flockEl.parentElement.clientHeight;
+            var flockW = flockEl.offsetWidth || 200;
+            var flockH = flockEl.offsetHeight || 100;
+            var padding = 10;
+            var maxLeft = Math.max(0, stageW - flockW - padding * 2);
+            var maxTop  = Math.max(0, stageH - flockH - padding * 2);
+            var randLeft = padding + Math.random() * maxLeft;
+            var randTop  = padding + Math.random() * maxTop;
+            flockEl.style.left = randLeft + "px";
+            flockEl.style.top  = randTop  + "px";
+        });
     }
 
     /* ——— Timer ——— */

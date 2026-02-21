@@ -81,7 +81,7 @@ body {
     text-align: center;
     font-size: 18px;
     font-weight: 700;
-    color: #374151;
+    color: #ffffff;
 }
 
 .stage {
@@ -99,10 +99,10 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #e5e7eb;
+    background: #3b82f6;
     position: relative;
     overflow: hidden;
-    opacity: 80%;
+    transition: background 0.2s ease;
 }
 
 .plane {

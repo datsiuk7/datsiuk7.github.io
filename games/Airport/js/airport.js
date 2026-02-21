@@ -102,16 +102,12 @@ document.addEventListener("DOMContentLoaded", function () {
             state.expectedDir = oppositeDir(state.planeDir);
         }
 
-        // Swap image based on rule color
-        var imgSrc = state.ruleColor === "blue" ? "./img/blue.png" : "./img/red.png";
-        planeEl.innerHTML = "<img src='" + imgSrc + "' alt='Машина' draggable='false'>";
+        // Set arena background color
+        arenaEl.style.background = state.ruleColor === "blue" ? "#3b82f6" : "#ef4444";
 
-        // Car faces right: right=0°, up=270°, down=90°, left=mirror scaleX(-1)
-        if (state.planeDir === "left") {
-            planeEl.style.transform = "scaleX(-1)";
-        } else {
-            planeEl.style.transform = "rotate(" + dirToRotation(state.planeDir) + ")";
-        }
+        // Rocket faces up — rotate to current direction
+        planeEl.innerHTML = "<img src='./img/rocket.png' alt='Ракета' draggable='false'>";
+        planeEl.style.transform = "rotate(" + dirToRotation(state.planeDir) + ")";
     }
 
     function tick() {

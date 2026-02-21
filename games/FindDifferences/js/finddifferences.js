@@ -24,8 +24,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     /* ——— SVG images pool ——— */
     var allImages = [];
-    for (var i = 1; i <= 23; i++) {
-        allImages.push("./svgs/" + i + ".svg");
+    for (var i = 1; i <= 33; i++) {
+        allImages.push("./svgs/1 (" + i + ").svg");
     }
 
     /* ——— Audio ——— */
