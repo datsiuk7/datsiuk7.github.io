@@ -96,16 +96,16 @@ document.addEventListener("DOMContentLoaded", function () {
         Flash interval also decreases (faster) with level.
     */
     var LEVEL_CONFIG = [
-        /* Level  1 */ { rows: 2, cols: 2, seqStart: 2, seqEnd: 4,  flashInterval: 700,  flashDuration: 500  },
-        /* Level  2 */ { rows: 2, cols: 3, seqStart: 3, seqEnd: 5,  flashInterval: 650,  flashDuration: 450  },
-        /* Level  3 */ { rows: 3, cols: 3, seqStart: 3, seqEnd: 6,  flashInterval: 600,  flashDuration: 420  },
-        /* Level  4 */ { rows: 3, cols: 4, seqStart: 4, seqEnd: 7,  flashInterval: 560,  flashDuration: 400  },
-        /* Level  5 */ { rows: 4, cols: 4, seqStart: 4, seqEnd: 8,  flashInterval: 520,  flashDuration: 380  },
-        /* Level  6 */ { rows: 4, cols: 5, seqStart: 5, seqEnd: 9,  flashInterval: 480,  flashDuration: 350  },
-        /* Level  7 */ { rows: 5, cols: 5, seqStart: 5, seqEnd: 10, flashInterval: 440,  flashDuration: 320  },
-        /* Level  8 */ { rows: 5, cols: 6, seqStart: 6, seqEnd: 11, flashInterval: 400,  flashDuration: 300  },
-        /* Level  9 */ { rows: 6, cols: 6, seqStart: 6, seqEnd: 12, flashInterval: 370,  flashDuration: 280  },
-        /* Level 10 */ { rows: 6, cols: 7, seqStart: 7, seqEnd: 13, flashInterval: 340,  flashDuration: 260  }
+        /* Level  1 */ { rows: 2, cols: 2, seqStart: 2, seqEnd: 4,  flashInterval: 900,  flashDuration: 700  },
+        /* Level  2 */ { rows: 2, cols: 3, seqStart: 3, seqEnd: 5,  flashInterval: 900,  flashDuration: 700  },
+        /* Level  3 */ { rows: 3, cols: 3, seqStart: 3, seqEnd: 6,  flashInterval: 900,  flashDuration: 700  },
+        /* Level  4 */ { rows: 3, cols: 4, seqStart: 4, seqEnd: 7,  flashInterval: 900,  flashDuration: 700  },
+        /* Level  5 */ { rows: 4, cols: 4, seqStart: 4, seqEnd: 8,  flashInterval: 900,  flashDuration: 700  },
+        /* Level  6 */ { rows: 4, cols: 5, seqStart: 5, seqEnd: 9,  flashInterval: 900,  flashDuration: 700  },
+        /* Level  7 */ { rows: 5, cols: 5, seqStart: 5, seqEnd: 10, flashInterval: 900,  flashDuration: 700  },
+        /* Level  8 */ { rows: 5, cols: 6, seqStart: 6, seqEnd: 11, flashInterval: 900,  flashDuration: 700  },
+        /* Level  9 */ { rows: 6, cols: 6, seqStart: 6, seqEnd: 12, flashInterval: 900,  flashDuration: 700  },
+        /* Level 10 */ { rows: 6, cols: 7, seqStart: 7, seqEnd: 13, flashInterval: 900,  flashDuration: 700  }
     ];
 
     var SUB_LEVELS_COUNT = 7;
@@ -114,15 +114,12 @@ document.addEventListener("DOMContentLoaded", function () {
         var cfg = LEVEL_CONFIG[level - 1];
         var t = sublevelIndex / (SUB_LEVELS_COUNT - 1); // 0..1
         var seqLen = Math.round(cfg.seqStart + t * (cfg.seqEnd - cfg.seqStart));
-        // Flash interval gets slightly faster within sub-levels
-        var intervalReduction = t * 60;
-        var durationReduction = t * 40;
         return {
             rows: cfg.rows,
             cols: cfg.cols,
             sequenceLength: seqLen,
-            flashInterval: Math.round(cfg.flashInterval - intervalReduction),
-            flashDuration: Math.round(cfg.flashDuration - durationReduction)
+            flashInterval: cfg.flashInterval,
+            flashDuration: cfg.flashDuration
         };
     }
 
@@ -137,7 +134,9 @@ document.addEventListener("DOMContentLoaded", function () {
         timerStart: 0,
         timerId: null,
         elapsedSeconds: 0,
-        completedSublevels: 0
+        completedSublevels: 0,
+        gameTime: 180,      // 3-minute countdown
+        gameTimerId: null
     };
 
     /* ——— Timer ——— */
@@ -147,20 +146,23 @@ document.addEventListener("DOMContentLoaded", function () {
         return m + ":" + (s < 10 ? "0" : "") + s;
     }
 
+    function tickGameTimer() {
+        if (!state.running) return;
+        state.gameTime -= 1;
+        timerEl.textContent = formatTime(state.gameTime);
+        if (state.gameTime <= 0) {
+            finishLevel("Час вийшов!", "Спробуйте ще раз.");
+        }
+    }
+
     function startTimer() {
-        state.timerStart = Date.now();
-        state.elapsedSeconds = 0;
-        timerEl.textContent = "0:00";
-        clearInterval(state.timerId);
-        state.timerId = setInterval(function () {
-            state.elapsedSeconds = Math.floor((Date.now() - state.timerStart) / 1000);
-            timerEl.textContent = formatTime(state.elapsedSeconds);
-        }, 500);
+        clearInterval(state.gameTimerId);
+        state.gameTimerId = setInterval(tickGameTimer, 1000);
     }
 
     function stopTimer() {
-        clearInterval(state.timerId);
-        state.timerId = null;
+        clearInterval(state.gameTimerId);
+        state.gameTimerId = null;
     }
 
     /* ——— UI helpers ——— */
@@ -391,6 +393,8 @@ document.addEventListener("DOMContentLoaded", function () {
         state.completedSublevels = 0;
         state.phase = "idle";
         state.running = true;
+        state.gameTime = 180;
+        timerEl.textContent = formatTime(state.gameTime);
 
         updateHeader();
         resultEl.classList.remove("visible");
@@ -410,9 +414,9 @@ document.addEventListener("DOMContentLoaded", function () {
         resultTitleEl.textContent = title || "Рівень завершено";
         resultMessageEl.textContent = message || "";
         finalSublevelsEl.textContent = state.completedSublevels + " / " + SUB_LEVELS_COUNT;
-        finalTimeEl.textContent = formatTime(state.elapsedSeconds);
+        finalTimeEl.textContent = formatTime(state.gameTime);
         resultEl.classList.add("visible");
-        GameAnalytics.send("game_end", { level: state.level, completedSublevels: state.completedSublevels, time: state.elapsedSeconds });
+        GameAnalytics.send("game_end", { level: state.level, completedSublevels: state.completedSublevels, timeLeft: state.gameTime });
     }
 
     /* ——— Countdown ——— */
@@ -444,6 +448,8 @@ document.addEventListener("DOMContentLoaded", function () {
         state.running = false;
         state.phase = "idle";
         stopTimer();
+        state.gameTime = 180;
+        timerEl.textContent = formatTime(state.gameTime);
         setPhase("", "");
     }
 

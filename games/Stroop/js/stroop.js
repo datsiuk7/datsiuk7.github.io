@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
     ];
 
     var state = {
-        time: 90,
+        time: 180,
         lives: 5,
         total: 0,
         correct: 0,
@@ -81,8 +81,8 @@ document.addEventListener("DOMContentLoaded", function () {
         var wordColor = pickRandom(colors);
         var inkColor;
         
-        // 40-50% chance that text and ink color MATCH (harder!)
-        var shouldMatch = Math.random() < 0.45; // 45% match rate
+        // 20% chance that text and ink color MATCH
+        var shouldMatch = Math.random() < 0.20; // 20% match rate
         
         if (shouldMatch) {
             // Text and ink are the SAME color
@@ -255,7 +255,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function resetGame(toStartScreen) {
         clearInterval(state.timerId);
-        state.time = 90;
+        state.time = 180;
         state.lives = 5;
         state.total = 0;
         state.correct = 0;

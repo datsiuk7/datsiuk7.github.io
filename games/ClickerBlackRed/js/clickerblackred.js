@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
+    var timeEl = document.getElementById("time");
     var levelEl = document.getElementById("level");
     var sublevelEl = document.getElementById("sublevel");
     var progressEl = document.getElementById("progress");
@@ -37,7 +38,9 @@ document.addEventListener("DOMContentLoaded", function () {
         maxLives: 3,
         remaining: [],
         currentTask: null,
-        nextTaskColor: "black"
+        nextTaskColor: "black",
+        time: 180,
+        timerId: null
     };
 
     var audioContext = null;
@@ -84,6 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function updateHeader() {
+        if (timeEl) timeEl.textContent = state.time;
         levelEl.textContent = state.level;
         sublevelEl.textContent = state.sublevelIndex + 1;
         progressEl.textContent = state.sequenceIndex;
@@ -260,6 +264,20 @@ document.addEventListener("DOMContentLoaded", function () {
         endGame(true, "Раунд завершено");
     }
 
+    function tickGameTimer() {
+        if (!state.running) return;
+        state.time -= 1;
+        if (timeEl) timeEl.textContent = state.time;
+        if (state.time <= 0) {
+            endGame(false, "Час вийшов!");
+        }
+    }
+
+    function startGameTimer() {
+        clearInterval(state.timerId);
+        state.timerId = setInterval(tickGameTimer, 1000);
+    }
+
     function showCountdown() {
         GameAnalytics.send("game_start", { level: state.level });
         var count = 3;
@@ -275,6 +293,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
             clearInterval(countdownId);
             countdownEl.classList.add("hidden");
+            startGameTimer();
             state.running = true;
         }, 1000);
     }
@@ -286,6 +305,10 @@ document.addEventListener("DOMContentLoaded", function () {
         state.lives = state.maxLives;
         state.nextTaskColor = "black";
         state.completedStepsLevel = 0;
+        state.time = 180;
+        if (timeEl) timeEl.textContent = state.time;
+        clearInterval(state.timerId);
+        state.timerId = null;
         state.totalStepsLevel = state.sublevels.reduce(function (sum, size) {
             return sum + size.rows * size.cols;
         }, 0);
@@ -300,6 +323,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function endGame(isWin, message) {
         state.running = false;
+        clearInterval(state.timerId);
+        state.timerId = null;
         stopResumeBtn.textContent = "Продовжити";
         correctEl.textContent = state.sequenceIndex;
         bestLevelEl.textContent = state.level;
@@ -397,6 +422,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     exitBtn.addEventListener("click", function () {
         state.running = false;
+        clearInterval(state.timerId);
+        state.timerId = null;
+        state.time = 180;
+        if (timeEl) timeEl.textContent = state.time;
         resultEl.classList.remove("visible");
         startScreenEl.classList.remove("hidden");
         stopResumeBtn.textContent = "Зупинити";

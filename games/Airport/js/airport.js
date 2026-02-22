@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var playAgainBtn = document.getElementById("play-again");
 
     var state = {
-        time: 90,
+        time: 180,
         lives: 5,
         total: 0,
         correct: 0,
@@ -228,7 +228,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function resetGame(toStartScreen) {
         clearInterval(state.timerId);
-        state.time = 90;
+        state.time = 180;
         state.lives = 5;
         state.total = 0;
         state.correct = 0;

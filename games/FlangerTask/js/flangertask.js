@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     /* ——— State ——— */
     var state = {
-        time: 90,
+        time: 180,
         lives: 5,
         total: 0,
         correct: 0,
@@ -104,9 +104,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     /* ——— Build round ——— */
     function buildRound() {
-        // Pick direction for the flanker birds (all 4 outer birds face same way)
-        var flankerDir = pickRandom(directions);
-
         // Pick direction for the center bird
         var centerDir = pickRandom(directions);
 
@@ -116,9 +113,9 @@ document.addEventListener("DOMContentLoaded", function () {
         var layout = pickRandom(layouts);
         flockEl.className = "flock " + layout;
 
-        // Render birds
+        // Render birds: each flanker independently picks a random direction
         for (var i = 0; i < 5; i++) {
-            var dir = (i === 2) ? centerDir : flankerDir;
+            var dir = (i === 2) ? centerDir : pickRandom(directions);
             var rotation = dirToRotation[dir];
             birdEls[i].innerHTML = "<img src=\"./images/bird.png\" alt=\"\u041f\u0442\u0430\u0448\u043a\u0430\" style=\"transform: rotate(" + rotation + "deg);\">";
         }
@@ -268,7 +265,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function resetGame(toStartScreen) {
         clearInterval(state.timerId);
-        state.time = 90;
+        state.time = 180;
         state.lives = 5;
         state.total = 0;
         state.correct = 0;

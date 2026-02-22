@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     /* ——— DOM refs ——— */
+    var timeEl = document.getElementById("time");
     var levelEl = document.getElementById("level");
     var sublevelEl = document.getElementById("sublevel");
     var totalSublevelsEl = document.getElementById("total-sublevels");
@@ -208,11 +209,14 @@ document.addEventListener("DOMContentLoaded", function () {
         running: false,
         locked: false,
         completedSublevels: 0,
-        phase: "idle"        // "idle" | "memorize" | "find" | "finished"
+        phase: "idle",       // "idle" | "memorize" | "find" | "finished"
+        time: 180,
+        timerId: null
     };
 
     /* ——— Header ——— */
     function updateHeader() {
+        if (timeEl) timeEl.textContent = state.time;
         levelEl.textContent = state.level;
         sublevelEl.textContent = state.sublevelIndex + 1;
         totalSublevelsEl.textContent = SUB_LEVELS_COUNT;
@@ -258,6 +262,20 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    function tickGameTimer() {
+        if (!state.running) return;
+        state.time -= 1;
+        if (timeEl) timeEl.textContent = state.time;
+        if (state.time <= 0) {
+            finishLevel("Час вийшов!", "Спробуйте ще раз.");
+        }
+    }
+
+    function startGameTimer() {
+        clearInterval(state.timerId);
+        state.timerId = setInterval(tickGameTimer, 1000);
+    }
+
     /* ——— Game flow ——— */
 
     function startLevel(level) {
@@ -269,12 +287,17 @@ document.addEventListener("DOMContentLoaded", function () {
         state.completedSublevels = 0;
         state.running = false;
         state.phase = "idle";
+        state.time = 180;
+        if (timeEl) timeEl.textContent = state.time;
+        clearInterval(state.timerId);
+        state.timerId = null;
 
         updateHeader();
         resultEl.classList.remove("visible");
         startScreenEl.classList.add("hidden");
 
         showCountdown(function () {
+            startGameTimer();
             startSublevel();
         });
     }
@@ -411,9 +434,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 setPhaseText("Чудово! Всі знайдено!", "success-phase");
                 setTimeout(function () {
                     var cfg = state.sublevelConfigs[state.sublevelIndex];
-                    // Continue: the current set becomes the "memorized" set
-                    // Show brief memorize for the current board before next swap
-                    showMemorizePhase(cfg);
+                    // If this was the last round — go straight to next sublevel
+                    if (state.round >= cfg.rounds) {
+                        state.completedSublevels++;
+                        playLevelCompleteSound();
+                        advanceSublevel();
+                    } else {
+                        // Show brief memorize for the current board before next swap
+                        showMemorizePhase(cfg);
+                    }
                 }, 1000);
             }
         } else {
@@ -479,6 +508,8 @@ document.addEventListener("DOMContentLoaded", function () {
     function finishLevel(title, message) {
         state.running = false;
         state.phase = "idle";
+        clearInterval(state.timerId);
+        state.timerId = null;
         resultTitleEl.textContent = title || "Рівень завершено";
         resultMessageEl.textContent = message || "";
         finalScoreEl.textContent = state.score;
@@ -516,6 +547,10 @@ document.addEventListener("DOMContentLoaded", function () {
         boardEl.innerHTML = "";
         state.running = false;
         state.phase = "idle";
+        clearInterval(state.timerId);
+        state.timerId = null;
+        state.time = 180;
+        if (timeEl) timeEl.textContent = state.time;
         setPhaseText("Запам'ятайте ці предмети", "");
     }
 

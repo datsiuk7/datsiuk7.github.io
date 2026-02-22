@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
     ];
 
     var state = {
-        time: 90,
+        time: 180,
         lives: 5,
         total: 0,
         correct: 0,
@@ -106,7 +106,7 @@ document.addEventListener("DOMContentLoaded", function () {
         ~50% chance the answer is "Так" to keep it fair.
     */
     function buildRound() {
-        var shouldMatch = Math.random() < 0.5;
+        var shouldMatch = Math.random() < 0.4; // 40% match rate
 
         // Pick the color NAME that the left card will display
         var leftColorObj = pickRandom(colors);
@@ -123,8 +123,12 @@ document.addEventListener("DOMContentLoaded", function () {
             rightInkObj = pickRandomExcluding(colors, leftColorObj.name);
         }
 
-        // Right card word — any color name, preferably different from its own ink
-        var rightWordObj = pickRandomExcluding(colors, rightInkObj.name);
+        // Right card word — must differ from its own ink AND from the left card's name
+        // (to avoid the displayed word falsely suggesting a match on non-match rounds)
+        var rightWordExcludes = shouldMatch
+            ? rightInkObj.name          // only exclude own ink colour
+            : leftColorObj.name;        // also exclude left name so word can't mislead
+        var rightWordObj = pickRandomExcluding(colors, rightWordExcludes);
 
         // Set left card
         wordLeftEl.textContent = leftColorObj.name;
@@ -268,7 +272,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function resetGame(toStartScreen) {
         clearInterval(state.timerId);
-        state.time = 90;
+        state.time = 180;
         state.lives = 5;
         state.total = 0;
         state.correct = 0;

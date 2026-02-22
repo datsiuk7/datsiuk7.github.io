@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // ===== Стан гри =====
     var state = {
-        time: 90,
+        time: 180,
         lives: 5,
         total: 0,
         correct: 0,
@@ -268,10 +268,13 @@ document.addEventListener("DOMContentLoaded", function () {
             // Рендеримо поки завіса закрита — іконки зʼявляються без анімації
             renderIcons();
 
-            // Невелика затримка щоб браузер встиг намалювати DOM перед відкриттям
-            setTimeout(function () {
-                openCurtain();
-            }, 80);
+            // Затримка щоб браузер встиг намалювати DOM перед відкриттям
+            // Використовуємо requestAnimationFrame + setTimeout для гарантії
+            requestAnimationFrame(function () {
+                setTimeout(function () {
+                    openCurtain();
+                }, 150);
+            });
         });
     }
 
@@ -382,7 +385,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // ===== Скидання гри =====
     function resetGame(toStartScreen) {
         clearInterval(state.timerId);
-        state.time = 90;
+        state.time = 180;
         state.lives = 5;
         state.total = 0;
         state.correct = 0;

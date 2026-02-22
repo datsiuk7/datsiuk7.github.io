@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     var shapes = ["circle", "square", "triangle", "hexagon", "star"];
     var state = {
-        time: 90,
+        time: 180,
         lives: 5,
         total: 0,
         correct: 0,
@@ -238,7 +238,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function resetGame() {
-        state.time = 90;
+        state.time = 180;
         state.lives = 5;
         state.total = 0;
         state.correct = 0;

@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
+    var timeEl = document.getElementById("time");
     var levelEl = document.getElementById("level");
     var sublevelEl = document.getElementById("sublevel");
     var progressEl = document.getElementById("progress");
@@ -37,7 +38,9 @@ document.addEventListener("DOMContentLoaded", function () {
         lives: 3,
         maxLives: 3,
         memorizeTimer: null,
-        cells: []
+        cells: [],
+        time: 180,
+        timerId: null
     };
 
     var audioContext = null;
@@ -120,6 +123,7 @@ document.addEventListener("DOMContentLoaded", function () {
     /* ─── UI helpers ─── */
 
     function updateHeader() {
+        if (timeEl) timeEl.textContent = state.time;
         levelEl.textContent = state.level;
         sublevelEl.textContent = state.sublevelIndex + 1;
         progressEl.textContent = state.nextExpected - 1;
@@ -302,6 +306,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
     /* ─── Game flow ─── */
 
+    function tickGameTimer() {
+        if (!state.running) return;
+        state.time -= 1;
+        if (timeEl) timeEl.textContent = state.time;
+        if (state.time <= 0) {
+            revealRemaining();
+            endGame(false, "Час вийшов!");
+        }
+    }
+
+    function startGameTimer() {
+        clearInterval(state.timerId);
+        state.timerId = setInterval(tickGameTimer, 1000);
+    }
+
     function showCountdown() {
         GameAnalytics.send("game_start", { level: state.level });
         var count = 3;
@@ -317,6 +336,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
             clearInterval(cid);
             countdownEl.classList.add("hidden");
+            startGameTimer();
             state.running = true;
             startSublevel();
         }, 1000);
@@ -329,6 +349,10 @@ document.addEventListener("DOMContentLoaded", function () {
         state.lives = state.maxLives;
         state.phase = "idle";
         state.completedStepsLevel = 0;
+        state.time = 180;
+        if (timeEl) timeEl.textContent = state.time;
+        clearInterval(state.timerId);
+        state.timerId = null;
         state.totalStepsLevel = state.sublevels.reduce(function (sum, cfg) {
             return sum + cfg.numbered;
         }, 0);
@@ -344,6 +368,8 @@ document.addEventListener("DOMContentLoaded", function () {
     function endGame(isWin, message) {
         state.running = false;
         state.phase = "idle";
+        clearInterval(state.timerId);
+        state.timerId = null;
         if (state.memorizeTimer) {
             clearTimeout(state.memorizeTimer);
             state.memorizeTimer = null;
@@ -467,6 +493,10 @@ document.addEventListener("DOMContentLoaded", function () {
     exitBtn.addEventListener("click", function () {
         state.running = false;
         state.phase = "idle";
+        clearInterval(state.timerId);
+        state.timerId = null;
+        state.time = 180;
+        if (timeEl) timeEl.textContent = state.time;
         if (state.memorizeTimer) {
             clearTimeout(state.memorizeTimer);
             state.memorizeTimer = null;

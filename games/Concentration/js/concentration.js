@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
+    var timeEl = document.getElementById("time");
     var levelEl = document.getElementById("level");
     var sublevelEl = document.getElementById("sublevel");
     var movesEl = document.getElementById("moves");
@@ -36,7 +37,9 @@ document.addEventListener("DOMContentLoaded", function () {
         totalPairs: 0,
         lives: 5,
         maxLives: 5,
-        running: false
+        running: false,
+        time: 180,
+        timerId: null
     };
 
     function initAudio() {
@@ -98,6 +101,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function updateHeader() {
+        if (timeEl) timeEl.textContent = state.time;
         levelEl.textContent = state.level;
         sublevelEl.textContent = state.sublevelIndex + 1;
         movesEl.textContent = state.moves;
@@ -190,6 +194,20 @@ document.addEventListener("DOMContentLoaded", function () {
         updateHeader();
     }
 
+    function tickGameTimer() {
+        if (!state.running) return;
+        state.time -= 1;
+        if (timeEl) timeEl.textContent = state.time;
+        if (state.time <= 0) {
+            finishLevel("Час вийшов!");
+        }
+    }
+
+    function startGameTimer() {
+        clearInterval(state.timerId);
+        state.timerId = setInterval(tickGameTimer, 1000);
+    }
+
     function startSublevel() {
         var size = state.sublevels[state.sublevelIndex];
         state.moves = 0;
@@ -239,6 +257,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function finishLevel(message) {
         state.running = false;
+        clearInterval(state.timerId);
+        state.timerId = null;
         finalMovesEl.textContent = state.moves;
         finalPairsEl.textContent = state.matchedPairs + " / " + state.totalPairs;
         resultEl.classList.add("visible");
@@ -265,6 +285,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
             clearInterval(countdownId);
             countdownEl.classList.add("hidden");
+            startGameTimer();
             state.running = true;
         }, 1000);
     }
@@ -274,6 +295,10 @@ document.addEventListener("DOMContentLoaded", function () {
         startScreenEl.classList.remove("hidden");
         boardEl.innerHTML = "";
         state.running = false;
+        clearInterval(state.timerId);
+        state.timerId = null;
+        state.time = 180;
+        if (timeEl) timeEl.textContent = state.time;
     }
 
     levelButtons.forEach(function (button) {
