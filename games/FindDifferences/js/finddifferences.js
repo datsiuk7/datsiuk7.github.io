@@ -29,6 +29,14 @@ document.addEventListener("DOMContentLoaded", function () {
         allImages.push("./svgs/1 (" + i + ").svg");
     }
 
+    /* ——— Preload all SVGs on page load ——— */
+    (function preloadAllImages() {
+        allImages.forEach(function (src) {
+            var img = new Image();
+            img.src = src;
+        });
+    })();
+
     /* ——— Audio ——— */
     var audioContext = null;
 
@@ -431,18 +439,20 @@ document.addEventListener("DOMContentLoaded", function () {
             // Check if all new items found
             if (state.foundNew.length >= state.newItems.length) {
                 state.locked = true;
-                setPhaseText("Чудово! Всі знайдено!", "success-phase");
+                setPhaseText("Чудово!", "success-phase");
                 setTimeout(function () {
                     var cfg = state.sublevelConfigs[state.sublevelIndex];
                     // If this was the last round — go straight to next sublevel
-                    if (state.round >= cfg.rounds) {
+                    // if (state.round >= cfg.rounds) {
                         state.completedSublevels++;
                         playLevelCompleteSound();
                         advanceSublevel();
-                    } else {
-                        // Show brief memorize for the current board before next swap
-                        showMemorizePhase(cfg);
-                    }
+                    // } else {
+                        // Skip re-memorize — go directly to next find phase
+                        //advanceToFindPhase(cfg);
+                        // showMemorizePhase(cfg);
+                        // advanceSublevel();
+                    // }
                 }, 1000);
             }
         } else {

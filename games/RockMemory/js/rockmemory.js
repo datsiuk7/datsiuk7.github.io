@@ -31,6 +31,14 @@ document.addEventListener("DOMContentLoaded", function () {
         allSvgs.push(i);
     }
 
+    // ===== Попереднє завантаження всіх SVG =====
+    (function preloadAllSvgs() {
+        for (var i = 1; i <= TOTAL_SVGS; i++) {
+            var img = new Image();
+            img.src = "./svgs/" + i + ".svg";
+        }
+    })();
+
     // ===== Стан гри =====
     var state = {
         time: 180,
