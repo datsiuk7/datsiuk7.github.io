@@ -261,6 +261,7 @@ document.addEventListener("DOMContentLoaded", function () {
         renderBest(results);
         resultEl.classList.add("visible");
         GameAnalytics.send("game_end", { correct: state.correct, total: state.total });
+        setTimeout(function () { GameWidgets.renderLeaderboardInline(); }, 500);
     }
 
     function resetGame(toStartScreen) {

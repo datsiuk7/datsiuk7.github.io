@@ -263,6 +263,7 @@ document.addEventListener("DOMContentLoaded", function () {
         finalPairsEl.textContent = state.matchedPairs + " / " + state.totalPairs;
         resultEl.classList.add("visible");
         GameAnalytics.send("game_end", { level: state.level, moves: state.moves, matchedPairs: state.matchedPairs, totalPairs: state.totalPairs });
+        setTimeout(function () { GameWidgets.renderLeaderboardInline(); }, 500);
         if (message) {
             resultEl.querySelector("h2").textContent = message;
         } else {

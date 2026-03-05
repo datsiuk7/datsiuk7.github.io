@@ -6,6 +6,7 @@
     <title>Концентрація</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style.css?v=1.0.8">
+    <link rel="stylesheet" href="../js/game-widgets.css">
 </head>
 <body>
     <header class="game-header">
@@ -66,6 +67,7 @@
                     <h2>Рівень завершено</h2>
                     <div>Кроків за рівень: <span id="final-moves">0</span></div>
                     <div>Знайдено пар: <span id="final-pairs">0</span></div>
+                    <div id="gw-leaderboard-inline"></div>
                     <button id="play-again">Грати знову</button>
                 </div>
             </div>
@@ -73,6 +75,7 @@
     </div>
 
     <script src="../js/analytics.js"></script>
+    <script src="../js/game-widgets.js"></script>
     <script src="./js/concentration.js?v=1.0.8"></script>
 </body>
 </html>

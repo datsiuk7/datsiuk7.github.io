@@ -388,6 +388,7 @@ document.addEventListener("DOMContentLoaded", function () {
             total: state.totalStepsLevel,
             win: isWin
         });
+        setTimeout(function () { GameWidgets.renderLeaderboardInline(); }, 500);
     }
 
     /* ─── Save / Best ─── */

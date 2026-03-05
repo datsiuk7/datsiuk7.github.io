@@ -333,6 +333,7 @@ document.addEventListener("DOMContentLoaded", function () {
         renderBest();
         resultEl.classList.add("visible");
         GameAnalytics.send("game_end", { level: state.level, steps: state.completedStepsLevel, total: state.totalStepsLevel, win: isWin });
+        setTimeout(function () { GameWidgets.renderLeaderboardInline(); }, 500);
     }
 
     function saveResult(isWin, timeSpent) {

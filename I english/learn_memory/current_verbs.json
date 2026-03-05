@@ -1,0 +1,72 @@
+[
+  {
+    "base": "be",
+    "past_simple": "was/were",
+    "past_participle": "been",
+    "translation": "бути",
+    "example": "I was tired yesterday."
+  },
+  {
+    "base": "have",
+    "past_simple": "had",
+    "past_participle": "had",
+    "translation": "мати",
+    "example": "She had a great time."
+  },
+  {
+    "base": "do",
+    "past_simple": "did",
+    "past_participle": "done",
+    "translation": "робити",
+    "example": "He did his homework."
+  },
+  {
+    "base": "say",
+    "past_simple": "said",
+    "past_participle": "said",
+    "translation": "говорити/сказати",
+    "example": "She said hello to me."
+  },
+  {
+    "base": "go",
+    "past_simple": "went",
+    "past_participle": "gone",
+    "translation": "іти/йти",
+    "example": "They went to the park."
+  },
+  {
+    "base": "get",
+    "past_simple": "got",
+    "past_participle": "got/gotten",
+    "translation": "отримувати/ставати",
+    "example": "I got a letter from her."
+  },
+  {
+    "base": "make",
+    "past_simple": "made",
+    "past_participle": "made",
+    "translation": "робити/створювати",
+    "example": "He made a delicious cake."
+  },
+  {
+    "base": "know",
+    "past_simple": "knew",
+    "past_participle": "known",
+    "translation": "знати",
+    "example": "She knew the answer."
+  },
+  {
+    "base": "take",
+    "past_simple": "took",
+    "past_participle": "taken",
+    "translation": "брати",
+    "example": "He took my pen."
+  },
+  {
+    "base": "see",
+    "past_simple": "saw",
+    "past_participle": "seen",
+    "translation": "бачити",
+    "example": "I saw a beautiful sunset."
+  }
+]

@@ -4,11 +4,13 @@
  * with XMLHttpRequest fallback.
  *
  * Also manages player name (localStorage) and visitor_id.
+ * Provides comments and leaderboard API.
  */
 var GameAnalytics = (function () {
     "use strict";
 
-    var API_URL = "https://games.datsiuk.com/api/game-events";
+    var API_BASE = "https://games.datsiuk.com/api";
+    var API_URL = API_BASE + "/game-events";
 
     /* ——— Session & Visitor ID ——— */
     function generateId() {
@@ -98,13 +100,107 @@ var GameAnalytics = (function () {
     function detectGame() {
         var path = window.location.pathname || "";
         var parts = path.split("/").filter(Boolean);
-        // URL pattern: /games/GameName/index.html
+        // URL pattern: /games/GameName/index.html or /GameName/index.html
         for (var i = 0; i < parts.length; i++) {
             if (parts[i] === "games" && parts[i + 1]) {
                 return parts[i + 1];
             }
         }
-        return parts[parts.length - 2] || "unknown";
+        // Fallback: second-to-last segment
+        return parts[parts.length - 2] || parts[parts.length - 1] || "unknown";
+    }
+
+    /* ================================================================
+     *  Comments API
+     * ================================================================ */
+
+    /**
+     * Fetch comments for the current game.
+     * @param {function} callback - receives array of comment objects
+     */
+    function fetchComments(callback) {
+        var game = detectGame();
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", API_BASE + "/comments/" + encodeURIComponent(game), true);
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                try {
+                    var resp = JSON.parse(xhr.responseText);
+                    callback(resp.comments || []);
+                } catch (e) {
+                    callback([]);
+                }
+            } else {
+                callback([]);
+            }
+        };
+        xhr.onerror = function () { callback([]); };
+        xhr.send();
+    }
+
+    /**
+     * Post a new comment.
+     * @param {string} text - the comment text
+     * @param {function} callback - receives the new comment object or null on error
+     */
+    function postComment(text, callback) {
+        var game = detectGame();
+        var name = getPlayerName();
+        if (!name) {
+            name = ensurePlayerName();
+            if (!name) { callback(null); return; }
+        }
+        var payload = JSON.stringify({
+            game: game,
+            player_name: name,
+            visitor_id: visitorId,
+            comment: text
+        });
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", API_BASE + "/comments", true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onload = function () {
+            if (xhr.status === 201) {
+                try {
+                    var resp = JSON.parse(xhr.responseText);
+                    callback(resp.comment || null);
+                } catch (e) {
+                    callback(null);
+                }
+            } else {
+                callback(null);
+            }
+        };
+        xhr.onerror = function () { callback(null); };
+        xhr.send(payload);
+    }
+
+    /* ================================================================
+     *  Leaderboard API
+     * ================================================================ */
+
+    /**
+     * Fetch leaderboard for the current game (all players).
+     * @param {function} callback - receives { game, leaderboard: [], total }
+     */
+    function fetchLeaderboard(callback) {
+        var game = detectGame();
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", API_BASE + "/leaderboard/" + encodeURIComponent(game), true);
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                try {
+                    var resp = JSON.parse(xhr.responseText);
+                    callback(resp);
+                } catch (e) {
+                    callback({ game: game, leaderboard: [], total: 0 });
+                }
+            } else {
+                callback({ game: game, leaderboard: [], total: 0 });
+            }
+        };
+        xhr.onerror = function () { callback({ game: game, leaderboard: [], total: 0 }); };
+        xhr.send();
     }
 
     /* ——— Public API ——— */
@@ -114,6 +210,10 @@ var GameAnalytics = (function () {
         visitorId: visitorId,
         getPlayerName: getPlayerName,
         setPlayerName: setPlayerName,
-        ensurePlayerName: ensurePlayerName
+        ensurePlayerName: ensurePlayerName,
+        detectGame: detectGame,
+        fetchComments: fetchComments,
+        postComment: postComment,
+        fetchLeaderboard: fetchLeaderboard
     };
 })();

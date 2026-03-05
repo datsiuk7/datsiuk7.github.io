@@ -6,6 +6,7 @@
     <title>Кроки</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style.css?v=1.0.8">
+    <link rel="stylesheet" href="../js/game-widgets.css">
 </head>
 <body>
     <header class="game-header">
@@ -61,8 +62,7 @@
                     <h2>Гру завершено</h2>
                     <div>Виконано кроків: <span id="correct">0</span> з <span id="total-result">0</span></div>
                     <div class="result-sub" id="result-sub">Раунд завершено</div>
-                    <h3>Найкращі результати (<span id="best-level">4</span> чисел)</h3>
-                    <ul id="best-list"></ul>
+                    <div id="gw-leaderboard-inline"><span id="best-level" style="display:none">4</span><ul id="best-list" style="display:none"></ul></div>
                     <button id="play-again">Грати знову</button>
                 </div>
             </div>
@@ -70,6 +70,7 @@
     </div>
 
     <script src="../js/analytics.js"></script>
+    <script src="../js/game-widgets.js"></script>
     <script src="./js/steps.js?v=1.0.8"></script>
 </body>
 </html>

@@ -1,0 +1,352 @@
+[
+  {
+    "base": "come",
+    "past_simple": "came",
+    "past_participle": "come",
+    "translation": "приходити",
+    "example": "She came home late."
+  },
+  {
+    "base": "think",
+    "past_simple": "thought",
+    "past_participle": "thought",
+    "translation": "думати",
+    "example": "I thought about it."
+  },
+  {
+    "base": "look",
+    "past_simple": "looked",
+    "past_participle": "looked",
+    "translation": "дивитися",
+    "example": "He looked at the sky."
+  },
+  {
+    "base": "want",
+    "past_simple": "wanted",
+    "past_participle": "wanted",
+    "translation": "хотіти",
+    "example": "She wanted a new car."
+  },
+  {
+    "base": "give",
+    "past_simple": "gave",
+    "past_participle": "given",
+    "translation": "давати",
+    "example": "He gave me a gift."
+  },
+  {
+    "base": "find",
+    "past_simple": "found",
+    "past_participle": "found",
+    "translation": "знаходити",
+    "example": "I found my keys."
+  },
+  {
+    "base": "tell",
+    "past_simple": "told",
+    "past_participle": "told",
+    "translation": "розповідати",
+    "example": "She told me the truth."
+  },
+  {
+    "base": "become",
+    "past_simple": "became",
+    "past_participle": "become",
+    "translation": "ставати",
+    "example": "He became a doctor."
+  },
+  {
+    "base": "show",
+    "past_simple": "showed",
+    "past_participle": "shown",
+    "translation": "показувати",
+    "example": "She showed me her art."
+  },
+  {
+    "base": "leave",
+    "past_simple": "left",
+    "past_participle": "left",
+    "translation": "залишати/виходити",
+    "example": "He left the room."
+  },
+  {
+    "base": "feel",
+    "past_simple": "felt",
+    "past_participle": "felt",
+    "translation": "відчувати",
+    "example": "I felt happy."
+  },
+  {
+    "base": "put",
+    "past_simple": "put",
+    "past_participle": "put",
+    "translation": "класти",
+    "example": "She put the book on the shelf."
+  },
+  {
+    "base": "bring",
+    "past_simple": "brought",
+    "past_participle": "brought",
+    "translation": "приносити",
+    "example": "He brought flowers."
+  },
+  {
+    "base": "begin",
+    "past_simple": "began",
+    "past_participle": "begun",
+    "translation": "починати",
+    "example": "The movie began at 8."
+  },
+  {
+    "base": "keep",
+    "past_simple": "kept",
+    "past_participle": "kept",
+    "translation": "тримати/зберігати",
+    "example": "She kept the secret."
+  },
+  {
+    "base": "hold",
+    "past_simple": "held",
+    "past_participle": "held",
+    "translation": "тримати",
+    "example": "He held my hand."
+  },
+  {
+    "base": "write",
+    "past_simple": "wrote",
+    "past_participle": "written",
+    "translation": "писати",
+    "example": "She wrote a letter."
+  },
+  {
+    "base": "stand",
+    "past_simple": "stood",
+    "past_participle": "stood",
+    "translation": "стояти",
+    "example": "He stood near the door."
+  },
+  {
+    "base": "hear",
+    "past_simple": "heard",
+    "past_participle": "heard",
+    "translation": "чути",
+    "example": "I heard a strange sound."
+  },
+  {
+    "base": "let",
+    "past_simple": "let",
+    "past_participle": "let",
+    "translation": "дозволяти",
+    "example": "She let me borrow her book."
+  },
+  {
+    "base": "meet",
+    "past_simple": "met",
+    "past_participle": "met",
+    "translation": "зустрічати",
+    "example": "We met at the café."
+  },
+  {
+    "base": "run",
+    "past_simple": "ran",
+    "past_participle": "run",
+    "translation": "бігти",
+    "example": "He ran to the bus stop."
+  },
+  {
+    "base": "pay",
+    "past_simple": "paid",
+    "past_participle": "paid",
+    "translation": "платити",
+    "example": "I paid the bill."
+  },
+  {
+    "base": "sit",
+    "past_simple": "sat",
+    "past_participle": "sat",
+    "translation": "сидіти",
+    "example": "She sat by the window."
+  },
+  {
+    "base": "speak",
+    "past_simple": "spoke",
+    "past_participle": "spoken",
+    "translation": "говорити",
+    "example": "He spoke to the manager."
+  },
+  {
+    "base": "lie",
+    "past_simple": "lay",
+    "past_participle": "lain",
+    "translation": "лежати",
+    "example": "She lay on the grass."
+  },
+  {
+    "base": "read",
+    "past_simple": "read",
+    "past_participle": "read",
+    "translation": "читати",
+    "example": "He read the newspaper."
+  },
+  {
+    "base": "spend",
+    "past_simple": "spent",
+    "past_participle": "spent",
+    "translation": "витрачати/проводити",
+    "example": "We spent the day outdoors."
+  },
+  {
+    "base": "grow",
+    "past_simple": "grew",
+    "past_participle": "grown",
+    "translation": "рости",
+    "example": "The plant grew quickly."
+  },
+  {
+    "base": "lose",
+    "past_simple": "lost",
+    "past_participle": "lost",
+    "translation": "губити/втрачати",
+    "example": "She lost her wallet."
+  },
+  {
+    "base": "fall",
+    "past_simple": "fell",
+    "past_participle": "fallen",
+    "translation": "падати",
+    "example": "He fell off his bike."
+  },
+  {
+    "base": "drive",
+    "past_simple": "drove",
+    "past_participle": "driven",
+    "translation": "водити/їхати",
+    "example": "She drove to work."
+  },
+  {
+    "base": "break",
+    "past_simple": "broke",
+    "past_participle": "broken",
+    "translation": "ламати",
+    "example": "He broke the window."
+  },
+  {
+    "base": "buy",
+    "past_simple": "bought",
+    "past_participle": "bought",
+    "translation": "купувати",
+    "example": "She bought a new dress."
+  },
+  {
+    "base": "eat",
+    "past_simple": "ate",
+    "past_participle": "eaten",
+    "translation": "їсти",
+    "example": "I ate pizza for dinner."
+  },
+  {
+    "base": "send",
+    "past_simple": "sent",
+    "past_participle": "sent",
+    "translation": "надсилати",
+    "example": "She sent an email."
+  },
+  {
+    "base": "build",
+    "past_simple": "built",
+    "past_participle": "built",
+    "translation": "будувати",
+    "example": "They built a house."
+  },
+  {
+    "base": "understand",
+    "past_simple": "understood",
+    "past_participle": "understood",
+    "translation": "розуміти",
+    "example": "I understood the lesson."
+  },
+  {
+    "base": "cut",
+    "past_simple": "cut",
+    "past_participle": "cut",
+    "translation": "різати",
+    "example": "She cut the bread."
+  },
+  {
+    "base": "set",
+    "past_simple": "set",
+    "past_participle": "set",
+    "translation": "ставити/встановлювати",
+    "example": "He set the table."
+  },
+  {
+    "base": "win",
+    "past_simple": "won",
+    "past_participle": "won",
+    "translation": "вигравати",
+    "example": "She won the race."
+  },
+  {
+    "base": "choose",
+    "past_simple": "chose",
+    "past_participle": "chosen",
+    "translation": "вибирати",
+    "example": "He chose the red one."
+  },
+  {
+    "base": "fly",
+    "past_simple": "flew",
+    "past_participle": "flown",
+    "translation": "летіти",
+    "example": "The bird flew away."
+  },
+  {
+    "base": "throw",
+    "past_simple": "threw",
+    "past_participle": "thrown",
+    "translation": "кидати",
+    "example": "He threw the ball."
+  },
+  {
+    "base": "catch",
+    "past_simple": "caught",
+    "past_participle": "caught",
+    "translation": "ловити",
+    "example": "She caught the ball."
+  },
+  {
+    "base": "teach",
+    "past_simple": "taught",
+    "past_participle": "taught",
+    "translation": "вчити/навчати",
+    "example": "He taught English."
+  },
+  {
+    "base": "sleep",
+    "past_simple": "slept",
+    "past_participle": "slept",
+    "translation": "спати",
+    "example": "She slept well last night."
+  },
+  {
+    "base": "sell",
+    "past_simple": "sold",
+    "past_participle": "sold",
+    "translation": "продавати",
+    "example": "He sold his old car."
+  },
+  {
+    "base": "swim",
+    "past_simple": "swam",
+    "past_participle": "swum",
+    "translation": "плавати",
+    "example": "We swam in the lake."
+  },
+  {
+    "base": "draw",
+    "past_simple": "drew",
+    "past_participle": "drawn",
+    "translation": "малювати",
+    "example": "She drew a beautiful picture."
+  }
+]

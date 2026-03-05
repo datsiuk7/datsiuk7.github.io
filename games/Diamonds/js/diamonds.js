@@ -417,6 +417,7 @@ document.addEventListener("DOMContentLoaded", function () {
         finalTimeEl.textContent = formatTime(state.gameTime);
         resultEl.classList.add("visible");
         GameAnalytics.send("game_end", { level: state.level, completedSublevels: state.completedSublevels, timeLeft: state.gameTime });
+        setTimeout(function () { GameWidgets.renderLeaderboardInline(); }, 500);
     }
 
     /* ——— Countdown ——— */

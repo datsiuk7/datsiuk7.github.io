@@ -526,6 +526,7 @@ document.addEventListener("DOMContentLoaded", function () {
         finalSublevelsEl.textContent = state.completedSublevels + " / " + SUB_LEVELS_COUNT;
         resultEl.classList.add("visible");
         GameAnalytics.send("game_end", { level: state.level, score: state.score, completedSublevels: state.completedSublevels });
+        setTimeout(function () { GameWidgets.renderLeaderboardInline(); }, 500);
     }
 
     /* ——— Countdown ——— */
