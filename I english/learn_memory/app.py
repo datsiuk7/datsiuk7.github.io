@@ -101,10 +101,11 @@ class CardDeck:
 
     # ---------- stats ---------------------------------------------------------
     def stats(self) -> dict:
+        prog = load_progress()
         total  = len(self.verbs)
-        known  = sum(1 for v in self.verbs if self.prog[v["base"]]["done"])
-        total_knew  = sum(self.prog[v["base"]]["knew"]  for v in self.verbs)
-        total_didnt = sum(self.prog[v["base"]]["didnt"] for v in self.verbs)
+        known  = sum(1 for v in self.verbs if prog.get(v["base"], {}).get("done", False))
+        total_knew  = sum(prog.get(v["base"], {}).get("knew",  0) for v in self.verbs)
+        total_didnt = sum(prog.get(v["base"], {}).get("didnt", 0) for v in self.verbs)
         return {
             "total": total, "known": known,
             "knew": total_knew, "didnt": total_didnt,
@@ -123,11 +124,13 @@ class CardDeck:
 
     def learned_verbs(self) -> list[dict]:
         """Return list of verb dicts that are marked done."""
-        return [v for v in self.verbs if self.prog[v["base"]]["done"]]
+        prog = load_progress()
+        return [v for v in self.verbs if prog.get(v["base"], {}).get("done", False)]
 
     def verb_stat(self, base: str) -> dict:
         """Return progress record for a single verb."""
-        return self.prog.get(base, {"knew": 0, "didnt": 0, "streak": 0, "done": False})
+        prog = load_progress()
+        return prog.get(base, {"knew": 0, "didnt": 0, "streak": 0, "done": False})
 
     def reset(self):
         for v in self.verbs:

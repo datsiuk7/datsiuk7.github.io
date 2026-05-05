@@ -1,62 +1,62 @@
 {
   "be": {
-    "knew": 0,
-    "didnt": 40,
-    "streak": 0,
+    "knew": 10,
+    "didnt": 2,
+    "streak": 4,
     "done": false
   },
   "have": {
-    "knew": 2,
-    "didnt": 0,
-    "streak": 2,
+    "knew": 8,
+    "didnt": 3,
+    "streak": 8,
     "done": false
   },
   "do": {
-    "knew": 1,
-    "didnt": 0,
-    "streak": 1,
+    "knew": 8,
+    "didnt": 1,
+    "streak": 8,
     "done": false
   },
   "say": {
-    "knew": 0,
-    "didnt": 40,
-    "streak": 0,
+    "knew": 8,
+    "didnt": 4,
+    "streak": 8,
     "done": false
   },
   "go": {
-    "knew": 0,
-    "didnt": 40,
-    "streak": 0,
+    "knew": 8,
+    "didnt": 4,
+    "streak": 8,
     "done": false
   },
   "get": {
-    "knew": 0,
-    "didnt": 42,
-    "streak": 0,
-    "done": false
+    "knew": 9,
+    "didnt": 0,
+    "streak": 9,
+    "done": true
   },
   "make": {
-    "knew": 0,
-    "didnt": 40,
-    "streak": 0,
-    "done": false
+    "knew": 9,
+    "didnt": 0,
+    "streak": 9,
+    "done": true
   },
   "know": {
-    "knew": 0,
-    "didnt": 40,
-    "streak": 0,
+    "knew": 10,
+    "didnt": 5,
+    "streak": 8,
     "done": false
   },
   "take": {
-    "knew": 0,
-    "didnt": 41,
-    "streak": 0,
+    "knew": 12,
+    "didnt": 3,
+    "streak": 6,
     "done": false
   },
   "see": {
-    "knew": 0,
-    "didnt": 40,
-    "streak": 0,
+    "knew": 9,
+    "didnt": 1,
+    "streak": 8,
     "done": false
   }
 }
