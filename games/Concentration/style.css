@@ -229,6 +229,15 @@ body {
     box-shadow: 0 20px 40px rgba(15, 23, 42, 0.25);
 }
 
+.training-tip {
+    color: #374151;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.45;
+    margin: 0;
+    padding: 0 8px;
+}
+
 .level-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
