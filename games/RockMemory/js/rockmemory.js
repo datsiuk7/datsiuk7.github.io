@@ -109,21 +109,28 @@ document.addEventListener("DOMContentLoaded", function () {
     function closeCurtain(callback) {
         state.animating = true;
         state.canClick = false;
+        stopTimer();
         curtain.classList.remove("open");
         curtain.classList.add("closed");
         // Завіса закривається за 0.7s (CSS transition), чекаємо 750ms
         // Потім рендеримо іконки, потім ще 500ms пауза закритою перед відкриттям
         setTimeout(function () {
             if (callback) callback();
-        }, 750);
+        }, 1750);
     }
 
     function openCurtain(callback) {
+        state.animating = true;
+        state.canClick = false;
+        stopTimer();
         curtain.classList.remove("closed");
         curtain.classList.add("open");
         setTimeout(function () {
             state.animating = false;
             state.canClick = true;
+            if (state.running && !isPaused) {
+                startTimer();
+            }
             if (callback) callback();
         }, 700);
     }
@@ -303,7 +310,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // ===== Таймер =====
     function tick() {
-        if (!state.running) return;
+        if (!state.running || !state.canClick || state.animating) return;
         state.time -= 1;
         updateHeader();
         if (state.time <= 0) {
@@ -311,8 +318,13 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    function startTimer() {
+    function stopTimer() {
         clearInterval(state.timerId);
+        state.timerId = null;
+    }
+
+    function startTimer() {
+        stopTimer();
         state.timerId = setInterval(tick, 1000);
     }
 
