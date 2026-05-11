@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Завдання фленджера</title>
+    <title>Класифікатор</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style.css?v=1.0.8">
     <link rel="stylesheet" href="../js/game-widgets.css">
 </head>
 <body>
     <header class="game-header">
-        <h1>🐦 Завдання фленджера</h1>
+        <h1>Класифікатор</h1>
     </header>
     <div class="app">
         <div class="panel">
@@ -23,38 +23,41 @@
                     <div class="badge lives" id="lives">❤️❤️❤️❤️❤️</div>
                 </div>
                 <div class="controls">
-                    <button class="btn-stop-resume" id="btn-stop-resume">Зупинити</button>
+                    <button class="btn-stop-resume" id="btn-stop-resume" style="display:none;">Зупинити</button>
                 </div>
             </div>
 
-            <h2 class="subtitle" style="color: white;">Куди летить центральна ракета?</h2>
+            <div class="task-label" id="task-label"></div>
 
             <div class="stage" aria-live="polite">
-                <div class="flock" id="flock">
-                    <div class="bird" id="bird-0"></div>
-                    <div class="bird" id="bird-1"></div>
-                    <div class="bird center-bird" id="bird-2"></div>
-                    <div class="bird" id="bird-3"></div>
-                    <div class="bird" id="bird-4"></div>
+                <div class="game-card" id="game-card">
+                    <div class="card-figure" id="card-figure"></div>
                 </div>
             </div>
 
             <div class="actions">
-                <div class="arrow-row top-row">
-                    <button class="btn-arrow" id="btn-up" data-dir="up">↑</button>
-                </div>
-                <div class="arrow-row bottom-row">
-                    <button class="btn-arrow" id="btn-left" data-dir="left">←</button>
-                    <button class="btn-arrow" id="btn-down" data-dir="down">↓</button>
-                    <button class="btn-arrow" id="btn-right" data-dir="right">→</button>
-                </div>
+                <button class="btn-answer btn-sun" id="btn-sun" data-answer="sun">
+                    <img src="./svgs/sun.svg" alt="Сонце">
+                    <span class="key-label">←</span>
+                </button>
+                <button class="btn-answer btn-cloud" id="btn-cloud" data-answer="cloud">
+                    <img src="./svgs/cloude.svg" alt="Хмарка">
+                    <span class="key-label">↓</span>
+                </button>
+                <button class="btn-answer btn-drop" id="btn-drop" data-answer="drop">
+                    <img src="./svgs/drop.svg" alt="Крапля">
+                    <span class="key-label">→</span>
+                </button>
             </div>
-            <div class="key-hint">Або натисніть ← ↑ ↓ → на клавіатурі</div>
+            <div class="key-hint">Або натисніть ← ↓ → на клавіатурі</div>
 
             <div class="start-screen" id="start-screen">
                 <div class="start-content">
-                    <h2>Фланкер</h2>
-                    <p class="start-rule">Вам показують зграю з 5 пташок.<br>Визначте, куди летить <strong>центральна</strong> пташка.<br>Використовуйте стрілки для відповіді.</p>
+                    <h2>Класифікатор</h2>
+                    <p class="start-rule">
+                    Вам показується картка — фігура певного кольору.<br><br>
+                    Коли на екрані написано <strong>ЗБІГАЄТЬСЯ</strong> — знайдіть кнопку, де і фігура, і колір повністю збігаються з карткою.<br><br>
+                    Коли написано <strong>НЕ ЗБІГАЄТЬСЯ</strong> — знайдіть кнопку, яка зовсім не схожа на картку: ні фігура, ні колір не збігаються.</p>
                     <button class="btn-start" id="start-btn">Старт</button>
                 </div>
             </div>
@@ -73,6 +76,6 @@
     </div>
     <script src="../js/analytics.js"></script>
     <script src="../js/game-widgets.js"></script>
-    <script src="./js/flangertask.js?v=1.0.8"></script>
+    <script src="./js/qsort.js?v=1.0.8"></script>
 </body>
 </html>

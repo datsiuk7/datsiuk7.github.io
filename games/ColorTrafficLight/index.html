@@ -2,15 +2,15 @@
 <html lang="uk">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-    <title>Рок-памʼять</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Кольоровий світлофор</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style.css?v=1.0.8">
     <link rel="stylesheet" href="../js/game-widgets.css">
 </head>
 <body>
     <header class="game-header">
-        <h1>Рок-памʼять</h1>
+        <h1>Кольоровий світлофор</h1>
     </header>
 
     <div class="app">
@@ -26,19 +26,17 @@
                 </div>
             </div>
 
-            <h2 class="subtitle">Знайди нову іконку</h2>
+            <h2 class="subtitle">Обери колір фарби (ігноруй слово)</h2>
 
-            <div class="stage" id="stage">
-                <div class="icons-field" id="icons-field"></div>
-
-                <!-- Театральна завіса -->
-                <div class="curtain" id="curtain">
-                    <div class="curtain-left"></div>
-                    <div class="curtain-right"></div>
-                </div>
+            <div class="stage" aria-live="polite">
+                <div class="word" id="word">СИНІЙ</div>
             </div>
 
-            <!-- Стартовий екран -->
+            <div class="actions">
+                <button class="btn-choice" id="btn-left">—</button>
+                <button class="btn-choice" id="btn-right">—</button>
+            </div>
+
             <div class="start-screen" id="start-screen">
                 <div class="start-content">
                     <h3>Готові?</h3>
@@ -46,10 +44,8 @@
                 </div>
             </div>
 
-            <!-- Відлік -->
             <div class="overlay hidden" id="countdown">3</div>
 
-            <!-- Результат -->
             <div class="result" id="result">
                 <div class="result-card">
                     <h2>Гру завершено</h2>
@@ -63,6 +59,6 @@
 
     <script src="../js/analytics.js"></script>
     <script src="../js/game-widgets.js"></script>
-    <script src="./js/rockmemory.js?v=1.0.8"></script>
+    <script src="./js/stroop.js?v=1.0.8"></script>
 </body>
 </html>

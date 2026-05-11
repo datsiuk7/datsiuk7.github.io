@@ -2,18 +2,17 @@
 <html lang="uk">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Геоперемикання</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Вектор</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style.css?v=1.0.8">
     <link rel="stylesheet" href="../js/game-widgets.css">
 </head>
 <body>
     <header class="game-header">
-        <h1>Геоперемикання</h1>
+        <h1>Вектор</h1>
     </header>
+
     <div class="app">
         <div class="panel">
             <div class="topbar">
@@ -26,29 +25,37 @@
                     <button class="btn-stop-resume" id="btn-stop-resume">Зупинити</button>
                 </div>
             </div>
-            <h1>Дайте відповідь на запитання</h1>
-            <div class="questions">
-                <div class="question">
-                    <p>Чи синій колір?</p>
-                    <div class="card" id="card-color"></div>
-                </div>
-                <div class="divider"></div>
-                <div class="question">
-                    <p>Чи квадратна фігура?</p>
-                    <div class="card" id="card-shape"></div>
+
+            <h2 class="subtitle" id="rule-text">Синій фон — натисни напрямок польоту. Червоний — протилежний.</h2>
+
+            <div class="stage" aria-live="polite">
+                <div class="arena" id="arena">
+                    <div class="plane" id="plane" aria-label="Літак"></div>
                 </div>
             </div>
-            <div class="actions">
-                <button class="btn-no" id="btn-no">Ні</button>
-                <button class="btn-yes" id="btn-yes">Так</button>
+
+            <div class="actions actions--arrows" aria-label="Керування стрілками">
+                <div class="arrow-pad">
+                    <div class="arrow-row">
+                        <button class="btn-arrow" id="btn-up" aria-label="Вгору">↑</button>
+                    </div>
+                    <div class="arrow-row">
+                        <button class="btn-arrow" id="btn-left" aria-label="Вліво">←</button>
+                        <button class="btn-arrow" id="btn-down" aria-label="Вниз">↓</button>
+                        <button class="btn-arrow" id="btn-right" aria-label="Вправо">→</button>
+                    </div>
+                </div>
             </div>
+
             <div class="start-screen" id="start-screen">
                 <div class="start-content">
-                    <h2>Готові?</h2>
+                    <h3>Готові?</h3>
                     <button class="btn-start" id="start-btn">Старт</button>
                 </div>
             </div>
+
             <div class="overlay hidden" id="countdown">3</div>
+
             <div class="result" id="result">
                 <div class="result-card">
                     <h2>Гру завершено</h2>
@@ -59,8 +66,9 @@
             </div>
         </div>
     </div>
+
     <script src="../js/analytics.js"></script>
     <script src="../js/game-widgets.js"></script>
-    <script src="./js/geoswitching.js?v=1.0.8"></script>
+    <script src="./js/airport.js?v=1.0.8"></script>
 </body>
 </html>

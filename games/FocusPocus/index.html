@@ -2,15 +2,15 @@
 <html lang="uk">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Аеропорт</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+    <title>Фокус-Покус</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style.css?v=1.0.8">
     <link rel="stylesheet" href="../js/game-widgets.css">
 </head>
 <body>
     <header class="game-header">
-        <h1>Аеропорт</h1>
+        <h1>Фокус-Покус</h1>
     </header>
 
     <div class="app">
@@ -26,27 +26,19 @@
                 </div>
             </div>
 
-            <h2 class="subtitle" id="rule-text">Синій фон — натисни напрямок польоту. Червоний — протилежний.</h2>
+            <h2 class="subtitle">Знайди нову іконку</h2>
 
-            <div class="stage" aria-live="polite">
-                <div class="arena" id="arena">
-                    <div class="plane" id="plane" aria-label="Літак"></div>
+            <div class="stage" id="stage">
+                <div class="icons-field" id="icons-field"></div>
+
+                <!-- Театральна завіса -->
+                <div class="curtain" id="curtain">
+                    <div class="curtain-left"></div>
+                    <div class="curtain-right"></div>
                 </div>
             </div>
 
-            <div class="actions actions--arrows" aria-label="Керування стрілками">
-                <div class="arrow-pad">
-                    <div class="arrow-row">
-                        <button class="btn-arrow" id="btn-up" aria-label="Вгору">↑</button>
-                    </div>
-                    <div class="arrow-row">
-                        <button class="btn-arrow" id="btn-left" aria-label="Вліво">←</button>
-                        <button class="btn-arrow" id="btn-down" aria-label="Вниз">↓</button>
-                        <button class="btn-arrow" id="btn-right" aria-label="Вправо">→</button>
-                    </div>
-                </div>
-            </div>
-
+            <!-- Стартовий екран -->
             <div class="start-screen" id="start-screen">
                 <div class="start-content">
                     <h3>Готові?</h3>
@@ -54,8 +46,10 @@
                 </div>
             </div>
 
+            <!-- Відлік -->
             <div class="overlay hidden" id="countdown">3</div>
 
+            <!-- Результат -->
             <div class="result" id="result">
                 <div class="result-card">
                     <h2>Гру завершено</h2>
@@ -69,6 +63,6 @@
 
     <script src="../js/analytics.js"></script>
     <script src="../js/game-widgets.js"></script>
-    <script src="./js/airport.js?v=1.0.8"></script>
+    <script src="./js/rockmemory.js?v=1.0.8"></script>
 </body>
 </html>
