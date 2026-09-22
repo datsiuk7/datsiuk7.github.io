@@ -43,9 +43,12 @@
       {
         "height": 0,
         "tree": false,
-        "lamp": true,
+        "lamp": false,
         "house": false,
-        "lit": false
+        "lit": false,
+        "bulb": false,
+        "kit": false,
+        "spark": false
       }
     ],
     [
