@@ -365,7 +365,6 @@ export function startGame(container, l, preview, options) {
 
     if (token === runToken) {
       running = false;
-      editor.showMemory(memory);
       editor.lock(false);
       $('#run').disabled = false;
     }
@@ -374,7 +373,7 @@ export function startGame(container, l, preview, options) {
   return () => {
     document.body.classList.remove('in-game');
     token++;
-    editor.endDrag();
+    editor.dnd.endDrag();
     saveProgram(l.id, preview, editor.getProgram());
     world.dispose();
   };
