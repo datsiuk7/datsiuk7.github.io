@@ -1,0 +1,62 @@
+{
+  "id": "kutyk",
+  "name": "Кутик",
+  "description": "",
+  "category": "basics",
+  "width": 3,
+  "depth": 3,
+  "start": {
+    "x": 0,
+    "z": 2,
+    "dir": 0
+  },
+  "allowed": [
+    "forward",
+    "right",
+    "light"
+  ],
+  "limit": 0,
+  "cells": [
+    [
+      {
+        "height": 0,
+        "tree": false,
+        "lamp": false
+      },
+      {
+        "height": 0,
+        "tree": false,
+        "lamp": false
+      },
+      {
+        "height": 0,
+        "tree": false,
+        "lamp": true
+      }
+    ],
+    [
+      {
+        "height": 0,
+        "tree": false,
+        "lamp": false
+      },
+      null,
+      null
+    ],
+    [
+      {
+        "height": 0,
+        "tree": false,
+        "lamp": false
+      },
+      null,
+      {
+        "height": 0,
+        "tree": false,
+        "lamp": false
+      }
+    ]
+  ],
+  "descriptionNight": "",
+  "descriptionDay": ""
+}

@@ -1,0 +1,158 @@
+{
+  "id": "na-gorbyku",
+  "name": "На горбику",
+  "description": "",
+  "category": "basics",
+  "width": 5,
+  "depth": 5,
+  "start": {
+    "x": 2,
+    "z": 4,
+    "dir": 0
+  },
+  "allowed": [
+    "forward",
+    "left",
+    "right",
+    "jump",
+    "light"
+  ],
+  "limit": 0,
+  "cells": [
+    [
+      {
+        "height": 0,
+        "tree": false,
+        "lamp": false
+      },
+      {
+        "height": 0,
+        "tree": false,
+        "lamp": false
+      },
+      {
+        "height": 0,
+        "tree": false,
+        "lamp": false
+      },
+      {
+        "height": 0,
+        "tree": false,
+        "lamp": false
+      },
+      {
+        "height": 2,
+        "tree": false,
+        "lamp": true
+      }
+    ],
+    [
+      {
+        "height": 0,
+        "tree": false,
+        "lamp": false
+      },
+      {
+        "height": 0,
+        "tree": true,
+        "lamp": false
+      },
+      {
+        "height": 0,
+        "tree": false,
+        "lamp": false
+      },
+      {
+        "height": 0,
+        "tree": false,
+        "lamp": false
+      },
+      {
+        "height": 2,
+        "tree": false,
+        "lamp": false
+      }
+    ],
+    [
+      {
+        "height": 0,
+        "tree": false,
+        "lamp": false
+      },
+      {
+        "height": 0,
+        "tree": false,
+        "lamp": false
+      },
+      {
+        "height": 0,
+        "tree": false,
+        "lamp": false
+      },
+      {
+        "height": 0,
+        "tree": false,
+        "lamp": false
+      },
+      {
+        "height": 2,
+        "tree": false,
+        "lamp": false
+      }
+    ],
+    [
+      {
+        "height": 0,
+        "tree": false,
+        "lamp": false
+      },
+      {
+        "height": 0,
+        "tree": false,
+        "lamp": false
+      },
+      {
+        "height": 1,
+        "tree": false,
+        "lamp": false
+      },
+      {
+        "height": 2,
+        "tree": false,
+        "lamp": false
+      },
+      {
+        "height": 2,
+        "tree": false,
+        "lamp": false
+      }
+    ],
+    [
+      {
+        "height": 0,
+        "tree": false,
+        "lamp": false
+      },
+      {
+        "height": 0,
+        "tree": false,
+        "lamp": false
+      },
+      {
+        "height": 0,
+        "tree": false,
+        "lamp": false
+      },
+      {
+        "height": 0,
+        "tree": false,
+        "lamp": false
+      },
+      {
+        "height": 0,
+        "tree": false,
+        "lamp": false
+      }
+    ]
+  ]
+}

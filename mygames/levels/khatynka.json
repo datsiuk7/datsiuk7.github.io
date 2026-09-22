@@ -1,0 +1,142 @@
+{
+  "id": "khatynka",
+  "name": "Хатинка",
+  "description": "",
+  "descriptionNight": "",
+  "descriptionDay": "",
+  "category": "basics",
+  "width": 4,
+  "depth": 4,
+  "start": {
+    "x": 0,
+    "z": 3,
+    "dir": 0
+  },
+  "allowed": [
+    "forward",
+    "light"
+  ],
+  "limit": 0,
+  "cells": [
+    [
+      {
+        "height": 0,
+        "tree": false,
+        "lamp": false,
+        "house": false,
+        "lit": false
+      },
+      {
+        "height": 0,
+        "tree": false,
+        "lamp": false,
+        "house": false,
+        "lit": false
+      },
+      {
+        "height": 0,
+        "tree": false,
+        "lamp": false,
+        "house": false,
+        "lit": false
+      },
+      {
+        "height": 0,
+        "tree": false,
+        "lamp": true,
+        "house": false,
+        "lit": false
+      }
+    ],
+    [
+      {
+        "height": 0,
+        "tree": false,
+        "lamp": false,
+        "house": true,
+        "lit": false
+      },
+      {
+        "height": 0,
+        "tree": false,
+        "lamp": false,
+        "house": false,
+        "lit": false
+      },
+      {
+        "height": 0,
+        "tree": false,
+        "lamp": false,
+        "house": false,
+        "lit": false
+      },
+      {
+        "height": 0,
+        "tree": false,
+        "lamp": false,
+        "house": false,
+        "lit": false
+      }
+    ],
+    [
+      {
+        "height": 0,
+        "tree": false,
+        "lamp": false,
+        "house": false,
+        "lit": false
+      },
+      {
+        "height": 0,
+        "tree": false,
+        "lamp": false,
+        "house": false,
+        "lit": false
+      },
+      {
+        "height": 0,
+        "tree": false,
+        "lamp": false,
+        "house": false,
+        "lit": false
+      },
+      {
+        "height": 0,
+        "tree": false,
+        "lamp": false,
+        "house": false,
+        "lit": false
+      }
+    ],
+    [
+      {
+        "height": 0,
+        "tree": false,
+        "lamp": false,
+        "house": false,
+        "lit": false
+      },
+      {
+        "height": 0,
+        "tree": false,
+        "lamp": false,
+        "house": false,
+        "lit": false
+      },
+      {
+        "height": 0,
+        "tree": false,
+        "lamp": false,
+        "house": false,
+        "lit": false
+      },
+      {
+        "height": 0,
+        "tree": false,
+        "lamp": false,
+        "house": false,
+        "lit": false
+      }
+    ]
+  ]
+}

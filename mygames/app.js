@@ -1,38 +1,273 @@
-import * as THREE from './vendor/three.module.js';
-import { start, goal, step, won } from './logic.mjs';
-const $ = s => document.querySelector(s);
-const names = { forward: ['↑', 'Крок уперед'], left: ['↶', 'Поворот ліворуч'], right: ['↷', 'Поворот праворуч'] };
-let program = [], state = { ...start }, running = false, generation = 0, active = -1, drag = null, angle = 0;
-const status = text => $('#status').textContent = text;
-function render() {
-    $('#program').replaceChildren();
-    program.forEach((cmd, i) => { const row = document.createElement('div'); row.className = 'row' + (i === active ? ' active' : ''); row.draggable = !running; row.innerHTML = `<span class="num">${i + 1}</span><span class="icon">${names[cmd][0]}</span><span>${names[cmd][1]}</span>`; const remove = document.createElement('button'); remove.textContent = '×'; remove.ariaLabel = `Видалити команду ${i + 1}`; remove.disabled = running; remove.onclick = () => { program.splice(i, 1); render() }; row.append(remove); row.ondragstart = e => { drag = { index: i }; e.dataTransfer.setData('text/plain', cmd); e.dataTransfer.effectAllowed = 'move' }; row.ondrop = e => { e.preventDefault(); e.stopPropagation(); drop(i) }; $('#program').append(row) });
-    $('#count').textContent = `${program.length} / 12`; $('#run').disabled = running || !program.length;
-    document.querySelectorAll('#palette button').forEach(b => { b.disabled = running || program.length >= 12; b.draggable = !b.disabled });
-}
-function add(cmd) { if (running || program.length >= 12) return; program.push(cmd); render() }
-function drop(index) { $('#program').classList.remove('dragover'); if (running || !drag) return; if (drag.index !== undefined) { const old = drag.index; const [cmd] = program.splice(old, 1); program.splice(index > old ? index - 1 : index, 0, cmd) } else if (program.length < 12) program.splice(index, 0, drag.cmd); drag = null; render() }
-for (const [cmd, [icon, label]] of Object.entries(names)) { const b = document.createElement('button'); b.className = 'command'; b.draggable = true; b.innerHTML = `<span class="icon">${icon}</span>${label}<span class="grip">⠿</span>`; b.onclick = () => add(cmd); b.ondragstart = e => { drag = { cmd }; e.dataTransfer.setData('text/plain', cmd); e.dataTransfer.effectAllowed = 'copy' }; $('#palette').append(b) }
-$('#program').ondragover = e => { if (!running) { e.preventDefault(); $('#program').classList.add('dragover') } };
-$('#program').ondragleave = () => $('#program').classList.remove('dragover');
-$('#program').ondrop = e => { e.preventDefault(); drop(program.length) };
-document.addEventListener('dragend', () => { drag = null; $('#program').classList.remove('dragover') });
-const scene = new THREE.Scene(); scene.background = new THREE.Color('#eef2e9');
-const camera = new THREE.OrthographicCamera(-4, 4, 3, -3, .1, 100); camera.position.set(7, 8, 10); camera.lookAt(0, 0, 0);
-let renderer;
-try { renderer = new THREE.WebGLRenderer({ antialias: true }); } catch (error) { status('Браузер не підтримує WebGL. Спробуй увімкнути апаратне прискорення.'); throw error }
-renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1; renderer.setPixelRatio(Math.min(devicePixelRatio, 2)); renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap; $('#scene').append(renderer.domElement);
-scene.add(new THREE.HemisphereLight(0xffffff, 0xa9b69b, 1.8)); const light = new THREE.DirectionalLight(0xfff8e9, 2); light.position.set(-3, 7, 5); light.castShadow = true; light.shadow.mapSize.set(1024, 1024); light.shadow.camera.left = -5; light.shadow.camera.right = 5; light.shadow.camera.top = 5; light.shadow.camera.bottom = -5; light.shadow.normalBias = .03; scene.add(light);
-function box(w, h, d, color, x, y, z, parent = scene) { const mesh = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), new THREE.MeshStandardMaterial({ color, roughness: .85 })); mesh.position.set(x, y, z); mesh.castShadow = true; mesh.receiveShadow = true; parent.add(mesh); return mesh }
-box(200, .1, 200, '#eef2e9', 0, -.31, 0);
-for (let z = 0; z < 4; z++)for (let x = 0; x < 4; x++) { const finish = x === goal.x && z === goal.z; const path = (x === 0 && z >= 1) || (z === 1 && x <= 2); box(.94, .22, .94, finish ? '#84b881' : path ? '#e4e9c8' : '#d6dfd1', x - 1.5, -.11, z - 1.5) }
-const marker = new THREE.Mesh(new THREE.TorusGeometry(.22, .027, 8, 32), new THREE.MeshStandardMaterial({ color: '#f5ffe5' })); marker.rotation.x = -Math.PI / 2; marker.position.set(.5, .02, -.5); scene.add(marker);
-const robot = new THREE.Group(); scene.add(robot); box(.43, .42, .38, '#e5a766', 0, .36, 0, robot); box(.49, .32, .43, '#f2c487', 0, .72, 0, robot); box(.34, .13, .055, '#394d43', 0, .73, -.225, robot); box(.065, .05, .018, '#f8ffec', -.09, .74, -.258, robot); box(.065, .05, .018, '#f8ffec', .09, .74, -.258, robot); box(.13, .14, .24, '#56695a', -.13, .09, 0, robot); box(.13, .14, .24, '#56695a', .13, .09, 0, robot); box(.1, .27, .15, '#ce9459', -.29, .38, 0, robot); box(.1, .27, .15, '#ce9459', .29, .38, 0, robot);
-function place() { robot.position.set(state.x - 1.5, 0, state.z - 1.5); robot.rotation.y = angle }
-function reset() { generation++; running = false; active = -1; state = { ...start }; angle = 0; place(); render(); status('Робот на старті. Можна спробувати ще раз.') }
-$('#reset').onclick = reset;
-function animateMove(next, cmd, token) { const from = robot.position.clone(), oldAngle = angle; angle += cmd === 'left' ? Math.PI / 2 : cmd === 'right' ? -Math.PI / 2 : 0; const targetAngle = angle; return new Promise(resolve => { const begin = performance.now(); function tick(now) { if (token !== generation) { resolve(false); return } const t = Math.min((now - begin) / 480, 1), ease = t * t * (3 - 2 * t); robot.position.set(THREE.MathUtils.lerp(from.x, next.x - 1.5, ease), cmd === 'forward' ? Math.sin(t * Math.PI) * .07 : 0, THREE.MathUtils.lerp(from.z, next.z - 1.5, ease)); robot.rotation.y = THREE.MathUtils.lerp(oldAngle, targetAngle, ease); if (t < 1) requestAnimationFrame(tick); else resolve(true) } requestAnimationFrame(tick) }) }
-$('#run').onclick = async () => { if (running || !program.length) return; reset(); running = true; const token = generation; render(); for (let i = 0; i < program.length; i++) { if (token !== generation) return; active = i; render(); status(`Команда ${i + 1}: ${names[program[i]][1].toLowerCase()}`); const next = step(state, program[i]); if (!next) { status('Попереду край поля. Зміни програму та спробуй ще.'); break } if (!await animateMove(next, program[i], token)) return; state = next; if (won(state)) { status('Чудово! Робот дістався фінішу ✨'); break } if (i === program.length - 1) status('Команди закінчилися. Додай ще, щоб дістатися фінішу.') } if (token === generation) { running = false; active = -1; render() } };
-new ResizeObserver(() => { const w = $('#scene').clientWidth, h = $('#scene').clientHeight; renderer.setSize(w, h); const aspect = w / h; const height = Math.max(5.5, 6.5 / aspect); camera.left = -height * aspect / 2; camera.right = height * aspect / 2; camera.top = height / 2; camera.bottom = -height / 2; camera.updateProjectionMatrix() }).observe($('#scene'));
-place(); render(); renderer.setAnimationLoop(() => renderer.render(scene, camera));
+import {
+  validateLevel,
+  categories,
+  getCategory
+} from './logic.mjs';
+import { setupMusic, setupEffects } from './music.js';
+import { renderHome, isCatUnlocked } from './home.js';
+import { startGame } from './runner.js';
 
+const app = document.querySelector('#app');
+setupMusic(document.querySelector('#music'));
+const effects = setupEffects(document.querySelector('#sound'));
+
+const esc = (s) =>
+  String(s).replace(/[&<>"']/g, (c) => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;'
+  }[c]));
+
+let cleanup = () => {};
+let levels = [];
+let currentTheme = localStorage.getItem('lamplighter-theme') || 'dark';
+let currentCategories = [...categories];
+
+const programMemoryCache = new Map();
+
+function getProgramStorageKey(levelId, isPreview) {
+  return isPreview ? 'lamplighter-preview-program' : `lamplighter-program-${levelId}`;
+}
+
+function loadSavedProgram(levelId, isPreview) {
+  const key = getProgramStorageKey(levelId, isPreview);
+  if (programMemoryCache.has(key)) return structuredClone(programMemoryCache.get(key));
+  try {
+    const storage = isPreview ? sessionStorage : localStorage;
+    const raw = storage.getItem(key);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      programMemoryCache.set(key, structuredClone(parsed));
+      return parsed;
+    }
+  } catch {}
+  return null;
+}
+
+function saveProgram(levelId, isPreview, programData) {
+  const key = getProgramStorageKey(levelId, isPreview);
+  if (programData && (programData.blocks?.length || programData.functions?.length || programData.lists?.length)) {
+    const clone = structuredClone(programData);
+    programMemoryCache.set(key, clone);
+    try {
+      const storage = isPreview ? sessionStorage : localStorage;
+      storage.setItem(key, JSON.stringify(clone));
+    } catch {}
+  } else {
+    programMemoryCache.delete(key);
+    try {
+      const storage = isPreview ? sessionStorage : localStorage;
+      storage.removeItem(key);
+    } catch {}
+  }
+}
+
+let gameSettings = {
+  footerDayText: 'Місто чекає на твою програму.',
+  footerNightText: 'Ніч чекає на твою програму.',
+  developerText: ''
+};
+
+function updateFooter(t = currentTheme) {
+  const footer = document.querySelector('footer');
+  if (!footer) return;
+  const quote =
+    t === 'light'
+      ? gameSettings.footerDayText || 'Місто чекає на твою програму.'
+      : gameSettings.footerNightText || 'Ніч чекає на твою програму.';
+  const dev = gameSettings.developerText
+    ? `<div class="footer-developer">${esc(gameSettings.developerText)}</div>`
+    : '';
+  footer.innerHTML = `<div class="footer-quote">${esc(quote)}</div>${dev}`;
+}
+
+const themeBtn = document.querySelector('#theme');
+
+function applyTheme(t) {
+  currentTheme = t;
+  document.documentElement.setAttribute('data-theme', t);
+  try {
+    localStorage.setItem('lamplighter-theme', t);
+  } catch {}
+  const metaTheme = document.querySelector('meta[name="theme-color"]');
+  if (metaTheme) metaTheme.setAttribute('content', t === 'light' ? '#f8f9fa' : '#101820');
+  updateFooter(t);
+  if (themeBtn) {
+    themeBtn.textContent = t === 'light' ? '☀️ Тема: День' : '🌙 Тема: Ніч';
+    themeBtn.setAttribute('aria-pressed', String(t === 'light'));
+  }
+}
+applyTheme(currentTheme);
+
+if (themeBtn) {
+  themeBtn.onclick = () => {
+    applyTheme(currentTheme === 'light' ? 'dark' : 'light');
+    route();
+  };
+}
+
+function completed() {
+  try {
+    return JSON.parse(localStorage.getItem('lamplighter-completed') || '[]');
+  } catch {
+    return [];
+  }
+}
+
+function complete(id) {
+  try {
+    localStorage.setItem(
+      'lamplighter-completed',
+      JSON.stringify([...new Set([...completed(), id])])
+    );
+  } catch {}
+}
+
+const resetProgressBtn = document.querySelector('#reset-progress');
+if (resetProgressBtn) {
+  resetProgressBtn.onclick = () => {
+    const done = completed();
+    const countInfo = done.length
+      ? ` (пройдено ${done.length} ${done.length === 1 ? 'рівень' : 'рівнів'})`
+      : '';
+    const msg = `Ви впевнені, що хочете повністю скинути весь прогрес гри${countInfo}?\n\nВсі відмітки пройдених вулиць буде видалено, а наступні розділи знову повернуться під замок.`;
+
+    if (confirm(msg)) {
+      try {
+        localStorage.removeItem('lamplighter-completed');
+        programMemoryCache.clear();
+        const toRemove = [];
+        for (let i = 0; i < localStorage.length; i++) {
+          const k = localStorage.key(i);
+          if (k && k.startsWith('lamplighter-program-')) toRemove.push(k);
+        }
+        toRemove.forEach((k) => localStorage.removeItem(k));
+      } catch {}
+      route();
+    }
+  };
+}
+
+async function load() {
+  try {
+    try {
+      const setRes = await fetch('./levels/settings.json', { cache: 'no-store' });
+      if (setRes.ok) {
+        const s = await setRes.json();
+        if (s) gameSettings = { ...gameSettings, ...s };
+        updateFooter(currentTheme);
+      }
+    } catch {}
+
+    try {
+      const catRes = await fetch('./levels/categories.json', { cache: 'no-store' });
+      if (catRes.ok) currentCategories = await catRes.json();
+    } catch {}
+
+    const response = await fetch('./levels/index.json', { cache: 'no-store' });
+    if (!response.ok) throw new Error('Не вдалося відкрити список рівнів.');
+    const ids = await response.json();
+
+    levels = await Promise.all(
+      ids.map(async (id) => {
+        if (!/^[a-z0-9-]+$/.test(id)) throw new Error('Некоректний ID рівня');
+        const r = await fetch(`./levels/${id}.json`, { cache: 'no-store' });
+        if (!r.ok) throw new Error(`Не знайдено рівень ${id}`);
+        const l = await r.json();
+        const errors = validateLevel(l);
+        if (errors.length) throw new Error(`${id}: ${errors.join(' ')}`);
+        return l;
+      })
+    );
+    route();
+  } catch (e) {
+    app.innerHTML = `<div class="panel"><h2>Не вдалося завантажити рівні</h2><p>${esc(e.message)}</p><p>Локально запусти <code>node server.cjs</code> та відкрий localhost:5173.</p></div>`;
+  }
+}
+
+function route() {
+  cleanup();
+  cleanup = () => {};
+
+  const resetBtn = document.querySelector('#reset-progress');
+  const id = new URLSearchParams(location.hash.slice(1)).get('level');
+
+  if (id === 'preview') {
+    if (resetBtn) resetBtn.style.display = 'none';
+    try {
+      const level = JSON.parse(sessionStorage.getItem('lamplighter-preview'));
+      const errors = validateLevel(level);
+      if (errors.length) throw new Error(errors.join(' '));
+      cleanup = startGame(app, level, true, {
+        currentTheme,
+        levels,
+        loadSavedProgram,
+        saveProgram,
+        complete,
+        effects
+      });
+    } catch (e) {
+      app.innerHTML = `<div class="panel"><h2>Немає рівня для тестування</h2><p>${esc(e.message)}</p><a href="./admin/">Повернутися в редактор</a></div>`;
+    }
+    return;
+  }
+
+  const l = levels.find((item) => item.id === id);
+  if (l) {
+    if (resetBtn) resetBtn.style.display = 'none';
+    if (l.hidden) {
+      app.innerHTML = `
+        <div class="panel" style="max-width:540px;margin:50px auto;text-align:center;padding:36px 28px">
+          <div style="font-size:44px;margin-bottom:12px">👁</div>
+          <h2>Цей рівень приховано</h2>
+          <p>Вулиця «${esc(l.name)}» наразі прихована в редакторі або знаходиться на оновленні.</p>
+          <div style="margin-top:24px"><a href="#" class="primary" style="display:inline-block;padding:11px 24px;border-radius:9px">Повернутися на головну ↗</a></div>
+        </div>`;
+      return;
+    }
+
+    const done = completed();
+    const visibleLevels = levels.filter((lvl) => !lvl.hidden);
+    const catsWithLevels = currentCategories
+      .map((cat) => ({
+        ...cat,
+        levels: visibleLevels.filter((lvl) => (lvl.category || getCategory(lvl)) === cat.id)
+      }))
+      .filter((cat) => cat.levels.length > 0);
+
+    const catIdx = catsWithLevels.findIndex((c) => c.levels.some((lvl) => lvl.id === l.id));
+    if (catIdx > 0 && !isCatUnlocked(catIdx, catsWithLevels, done)) {
+      const prevCat = catsWithLevels[catIdx - 1];
+      app.innerHTML = `
+        <div class="panel" style="max-width:540px;margin:50px auto;text-align:center;padding:36px 28px">
+          <div style="font-size:44px;margin-bottom:12px">🔒</div>
+          <h2>Цей рівень під замком</h2>
+          <p>Щоб відкрити вулицю «${esc(l.name)}», спочатку пройди всі завдання теми <strong>«${esc(prevCat.title)}»</strong>.</p>
+          <div style="margin-top:24px"><a href="#" class="primary" style="display:inline-block;padding:11px 24px;border-radius:9px">Повернутися на головну ↗</a></div>
+        </div>`;
+      return;
+    }
+
+    cleanup = startGame(app, l, false, {
+      currentTheme,
+      levels,
+      loadSavedProgram,
+      saveProgram,
+      complete,
+      effects
+    });
+  } else {
+    if (resetBtn) resetBtn.style.display = '';
+    renderHome(app, {
+      levels,
+      categories: currentCategories,
+      done: completed(),
+      currentTheme
+    });
+  }
+}
+
+window.addEventListener('hashchange', route);
+load();
