@@ -161,7 +161,7 @@ function makeDragon() {
 }
 const dragon=makeDragon();
 
-const characterTexture=new THREE.TextureLoader().load('/assets/pavlyk-frog.png');
+const characterTexture=new THREE.TextureLoader().load(`${import.meta.env.BASE_URL}assets/pavlyk-frog.png`);
 characterTexture.colorSpace=THREE.SRGBColorSpace;
 characterTexture.anisotropy=Math.min(renderer.capabilities.getMaxAnisotropy(),8);
 const character=new THREE.Sprite(new THREE.SpriteMaterial({map:characterTexture,transparent:true,alphaTest:.03,depthWrite:false}));
