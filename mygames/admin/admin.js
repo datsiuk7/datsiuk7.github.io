@@ -9,10 +9,13 @@ import {
   saveLevelToServer,
   deleteLevelOnServer,
   fetchStructureLevels,
+  reorderLevelsOnServer,
   slugify
 } from './level-storage.js';
 import { resizeLevel, setupSizeMatrix } from './map-resize.js';
 import { MapGridController } from './map-paint.js';
+import { renderHintEditor } from './hint-editor.js';
+import { enableLevelTreeDnd, isLevelTreeDragging } from './level-tree-dnd.js';
 
 const $ = (s) => document.querySelector(s);
 
@@ -66,8 +69,12 @@ function updateLampStateButtons() {
   $('#lamp-state-on')?.setAttribute('aria-pressed', String(lampState === 'on'));
   $('#lamp-state-spark')?.classList.toggle('selected', lampState === 'spark');
   $('#lamp-state-spark')?.setAttribute('aria-pressed', String(lampState === 'spark'));
+  $('#lamp-state-no-bulb')?.classList.toggle('selected', lampState === 'no-bulb');
+  $('#lamp-state-no-bulb')?.setAttribute('aria-pressed', String(lampState === 'no-bulb'));
   const sparkBtn = $('#lamp-state-spark');
   if (sparkBtn) sparkBtn.hidden = tool === 'house';
+  const noBulbBtn = $('#lamp-state-no-bulb');
+  if (noBulbBtn) noBulbBtn.hidden = tool === 'house';
 }
 
 function updateHouseDirButtons() {
@@ -92,7 +99,7 @@ function brush() {
   if (isLightTool) {
     const label = $('#lamp-tools')?.querySelector('#light-tools-label') || $('#lamp-tools')?.querySelector('.field-label');
     if (label) label.textContent = tool === 'house' ? 'Світло в будинку (для ночі)' : 'Стан ліхтаря (для ночі)';
-    if (tool === 'house' && lampState === 'spark') {
+    if (tool === 'house' && (lampState === 'spark' || lampState === 'no-bulb')) {
       lampState = 'off';
     }
     updateLampStateButtons();
@@ -182,6 +189,8 @@ function draw() {
 
 for (const [id, [label]] of Object.entries(tools)) {
   const b = document.createElement('button');
+  b.type = 'button';
+  b.title = `${label}: ${tools[id][1]}`;
   b.innerHTML = icon(id) + `<span>${label}</span>`;
   b.dataset.tool = id;
   b.onclick = () => {
@@ -218,6 +227,10 @@ $('#lamp-state-on').onclick = () => {
 };
 $('#lamp-state-spark').onclick = () => {
   lampState = 'spark';
+  updateLampStateButtons();
+};
+$('#lamp-state-no-bulb').onclick = () => {
+  lampState = 'no-bulb';
   updateLampStateButtons();
 };
 
@@ -284,13 +297,29 @@ $('#house-direction-buttons')?.querySelectorAll('.dir-btn').forEach((b) => {
   };
 });
 
+function updateStepButtonsState() {
+  const w = level.width || 4;
+  const d = level.depth || 4;
+  if ($('#btn-width-dec')) $('#btn-width-dec').disabled = w <= 2;
+  if ($('#btn-width-inc')) $('#btn-width-inc').disabled = w >= 10;
+  if ($('#btn-depth-dec')) $('#btn-depth-dec').disabled = d <= 2;
+  if ($('#btn-depth-inc')) $('#btn-depth-inc').disabled = d >= 10;
+}
+
 function applyDimensions(w, d) {
   checkpoint();
   const res = resizeLevel(level, w, d, status);
-  if (!res || !res.changed) return !!res;
+  if (!res || !res.changed) {
+    if ($('#width')) $('#width').value = level.width;
+    if ($('#depth')) $('#depth').value = level.depth;
+    updateStepButtonsState();
+    sizeMatrix.render();
+    return !!res;
+  }
 
   if ($('#width')) $('#width').value = w;
   if ($('#depth')) $('#depth').value = d;
+  updateStepButtonsState();
   change();
   draw();
   fill();
@@ -311,6 +340,49 @@ const sizeMatrix = setupSizeMatrix({
   infoEl: $('#size-picker-info'),
   getLevel: () => level,
   onResize: (w, d) => applyDimensions(w, d)
+});
+
+function updateSizeFromInputs() {
+  const rawW = parseInt($('#width')?.value, 10);
+  const rawD = parseInt($('#depth')?.value, 10);
+  const targetW = Number.isNaN(rawW) ? level.width : Math.max(2, Math.min(10, rawW));
+  const targetD = Number.isNaN(rawD) ? level.depth : Math.max(2, Math.min(10, rawD));
+  if (targetW !== level.width || targetD !== level.depth) {
+    applyDimensions(targetW, targetD);
+  } else {
+    if ($('#width')) $('#width').value = targetW;
+    if ($('#depth')) $('#depth').value = targetD;
+    updateStepButtonsState();
+    sizeMatrix.render();
+  }
+}
+
+$('#width')?.addEventListener('change', updateSizeFromInputs);
+$('#depth')?.addEventListener('change', updateSizeFromInputs);
+$('#width')?.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    updateSizeFromInputs();
+  }
+});
+$('#depth')?.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    updateSizeFromInputs();
+  }
+});
+
+$('#btn-width-dec')?.addEventListener('click', () => {
+  applyDimensions(Math.max(2, level.width - 1), level.depth);
+});
+$('#btn-width-inc')?.addEventListener('click', () => {
+  applyDimensions(Math.min(10, level.width + 1), level.depth);
+});
+$('#btn-depth-dec')?.addEventListener('click', () => {
+  applyDimensions(level.width, Math.max(2, level.depth - 1));
+});
+$('#btn-depth-inc')?.addEventListener('click', () => {
+  applyDimensions(level.width, Math.min(10, level.depth + 1));
 });
 
 $('#undo').onclick = () => {
@@ -412,6 +484,8 @@ function highlightActiveLevel() {
 
 $('#new').onclick = () => createNewLevel('');
 
+let allLoadedLevels = [];
+
 async function list() {
   const tree = $('#level-tree');
   if (!tree) return;
@@ -421,8 +495,42 @@ async function list() {
 
   const { categories: fetchedCats, levels: loaded } = await fetchStructureLevels();
   if (fetchedCats.length) dynamicCategories = fetchedCats;
+  allLoadedLevels = loaded;
 
   tree.replaceChildren();
+
+  const handleReorder = async (catId, newIdsInCat) => {
+    if (!local) {
+      status('Зміна порядку рівнів доступна лише через локальний node server.cjs.', true);
+      return;
+    }
+    try {
+      const isOther = catId === '_other';
+      const catLevels = allLoadedLevels.filter((l) =>
+        isOther ? !dynamicCategories.some((c) => c.id === (l.category || getCategory(l))) : (l.category || getCategory(l)) === catId
+      );
+      const map = new Map(catLevels.map((l) => [l.id, l]));
+      const reordered = newIdsInCat.map((id) => map.get(id)).filter(Boolean);
+
+      let idx = 0;
+      for (let i = 0; i < allLoadedLevels.length; i++) {
+        const match = isOther
+          ? !dynamicCategories.some((c) => c.id === (allLoadedLevels[i].category || getCategory(allLoadedLevels[i])))
+          : (allLoadedLevels[i].category || getCategory(allLoadedLevels[i])) === catId;
+        if (match) {
+          allLoadedLevels[i] = reordered[idx++];
+        }
+      }
+
+      const allIds = allLoadedLevels.map((l) => l.id);
+      await reorderLevelsOnServer(allIds);
+      const catObj = dynamicCategories.find((c) => c.id === catId);
+      status(`Порядок рівнів у темі «${catObj?.title || 'Без категорії'}» оновлено.`);
+    } catch (err) {
+      status('Помилка збереження порядку: ' + err.message, true);
+      await list();
+    }
+  };
 
   for (const cat of dynamicCategories) {
     const group = loaded.filter((l) => (l.category || getCategory(l)) === cat.id);
@@ -468,19 +576,37 @@ async function list() {
         const li = document.createElement('li');
         li.className = 'cat-level-item' + (l.id === savedId ? ' active' : '');
         li.dataset.id = l.id;
+        li.dataset.cat = cat.id;
+
+        const row = document.createElement('div');
+        row.className = 'cat-level-row';
+
+        const handle = document.createElement('span');
+        handle.className = 'level-drag-handle';
+        handle.title = 'Перетягни, щоб змінити порядок';
+        handle.setAttribute('aria-label', 'Перетягнути для зміни порядку');
+        handle.textContent = '⠿';
+
         const btn = document.createElement('button');
         btn.type = 'button';
         btn.className = 'btn-level';
+        btn.draggable = false;
         btn.title = `${l.name} (${l.id})`;
         btn.innerHTML = `
           <span class="level-bullet">●</span>
           <span class="level-name">${l.name || l.id}</span>
           ${l.hidden ? '<span class="level-badge-hidden">прихов.</span>' : ''}
         `;
-        btn.onclick = () => openLevel(l.id);
-        li.append(btn);
+        btn.onclick = () => {
+          if (isLevelTreeDragging()) return;
+          openLevel(l.id);
+        };
+
+        row.append(handle, btn);
+        li.append(row);
         ul.append(li);
       }
+      enableLevelTreeDnd({ ul, categoryId: cat.id, onReorder: handleReorder });
     }
     body.append(ul);
 
@@ -533,19 +659,37 @@ async function list() {
       const li = document.createElement('li');
       li.className = 'cat-level-item' + (l.id === savedId ? ' active' : '');
       li.dataset.id = l.id;
+      li.dataset.cat = '_other';
+
+      const row = document.createElement('div');
+      row.className = 'cat-level-row';
+
+      const handle = document.createElement('span');
+      handle.className = 'level-drag-handle';
+      handle.title = 'Перетягни, щоб змінити порядок';
+      handle.setAttribute('aria-label', 'Перетягнути для зміни порядку');
+      handle.textContent = '⠿';
+
       const btn = document.createElement('button');
       btn.type = 'button';
       btn.className = 'btn-level';
+      btn.draggable = false;
       btn.title = `${l.name} (${l.id})`;
       btn.innerHTML = `
         <span class="level-bullet">●</span>
         <span class="level-name">${l.name || l.id}</span>
         ${l.hidden ? '<span class="level-badge-hidden">прихов.</span>' : ''}
       `;
-      btn.onclick = () => openLevel(l.id);
-      li.append(btn);
+      btn.onclick = () => {
+        if (isLevelTreeDragging()) return;
+        openLevel(l.id);
+      };
+
+      row.append(handle, btn);
+      li.append(row);
       ul.append(li);
     }
+    enableLevelTreeDnd({ ul, categoryId: '_other', onReorder: handleReorder });
     body.append(ul);
     details.append(body);
     tree.append(details);
@@ -617,15 +761,30 @@ function fill() {
       level.allowed = Object.keys(commands).filter((k) =>
         k === id ? box.checked : level.allowed.includes(k)
       );
+      drawLevelHints();
       change();
     };
     label.append(box, document.createTextNode(cmdIcon + ' ' + name));
     $('#allowed').append(label);
   }
 
+  drawLevelHints();
+
   $('#dirty').textContent = dirty ? 'Є незбережені зміни' : 'Збережено';
+  updateStepButtonsState();
   sizeMatrix.render();
   draw();
+}
+
+function drawLevelHints() {
+  renderHintEditor($('#level-hints'), level.hints, {
+    allowedCommands: level.allowed,
+    onChange: (next) => {
+      checkpoint();
+      level.hints = next;
+      change();
+    }
+  });
 }
 
 function valid() {

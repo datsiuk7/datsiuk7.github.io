@@ -13,7 +13,7 @@
   "allowed": [
     "light"
   ],
-  "limit": 0,
+  "limit": 1,
   "cells": [
     [
       {
@@ -103,5 +103,21 @@
         "lamp": false
       }
     ]
+  ],
+  "descriptionNight": "",
+  "descriptionDay": "",
+  "hints": [
+    {
+      "text": "Можна натиснути або перемістити",
+      "target": "command:light"
+    },
+    {
+      "text": "Сюди",
+      "target": "program"
+    },
+    {
+      "text": "Запусти",
+      "target": "run"
+    }
   ]
 }

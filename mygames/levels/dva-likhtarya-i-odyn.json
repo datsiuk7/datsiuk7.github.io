@@ -1,6 +1,6 @@
 {
-  "id": "dva-likhtarya",
-  "name": "Два ліхтаря",
+  "id": "dva-likhtarya-i-odyn",
+  "name": "Два ліхтаря і один",
   "description": "",
   "category": "basics",
   "width": 5,
@@ -14,7 +14,7 @@
     "forward",
     "light"
   ],
-  "limit": 0,
+  "limit": 10,
   "cells": [
     [
       {
@@ -30,7 +30,12 @@
       {
         "height": 0,
         "tree": false,
-        "lamp": false
+        "lamp": false,
+        "house": false,
+        "bulb": false,
+        "kit": false,
+        "spark": false,
+        "lit": false
       },
       {
         "height": 0,

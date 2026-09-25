@@ -18,7 +18,7 @@
     "jump",
     "light"
   ],
-  "limit": 0,
+  "limit": 5,
   "cells": [
     [
       {
@@ -152,5 +152,7 @@
         "lamp": false
       }
     ]
-  ]
+  ],
+  "descriptionNight": "",
+  "descriptionDay": ""
 }

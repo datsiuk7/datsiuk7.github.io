@@ -114,13 +114,17 @@ export function setupSizeMatrix({ matrixEl, previewBadgeEl, infoEl, getLevel, on
   if (!matrixEl) return { render: () => {} };
 
   matrixEl.replaceChildren();
-  for (let d = 2; d <= 10; d++) {
-    for (let w = 2; w <= 10; w++) {
+  for (let d = 1; d <= 10; d++) {
+    for (let w = 1; w <= 10; w++) {
       const cell = document.createElement('div');
       cell.className = 'size-cell';
       cell.dataset.w = w;
       cell.dataset.d = d;
-      cell.title = `${w} × ${d}`;
+      cell.title = w < 2 || d < 2 ? 'Мінімальний розмір — 2 × 2' : `${w} × ${d}`;
+      if (w < 2 || d < 2) {
+        cell.classList.add('unavailable');
+        cell.setAttribute('aria-disabled', 'true');
+      }
       matrixEl.append(cell);
     }
   }
@@ -153,6 +157,7 @@ export function setupSizeMatrix({ matrixEl, previewBadgeEl, infoEl, getLevel, on
   const getTargetCoords = (e) => {
     const cell = document.elementFromPoint(e.clientX, e.clientY)?.closest('.size-cell');
     if (!cell || !matrixEl.contains(cell)) return null;
+    if (+cell.dataset.w < 2 || +cell.dataset.d < 2) return null;
     return {
       w: Math.max(2, Math.min(10, +cell.dataset.w)),
       d: Math.max(2, Math.min(10, +cell.dataset.d))
@@ -160,6 +165,7 @@ export function setupSizeMatrix({ matrixEl, previewBadgeEl, infoEl, getLevel, on
   };
 
   let isMatrixDragging = false;
+  let didResizeOnPointerUp = false;
 
   matrixEl.addEventListener('pointerdown', (e) => {
     if (e.button !== 0) return;
@@ -175,6 +181,8 @@ export function setupSizeMatrix({ matrixEl, previewBadgeEl, infoEl, getLevel, on
     const coords = getTargetCoords(e);
     if (coords) {
       render(coords.w, coords.d);
+    } else if (!isMatrixDragging) {
+      render();
     }
   });
 
@@ -187,12 +195,15 @@ export function setupSizeMatrix({ matrixEl, previewBadgeEl, infoEl, getLevel, on
     isMatrixDragging = false;
     const coords = getTargetCoords(e);
     if (coords) {
+      didResizeOnPointerUp = true;
       onResize(coords.w, coords.d);
+      setTimeout(() => { didResizeOnPointerUp = false; }, 60);
     }
     render();
   });
 
   matrixEl.addEventListener('click', (e) => {
+    if (didResizeOnPointerUp) return;
     const coords = getTargetCoords(e);
     if (coords) {
       onResize(coords.w, coords.d);

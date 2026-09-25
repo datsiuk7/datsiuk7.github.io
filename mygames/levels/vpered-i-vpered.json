@@ -104,5 +104,13 @@
         "lamp": false
       }
     ]
+  ],
+  "descriptionNight": "",
+  "descriptionDay": "",
+  "hints": [
+    {
+      "text": "Команда Вперед рухає гравця вперед на одну клітинку куди він дивиться",
+      "target": "command:forward"
+    }
   ]
 }

@@ -206,20 +206,13 @@ export class ProgramEditor {
     this.renderPalette();
     this.host.replaceChildren();
     const count = this.used();
-    this.count.textContent = `${count}${this.level.limit ? ` / ${this.level.limit}` : ''}`;
-    this.count.parentElement?.classList.toggle('over-limit', Boolean(this.level.limit && count > this.level.limit));
-
-    let hasOpenSlot = false;
-    for (const list of this.allLists()) {
-      for (const b of list) {
-        if ((b.type === 'if' || b.type === 'while' || b.type === 'loop') && b.body && b.body.length === 0) {
-          hasOpenSlot = true;
-          break;
-        }
-      }
-      if (hasOpenSlot) break;
+    if (this.level.limit) {
+      const remaining = Math.max(0, this.level.limit - count);
+      this.count.textContent = `Залишилося ${remaining}/${this.level.limit}`;
+    } else {
+      this.count.textContent = `Блоків: ${count}`;
     }
-    this.host.classList.toggle('has-open-slot', hasOpenSlot);
+    this.count.parentElement?.classList.toggle('over-limit', Boolean(this.level.limit && count > this.level.limit));
 
     this.renderList(this.blocks, this.host);
     this.zone(this.host, this.blocks);

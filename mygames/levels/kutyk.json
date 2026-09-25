@@ -15,7 +15,7 @@
     "right",
     "light"
   ],
-  "limit": 0,
+  "limit": 10,
   "cells": [
     [
       {
@@ -53,10 +53,16 @@
       {
         "height": 0,
         "tree": false,
-        "lamp": false
+        "lamp": false,
+        "house": false,
+        "bulb": false,
+        "kit": false,
+        "spark": false,
+        "lit": false
       }
     ]
   ],
   "descriptionNight": "",
-  "descriptionDay": ""
+  "descriptionDay": "",
+  "hints": []
 }

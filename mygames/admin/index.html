@@ -6,6 +6,7 @@
   <title>Редактор — Ліхтарник</title>
   <link rel="stylesheet" href="../style.css">
   <link rel="stylesheet" href="editor.css">
+  <link rel="stylesheet" href="hints.css">
 </head>
 <body>
   <header>
@@ -63,6 +64,11 @@
             </div>
             <input type="hidden" id="description">
           </div>
+          <div class="field level-hints-section">
+            <strong>Підказки для гравця</strong>
+            <p class="level-hints-source">Додай до 5 підказок лише для цього рівня. Без підказок це поле залишиться порожнім у грі.</p>
+            <div id="level-hints" class="hint-editor-list"></div>
+          </div>
         </div>
       </section>
 
@@ -93,6 +99,10 @@
               <button type="button" id="lamp-state-spark" class="lamp-state-btn" data-state="spark" aria-pressed="false">
                 <span class="lamp-dot spark">⚡</span>
                 <span>Іскрить</span>
+              </button>
+              <button type="button" id="lamp-state-no-bulb" class="lamp-state-btn" data-state="no-bulb" aria-pressed="false">
+                <span class="lamp-dot no-bulb">💡⃠</span>
+                <span>Без лампочки</span>
               </button>
             </div>
           </div>
@@ -152,12 +162,28 @@
               <span>Розмір поля (Ширина × Довжина)</span>
               <span id="size-preview-badge" class="size-badge">4 × 4</span>
             </div>
+            <div class="size-steppers">
+              <div class="size-stepper-item">
+                <span class="size-stepper-label">Ширина (X)</span>
+                <div class="size-stepper-control">
+                  <button type="button" id="btn-width-dec" class="size-step-btn" title="Зменшити ширину" aria-label="Зменшити ширину">−</button>
+                  <input type="number" id="width" min="2" max="10" value="4" class="size-input" aria-label="Ширина поля (від 2 до 10)">
+                  <button type="button" id="btn-width-inc" class="size-step-btn" title="Збільшити ширину" aria-label="Збільшити ширину">+</button>
+                </div>
+              </div>
+              <div class="size-stepper-item">
+                <span class="size-stepper-label">Довжина (Z)</span>
+                <div class="size-stepper-control">
+                  <button type="button" id="btn-depth-dec" class="size-step-btn" title="Зменшити довжину" aria-label="Зменшити довжину">−</button>
+                  <input type="number" id="depth" min="2" max="10" value="4" class="size-input" aria-label="Довжина поля (від 2 до 10)">
+                  <button type="button" id="btn-depth-inc" class="size-step-btn" title="Збільшити довжину" aria-label="Збільшити довжину">+</button>
+                </div>
+              </div>
+            </div>
             <div id="size-matrix" class="size-matrix" role="grid" aria-label="Вибір розміру поля"></div>
             <div class="size-picker-hint">
               <span id="size-picker-info">Виділи прямокутник мишкою (від 2×2 до 10×10)</span>
             </div>
-            <input type="hidden" id="width" value="4">
-            <input type="hidden" id="depth" value="4">
           </div>
           <div class="field">
             <span>Початковий напрямок</span>

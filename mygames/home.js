@@ -20,7 +20,7 @@ export function isCatUnlocked(catIdx, catsWithLevels, done) {
   return true;
 }
 
-export function renderHome(container, { levels, categories, done, currentTheme }) {
+export function getLevelSections(levels, categories) {
   const visibleLevels = levels.filter((l) => !l.hidden);
   const catsWithLevels = categories
     .map((cat) => ({
@@ -42,6 +42,28 @@ export function renderHome(container, { levels, categories, done, currentTheme }
       levels: otherLevels
     });
   }
+
+  return catsWithLevels;
+}
+
+export function findNextLevel(levels, categories, done, currentId) {
+  const sections = getLevelSections(levels, categories);
+  const currentSection = sections.findIndex((section) =>
+    section.levels.some((level) => level.id === currentId)
+  );
+  if (currentSection < 0) return null;
+
+  const currentLevels = sections[currentSection].levels;
+  const currentIndex = currentLevels.findIndex((level) => level.id === currentId);
+  if (currentIndex + 1 < currentLevels.length) return currentLevels[currentIndex + 1];
+
+  const nextSection = currentSection + 1;
+  if (nextSection >= sections.length || !isCatUnlocked(nextSection, sections, done)) return null;
+  return sections[nextSection].levels[0];
+}
+
+export function renderHome(container, { levels, categories, done, currentTheme }) {
+  const catsWithLevels = getLevelSections(levels, categories);
 
   const sectionsHtml = catsWithLevels
     .map((cat, catIdx) => {

@@ -426,3 +426,78 @@
   border-color: #ef4444;
   color: #b91c1c;
 }
+
+@media (max-width: 740px) {
+  header {
+    flex-wrap: wrap;
+    padding: 14px;
+    gap: 10px;
+  }
+
+  header .brand { flex: 1 1 100%; }
+
+  .header-audio {
+    width: 100%;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .header-audio button,
+  #theme, #sound, #music, #reset-progress {
+    min-width: 0;
+    width: 100%;
+    min-height: 44px;
+    white-space: normal;
+  }
+
+  #theme { order: 1; }
+  #sound { order: 2; }
+  #music { order: 3; }
+  #reset-progress { order: 4; }
+
+  .hero-copy { padding: 26px 20px; }
+  .hero h1 { font-size: clamp(28px, 7vw, 38px); }
+  .categories-container { gap: 22px; margin-bottom: 28px; }
+}
+
+@media (max-width: 480px) {
+  .home-level-grid { grid-template-columns: minmax(0, 1fr); }
+
+  .home-level-grid .level-card {
+    display: grid;
+    grid-template-columns: 92px minmax(0, 1fr);
+    min-height: 112px;
+  }
+
+  .home-level-grid .card-art {
+    height: auto;
+    min-height: 112px;
+    padding: 8px 4px;
+  }
+
+  .home-level-grid .level-number { font-size: 34px; }
+  .home-level-grid .level-name { font-size: 12px; overflow-wrap: anywhere; }
+
+  .home-level-grid .card-body {
+    padding: 12px;
+    text-align: left;
+    min-width: 0;
+  }
+
+  .home-level-grid .card-body p {
+    min-height: 0;
+    margin-bottom: 8px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+  }
+
+  .home-level-grid .completed-badge {
+    position: static;
+    font-size: 9px;
+    padding: 2px 5px;
+  }
+}

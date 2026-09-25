@@ -13,6 +13,7 @@ export function createFreshLevel(defaultAllowed = null) {
     depth: 4,
     start: { x: 0, z: 3, dir: 0 },
     allowed,
+    hints: [],
     limit: 0,
     repairKits: 0,
     cells: Array.from({ length: 4 }, () =>

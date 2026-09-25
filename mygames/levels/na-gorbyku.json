@@ -6,9 +6,9 @@
   "width": 5,
   "depth": 5,
   "start": {
-    "x": 2,
-    "z": 4,
-    "dir": 0
+    "x": 1,
+    "z": 3,
+    "dir": 1
   },
   "allowed": [
     "forward",
@@ -17,7 +17,7 @@
     "jump",
     "light"
   ],
-  "limit": 0,
+  "limit": 10,
   "cells": [
     [
       {
@@ -154,5 +154,7 @@
         "lamp": false
       }
     ]
-  ]
+  ],
+  "descriptionNight": "",
+  "descriptionDay": ""
 }

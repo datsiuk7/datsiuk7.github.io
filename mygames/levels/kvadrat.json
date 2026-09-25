@@ -17,7 +17,7 @@
     "loop",
     "light"
   ],
-  "limit": 0,
+  "limit": 10,
   "cells": [
     [
       {
@@ -107,5 +107,7 @@
         "lamp": true
       }
     ]
-  ]
+  ],
+  "descriptionNight": "",
+  "descriptionDay": ""
 }

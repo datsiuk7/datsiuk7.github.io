@@ -174,6 +174,13 @@ export function setupEffects(button){
     repair(){if(!on)return;const audio=getContext();if(!audio)return;const now=audio.currentTime;tone(now,320,.08,.1,'sawtooth',480);tone(now+.09,880,.18,.07,'sine',1320)},
     call(){if(!on)return;const audio=getContext();if(!audio)return;const now=audio.currentTime;tone(now,660,.06,.06,'sine',990)},
     spark(){if(!on)return;const audio=getContext();if(!audio)return;const now=audio.currentTime;tone(now,820,.04,.08,'sawtooth',140);tone(now+.03,1200,.03,.07,'sawtooth',220)},
+    shock(){if(!on)return;const audio=getContext();if(!audio)return;const now=audio.currentTime;
+      for(const [index,frequency] of [1180,720,1320,640,960,510].entries()){
+        tone(now+index*.075,frequency,.09,.105,'sawtooth',frequency*.22);
+      }
+      tone(now,145,.55,.09,'triangle',48);
+      tone(now+.28,90,.22,.07,'sawtooth',35);
+    },
     light(){if(!on)return;const audio=getContext();if(!audio)return;const now=audio.currentTime;tone(now,880,.16,.08,'sine',1320);tone(now+.07,1320,.2,.055,'sine',1760)},
     unscrew(){if(!on)return;const audio=getContext();if(!audio)return;const now=audio.currentTime;tone(now,650,.1,.09,'triangle',320);tone(now+.08,440,.14,.07,'sine',220);tone(now+.18,280,.18,.05,'sine',140)},
     fall(){if(!on)return;const audio=getContext();if(!audio)return;const now=audio.currentTime;

@@ -7,10 +7,12 @@ import {
   createMemory,
   executeProgram,
   getCommandInfo,
-  getLevelDescription
+  getLevelDescription,
+  ElectricShockError
 } from './logic.mjs';
 import { World } from './scene.js';
 import { ProgramEditor } from './program.js';
+import { setupGameHints } from './game-hints.js';
 
 const esc = (s) =>
   String(s).replace(/[&<>"']/g, (c) => ({
@@ -45,7 +47,8 @@ function spawnConfetti(container) {
 export function startGame(container, l, preview, options) {
   const {
     currentTheme,
-    levels,
+    gameSettings,
+    getNextLevel,
     loadSavedProgram,
     saveProgram,
     complete,
@@ -70,6 +73,15 @@ export function startGame(container, l, preview, options) {
         <span>${preview ? 'До редактора' : 'Всі теми'}</span>
       </a>
       <div class="game-level-name">${esc(l.name)}</div>
+      <button id="help-open" class="game-help-open" type="button" aria-label="Відкрити підказки">? Підказка</button>
+    </div>
+    <div id="help-card" class="game-help-card" hidden>
+      <div class="game-help-heading"><strong>Як грати</strong><span id="help-count"></span></div>
+      <p id="help-text" aria-live="polite"></p>
+      <div class="game-help-actions">
+        <button id="help-close" type="button">Закрити</button>
+        <button id="help-next" type="button" class="primary">Далі</button>
+      </div>
     </div>
     <div class="game-layout ${isAdvanced ? 'advanced-level' : ''}">
       <section class="world">
@@ -92,6 +104,7 @@ export function startGame(container, l, preview, options) {
         </div>
       </section>
       <aside class="program-panel">
+        <div id="win" class="win" hidden></div>
         <div class="program-run-bar">
           <button id="run" class="primary" aria-label="Запустити програму">
             <span class="run-icon">▶</span> <span>Запустити</span>
@@ -106,7 +119,6 @@ export function startGame(container, l, preview, options) {
         <div class="section-label available-commands">Доступні команди <span class="count">${l.allowed.length}</span></div>
         <div id="palette" class="palette"></div>
         <p id="status" class="status" role="status" aria-live="polite"></p>
-        <div id="win" class="win" hidden></div>
       </aside>
     </div>
   `;
@@ -136,7 +148,11 @@ export function startGame(container, l, preview, options) {
     savedProgram
   );
 
-  editor.onChange = (data) => saveProgram(l.id, preview, data);
+  const help = setupGameHints(container, l, preview);
+  editor.onChange = (data) => {
+    saveProgram(l.id, preview, data);
+    help.refresh();
+  };
 
   $('#trash').onclick = () => {
     if (editor.blocks.length && confirm('Очистити всі складені блоки програми?')) {
@@ -156,9 +172,6 @@ export function startGame(container, l, preview, options) {
       text = `💡 ${lampCount(l) - state.lit.length} / ${lampCount(l)} вимкнено`;
     } else {
       text = `☀ ${state.lit.length} / ${lampCount(l)} увімкнено`;
-    }
-    if (state.sparks && state.sparks.length > 0) {
-      text += ` · ⚡ ${state.sparks.length} іскрить`;
     }
     if ((state.repairKits || 0) > 0 || (l.repairKits || 0) > 0 || (state.kits && state.kits.length > 0)) {
       text += ` · 🔧 ${state.repairKits || 0} ремкомплектів`;
@@ -219,6 +232,7 @@ export function startGame(container, l, preview, options) {
   $('#reset').onclick = reset;
 
   $('#run').onclick = async () => {
+    help.close();
     if (running) return;
     let memory;
 
@@ -298,17 +312,15 @@ export function startGame(container, l, preview, options) {
                 : 'Усі ліхтарі світяться. Гарна робота!';
             status(successMsg, 'success');
 
-            const i = levels.findIndex((x) => x.id === l.id);
-            const nextLevel = levels[i + 1];
-            $('#win').hidden = false;
-            $('#win').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-
+            const nextLevel = getNextLevel(l.id);
             const winLink = preview
               ? '<a class="next-street" href="./admin/">← Повернутися до редактора</a>'
               : nextLevel
               ? '<a class="next-street" href="#level=' + nextLevel.id + '">Наступна вулиця →</a>'
               : '<a class="next-street" href="#">До всіх тем →</a>';
             $('#win').innerHTML = winLink;
+            $('#win').hidden = false;
+            $('#win').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             break;
           }
         } catch (e) {
@@ -327,6 +339,18 @@ export function startGame(container, l, preview, options) {
             status('Персонаж вийшов за межі та впав.', 'error');
             await wait(1800);
             if (token === runToken) status('На старті. Спробуй ще раз.', 'error');
+          } else if (e instanceof ElectricShockError) {
+            effects.shock?.();
+            status(e.message, 'error');
+            if (!(await world.shocked(() => token !== runToken))) return;
+            await wait(900);
+            if (token === runToken) {
+              state = initialState(l, currentTheme);
+              world.setState(state);
+              meter();
+              editor.highlight(null);
+              status('Персонаж повернувся на старт. Спершу полагодь іскристий ліхтар.', 'error');
+            }
           } else {
             effects.angry?.();
             status(e.message, 'error');
@@ -371,6 +395,7 @@ export function startGame(container, l, preview, options) {
   };
 
   return () => {
+    help.close();
     document.body.classList.remove('in-game');
     token++;
     editor.dnd.endDrag();

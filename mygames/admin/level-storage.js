@@ -87,6 +87,17 @@ export async function deleteLevelOnServer(id) {
   return r.ok;
 }
 
+export async function reorderLevelsOnServer(ids) {
+  const r = await fetch('../api/levels/reorder', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'X-Local-Editor': '1' },
+    body: JSON.stringify({ ids })
+  });
+  const result = await r.json();
+  if (!r.ok) throw new Error(result.error || 'Помилка зміни порядку рівнів.');
+  return result;
+}
+
 export async function fetchStructureLevels() {
   try {
     const r = await fetch('../api/structure', { cache: 'no-store' });

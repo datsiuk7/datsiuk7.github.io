@@ -16,7 +16,7 @@
     "right",
     "light"
   ],
-  "limit": 0,
+  "limit": 10,
   "cells": [
     [
       null,
@@ -71,5 +71,7 @@
       null,
       null
     ]
-  ]
+  ],
+  "descriptionNight": "",
+  "descriptionDay": ""
 }

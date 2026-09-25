@@ -1,10 +1,9 @@
 import {
   validateLevel,
-  categories,
-  getCategory
+  categories
 } from './logic.mjs';
 import { setupMusic, setupEffects } from './music.js';
-import { renderHome, isCatUnlocked } from './home.js';
+import { renderHome, isCatUnlocked, getLevelSections, findNextLevel } from './home.js';
 import { startGame } from './runner.js';
 
 const app = document.querySelector('#app');
@@ -202,10 +201,11 @@ function route() {
       if (errors.length) throw new Error(errors.join(' '));
       cleanup = startGame(app, level, true, {
         currentTheme,
-        levels,
+        gameSettings,
         loadSavedProgram,
         saveProgram,
         complete,
+        getNextLevel: (levelId) => findNextLevel(levels, currentCategories, completed(), levelId),
         effects
       });
     } catch (e) {
@@ -229,13 +229,7 @@ function route() {
     }
 
     const done = completed();
-    const visibleLevels = levels.filter((lvl) => !lvl.hidden);
-    const catsWithLevels = currentCategories
-      .map((cat) => ({
-        ...cat,
-        levels: visibleLevels.filter((lvl) => (lvl.category || getCategory(lvl)) === cat.id)
-      }))
-      .filter((cat) => cat.levels.length > 0);
+    const catsWithLevels = getLevelSections(levels, currentCategories);
 
     const catIdx = catsWithLevels.findIndex((c) => c.levels.some((lvl) => lvl.id === l.id));
     if (catIdx > 0 && !isCatUnlocked(catIdx, catsWithLevels, done)) {
@@ -252,10 +246,11 @@ function route() {
 
     cleanup = startGame(app, l, false, {
       currentTheme,
-      levels,
+      gameSettings,
       loadSavedProgram,
       saveProgram,
       complete,
+      getNextLevel: (levelId) => findNextLevel(levels, currentCategories, completed(), levelId),
       effects
     });
   } else {
