@@ -1,133 +1,81 @@
 import * as THREE from 'three';
 
-const sphere=new THREE.SphereGeometry(1,20,14);
-const smallSphere=new THREE.SphereGeometry(1,12,9);
-const mat=(color,roughness=.8)=>new THREE.MeshStandardMaterial({color,roughness});
-const green=mat(0x55c784),hoodGreen=mat(0x65d395),darkGreen=mat(0x299663);
-const cream=mat(0xffeed2),skin=mat(0xe9b49a),hair=mat(0x463329);
-const gold=mat(0xffcf5c,.35),eyeWhite=mat(0xfffcf0),black=mat(0x242d30,.42);
+const mat=(color,roughness=.88)=>new THREE.MeshStandardMaterial({color,roughness});
+const skin=mat(0xc69077),hair=mat(0x302a25),jacket=mat(0x414639),seam=mat(0x2f332b),shirt=mat(0x292a28),jeans=mat(0x343c43),boot=mat(0x302c28),metal=mat(0x9a8b6e,.42);
+const sphere=new THREE.SphereGeometry(1,24,16);
+function ellipsoid(parent,material,x,y,z,sx,sy,sz){const m=new THREE.Mesh(sphere,material);m.position.set(x,y,z);m.scale.set(sx,sy,sz);m.castShadow=true;m.receiveShadow=true;parent.add(m);return m}
+function block(parent,material,x,y,z,sx,sy,sz){const m=new THREE.Mesh(new THREE.BoxGeometry(sx,sy,sz),material);m.position.set(x,y,z);m.castShadow=true;m.receiveShadow=true;parent.add(m);return m}
 
-function ball(parent,material,x,y,z,sx,sy,sz,small=false){
-  const m=new THREE.Mesh(small?smallSphere:sphere,material);
-  m.position.set(x,y,z);m.scale.set(sx,sy,sz);m.castShadow=true;m.receiveShadow=true;parent.add(m);return m;
-}
-function cylinder(parent,material,x,y,z,rt,rb,h,segments=10){
-  const m=new THREE.Mesh(new THREE.CylinderGeometry(rt,rb,h,segments),material);
-  m.position.set(x,y,z);m.castShadow=true;parent.add(m);return m;
-}
-function faceTextureFromPortrait(url,onReady){
-  const cvs=document.createElement('canvas');cvs.width=512;cvs.height=640;
-  const ctx=cvs.getContext('2d');
-  const tex=new THREE.CanvasTexture(cvs);tex.colorSpace=THREE.SRGBColorSpace;
-  const img=new Image();
-  img.onload=()=>{
-    // The source is the already-created Pavlyk frog portrait. Only the face is
-    // projected onto the curved front of the actual 3D head.
-    ctx.clearRect(0,0,512,640);
-    ctx.drawImage(img,295,150,430,515,0,0,512,640);
+function makeFaceTexture(url,onReady){
+  const canvas=document.createElement('canvas');canvas.width=512;canvas.height=640;
+  const ctx=canvas.getContext('2d'),texture=new THREE.CanvasTexture(canvas);texture.colorSpace=THREE.SRGBColorSpace;
+  const image=new Image();image.onload=()=>{
+    // Crop the AI-assisted portrait to its face and fade the perimeter into the modelled skin.
+    ctx.clearRect(0,0,512,640);ctx.drawImage(image,145,50,735,1100,0,0,512,640);
     ctx.globalCompositeOperation='destination-in';
-    ctx.save();ctx.translate(256,320);ctx.scale(1,1.23);
-    const fade=ctx.createRadialGradient(0,0,160,0,0,258);
-    fade.addColorStop(0,'rgba(255,255,255,1)');
-    fade.addColorStop(.77,'rgba(255,255,255,1)');
-    fade.addColorStop(1,'rgba(255,255,255,0)');
-    ctx.fillStyle=fade;ctx.fillRect(-256,-270,512,540);
-    ctx.restore();ctx.globalCompositeOperation='source-over';
-    tex.needsUpdate=true;onReady();
-  };
-  img.src=url;
-  return tex;
+    const oval=ctx.createRadialGradient(256,312,170,256,312,325);
+    oval.addColorStop(0,'#fff');oval.addColorStop(.67,'#fff');oval.addColorStop(.94,'#0000');
+    ctx.fillStyle=oval;ctx.fillRect(0,0,512,640);ctx.globalCompositeOperation='source-over';
+    texture.needsUpdate=true;onReady();
+  };image.src=url;return texture;
 }
 
 export function createCharacter(portraitUrl){
-  const group=new THREE.Group();
-  const rig=new THREE.Group();group.add(rig);
-  // Hoodie and short overalls are volumetric meshes from every angle.
-  ball(rig,green,0,1.47,0,.58,.70,.40);
-  ball(rig,cream,0,1.42,.365,.42,.52,.10);
-  ball(rig,darkGreen,0,.96,.20,.52,.36,.33);
-  ball(rig,darkGreen,0,1.18,.465,.35,.25,.07);
+  const group=new THREE.Group(),rig=new THREE.Group();group.add(rig);
+  // Human proportions, fabric layers and a neutral field outfit.
+  ellipsoid(rig,jacket,0,1.58,0,.43,.60,.29);
+  ellipsoid(rig,shirt,0,1.71,.275,.25,.35,.035);
+  ellipsoid(rig,jacket,0,1.04,0,.38,.24,.28);
+  block(rig,seam,0,1.63,.31,.035,.85,.025);
   for(const side of [-1,1]){
-    const strap=cylinder(rig,darkGreen,side*.36,1.49,.395,.065,.068,.57,8);
-    strap.rotation.z=side*.27;
-    ball(rig,gold,side*.34,1.20,.48,.08,.08,.045,true);
+    block(rig,seam,side*.23,1.40,.29,.18,.045,.035);
+    ellipsoid(rig,metal,side*.29,1.38,.315,.027,.027,.018);
   }
-  ball(rig,darkGreen,0,.99,.54,.20,.13,.035,true);
-
   const arms=[];
   for(const side of [-1,1]){
-    const arm=new THREE.Group();arm.position.set(side*.53,1.89,0);rig.add(arm);
-    ball(arm,green,side*.15,-.22,0,.25,.36,.25);
-    ball(arm,hoodGreen,side*.19,-.49,.01,.21,.16,.21,true);
-    ball(arm,skin,side*.20,-.65,.015,.16,.19,.15,true);
+    const arm=new THREE.Group();arm.position.set(side*.47,1.96,0);rig.add(arm);
+    ellipsoid(arm,jacket,side*.06,-.32,0,.18,.37,.19);
+    ellipsoid(arm,seam,side*.08,-.65,0,.15,.09,.16);
+    ellipsoid(arm,skin,side*.08,-.79,.01,.12,.16,.12);
     arms.push(arm);
   }
   const legs=[];
   for(const side of [-1,1]){
-    const leg=new THREE.Group();leg.position.set(side*.29,.92,0);rig.add(leg);
-    ball(leg,darkGreen,0,-.18,0,.25,.30,.29);
-    ball(leg,skin,0,-.49,.01,.17,.22,.18,true);
-    ball(leg,darkGreen,0,-.68,.08,.23,.18,.27,true);
-    ball(leg,hoodGreen,0,-.77,.16,.28,.18,.39);
-    ball(leg,green,0,-.63,.13,.28,.10,.31,true);
-    ball(leg,gold,0,-.62,.39,.055,.055,.025,true);
+    const leg=new THREE.Group();leg.position.set(side*.21,1.01,0);rig.add(leg);
+    ellipsoid(leg,jeans,0,-.38,0,.19,.45,.20);
+    ellipsoid(leg,boot,0,-.77,.10,.21,.17,.32);
+    block(leg,seam,0,-.86,.13,.43,.07,.62);
     legs.push(leg);
   }
-
-  // Hood, ears, face and frog eyes form a real rounded head.
-  ball(rig,hoodGreen,0,2.43,0,.70,.77,.62);
-  ball(rig,hair,0,2.60,.29,.51,.49,.37);
-  ball(rig,skin,0,2.38,.28,.53,.62,.39);
-  ball(rig,skin,-.53,2.36,.22,.13,.21,.11,true);
-  ball(rig,skin,.53,2.36,.22,.13,.21,.11,true);
-  const hoodRim=new THREE.Mesh(new THREE.TorusGeometry(.59,.105,12,48),green);
-  hoodRim.scale.y=1.09;hoodRim.position.set(0,2.42,.57);hoodRim.castShadow=true;rig.add(hoodRim);
-  for(const side of [-1,1]){
-    ball(rig,green,side*.44,3.05,.22,.30,.32,.25);
-    ball(rig,eyeWhite,side*.44,3.07,.423,.205,.22,.085,true);
-    ball(rig,black,side*.44,3.07,.504,.103,.12,.045,true);
-    ball(rig,eyeWhite,side*.47,3.13,.545,.032,.04,.015,true);
-  }
-
-  // Geometric expression remains if the portrait texture cannot load.
+  ellipsoid(rig,skin,0,2.28,.04,.49,.56,.42);
+  // Receding short dark hair and ears remain visible when the camera orbits.
+  ellipsoid(rig,hair,0,2.55,-.20,.46,.30,.25);
+  ellipsoid(rig,hair,-.39,2.43,-.03,.085,.23,.25);
+  ellipsoid(rig,hair,.39,2.43,-.03,.085,.23,.25);
+  for(const side of [-1,1])ellipsoid(rig,skin,side*.49,2.24,.04,.085,.17,.09);
   const fallback=new THREE.Group();rig.add(fallback);
   for(const side of [-1,1]){
-    ball(fallback,black,side*.22,2.48,.64,.064,.074,.027,true);
-    const brow=cylinder(fallback,hair,side*.22,2.63,.64,.025,.025,.22,6);brow.rotation.z=side*.88;
+    ellipsoid(fallback,hair,side*.18,2.38,.423,.105,.035,.022);
+    ellipsoid(fallback,mat(0x392f2b),side*.18,2.26,.43,.045,.05,.02);
   }
-  ball(fallback,skin,0,2.30,.68,.11,.16,.09,true);
-  const smileCurve=new THREE.CatmullRomCurve3([
-    new THREE.Vector3(-.27,2.15,.64),new THREE.Vector3(0,2.07,.69),new THREE.Vector3(.27,2.15,.64)
-  ]);
-  fallback.add(new THREE.Mesh(new THREE.TubeGeometry(smileCurve,16,.025,6,false),hair));
-
-  const faceGeo=new THREE.PlaneGeometry(1.04,1.26,16,16);
-  const pos=faceGeo.attributes.position;
-  for(let i=0;i<pos.count;i++){
-    const x=pos.getX(i),y=pos.getY(i);
-    pos.setZ(i,.055-.15*(x/.52)**2-.055*(y/.63)**2);
+  ellipsoid(fallback,skin,0,2.14,.46,.095,.15,.08);
+  const faceGeo=new THREE.PlaneGeometry(.87,1.12,22,22),p=faceGeo.attributes.position;
+  for(let i=0;i<p.count;i++){
+    const x=p.getX(i),y=p.getY(i),u=x/.49,v=y/.56;
+    p.setZ(i,.04+.42*Math.sqrt(Math.max(.012,1-u*u-v*v))+.012);
   }
   faceGeo.computeVertexNormals();
-  const texture=faceTextureFromPortrait(portraitUrl,()=>{face.visible=true;fallback.visible=false});
-  const face=new THREE.Mesh(faceGeo,new THREE.MeshBasicMaterial({map:texture,transparent:true,side:THREE.DoubleSide,depthWrite:false,alphaTest:.012}));
-  face.position.set(0,2.39,.667);face.visible=false;face.renderOrder=2;rig.add(face);
-
-  // A tiny backpack and frog-hood seam make the back view readable too.
-  ball(rig,darkGreen,0,1.52,-.42,.36,.42,.17);
-  ball(rig,hoodGreen,0,1.53,-.56,.23,.27,.07,true);
-
+  const face=new THREE.Mesh(faceGeo,new THREE.MeshBasicMaterial({map:null,transparent:true,side:THREE.DoubleSide,depthWrite:false,alphaTest:.025}));
+  face.position.set(0,2.28,0);face.visible=false;face.renderOrder=2;rig.add(face);
+  face.material.map=makeFaceTexture(portraitUrl,()=>{face.visible=true;fallback.visible=false});
+  ellipsoid(rig,seam,0,1.50,-.31,.29,.35,.11); // small backpack
   return {group,rig,arms,legs,face};
 }
-
 export function animateCharacter(character,time,moveAmount,grounded,vy,invulnerable){
-  const pace=time*(moveAmount>.1?12:2.4);
-  const swing=Math.sin(pace)*Math.min(1,moveAmount);
-  character.legs[0].rotation.x=swing*.58;
-  character.legs[1].rotation.x=-swing*.58;
-  character.arms[0].rotation.x=-swing*.48-.09;
-  character.arms[1].rotation.x=swing*.48-.09;
-  character.rig.position.y=grounded?Math.abs(Math.sin(pace))*.045*moveAmount:0;
-  character.rig.rotation.x=grounded?0:Math.max(-.20,Math.min(.20,-vy*.024));
-  character.rig.rotation.z=grounded?Math.sin(pace)*.025*moveAmount:0;
+  const cadence=time*(moveAmount>.15?10.5:2.4),swing=Math.sin(cadence)*Math.min(1,moveAmount);
+  character.legs[0].rotation.x=swing*.68;character.legs[1].rotation.x=-swing*.68;
+  character.arms[0].rotation.x=-swing*.48-.08;character.arms[1].rotation.x=swing*.48-.08;
+  character.rig.position.y=grounded?Math.abs(Math.sin(cadence))*.038*moveAmount:0;
+  character.rig.rotation.x=grounded?0:Math.max(-.18,Math.min(.18,-vy*.018));
   character.group.visible=!(invulnerable>0&&Math.floor(time*12)%2===0);
 }

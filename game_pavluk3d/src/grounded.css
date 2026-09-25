@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap');
+:root{font-family:'DM Sans',system-ui,sans-serif;color:#f5f3e9}
+body{background:#617365}
+.screen-glow{background:linear-gradient(180deg,#15271d4d,transparent 24%,transparent 70%,#161e193d)}
+.brand{color:#fff}
+.brand-icon{border-radius:50%;background:#333c33;border:2px solid #e0d6b5;box-shadow:0 4px 20px #0004}
+.brand-icon img{width:100%;height:100%;object-fit:cover;object-position:center 28%}
+.brand strong{font-family:Manrope,sans-serif;font-size:22px;letter-spacing:-.04em}
+.brand small{color:#e2d5a9;letter-spacing:.18em}
+.hud-center,.counter,.hearts,.icon-btn,.quest-card,.map-card,.desktop-help{background:#1f2924bd;border:1px solid #e7e7cf38;color:#f5f3e9;box-shadow:0 9px 27px #07100835;backdrop-filter:blur(16px)}
+.level-name,.quest-kicker,.map-title{color:#d8bd85}
+.objective-text{font-family:Manrope,sans-serif;color:#fff;font-size:16px}
+.counter span,.overlay-stars{color:#f5ce77;text-shadow:none}
+.counter small,.quest-row small,.map-legend,.desktop-help,.overlay-footer{color:#c5c7b9}
+.hearts{color:#d78578;text-shadow:none}.hearts .empty{color:#687068}
+.icon-btn{color:#f5f3e9}.icon-btn:hover{background:#3b4941}.icon-btn.muted{color:#8a948a}
+.quest-arrow{background:#dac18f;color:#263025;border-radius:9px}
+.map-card{border-radius:14px}.map-title{margin-bottom:5px}
+.player-dot{background:#f7ecd1}.star-dot{background:#f0c673}
+.desktop-help{font-weight:600;border-radius:10px;font-size:11px}
+kbd{font-family:Manrope,sans-serif;background:#48564a;border:1px solid #778570;color:#fff}
+.jump-btn{background:linear-gradient(145deg,#d2b77b,#a78958);color:#263126;border-color:#ffffff55;box-shadow:0 6px 0 #62583d,0 12px 22px #111a1490,inset 0 2px 2px #fff6}
+.jump-btn:active,.jump-btn.pressed{box-shadow:0 2px 0 #62583d,0 6px 12px #111a1460}
+.joystick{background:#1f292498;border-color:#e7e7cf5c;box-shadow:0 7px 20px #0e1c1590}
+.stick{background:linear-gradient(145deg,#b7aa82,#6e765e);box-shadow:0 5px 12px #1119}
+.toast{background:#25332ce8;color:#f9e8c3;border-color:#e7e7cf5c;font-family:Manrope,sans-serif;box-shadow:0 10px 24px #0e1c1580}
+.overlay{background:linear-gradient(135deg,#16251fba,#34413487 50%,#2a3428c2);backdrop-filter:blur(10px)}
+.overlay-card{background:linear-gradient(130deg,#25322af7,#1a2620f8);border:1px solid #ddd5bc53;border-radius:18px;box-shadow:0 28px 95px #0a150ecc}
+.overlay-top{color:#d8bd85}.overlay h1{font-family:Manrope,sans-serif;color:#f7f5e9;font-size:clamp(41px,4.6vw,59px);line-height:1;letter-spacing:-.055em}.overlay h1 em{color:#d8bd85}
+.overlay p{color:#d2d4c6;font-weight:500}
+.overlay-mascot{border-radius:12px;overflow:hidden;align-self:center;min-height:355px;background:#3d463e}
+.overlay-mascot:before{display:none}
+.overlay-mascot img{width:100%;height:100%;max-height:355px;object-fit:cover;object-position:center 19%;filter:none}
+.primary-btn{background:linear-gradient(135deg,#d7bc87,#aa8d58);color:#243026;box-shadow:0 5px 0 #6c6044,0 12px 18px #0f1810a6;font-family:Manrope,sans-serif;border-radius:10px}
+.overlay-footer{font-weight:600}
+.overlay-card:after{color:#d8bd85}
+@media(max-width:700px){.overlay-card{padding:18px 20px 22px}.overlay-mascot{min-height:0;height:158px;width:150px;margin:0 auto}.overlay-mascot img{height:100%;max-height:none}.overlay h1{font-size:35px}.overlay p{font-size:13px}.quest-card{background:#1f2924d9}.map-card{background:#1f2924db}}
+@media(max-height:550px) and (max-width:700px){.overlay-mascot{height:65px;width:80px}.overlay h1{font-size:29px}.overlay p{font-size:10px}}

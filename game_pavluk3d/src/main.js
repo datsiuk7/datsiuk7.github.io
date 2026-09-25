@@ -4,6 +4,7 @@ import { createLevel, groundAt, animateWorld, unlockPortal } from './world.js';
 import { createCharacter, animateCharacter } from './character.js';
 import { createDragon, animateDragon } from './dragon.js';
 import './style.css';
+import './grounded.css';
 
 const $=(id)=>document.getElementById(id);
 const canvas=$('game');
@@ -22,14 +23,14 @@ try{
 renderer.setPixelRatio(Math.min(devicePixelRatio||1,1.8));
 renderer.outputColorSpace=THREE.SRGBColorSpace;
 renderer.toneMapping=THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure=1.25;
+renderer.toneMappingExposure=1.0;
 renderer.shadowMap.enabled=true;
 renderer.shadowMap.type=THREE.PCFSoftShadowMap;
 
 const scene=new THREE.Scene();
 const camera=new THREE.PerspectiveCamera(51,1,.1,250);
-const ambient=new THREE.HemisphereLight(0xffffff,0x86a9c1,2.25);scene.add(ambient);
-const sun=new THREE.DirectionalLight(0xffffff,2.15);
+const ambient=new THREE.HemisphereLight(0xffffff,0x536250,1.35);scene.add(ambient);
+const sun=new THREE.DirectionalLight(0xfff4dc,2.45);
 sun.position.set(-12,25,13);sun.castShadow=true;
 sun.shadow.mapSize.set(2048,2048);
 sun.shadow.camera.left=-30;sun.shadow.camera.right=30;
@@ -37,7 +38,7 @@ sun.shadow.camera.top=30;sun.shadow.camera.bottom=-30;
 sun.shadow.camera.near=.5;sun.shadow.camera.far=90;
 sun.shadow.bias=-.00025;scene.add(sun);
 
-const portraitUrl=`${import.meta.env.BASE_URL}assets/pavlyk-frog.png`;
+const portraitUrl=`${import.meta.env.BASE_URL}assets/pavlyk-portrait.png`;
 const avatar=createCharacter(portraitUrl);scene.add(avatar.group);
 const dragon=createDragon();scene.add(dragon.group);
 const shadow=new THREE.Mesh(new THREE.CircleGeometry(.56,28),new THREE.MeshBasicMaterial({color:0x237d70,transparent:true,opacity:.22,depthWrite:false,side:THREE.DoubleSide}));
@@ -58,9 +59,10 @@ let dragonAwake=false;
 let toastTimeout;
 let soundOn=true;
 let audioContext;
-let yaw=.66;
-let pitch=.51;
-let cameraDistance=14.5;
+let yaw=.15;
+let pitch=.34;
+let cameraDistance=8.7;
+let cameraIdle=0;
 let dragging=false;
 let dragPointer=null;
 let dragX=0,dragY=0;
@@ -123,7 +125,7 @@ function updateHearts(){
 }
 function updateHud(){
   const level=LEVELS[levelIndex];
-  $('level-name').textContent=`${String(levelIndex+1).padStart(2,'0')} / 03 · ${level.name}`;
+  $('level-name').textContent=`${String(levelIndex+1).padStart(2,'0')} / ${String(LEVELS.length).padStart(2,'0')} · ${level.name}`;
   $('stars-count').textContent=levelStars;
   $('objective-text').textContent=levelStars===5?'Портал відкрито!':'Збери всі 5 зірочок';
   updateHearts();
@@ -137,7 +139,9 @@ function disposeWorld(){
 }
 function cameraCoordinates(){
   const horizontal=cameraDistance*Math.cos(pitch),height=cameraDistance*Math.sin(pitch);
-  return new THREE.Vector3(player.x+Math.sin(yaw)*horizontal,player.y+1.2+height,player.z+Math.cos(yaw)*horizontal);
+  const x=player.x+Math.sin(yaw)*horizontal,z=player.z+Math.cos(yaw)*horizontal;
+  const floor=world?groundAt(world,x,z):null;
+  return new THREE.Vector3(x,Math.max(player.y+1.2+height,(floor??-10)+1.35),z);
 }
 function snapCamera(){
   camera.position.copy(cameraCoordinates());
@@ -148,14 +152,15 @@ function loadLevel(index){
   levelIndex=index;levelStars=0;hearts=3;dragonGrace=7;dragonAwake=false;
   world=createLevel(LEVELS[index],index);scene.add(world.group);
   const spawn=LEVELS[index].spawn;
-  player.x=spawn.x;player.z=spawn.z;player.y=world.platforms[0].top;
+  player.x=spawn.x;player.z=spawn.z;player.y=groundAt(world,spawn.x,spawn.z);
   player.vx=0;player.vz=0;player.vy=0;player.grounded=true;
-  player.coyote=.12;player.jumpBuffer=0;player.invulnerable=0;player.facing=yaw;
-  avatar.group.position.set(player.x,player.y,player.z);avatar.group.rotation.y=yaw;
-  dragon.group.position.set(LEVELS[index].dragon.x,.5,LEVELS[index].dragon.z);
+  player.coyote=.12;player.jumpBuffer=0;player.invulnerable=0;player.facing=yaw+Math.PI;
+  avatar.group.position.set(player.x,player.y,player.z);avatar.group.rotation.y=player.facing;
+  dragon.group.position.set(LEVELS[index].dragon.x,groundAt(world,LEVELS[index].dragon.x,LEVELS[index].dragon.z)+.55,LEVELS[index].dragon.z);
   snapCamera();updateHud();drawMap();
-  sun.color.setHex(index===2?0xffe4f4:0xffffff);
-  ambient.color.setHex(index===2?0xf1e9ff:0xffffff);
+  scene.fog=new THREE.Fog(LEVELS[index].fog,36,112);
+  sun.color.setHex(index===1?0xffd6ad:index===3?0xffddb9:0xffffff);
+  ambient.color.setHex(LEVELS[index].skyBottom);
 }
 function startGame(){
   if(state==='won'||state==='intro'){
@@ -173,7 +178,7 @@ function nextLevel(){
 function togglePause(){
   if(state==='playing'){
     state='paused';
-    showOverlay('ПЕРЕПОЧИНОК','Пауза <em>в хмарах</em>','Дракон теж зупинився. Відпочинь і продовжуй дослідження островів.','Продовжити','Esc — продовжити · R — почати рівень спочатку');
+    showOverlay('ПЕРЕПОЧИНОК','Пауза <em>в дорозі</em>','Поглянь на мапу та продовжуй дослідження місцевості.','Продовжити','Esc — продовжити · R — почати регіон спочатку');
   }else if(state==='paused'){
     state='playing';hideOverlay();
   }
@@ -181,18 +186,18 @@ function togglePause(){
 function gameOver(){
   state='lost';
   playTone(285,.24,'triangle');playTone(190,.32,'triangle',.055,.19);
-  showOverlay('ДРАКОН ЗАСНУВ НА ШЛЯХУ','Спробуй <em>ще раз!</em>','Павлик перепочине і повернеться на початок цього острова. Зірки попередніх рівнів залишаться з ним.','Повторити рівень',`Рівень ${levelIndex+1} із 3 · Зірок загалом: ${totalStars}`);
+  showOverlay('ДРАКОН НАЗДОГНАВ','Спробуй <em>ще раз!</em>','Павлик повернеться на початок цього регіону. Зірки пройдених регіонів залишаться з ним.','Повторити регіон',`Регіон ${levelIndex+1} із ${LEVELS.length} · Зірок загалом: ${totalStars}`);
 }
 function finishLevel(){
   if(state!=='playing')return;
   playTone(523,.12);playTone(659,.14,'sine',.065,.11);playTone(784,.2,'sine',.075,.23);
-  if(levelIndex<2){
+  if(levelIndex<LEVELS.length-1){
     state='between';
-    showOverlay('УСІ ЗІРКИ ЗІБРАНО','Острів <em>пройдено!</em>',`Павлик зібрав усі 5 зірочок і знайшов портал. Далі — ${LEVELS[levelIndex+1].name.toLowerCase()}.`,`Наступний острів`,`Зібрано ${totalStars} з 15 зірок`);
+    showOverlay('УСІ ЗІРКИ ЗІБРАНО','Регіон <em>пройдено!</em>',`Павлик знайшов усі 5 зірок. Наступна місцевість — ${LEVELS[levelIndex+1].name.toLowerCase()}.`,`Наступний регіон`,`Зібрано ${totalStars} з ${LEVELS.length*5} зірок`);
   }else{
     state='won';
-    try{localStorage.setItem('pavlyk3d-best','15')}catch{}
-    showOverlay('ТРИ ОСТРОВИ ПІДКОРЕНО','Павлик — <em>герой!</em>','Усі 15 зірок твої! Дракон нарешті може спокійно поспати ще п’ять хвилинок.','Грати знову','Дякуємо за пригоду у Світі Хмар ✦');
+    try{localStorage.setItem('pavlyk3d-best',String(LEVELS.length*5))}catch{}
+    showOverlay('УСІ РЕГІОНИ ДОСЛІДЖЕНО','Павлик — <em>герой!</em>',`Усі ${LEVELS.length*5} зірок твої! Сонний дракон знову спить, а Павлик повертається додому.`, 'Грати знову','Дякуємо за пригоду ✦');
   }
 }
 function hurt(reason){
@@ -202,10 +207,10 @@ function hurt(reason){
   playTone(280,.20,'sawtooth',.045);
   updateHearts();
   if(hearts<=0){gameOver();return}
-  toast(reason==='fall'?'☁ Обережно, край острова!':'🐉 Дракон майже схопив Павлика!');
+  toast(reason==='fall'?'Обережно, край мапи!':'🐉 Дракон майже схопив Павлика!');
   if(reason==='fall'){
     const spawn=LEVELS[levelIndex].spawn;
-    player.x=spawn.x;player.z=spawn.z;player.y=world.platforms[0].top;
+    player.x=spawn.x;player.z=spawn.z;player.y=groundAt(world,spawn.x,spawn.z);
     player.vx=0;player.vz=0;player.vy=0;player.grounded=true;
     dragon.group.position.set(LEVELS[levelIndex].dragon.x,.5,LEVELS[levelIndex].dragon.z);
     dragonGrace=6;snapCamera();
@@ -233,6 +238,13 @@ function controlVector(){
   if(length>1){x/=length;y/=length}
   return {x,y};
 }
+function canStandAt(x,z){
+  if(Math.abs(x)>37.5||Math.abs(z)>37.5)return false;
+  for(const b of LEVELS[levelIndex].buildings){
+    if(Math.abs(x-b.x)<b.w/2+.46&&Math.abs(z-b.z)<b.d/2+.46)return false;
+  }
+  return true;
+}
 function updatePlayer(dt){
   player.invulnerable=Math.max(0,player.invulnerable-dt);
   player.jumpBuffer=Math.max(0,player.jumpBuffer-dt);
@@ -242,26 +254,27 @@ function updatePlayer(dt){
     dragonAwake=true;dragonGrace=7;toast('🐉 Дракон прокидається!');
   }
   const sprint=keys.has('ShiftLeft')||keys.has('ShiftRight');
-  const speed=sprint?7.3:5.55;
+  const speed=sprint?9.0:6.2;
   const rightX=Math.cos(yaw),rightZ=-Math.sin(yaw);
   const forwardX=-Math.sin(yaw),forwardZ=-Math.cos(yaw);
   const desiredX=(rightX*input.x+forwardX*input.y)*speed;
   const desiredZ=(rightZ*input.x+forwardZ*input.y)*speed;
-  const grip=Math.min(1,dt*(player.grounded?10:4.2));
+  const grip=Math.min(1,dt*(player.grounded?16:5.5));
   player.vx+=(desiredX-player.vx)*grip;
   player.vz+=(desiredZ-player.vz)*grip;
   if(player.jumpBuffer>0&&(player.grounded||player.coyote>0)){
-    player.vy=8.9;player.grounded=false;player.coyote=0;player.jumpBuffer=0;
+    player.vy=8.1;player.grounded=false;player.coyote=0;player.jumpBuffer=0;
     burst(player.x,player.y+.12,player.z,0xffffff,9);
     playTone(380,.12,'sine',.055);playTone(560,.13,'sine',.04,.06);
   }
   const previousY=player.y;
-  player.x+=player.vx*dt;player.z+=player.vz*dt;
-  if(!player.grounded){player.vy-=19.6*dt;player.y+=player.vy*dt}
-  const ground=groundAt(world.platforms,player.x,player.z);
+  if(canStandAt(player.x+player.vx*dt,player.z))player.x+=player.vx*dt;else player.vx=0;
+  if(canStandAt(player.x,player.z+player.vz*dt))player.z+=player.vz*dt;else player.vz=0;
+  if(!player.grounded){player.vy-=20.4*dt;player.y+=player.vy*dt}
+  const ground=groundAt(world,player.x,player.z);
   if(player.grounded){
     if(ground===null){player.grounded=false;player.coyote=.13}
-    else player.y=ground;
+    else player.y+=(ground-player.y)*Math.min(1,dt*18);
   }else if(ground!==null&&player.vy<=0&&previousY>=ground-.08&&player.y<=ground){
     player.y=ground;player.vy=0;player.grounded=true;player.coyote=.13;
     burst(player.x,ground+.05,player.z,0xe6f9ef,6);
@@ -272,6 +285,11 @@ function updatePlayer(dt){
     const target=Math.atan2(player.vx,player.vz);
     let delta=(target-player.facing+Math.PI*3)%(Math.PI*2)-Math.PI;
     player.facing+=delta*Math.min(1,dt*12);
+  }
+  if(input.y>.35&&Math.abs(input.x)<.4&&cameraIdle>1.2){
+    const target=player.facing+Math.PI;
+    const delta=(target-yaw+Math.PI*3)%(Math.PI*2)-Math.PI;
+    yaw+=delta*Math.min(1,dt*.7);
   }
   for(const star of world.stars){
     if(star.collected)continue;
@@ -301,7 +319,7 @@ function updateDragon(dt){
     let d=(target-dragon.group.rotation.y+Math.PI*3)%(Math.PI*2)-Math.PI;
     dragon.group.rotation.y+=d*Math.min(1,dt*4);
   }
-  const ground=groundAt(world.platforms,dragon.group.position.x,dragon.group.position.z);
+  const ground=groundAt(world,dragon.group.position.x,dragon.group.position.z);
   const targetY=(ground??Math.max(-.3,player.y))+.55;
   dragon.group.position.y+=(targetY-dragon.group.position.y)*Math.min(1,dt*2.3);
   if(dist<1.45&&Math.abs(player.y-dragon.group.position.y)<2.2)hurt('dragon');
@@ -329,24 +347,23 @@ function updateQuest(){
 function drawMap(){
   if(!world)return;
   const c=mapCtx;c.clearRect(0,0,144,144);
-  const s=3.52,toX=x=>72+x*s,toY=z=>72+z*s;
-  c.fillStyle='#eafaf4';c.beginPath();c.arc(72,72,69,0,Math.PI*2);c.fill();
-  for(const p of world.platforms){
-    c.beginPath();c.arc(toX(p.x),toY(p.z),p.r*s,0,Math.PI*2);
-    c.fillStyle=p.kind==='cloud'?'#ffffff':p.kind==='portal'?'#b1f1db':'#9bdfb6';c.fill();
-    c.strokeStyle='#83c7b7';c.lineWidth=1;c.stroke();
-  }
+  const level=LEVELS[levelIndex],s=1.72,toX=x=>72+x*s,toY=z=>72+z*s;
+  c.fillStyle=`#${level.ground.toString(16).padStart(6,'0')}`;c.fillRect(0,0,144,144);
+  c.strokeStyle=`#${level.path.toString(16).padStart(6,'0')}`;c.lineWidth=8;c.beginPath();
+  for(let z=-38;z<=38;z+=2){const x=Math.sin(z*.115)*3.1;if(z===-38)c.moveTo(toX(x),toY(z));else c.lineTo(toX(x),toY(z))}c.stroke();
+  c.fillStyle='#383b34';for(const b of level.buildings)c.fillRect(toX(b.x-b.w/2),toY(b.z-b.d/2),b.w*s,b.d*s);
   for(const star of world.stars){if(!star.collected){c.fillStyle='#fabb41';c.beginPath();c.arc(toX(star.x),toY(star.z),3.1,0,Math.PI*2);c.fill()}}
-  const portal=LEVELS[levelIndex].portal;
-  c.strokeStyle=world.portal.unlocked?'#26b996':'#a6b6b2';c.lineWidth=2.4;
+  const portal=level.portal;
+  c.strokeStyle=world.portal.unlocked?'#e7cf9b':'#d1d3c9';c.lineWidth=2.4;
   c.beginPath();c.arc(toX(portal.x),toY(portal.z),4.6,0,Math.PI*2);c.stroke();
-  c.fillStyle='#26ae85';c.beginPath();c.arc(toX(player.x),toY(player.z),4.3,0,Math.PI*2);c.fill();
+  c.fillStyle='#fff3d3';c.beginPath();c.arc(toX(player.x),toY(player.z),4.3,0,Math.PI*2);c.fill();
   c.strokeStyle='#ffffff';c.lineWidth=1.5;c.stroke();
   const nx=Math.sin(player.facing),nz=Math.cos(player.facing);
-  c.strokeStyle='#146a62';c.lineWidth=2;c.beginPath();c.moveTo(toX(player.x),toY(player.z));c.lineTo(toX(player.x)+nx*8,toY(player.z)+nz*8);c.stroke();
+  c.strokeStyle='#342d23';c.lineWidth=2;c.beginPath();c.moveTo(toX(player.x),toY(player.z));c.lineTo(toX(player.x)+nx*8,toY(player.z)+nz*8);c.stroke();
 }
 function animate(dt){
   time+=dt;
+  cameraIdle+=dt;
   animateWorld(world,time,dt);
   updateParticles(dt);
   if(state==='playing'){
@@ -358,7 +375,7 @@ function animate(dt){
   avatar.group.rotation.y=player.facing;
   animateCharacter(avatar,time,state==='playing'?moveAmount:0,player.grounded,player.vy,player.invulnerable);
   animateDragon(dragon,time);
-  const ground=groundAt(world.platforms,player.x,player.z);
+  const ground=groundAt(world,player.x,player.z);
   shadow.visible=ground!==null&&player.y>ground-.2;
   if(shadow.visible){shadow.position.set(player.x,ground+.035,player.z);shadow.material.opacity=Math.max(.05,.22-(player.y-ground)*.04);shadow.scale.setScalar(1+Math.max(0,player.y-ground)*.2)}
   const cameraTarget=cameraCoordinates();
@@ -403,16 +420,17 @@ $('sound-btn').addEventListener('click',()=>{
 canvas.addEventListener('pointerdown',e=>{
   if(e.button!==0||state!=='playing')return;
   dragging=true;dragPointer=e.pointerId;dragX=e.clientX;dragY=e.clientY;canvas.setPointerCapture(e.pointerId);
+  cameraIdle=0;
 });
 canvas.addEventListener('pointermove',e=>{
   if(!dragging||e.pointerId!==dragPointer)return;
   const dx=e.clientX-dragX,dy=e.clientY-dragY;
-  yaw-=dx*.006;pitch=Math.max(.25,Math.min(.85,pitch+dy*.0035));
+  yaw-=dx*.005;pitch=Math.max(.18,Math.min(.78,pitch+dy*.0035));cameraIdle=0;
   dragX=e.clientX;dragY=e.clientY;
 });
 function stopDrag(e){if(e.pointerId===dragPointer){dragging=false;dragPointer=null}}
 canvas.addEventListener('pointerup',stopDrag);canvas.addEventListener('pointercancel',stopDrag);
-canvas.addEventListener('wheel',e=>{e.preventDefault();cameraDistance=Math.max(9,Math.min(20,cameraDistance+Math.sign(e.deltaY)*.9))},{passive:false});
+canvas.addEventListener('wheel',e=>{e.preventDefault();cameraDistance=Math.max(5.5,Math.min(13,cameraDistance+Math.sign(e.deltaY)*.65))},{passive:false});
 
 const joyEl=$('joystick'),stickEl=$('stick');
 function resetStick(){stickEl.style.transform='translate(0px,0px)'}
