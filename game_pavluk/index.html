@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#bcf0f4" />
+    <meta name="description" content="Павлик-стрибунець — веселий 3D платформер у хмарках." />
+    <title>Павлик-стрибунець 🐸</title>
+  </head>
+  <body>
+    <div id="app">
+      <canvas id="game" aria-label="3D гра Павлик-стрибунець"></canvas>
+
+      <header class="hud">
+        <div class="brand"><span class="brand-frog">🐸</span><span>Павлик<span class="brand-muted">-стрибунець</span></span></div>
+        <div class="hud-right">
+          <div class="level-chip"><span class="chip-label">РІВЕНЬ</span><strong id="level-number">01</strong><span class="chip-separator">/</span><span>03</span></div>
+          <div class="stars-chip"><span class="star-icon">★</span><strong id="star-count">0</strong></div>
+          <button id="sound-button" class="icon-button" aria-label="Вимкнути звук" title="Звук">♪</button>
+        </div>
+      </header>
+
+      <div class="level-info" id="level-info"><span class="level-kicker" id="level-kicker">РІВЕНЬ 1 · НЕБЕСНИЙ САД</span><div id="level-title">Стрибок у хмари</div></div>
+
+      <div class="progress-wrap" aria-label="Прогрес рівня"><div class="progress-track"><div id="progress-fill"></div></div><div class="progress-marker">☁</div></div>
+
+      <div class="tip" id="tip"><span class="tip-key">ПРОБІЛ</span><span>або натисни кнопку, щоб стрибнути</span></div>
+      <button id="jump-button" class="jump-button" aria-label="Стрибнути"><span class="jump-symbol">↑</span><span>СТРИБОК</span></button>
+
+      <div class="overlay visible" id="overlay">
+        <div class="overlay-card">
+          <div class="eyebrow" id="overlay-eyebrow">МАЛЕНЬКА ВЕЛИКА ПРИГОДА</div>
+          <div class="overlay-hero">🐸 <span class="hero-sparkle">✦</span></div>
+          <h1 id="overlay-title">Павлик-<br><em>стрибунець</em></h1>
+          <p id="overlay-text">Стрибай по пухнастих хмаринках, збирай зірочки й не дай сонному дракону наздогнати тебе!</p>
+          <button id="primary-button" class="primary-button">Грати <span>→</span></button>
+          <div class="overlay-foot" id="overlay-foot">Один рух — безліч пригод · 3 рівні</div>
+        </div>
+      </div>
+
+      <div id="toast" class="toast" role="status"></div>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
