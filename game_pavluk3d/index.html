@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#8ed7e7" />
+  <meta name="description" content="Павлик: Світ Хмар — повноцінна 3D пригода з вільним пересуванням." />
+  <title>Павлик: Світ Хмар 🐸</title>
+  <script type="module" crossorigin src="./assets/index.source-DhDcuBlY.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-CpA-raxE.css">
+</head>
+<body>
+  <div id="app">
+    <canvas id="game" aria-label="3D світ Павлика"></canvas>
+    <div class="screen-glow"></div>
+    <div id="damage-flash" class="damage-flash"></div>
+
+    <header class="hud">
+      <div class="brand"><div class="brand-icon"><img src="./assets/pavlyk-frog.png" alt="" /></div><div><strong>Павлик</strong><small>СВІТ ХМАР</small></div></div>
+      <div class="hud-center"><div class="level-name" id="level-name">01 / 03 · НЕБЕСНИЙ САД</div><div class="objective-text" id="objective-text">Збери зірочки</div></div>
+      <div class="hud-right"><div class="counter"><span>★</span><strong id="stars-count">0</strong><small>/ 5</small></div><div class="hearts" id="hearts" aria-label="Здоров’я">♥ ♥ ♥</div><button class="icon-btn" id="sound-btn" aria-label="Вимкнути звук">♪</button><button class="icon-btn" id="pause-btn" aria-label="Пауза">Ⅱ</button></div>
+    </header>
+
+    <div class="quest-card"><div class="quest-kicker">ТВОЯ МЕТА</div><div class="quest-row"><span id="quest-arrow" class="quest-arrow">↑</span><div><strong id="quest-label">Найближча зірка</strong><small id="quest-distance">0 м</small></div></div></div>
+
+    <div class="map-card"><div class="map-title">МАПА ОСТРОВА</div><canvas id="minimap" width="144" height="144" aria-label="Мапа рівня"></canvas><div class="map-legend"><span><i class="map-dot player-dot"></i>Ти</span><span><i class="map-dot star-dot"></i>Зірки</span></div></div>
+
+    <div id="toast" class="toast" role="status"></div>
+    <div class="desktop-help"><span><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> рух</span><span><kbd>ПРОБІЛ</kbd> стрибок</span><span>Миша — камера</span><span><kbd>SHIFT</kbd> швидше</span></div>
+
+    <div id="joystick" class="joystick" aria-label="Керування рухом"><div id="stick" class="stick"></div></div>
+    <button id="jump-btn" class="jump-btn" aria-label="Стрибнути"><span>↥</span><small>СТРИБОК</small></button>
+
+    <div id="overlay" class="overlay visible">
+      <div class="overlay-card">
+        <div class="overlay-top"><span id="overlay-kicker">НОВА 3D ПРИГОДА</span><span class="overlay-stars">✦ ✧ ✦</span></div>
+        <div class="overlay-mascot"><img src="./assets/pavlyk-frog.png" alt="Павлик у костюмі жабки" /></div>
+        <h1 id="overlay-title">Павлик:<br><em>Світ Хмар</em></h1>
+        <p id="overlay-text">Досліджуй літаючі острови, збирай зірочки та втечи від сонного дракона. Тепер ти можеш бігати куди захочеш!</p>
+        <button id="primary-btn" class="primary-btn">Почати пригоду <span>→</span></button>
+        <div class="overlay-footer" id="overlay-footer">WASD / стрілки · Пробіл · Миша або дотик</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
