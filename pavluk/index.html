@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#171f1b">
-  <meta name="description" content="Три браузерні пригоди Павлика: стрибки по хмарах, вільний 3D світ і наземна експедиція.">
-  <title>Пригоди Павлика — три гри</title>
+  <meta name="description" content="Чотири браузерні пригоди Павлика: стрибки по хмарах, вільний 3D світ і наземна експедиція.">
+  <title>Пригоди Павлика — чотири гри</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
@@ -30,7 +30,7 @@
     .section-heading{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:22px}
     .section-heading h2{font:800 clamp(23px,3vw,34px) Manrope,sans-serif;letter-spacing:-.045em}
     .section-heading p{color:#aab8aa;font-size:13px}
-    .cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;padding-bottom:68px}
+    .cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;padding-bottom:68px}
     .card{display:flex;flex-direction:column;min-width:0;overflow:hidden;border-radius:20px;background:#253028;border:1px solid #d9dfcc28;box-shadow:0 22px 60px #090f0b52;transition:transform .22s,border-color .22s,box-shadow .22s}
     .card:hover,.card:focus-within{transform:translateY(-7px);border-color:#ddc7958c;box-shadow:0 30px 72px #090f0b80}
     .art{height:250px;position:relative;overflow:hidden;isolation:isolate}
@@ -57,24 +57,30 @@
     .play{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:13px 15px;background:#d9bf8d;color:#1b2a22;border-radius:9px;font-family:Manrope,sans-serif;font-weight:800;font-size:14px;transition:background .2s}
     .card:hover .play{background:#efd6a5}.play span{font-size:20px;line-height:1}
     footer{border-top:1px solid #d9dfcc26;padding:26px 0 32px;color:#94a396;font-size:12px;display:flex;justify-content:space-between;gap:12px}
-    @media(max-width:930px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{padding-top:65px}.card:last-child{grid-column:1/-1}.card:last-child .art{height:280px}}
-    @media(max-width:620px){.shell{width:min(100% - 32px,450px)}header{padding:20px 0}.header-note{font-size:10px}.hero{padding:55px 0 47px}.hero p{font-size:16px}.section-heading{align-items:start}.section-heading p{max-width:110px;text-align:right}.cards{display:block}.card{margin-bottom:18px}.card:last-child .art{height:250px}.art{height:230px}.card p{min-height:0}.card-body{padding:20px}footer{flex-direction:column}}
+    @media(max-width:930px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{padding-top:65px}}
+    @media(max-width:620px){.shell{width:min(100% - 32px,450px)}header{padding:20px 0}.header-note{font-size:10px}.hero{padding:55px 0 47px}.hero p{font-size:16px}.section-heading{align-items:start}.section-heading p{max-width:110px;text-align:right}.cards{display:block}.card{margin-bottom:18px}.art{height:230px}.card p{min-height:0}.card-body{padding:20px}footer{flex-direction:column}}
+  .wild{background:linear-gradient(#98afaf 0%,#bdc8b8 55%,#465d47 55%,#293b2b 100%)}
+    .wild:before{left:-10%;bottom:32%;width:125%;height:48%;background:#6c8077;clip-path:polygon(0 100%,0 80%,22% 35%,38% 76%,58% 13%,78% 77%,100% 44%,100% 100%)}
+    .wild:after{left:0;bottom:0;width:100%;height:32%;background:linear-gradient(#3c543b,#243a29)}
+    .wild img{height:108%;max-height:none;left:72%;bottom:-44px;filter:drop-shadow(0 14px 18px #0a1c14a0)}
+    @media(min-width:931px){.art{height:220px}.card-body{padding:21px}.card h3{font-size:21px}}
   </style>
 </head>
 <body>
   <div class="shell">
     <header><div class="logo"><span class="logo-mark">✦</span><span>Павлик<span style="color:#d8bd85">.</span></span></div><div class="header-note">КОЛЕКЦІЯ ПРИГОД</div></header>
     <main>
-      <section class="hero"><div class="eyebrow">Три світи · один герой</div><h1>Куди вирушить<br><em>Павлик сьогодні?</em></h1><p>Почни з простих стрибків, досліди 3D світ хмар, а потім ступи на землю. Обери пригоду й грай просто у браузері.</p><a class="hero-arrow" href="#games">Обрати гру <span aria-hidden="true">↓</span></a></section>
+      <section class="hero"><div class="eyebrow">Чотири світи · один герой</div><h1>Куди вирушить<br><em>Павлик сьогодні?</em></h1><p>Від стрибків по хмаринках до відкритого природного світу. Обери пригоду й грай просто у браузері.</p><a class="hero-arrow" href="#games">Обрати гру <span aria-hidden="true">↓</span></a></section>
       <section id="games" aria-labelledby="games-heading"><div class="section-heading"><h2 id="games-heading">Обери свій світ</h2><p>Усі ігри запускаються в браузері</p></div>
         <div class="cards">
-          <article class="card"><div class="art cloud-one"><span class="badge">01 · ПОЧАТОК</span><img src="./game_pavluk/assets/pavlyk-frog.png" alt="Павлик у костюмі жабки" loading="lazy"></div><div class="card-body"><div class="card-number">ПРИГОДА 01 / 03</div><h3>Павлик-стрибунець</h3><p>Аркада на хмаринках: вчасно стрибай, збирай зірки та уникай сонного дракона.</p><div class="meta"><span>Хмаринки</span><span>Одна кнопка</span><span>3 рівні</span></div><a class="play" href="./game_pavluk/" aria-label="Грати в Павлик-стрибунець">Грати <span aria-hidden="true">↗</span></a></div></article>
-          <article class="card"><div class="art cloud-two"><span class="badge">02 · ВІЛЬНИЙ РУХ</span><img src="./game_pavluk3d/assets/pavlyk-frog.png" alt="Павлик у світі хмар" loading="lazy"></div><div class="card-body"><div class="card-number">ПРИГОДА 02 / 03</div><h3>Павлик: Світ Хмар</h3><p>Ті самі зірки й сонний дракон, але тепер можна вільно ходити 3D островами.</p><div class="meta"><span>3D хмаринки</span><span>WASD</span><span>3 острови</span></div><a class="play" href="./game_pavluk3d/" aria-label="Грати в Павлик: Світ Хмар">Грати <span aria-hidden="true">↗</span></a></div></article>
-          <article class="card"><div class="art ground"><span class="badge">03 · НОВИЙ СВІТ</span><img src="./game_pavluk3d2/assets/pavlyk-portrait.png" alt="Портрет Павлика" loading="lazy"></div><div class="card-body"><div class="card-number">ПРИГОДА 03 / 03</div><h3>Павлик: Дорога додому</h3><p>Наземна 3D пригода з реалістичнішим Павликом: селище, каньйон, гори й порт.</p><div class="meta"><span>3D земля</span><span>4 регіони</span><span>Вільна камера</span></div><a class="play" href="./game_pavluk3d2/" aria-label="Грати в Павлик: Дорога додому">Грати <span aria-hidden="true">↗</span></a></div></article>
+          <article class="card"><div class="art cloud-one"><span class="badge">01 · ПОЧАТОК</span><img src="./game_pavluk/assets/pavlyk-frog.png" alt="Павлик у костюмі жабки" loading="lazy"></div><div class="card-body"><div class="card-number">ПРИГОДА 01 / 04</div><h3>Павлик-стрибунець</h3><p>Аркада на хмаринках: вчасно стрибай, збирай зірки та уникай сонного дракона.</p><div class="meta"><span>Хмаринки</span><span>Одна кнопка</span><span>3 рівні</span></div><a class="play" href="./game_pavluk/" aria-label="Грати в Павлик-стрибунець">Грати <span aria-hidden="true">↗</span></a></div></article>
+          <article class="card"><div class="art cloud-two"><span class="badge">02 · ВІЛЬНИЙ РУХ</span><img src="./game_pavluk3d/assets/pavlyk-frog.png" alt="Павлик у світі хмар" loading="lazy"></div><div class="card-body"><div class="card-number">ПРИГОДА 02 / 04</div><h3>Павлик: Світ Хмар</h3><p>Ті самі зірки й сонний дракон, але тепер можна вільно ходити 3D островами.</p><div class="meta"><span>3D хмаринки</span><span>WASD</span><span>3 острови</span></div><a class="play" href="./game_pavluk3d/" aria-label="Грати в Павлик: Світ Хмар">Грати <span aria-hidden="true">↗</span></a></div></article>
+          <article class="card"><div class="art ground"><span class="badge">03 · НОВИЙ СВІТ</span><img src="./game_pavluk3d2/assets/pavlyk-portrait.png" alt="Портрет Павлика" loading="lazy"></div><div class="card-body"><div class="card-number">ПРИГОДА 03 / 04</div><h3>Павлик: Дорога додому</h3><p>Наземна 3D пригода з реалістичнішим Павликом: селище, каньйон, гори й порт.</p><div class="meta"><span>3D земля</span><span>4 регіони</span><span>Вільна камера</span></div><a class="play" href="./game_pavluk3d2/" aria-label="Грати в Павлик: Дорога додому">Грати <span aria-hidden="true">↗</span></a></div></article>
+          <article class="card"><div class="art wild"><span class="badge">04 · ВІДКРИТИЙ СВІТ</span><img src="./game_pavluk4/assets/pine-cutout.png" alt="Хвойне дерево в природному світі" loading="lazy"></div><div class="card-body"><div class="card-number">ПРИГОДА 04 / 04</div><h3>Павлик: Відкритий світ</h3><p>Вільна прогулянка природною долиною. Ходи, біжи, стрибай і досліджуй простір без завдань.</p><div class="meta"><span>Відкритий 3D світ</span><span>Біг і стрибок</span><span>Природа</span></div><a class="play" href="./game_pavluk4/" aria-label="Грати в Павлик: Відкритий світ">Грати <span aria-hidden="true">↗</span></a></div></article>
         </div>
       </section>
     </main>
-    <footer><span>Павлик · Три браузерні пригоди</span><span>Зроблено з любов’ю до ігор ✦</span></footer>
+    <footer><span>Павлик · Чотири браузерні пригоди</span><span>Зроблено з любов’ю до ігор ✦</span></footer>
   </div>
 </body>
 </html>
