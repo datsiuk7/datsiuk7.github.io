@@ -1,0 +1,1 @@
+{"name":"pavluk-open-world","private":true,"type":"module","scripts":{"dev":"vite --host 127.0.0.1","build":"vite build","test":"node --test"},"dependencies":{"three":"^0.180.0","vite":"^7.1.0"}}
